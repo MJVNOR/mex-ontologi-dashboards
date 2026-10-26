@@ -24,7 +24,7 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 | Salud en Hermosillo | `dashboards/hermosillo-salud/app.py` — [ver en vivo](https://mjvnor-mex-ontologi-dashbo-dashboardshermosillo-saludapp-le2l94.streamlit.app/) | 7 conjuntos seleccionados, 212 significados documentados |
 | Educación en Hermosillo | `dashboards/educacion-hermosillo/app.py` — [ver en vivo](https://mex-ontologi-dashboards-zqt8qvqfwwbacguuimtvwz.streamlit.app/) | Becas 2021-25 (filtro HMO) + UTH institucional + capacitación SEC, 115 significados documentados |
 | Seguridad en Sonora | `dashboards/seguridad-sonora/app.py` — [ver en vivo](https://mex-ontologi-dashboards-plduatjh2dn6pwcct3cwku.streamlit.app/) | Incidencia municipal 2015-25 + víctimas + 911 T1-T2 2026 + detenidas + desaparecidas + mapa 72 municipios, 107 significados |
-| Contexto laboral proxy (ingresos) | `dashboards/marginacion-ingresos/app.py` | Marginación 2020: PO2SM municipal (72 municipios) + entidades, 34 significados documentados. Proxy de ingresos, no mide empleo |
+| Contexto laboral proxy (ingresos) | `dashboards/marginacion-ingresos/app.py` — [ver en vivo](https://mex-ontologi-dashboards-cuxm5s9hfsjkfgabdcet4t.streamlit.app/) | Marginación 2020: PO2SM municipal (72 municipios) + entidades, 34 significados documentados. Proxy de ingresos, no mide empleo |
 
 Capa tidy de consumo: `data/tidy/` (15 tablas snake_case + `diccionario_datos.csv`; scripts `tidy_seg.py`, `preprocesar_poblacion.py`, `materializar_catalogo.py`; procedencia en `data/procedencia_*.json`, registro en `config/artefactos.json`). Población (grupos quinquenales 1990-2040 + indicadores) aporta denominadores para tasas por 100 mil; catálogo (89 conjuntos, 486 recursos) documenta cobertura. El dashboard de seguridad lee de `data/tidy/`; `data/seg/` queda como staging.
 
@@ -138,6 +138,7 @@ uv run python scripts/descargar_fuentes.py --tema marginacion
 uv run python scripts/preprocesar_hmo.py
 uv run python scripts/preprocesar_edu.py
 uv run python scripts/preprocesar_marginacion.py
+uv run python scripts/modelos_marginacion.py
 uv run python -m unittest discover -s tests -v
 uv run python scripts/verificar.py --base origin/main
 uv run streamlit run dashboards/hermosillo-salud/app.py

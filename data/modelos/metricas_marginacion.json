@@ -1,0 +1,39 @@
+{
+  "segmentos": {
+    "k": 2,
+    "n": 72,
+    "silueta_por_k": {
+      "2": 0.508,
+      "3": 0.326,
+      "4": 0.327,
+      "5": 0.234,
+      "6": 0.234
+    },
+    "tamano": {
+      "0": 65,
+      "1": 7
+    },
+    "po2sm_mediana_por_segmento": {
+      "0": 69.3,
+      "1": 83.9
+    },
+    "nota": "Descriptivo: agrupa perfiles de carencias, no acredita causas"
+  },
+  "po2sm_ridge": {
+    "r2_oof": 0.15,
+    "mae_oof": 7.88,
+    "alpha": 15.199110829529332,
+    "n": 72,
+    "coeficientes": {
+      "SBASC": 2.996,
+      "VHAC": 2.641,
+      "OVSEE": 0.902,
+      "OVSAE": 0.899,
+      "ANALF": 0.868,
+      "OVSDE": 0.864,
+      "PL.5000": -1.788,
+      "OVPT": -2.27
+    },
+    "advertencia": "n=72, corte único 2020: asociación exploratoria, no causalidad ni pronóstico"
+  }
+}

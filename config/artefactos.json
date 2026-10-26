@@ -633,5 +633,21 @@
     "medidas": [],
     "agregacion": "Sin agregar.",
     "alcance": "Snapshot de metadatos versionado por huella."
+  },
+  "tidy/hecho_vigilancia_mes.parquet": {
+    "tema": "seg",
+    "fuentes": [
+      {
+        "archivo": "vigilancia_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "ninguno",
+    "transformacion": "vigilancia 2022 derretida a semana x mes",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n.",
+    "alcance": "Totales declarados por la fuente."
   }
 }
