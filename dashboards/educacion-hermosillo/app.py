@@ -91,7 +91,9 @@ with t1:
                            names="genero", values="n", title="Becas por género"),
                     use_container_width=True)
     que("Las 12 escuelas con mayor importe acumulado en becas: dónde se concentra "
-        "el recurso del programa en Hermosillo.")
+        "el recurso del programa en Hermosillo. Ojo: los importes tienen cola derecha "
+        "(mediana $5,000 vs media $7,694): el total lo jalan pocas becas grandes; "
+        "no leer 'beca promedio'.")
     top_esc = bec_f.groupby("escuela")["importe"].sum().nlargest(12).reset_index()
     st.plotly_chart(px.bar(top_esc, x="importe", y="escuela", orientation="h",
                            title="Top 12 escuelas por importe acumulado"),
@@ -373,7 +375,9 @@ with t5:
     e = tb[tb.tipo == "estimacion"]
     fig.add_trace(go.Scatter(x=h.anio, y=h.n, mode="lines+markers", name="Observado"))
     fig.add_trace(go.Scatter(x=e.anio, y=e.n, mode="markers",
-                             marker=dict(color="orange", size=12), name="Estimación 2026"))
+                             marker=dict(color="rgba(255,165,0,0.2)", size=9,
+                                           line=dict(color="orange", width=2)),
+                             name="Estimación 2026"))
     fig.update_layout(title="Becas HMO: observado + estimación 2026",
                       xaxis_title="Año", yaxis_title="Becas")
     st.plotly_chart(fig, use_container_width=True)
