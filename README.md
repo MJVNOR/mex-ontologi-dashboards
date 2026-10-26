@@ -1,5 +1,13 @@
 # mex-ontologi-dashboards
 
+## Fuente de los datos
+
+**Los datos utilizados en estos dashboards provienen del [Portal de Datos Abiertos del Estado de Sonora](https://datos.sonora.gob.mx/).** Los valores se obtienen de los archivos publicados en ese portal por las dependencias y organizaciones responsables de cada conjunto.
+
+La ontología **mex-ontologi** permite descubrir esas fuentes y consultar los significados y límites documentados de sus variables. Los filtros, agregaciones, visualizaciones y resultados de modelos elaborados en este repositorio son productos derivados de esas fuentes y deben conservar su procedencia y metodología.
+
+## Propósito del proyecto
+
 Fábrica de dashboards construidos sobre la ontología **mex-ontologi**
 (datos abiertos de Sonora, repo `MEX-Ontologi`, store portal con 322,495 triples
 servido por el MCP `mex-ontologia`).
