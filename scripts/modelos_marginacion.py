@@ -75,6 +75,33 @@ def main():
                   "po2sm_oof": np.round(oof, 2)}).to_parquet(
         OUT / "inferencias" / "po2sm_oof.parquet", index=False)
 
+    # 3. SHAP offline (LinearExplainer exacto sobre el Ridge ajustado).
+    # Explica valor de regresión (PO2SM) con fondo = las 72 filas de
+    # entrenamiento y máscara independiente. Describe al modelo, no causalidad.
+    import shap
+    sc = pipe.named_steps["sc"]
+    ridge = pipe.named_steps["ridge"]
+    Xs = sc.transform(X)
+    masker = shap.maskers.Independent(Xs, max_samples=len(Xs))
+    ex = shap.LinearExplainer(ridge, masker)
+    exp = ex(Xs)
+    base = np.asarray(exp.base_values)
+    vals = np.asarray(exp.values)
+    err = float(np.abs(base + vals.sum(axis=1) - ridge.predict(Xs)).max())
+    assert err < 1e-6, f"SHAP no aditivo: err={err}"
+    vv = pd.DataFrame(vals, columns=CARENCIAS).round(4)
+    vv.insert(0, "NOM_MUN", m["NOM_MUN"].values)
+    vv["base_value"] = np.round(base, 4)
+    vv["pred_modelo"] = np.round(ridge.predict(Xs), 3)
+    SHAPV = OUT / "shap"
+    SHAPV.mkdir(parents=True, exist_ok=True)
+    vv.to_parquet(SHAPV / "valores_po2sm_ridge.parquet", index=False)
+    met["shap"] = {
+        "version": shap.__version__, "output": "PO2SM (valor de regresión)",
+        "explainer": "LinearExplainer", "masker": "Independent (72 filas train)",
+        "filas": len(m), "aditividad_max_err": err,
+        "nota": "Describe al modelo Ridge, no causalidad ni mecanismo"}
+
     (OUT / "metricas_marginacion.json").write_text(
         json.dumps(met, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(met, ensure_ascii=False, indent=2)[:1200])

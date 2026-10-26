@@ -35,5 +35,14 @@
       "OVPT": -2.27
     },
     "advertencia": "n=72, corte único 2020: asociación exploratoria, no causalidad ni pronóstico"
+  },
+  "shap": {
+    "version": "0.54.1",
+    "output": "PO2SM (valor de regresión)",
+    "explainer": "LinearExplainer",
+    "masker": "Independent (72 filas train)",
+    "filas": 72,
+    "aditividad_max_err": 1.4210854715202004e-14,
+    "nota": "Describe al modelo Ridge, no causalidad ni mecanismo"
   }
 }

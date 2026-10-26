@@ -13,6 +13,7 @@ from procedencia import fuentes
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 DATA = Path(__file__).resolve().parents[2] / "data"
@@ -167,3 +168,28 @@ with t4:
     que("Quién es quién en cada segmento: municipios por segmento con su PO2SM.")
     st.dataframe(seg.sort_values(["segmento", "PO2SM"], ascending=[True, False])
                     [["segmento", "NOM_MUN", "GM_2020", "PO2SM"]], hide_index=True)
+    que("Atribución global SHAP del Ridge (media de |SHAP| por carencia, n=72): "
+        "replica el ranking de coeficientes; describe al modelo, no causalidad.")
+    _sh = pd.read_parquet(DATA / "modelos" / "shap" / "valores_po2sm_ridge.parquet")
+    _car = ["ANALF", "SBASC", "OVSDE", "OVSEE", "OVSAE", "OVPT", "VHAC", "PL.5000"]
+    _g = pd.DataFrame({"carencia": _car,
+                       "shap_medio_abs": [_sh[c].abs().mean() for c in _car]
+                       }).sort_values("shap_medio_abs")
+    st.plotly_chart(px.bar(_g, x="shap_medio_abs", y="carencia", orientation="h",
+                           title="SHAP medio absoluto por carencia (Ridge)",
+                           labels={"shap_medio_abs": "media |SHAP| (pp PO2SM)",
+                                   "carencia": "carencia"}),
+                    width="stretch")
+    que("Por qué el modelo estima tal PO2SM para un municipio: cascada desde el "
+        "promedio (base) hasta la estimación, carencia por carencia.")
+    _mun = st.selectbox("Municipio (waterfall SHAP)", sorted(_sh["NOM_MUN"].unique()),
+                        index=sorted(_sh["NOM_MUN"].unique()).index("Hermosillo")
+                        if "Hermosillo" in set(_sh["NOM_MUN"]) else 0)
+    _row = _sh[_sh["NOM_MUN"] == _mun].iloc[0]
+    _ord = sorted(_car, key=lambda c: -abs(float(_row[c])))
+    _wf = go.Figure(go.Waterfall(
+        x=["base"] + _ord + ["estimación"],
+        y=[float(_row["base_value"])] + [float(_row[c]) for c in _ord] + [0],
+        measure=["absolute"] + ["relative"] * len(_car) + ["total"]))
+    _wf.update_layout(title=f"Waterfall SHAP — {_mun} (estima {float(_row['pred_modelo']):.1f}%)")
+    st.plotly_chart(_wf, width="stretch")
