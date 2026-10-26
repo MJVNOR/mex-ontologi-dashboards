@@ -25,7 +25,9 @@ La pestaña **Historia** organiza los hallazgos y sus límites; **Ontología** p
 
 ### Vistas del dashboard de salud
 
-![Vista general](reports/capturas-salud/01-vista-general.png)
+<table><tr>
+<td align="center"><a href="reports/capturas-salud/01-vista-general.png"><img src="reports/capturas-salud/01-vista-general.png" alt="Vista general del dashboard de salud" width="800"></a><br><em>Vista general: series anuales y KPIs</em></td>
+</tr></table>
 
 ### Educación: becas y cortes institucionales
 
@@ -35,7 +37,10 @@ La pestaña **Historia** organiza los hallazgos y sus límites; **Ontología** p
 
 ### Vistas del dashboard de educación
 
-![Vista general](reports/capturas-educacion/01-vista-general.png)
+<table><tr>
+<td align="center"><a href="reports/capturas-educacion/01-vista-general.png"><img src="reports/capturas-educacion/01-vista-general.png" alt="Pestaña Hallazgos del dashboard de educación" width="100%"></a><br><em>Hallazgos: narrativa con evidencia y límites</em></td>
+<td align="center"><a href="reports/capturas-educacion/02-modelos.png"><img src="reports/capturas-educacion/02-modelos.png" alt="Pestaña Modelos del dashboard de educación" width="100%"></a><br><em>Modelos: riesgo, irregularidad e inferencia</em></td>
+</tr></table>
 
 ### Seguridad: varias fuentes, varias unidades de conteo
 
@@ -45,9 +50,11 @@ El recorrido distingue los periodos y alcances de las fuentes. Los conteos munic
 
 ### Vistas del dashboard de seguridad
 
-![Vista general](reports/capturas-seguridad/01-vista-general.png)
-![Historia: narrativa con evidencia y límites](reports/capturas-seguridad/02-historia.png)
-![Mapa municipal de incidencia](reports/capturas-seguridad/03-mapa.png)
+<table><tr>
+<td align="center"><a href="reports/capturas-seguridad/01-vista-general.png"><img src="reports/capturas-seguridad/01-vista-general.png" alt="Vista general del dashboard de seguridad" width="100%"></a><br><em>Vista general e indicadores</em></td>
+<td align="center"><a href="reports/capturas-seguridad/02-historia.png"><img src="reports/capturas-seguridad/02-historia.png" alt="Pestaña Historia del dashboard de seguridad" width="100%"></a><br><em>Historia: narrativa con evidencia y límites</em></td>
+<td align="center"><a href="reports/capturas-seguridad/03-mapa.png"><img src="reports/capturas-seguridad/03-mapa.png" alt="Mapa municipal de incidencia" width="100%"></a><br><em>Mapa municipal de incidencia</em></td>
+</tr></table>
 
 ### Ingresos y marginación: un contexto, no una medición de empleo
 
@@ -57,11 +64,15 @@ El recorrido distingue los periodos y alcances de las fuentes. Los conteos munic
 
 ### Vistas del dashboard de contexto laboral proxy
 
-![Vista general](reports/capturas-marginacion/00-vista-general.png)
-![Hallazgos](reports/capturas-marginacion/01-hallazgos.png)
-![Municipios](reports/capturas-marginacion/02-municipios.png)
-![Entidades](reports/capturas-marginacion/03-entidades.png)
-![Modelos](reports/capturas-marginacion/04-modelos.png)
+<table><tr>
+<td align="center"><a href="reports/capturas-marginacion/00-vista-general.png"><img src="reports/capturas-marginacion/00-vista-general.png" alt="Vista general del dashboard de marginación" width="100%"></a><br><em>Vista general</em></td>
+<td align="center"><a href="reports/capturas-marginacion/01-hallazgos.png"><img src="reports/capturas-marginacion/01-hallazgos.png" alt="Pestaña Hallazgos del dashboard de marginación" width="100%"></a><br><em>Hallazgos</em></td>
+</tr><tr>
+<td align="center"><a href="reports/capturas-marginacion/02-municipios.png"><img src="reports/capturas-marginacion/02-municipios.png" alt="Pestaña Municipios" width="100%"></a><br><em>Municipios</em></td>
+<td align="center"><a href="reports/capturas-marginacion/03-entidades.png"><img src="reports/capturas-marginacion/03-entidades.png" alt="Pestaña Entidades" width="100%"></a><br><em>Entidades</em></td>
+</tr><tr>
+<td align="center" colspan="2"><a href="reports/capturas-marginacion/04-modelos.png"><img src="reports/capturas-marginacion/04-modelos.png" alt="Pestaña Modelos del dashboard de marginación" width="800"></a><br><em>Modelos</em></td>
+</tr></table>
 
 ## Cómo leer los resultados
 
