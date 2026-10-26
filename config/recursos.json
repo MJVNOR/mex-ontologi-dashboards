@@ -1,0 +1,156 @@
+{
+  "salud": [
+    {
+      "dataset_id": "318b9551-47a1-4e6b-a194-232ea5a08d43",
+      "recurso_id": "3bff8e8d-424e-4da3-878f-816a338e614e",
+      "archivo": "urgencias_2018_2022.xlsx"
+    },
+    {
+      "dataset_id": "8993c917-47d8-4304-8141-5f481fe04301",
+      "recurso_id": "ad6f77b8-569d-4826-8ce0-3c6efddcb098",
+      "archivo": "egresos_2018_2022.xlsx"
+    },
+    {
+      "dataset_id": "940de7d8-73ec-4a08-8d26-b7cc97ff17bd",
+      "recurso_id": "46977217-9396-4f9c-bddb-6616e82530b4",
+      "archivo": "nacimientos_2022.xlsx"
+    },
+    {
+      "dataset_id": "cd3d6e34-3789-479e-9f2b-a717b8419f9c",
+      "recurso_id": "6f39fc5d-e097-4954-8cd7-10e8f9dea541",
+      "archivo": "defunciones_2022.xlsx"
+    },
+    {
+      "dataset_id": "d96602ac-f274-4d54-8aea-3f33a21bdd33",
+      "recurso_id": "c70eb3c5-d965-42a2-8c0e-1bf22b20a10c",
+      "archivo": "consulta_externa_2018_2022.xlsx"
+    },
+    {
+      "dataset_id": "dca16d84-dbf0-4501-b702-dc6372a480ea",
+      "recurso_id": "1689b19c-b0dc-4e39-bf07-e3a2e684ef1a",
+      "archivo": "vigilancia_2022.xlsx"
+    },
+    {
+      "dataset_id": "0bc896bc-a3c0-4c5d-b44b-8031b343f854",
+      "recurso_id": "942b5034-7b68-458b-93ad-49f7eab9e638",
+      "archivo": "inspecciones_2021_t3.xlsx"
+    }
+  ],
+  "edu": [
+    {
+      "dataset_id": "e819466c-7282-46c5-84e9-65917dd8cc85",
+      "recurso_id": "58f2d5a6-0432-48f1-8a35-a5efcce78bac",
+      "archivo": "edu/matriculas_de_estudiantes_202209271427270-file.xlsx"
+    },
+    {
+      "dataset_id": "e68332eb-2bac-460a-a9cf-c9945230de81",
+      "recurso_id": "4af3e212-7253-4fc3-908d-1aec14dddb40",
+      "archivo": "edu/matriculas_matriculas-ciclo-2021-2022.xlsx"
+    },
+    {
+      "dataset_id": "7acf8797-cf5b-4906-ab5a-20ef0f483eb4",
+      "recurso_id": "3ff37353-0d4d-4fb7-83bb-e4020d2e8265",
+      "archivo": "edu/indices_de_reprobacion_indices-enero-junio-2022.xlsx"
+    },
+    {
+      "dataset_id": "7acf8797-cf5b-4906-ab5a-20ef0f483eb4",
+      "recurso_id": "04f794bf-b691-49f8-ac53-6c0618e9f545",
+      "archivo": "edu/indices_de_reprobacion_indices-agosto-diciembre-2022.xlsx"
+    },
+    {
+      "dataset_id": "8f60b63d-c3aa-4206-a9a9-01971095e984",
+      "recurso_id": "16367baf-371b-4849-adb1-7eca68a9e3e1",
+      "archivo": "edu/reprobacion_remota_indices-agosto-diciembre-2022.xlsx"
+    },
+    {
+      "dataset_id": "8862ad24-3b6f-4c4a-92cf-e473b9ba40c8",
+      "recurso_id": "6bf4a438-3e70-482e-a06d-2bc624d38eed",
+      "archivo": "edu/becas_becas-autorizadas-2021.xlsx"
+    },
+    {
+      "dataset_id": "8862ad24-3b6f-4c4a-92cf-e473b9ba40c8",
+      "recurso_id": "33150a6b-63be-41f1-a105-7c313a43c773",
+      "archivo": "edu/becas_becas-autorizadas-2022.xlsx"
+    },
+    {
+      "dataset_id": "8862ad24-3b6f-4c4a-92cf-e473b9ba40c8",
+      "recurso_id": "cc0954ad-b812-436e-af4c-044c6bdfaa36",
+      "archivo": "edu/becas_becas-autorizadas-2023.xlsx"
+    },
+    {
+      "dataset_id": "8862ad24-3b6f-4c4a-92cf-e473b9ba40c8",
+      "recurso_id": "55c09381-0eb9-44a2-ae6b-4af56e31f0f8",
+      "archivo": "edu/becas_becas-autorizadas-2024.xlsx"
+    },
+    {
+      "dataset_id": "8862ad24-3b6f-4c4a-92cf-e473b9ba40c8",
+      "recurso_id": "8dac33ec-6b5f-4525-bd29-e1ce87920d68",
+      "archivo": "edu/becas_becas-autorizadas-2025.xlsx"
+    },
+    {
+      "dataset_id": "e7a3d62f-4ace-479c-aa52-1c9e384dc429",
+      "recurso_id": "79362ac6-c6ad-4231-aa41-f23ab92d1ae1",
+      "archivo": "edu/titulados_titulados-2022.xlsx"
+    },
+    {
+      "dataset_id": "e7a3d62f-4ace-479c-aa52-1c9e384dc429",
+      "recurso_id": "492df0ef-58f7-4ae9-8651-fae4d2c14b00",
+      "archivo": "edu/titulados_titulados-2023.xlsx"
+    },
+    {
+      "dataset_id": "e7a3d62f-4ace-479c-aa52-1c9e384dc429",
+      "recurso_id": "2addc93b-50df-40ea-9d40-13720a624114",
+      "archivo": "edu/titulados_titulados-2024.xlsx"
+    },
+    {
+      "dataset_id": "e7a3d62f-4ace-479c-aa52-1c9e384dc429",
+      "recurso_id": "61f23932-497d-431a-9725-ba241038e99d",
+      "archivo": "edu/titulados_titulados-2025.xlsx"
+    },
+    {
+      "dataset_id": "85ee0e2b-ba05-4d9a-8177-cdbf0cb42f8f",
+      "recurso_id": "7422760b-8f99-4774-a436-c7d1f49c2cc0",
+      "archivo": "edu/egresados_egresados-2022.xlsx"
+    },
+    {
+      "dataset_id": "85ee0e2b-ba05-4d9a-8177-cdbf0cb42f8f",
+      "recurso_id": "3e3bed3e-db98-45a0-89b3-d07fb57cafe6",
+      "archivo": "edu/egresados_egresados-2023.xlsx"
+    },
+    {
+      "dataset_id": "85ee0e2b-ba05-4d9a-8177-cdbf0cb42f8f",
+      "recurso_id": "ae39974c-131d-48f1-bd25-b368d59db4b6",
+      "archivo": "edu/egresados_egresados-2024.xlsx"
+    },
+    {
+      "dataset_id": "85ee0e2b-ba05-4d9a-8177-cdbf0cb42f8f",
+      "recurso_id": "ad71c81a-01ac-40f2-821d-0b1efd06b487",
+      "archivo": "edu/egresados_egresados-2025.xlsx"
+    },
+    {
+      "dataset_id": "65bdde5d-7a7e-45a9-8524-ae43aecff879",
+      "recurso_id": "e1dba4c6-d036-4eaf-8f93-73849909f795",
+      "archivo": "edu/nuevo_ingreso_nuevo-ingreso-enero-abril-2022.xlsx"
+    },
+    {
+      "dataset_id": "65bdde5d-7a7e-45a9-8524-ae43aecff879",
+      "recurso_id": "94fa9a0a-9da2-4b1d-a3f2-f013f72c2f49",
+      "archivo": "edu/nuevo_ingreso_nuevo-ingreso-septiembre-diciembre-2022.xlsx"
+    },
+    {
+      "dataset_id": "65bdde5d-7a7e-45a9-8524-ae43aecff879",
+      "recurso_id": "5907da53-1105-4568-af0a-2c3108b74ddf",
+      "archivo": "edu/nuevo_ingreso_nuevo-ingreso-septiembre-diciembre-2023.xlsx"
+    },
+    {
+      "dataset_id": "e465480c-18f7-4132-9daa-7abca8522c84",
+      "recurso_id": "ee73998a-cb5b-4599-92a7-317a296e336e",
+      "archivo": "edu/aprovechamiento_aprovechamiento-academico-2021-2.xlsx"
+    },
+    {
+      "dataset_id": "6cce2696-2194-408c-baae-ce9020a008d0",
+      "recurso_id": "d5b0ae09-b0bd-4352-b931-69a9c00001ef",
+      "archivo": "edu/capacitacion_segundo-trimestre-2022-vii.17-icd-sec.xlsx"
+    }
+  ]
+}

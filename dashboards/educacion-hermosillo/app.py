@@ -7,6 +7,9 @@ Hermosillo); capacitacion SEC estatal. Totales declarados por la fuente.
 
 import json
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from procedencia import fuentes
 
 import pandas as pd
 import numpy as np
@@ -17,8 +20,8 @@ DATA = Path(__file__).resolve().parents[2] / "data"
 EDU = DATA / "edu_hmo"
 st.set_page_config(page_title="Educación Hermosillo", layout="wide")
 st.title("Educación en Hermosillo — datos abiertos de Sonora")
-st.caption("Fuente: portal datos.sonora.gob.mx, grupo Educación (20 conjuntos). "
-           "Identificación y significados vía ontología mex-ontologi (MCP). "
+st.caption("Fuente: archivos seleccionados del portal datos.sonora.gob.mx. "
+           "Fuentes y significados preparados mediante consultas a mex-ontologi. "
            "UTH = Universidad Tecnológica de Hermosillo (datos institucionales).")
 
 
@@ -58,6 +61,8 @@ anios = sorted(bec["anio"].unique())
 sel = st.sidebar.multiselect("Años (becas)", anios, default=anios)
 bec_f = bec[bec["anio"].isin(sel)] if sel else bec
 
+fuentes("edu", "edu_hmo/becas_hmo.parquet", "edu_hmo/matriculas_uth_hmo.parquet", "edu_hmo/titulados_uth.parquet", "edu_hmo/egresados_uth.parquet")
+
 k1, k2, k3, k4 = st.columns(4)
 k1.metric("Becas HMO", f"{len(bec_f):,}", f"${int(bec_f['importe'].sum()):,}")
 k2.metric("Matrícula UTH HMO 2022-2", f"{len(mat):,}")
@@ -69,9 +74,9 @@ t1, t2, t3, t4, t5, t6, t7 = st.tabs(
      "Aprovech. y Capacitación", "Ontología"])
 
 with t1:
+    fuentes("edu", 'edu_hmo/becas_hmo.parquet')
     que("Becas autorizadas a residentes de Hermosillo por año (2021-2025): cada barra "
-        "es un año y su altura el número de becas. Crecimiento 2021-2024 con ligera "
-        "baja en 2025.")
+        "es un año y su altura el número de becas. Cuenta registros publicados; no acredita cobertura del programa.")
     s = bec_f.groupby("anio").agg(becas=("importe", "size"),
                                    importe=("importe", "sum")).reset_index()
     st.plotly_chart(px.bar(s, x="anio", y="becas", title="Becas HMO por año"),
@@ -142,9 +147,10 @@ with t1:
                     use_container_width=True)
 
 with t2:
+    fuentes("edu", 'edu_hmo/titulados_uth.parquet', 'edu_hmo/egresados_uth.parquet', 'edu_hmo/nuevo_ingreso_uth.parquet')
     que("Comparativa por corte de las tres etapas de la trayectoria UTH: nuevo ingreso, "
         "egresados y titulados. Cada grupo de barras es un periodo; permite ver la "
-        "relación entre los que entran, los que egresan y los que se titulan.")
+        "comparación del volumen de cada serie institucional. No hay seguimiento de las mismas personas ni tasas de transición.")
     tray = pd.concat([
         tit.assign(etapa="Titulados"), egr.assign(etapa="Egresados"),
         ing.assign(etapa="Nuevo ingreso")])
@@ -186,9 +192,10 @@ with t2:
                     use_container_width=True)
 
 with t3:
-    que("Materias con mayor índice promedio de reprobación en la semana 16 del semestre "
-        "(2022, presencial y remota): señala dónde se concentran los rezagos. El "
-        "histograma muestra cómo se distribuye ese índice entre todas las materias.")
+    fuentes("edu", 'edu_hmo/reprobacion_uth.parquet')
+    que("Categorías de la fuente con mayor promedio aritmético del índice de reprobación de semana 16 "
+        "(2022, presencial y remota), sin ponderación. El "
+        "histograma muestra cómo se distribuye ese índice entre los registros disponibles.")
     idx_all = [c for c in rep.columns if "16VA" in c.upper() and "REPROB" in c.upper()]
     idx, idx2 = idx_all[0], (idx_all[1] if len(idx_all) > 1 else idx_all[0])
     mat_col = [c for c in rep.columns if "PROGRAMA" in c.upper()][0]
@@ -227,7 +234,8 @@ with t3:
                     use_container_width=True)
 
 with t4:
-    que("Matrícula UTH Hermosillo 2022-2 (8,227 estudiantes): reparto por unidad "
+    fuentes("edu", 'edu_hmo/matriculas_uth_hmo.parquet')
+    que("Registros de matrícula UTH seleccionados por unidad o municipio Hermosillo: reparto por unidad "
         "académica y por sexo, histograma de edades y periodo escolar de ingreso. "
         "Describe quiénes estudian en la universidad.")
     uni = col(mat, "unidad")
@@ -246,34 +254,18 @@ with t4:
                                  title="Matrícula UTH HMO: edad (años)",
                                  labels={edad: "Edad (años)"}),
                     use_container_width=True)
-    st.caption("⚠️ Dato curioso: 11 registros aparecen con 122 años "
-               "(probable error de captura, no edad real).")
+    st.caption("Las edades se presentan tal como aparecen en la fuente; no se corrigen valores sin evidencia.")
     que("Periodo escolar de ingreso de la matrícula actual: de qué generación "
         "viene cada inscrito (año-periodo).")
     ing_c = mat.groupby(ping).size().reset_index(name="n").sort_values(ping)
 
 
-    def _per(p):  # ponytail: YY+periodo UTH (222->2022-2), siglo 19 si YY>=90
-        try:
-            p = int(p)
-            yy, t = divmod(p, 10)
-            return f"{19 if yy >= 90 else 20}{yy:02d}-{t}"
-        except (TypeError, ValueError):
-            return str(p)
-
-
-    ing_c["ingreso"] = ing_c[ping].map(_per)
-    ing_c["periodo"] = ing_c["ingreso"].str.slice(-1).map(
-        {"1": "1 · ene-abr", "2": "2 · sep-dic", "3": "3 · verano*"})
-    st.plotly_chart(px.bar(ing_c, x="ingreso", y="n", color="periodo",
-                           title="Matrícula por año de ingreso",
-                           labels={"ingreso": "Ingreso (año-periodo)",
-                                   "n": "Inscritos", "periodo": "Periodo"},
-                           category_orders={"ingreso": ing_c["ingreso"].tolist()}),
+    ing_c["ingreso"] = ing_c[ping].astype(str)
+    st.plotly_chart(px.bar(ing_c, x="ingreso", y="n",
+                           title="Matrícula por código de periodo de ingreso",
+                           labels={"ingreso": "Código declarado", "n": "Registros"}),
                     use_container_width=True)
-    st.caption("* La fuente no define 1/2/3; se infiere de nuevo ingreso "
-               "(2022-1 = enero-abril, 2022-2 = septiembre-diciembre) y de que "
-               "el 3 va casi todo a cuatrimestrales.")
+    st.caption("Se conservan los códigos originales: no se ha recuperado una definición documental que permita traducirlos a fechas.")
     # --- Programas, modalidad, regularidad ---
     que("Qué estudian y en qué modalidad: top de programas, 91% escolarizado, "
         "70% regulares vs 30% irregulares.")
@@ -510,9 +502,11 @@ with t6:
 
 with t7:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
-             "qué significa cada columna de los conjuntos de educación según la fuente.")
+             "significados documentales; las correspondencias con columnas se muestran por separado y requieren revisar su estado.")
     sig = significados()
     st.dataframe(sig, use_container_width=True)
     st.download_button("Descargar significados (CSV)",
                        sig.to_csv(index=False).encode("utf-8"),
                        "significados_edu_hermosillo.csv", "text/csv")
+
+    fuentes("edu")

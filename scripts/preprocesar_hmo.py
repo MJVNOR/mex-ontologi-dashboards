@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 
 import pandas as pd
+from registrar_procedencia import registrar
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
@@ -79,6 +80,7 @@ def main():
 
     (DATA / "resumen_hmo.json").write_text(
         json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
+    registrar('salud')
     print(json.dumps(out, ensure_ascii=False, indent=2)[:2000])
 
 

@@ -1,13 +1,16 @@
 """Dashboard Salud Hermosillo — datos abiertos Sonora via ontologia mex-ontologi.
 
 Fuente: 7 conjuntos del grupo Salud del portal datos.sonora.gob.mx, identificados
-con el MCP mex-ontologia (store portal, 322495 triples; variables y significados
-en data/significados_salud.csv). Descarga: scripts/descargar_salud.py.
+por consultas a mex-ontologia; variables, significados y evidencia
+en data/significados_salud.csv y data/procedencia_salud.json. Descarga: scripts/descargar_salud.py.
 Filtro Hermosillo: scripts/preprocesar_hmo.py -> data/hmo_*.parquet.
 """
 
 import json
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from procedencia import fuentes
 
 import pandas as pd
 import plotly.express as px
@@ -17,7 +20,7 @@ DATA = Path(__file__).resolve().parents[2] / "data"
 st.set_page_config(page_title="Salud Hermosillo", layout="wide")
 st.title("Salud en Hermosillo — datos abiertos de Sonora")
 st.caption("Fuente: portal datos.sonora.gob.mx, grupo Salud (7 conjuntos). "
-           "Identificación y significados vía ontología mex-ontologi (MCP). "
+           "Fuentes y significados preparados mediante consultas a mex-ontologi. "
            "Los totales son los declarados por la fuente, sin inferir cobertura.")
 
 
@@ -61,6 +64,8 @@ if sel:
 else:
     urg_f, egr_f, con_f = urg, egr, con
 
+fuentes("salud", "hmo_urgencias.parquet", "hmo_egresos.parquet", "hmo_consulta.parquet", "hmo_nacimientos.parquet", "hmo_defunciones.parquet")
+
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric("Urgencias", f"{int(urg_f['Total_Urgencias'].sum()):,}")
 k2.metric("Egresos hosp.", f"{int(egr_f['Total_Egresos'].sum()):,}")
@@ -73,9 +78,9 @@ t1, t2, t3, t4, t5, t6, t7 = st.tabs(
      "Nacimientos / Defunciones", "Vigilancia", "Pronóstico", "Ontología"])
 
 with t1:
+    fuentes("salud", 'hmo_urgencias.parquet', 'hmo_egresos.parquet', 'hmo_consulta.parquet')
     que("Barras agrupadas por año: compara el volumen anual de urgencias, egresos "
-        "hospitalarios y consulta externa en Hermosillo. Se aprecia el pico "
-        "2018-2019 y la caída de 2020 (pandemia) y 2022 (año parcial en la fuente).")
+        "hospitalarios y consulta externa en Hermosillo. No se atribuyen causas a las variaciones ni se presume cobertura anual completa.")
     s = pd.DataFrame({
         "Urgencias": urg_f.groupby(yu)["Total_Urgencias"].sum(),
         "Egresos": egr_f.groupby(ye)["Total_Egresos"].sum(),
@@ -88,6 +93,7 @@ with t1:
                "el grueso es 2018-2022.")
 
 with t2:
+    fuentes("salud", 'hmo_urgencias.parquet', 'hmo_egresos.parquet')
     c1, c2 = st.columns(2)
     que("Izquierda: los 10 diagnósticos (CIE-10) con más atenciones de urgencias en "
         "Hermosillo. Derecha: lo mismo para egresos hospitalarios. Permite ver qué "
@@ -108,6 +114,7 @@ with t2:
                            title="Egresos por sexo (etiquetas de la fuente)"), use_container_width=True)
 
 with t3:
+    fuentes("salud", 'hmo_consulta.parquet')
     que("Izquierda: consultas por grupo de edad (de menor a mayor volumen). Derecha: "
         "reparto por sexo. Muestran qué población usa más la consulta externa.")
     c1, c2 = st.columns(2)
@@ -124,6 +131,7 @@ with t3:
                            title="Consulta externa: top 10 establecimientos"), use_container_width=True)
 
 with t4:
+    fuentes("salud", 'hmo_nacimientos.parquet', 'hmo_defunciones.parquet')
     que("Nacimientos 2022 (madres residentes en HMO): edad de la madre y peso del "
         "recién nacido en gramos. Defunciones 2022 (residentes): edad al fallecer y "
         "top 10 causas básicas (CIE). Son registros individuales, no agregados.")
@@ -139,16 +147,17 @@ with t4:
                            title="Defunciones: top 10 causas básicas"), use_container_width=True)
 
 with t5:
-    que("Vigilancia epidemiológica 2022 en HMO (36 semanas con reporte): casos acumulados "
-        "por diagnóstico (lideran infecciones respiratorias agudas y COVID-19) y curva "
-        "de casos por semana epidemiológica, que muestra los picos de contagio del año.")
+    fuentes("salud", 'hmo_vigilancia.parquet', 'hmo_inspecciones.parquet')
+    que("Vigilancia epidemiológica 2022 en HMO (36 semanas con reporte): valores de la columna acumulado por diagnóstico "
+        "(lideran infecciones respiratorias agudas y COVID-19) y suma de esos valores por "
+        "semana epidemiológica, sin interpretar estos agregados como incidencia semanal.")
     top_v = vig.groupby("des_diagno")["acumulado"].sum().nlargest(12).reset_index()
     st.plotly_chart(px.bar(top_v, x="acumulado", y="des_diagno", orientation="h",
-                           title="Vigilancia 2022 HMO: casos acumulados por diagnóstico"),
+                           title="Vigilancia HMO: suma de valores de acumulado por diagnóstico"),
                     use_container_width=True)
     sem = vig.groupby("no_semana")["acumulado"].sum().reset_index()
     st.plotly_chart(px.line(sem, x="no_semana", y="acumulado",
-                            title="Vigilancia HMO: casos por semana epidemiológica"),
+                            title="Vigilancia HMO: suma de acumulado por semana declarada"),
                     use_container_width=True)
     if len(ins):
         que("Tabla de las 30 inspecciones sanitarias de PROAES realizadas en Hermosillo "
@@ -186,29 +195,26 @@ with t6:
                f"variante {met['consulta']['modelo']}). "
                "R² negativo = peor que predecir el promedio mensual: úsese como "
                "perfil estacional de referencia, no como pronóstico operativo.")
-    que("Semanas epidemiológicas atípicas (IsolationForest sobre casos semanales "
-        "totales): los puntos rojos son semanas cuyo volumen se aparta del patrón "
+    que("Semanas epidemiológicas atípicas (IsolationForest sobre la suma de la columna "
+        "acumulado por semana): los puntos rojos son semanas cuyo valor se aparta del patrón "
         "habitual y ameritan revisión.")
     ano = pd.read_parquet(DATA / "modelos" / "inferencias" / "anomalias_vigilancia.parquet")
     fig2 = go.Figure()
     fig2.add_trace(go.Scatter(x=ano.no_semana, y=ano.acumulado, mode="lines",
-                              name="Casos semanales"))
+                              name="Suma de acumulado"))
     flag = ano[ano.anomalia == -1]
     fig2.add_trace(go.Scatter(x=flag.no_semana, y=flag.acumulado, mode="markers",
                               marker=dict(color="red", size=10), name="Atípica"))
     fig2.update_layout(title="Vigilancia HMO: semanas atípicas detectadas",
-                       xaxis_title="Semana epidemiológica", yaxis_title="Casos acumulados")
+                       xaxis_title="Semana epidemiológica", yaxis_title="Suma de acumulado")
     st.plotly_chart(fig2, use_container_width=True)
 
 with t7:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
-             "qué significa cada columna de los 7 conjuntos de salud según la fuente.")
+             "significados documentales; las correspondencias con columnas se muestran por separado y requieren revisar su estado.")
     sig = significados()
     st.dataframe(sig, use_container_width=True)
     st.download_button("Descargar significados (CSV)",
                        sig.to_csv(index=False).encode("utf-8"),
                        "significados_salud_hermosillo.csv", "text/csv")
-    st.json({"conjuntos_salud": 7, "significados": len(sig),
-             "triples_store_portal": 322495,
-             "nota": "Cruces entre conjuntos no autorizados por la ontología sin validación; "
-                     "cada serie se reporta por separado."})
+    fuentes("salud")

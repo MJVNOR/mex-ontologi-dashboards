@@ -1,6 +1,9 @@
 .venv/
 __pycache__/
 *.pyc
+*.part
+*.tmp
+*.log
 *.xlsx
 data/seg_raw/
 .streamlit/secrets.toml

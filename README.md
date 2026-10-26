@@ -21,8 +21,8 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 
 | Dashboard | App | Fuente |
 |---|---|---|
-| Salud en Hermosillo | `dashboards/hermosillo-salud/app.py` — [ver en vivo](https://mjvnor-mex-ontologi-dashbo-dashboardshermosillo-saludapp-le2l94.streamlit.app/) | 7 conjuntos grupo Salud, 230 significados |
-| Educación en Hermosillo | `dashboards/educacion-hermosillo/app.py` — [ver en vivo](https://mex-ontologi-dashboards-zqt8qvqfwwbacguuimtvwz.streamlit.app/) | Becas 2021-25 (filtro HMO) + UTH institucional, 124 significados |
+| Salud en Hermosillo | `dashboards/hermosillo-salud/app.py` — [ver en vivo](https://mjvnor-mex-ontologi-dashbo-dashboardshermosillo-saludapp-le2l94.streamlit.app/) | 7 conjuntos seleccionados, 212 significados documentados |
+| Educación en Hermosillo | `dashboards/educacion-hermosillo/app.py` — [ver en vivo](https://mex-ontologi-dashboards-zqt8qvqfwwbacguuimtvwz.streamlit.app/) | Becas 2021-25 (filtro HMO) + UTH institucional + capacitación SEC, 115 significados documentados |
 | Seguridad en Sonora | `dashboards/seguridad-sonora/app.py` — [ver en vivo](https://mex-ontologi-dashboards-plduatjh2dn6pwcct3cwku.streamlit.app/) | Incidencia municipal 2015-25 + víctimas + 911 T1-T2 2026 + detenidas + desaparecidas + mapa 72 municipios, 107 significados |
 
 ## Skills para análisis y dashboards
@@ -68,15 +68,17 @@ canónica, evidencia trazable y evaluación de cruces mediante
 
 ## Crear un dashboard nuevo
 
-1. Descubre conjuntos con el MCP o el TTL:
+1. Descubre conjuntos mediante el MCP; si no está disponible, utiliza la CLI canónica de MEX-Ontologi:
    `onto_query("SELECT ...")` / `scripts/extraer_significados.py`
    (`MEX_ONTOLOGIA_DIR` apunta al repo de la ontología).
-2. Descarga los recursos que indique el inventario (`scripts/descargar_salud.py`
-   como ejemplo; el portal exige `User-Agent`).
+2. Descarga los recursos recuperados por consulta (`scripts/descargar_salud.py`
+   como ejemplo). Los coordinadores de Salud y Educación utilizan el helper
+   `MEX-Ontologi/scripts/descargar_ckan.py`, que conserva el `User-Agent` requerido.
 3. Filtra a tu población en `scripts/preprocesar_*.py` → `data/hmo_*.parquet`
    (los `*.xlsx` crudos están en `.gitignore`; se regeneran con el paso 2).
 4. Crea `dashboards/<tema>/app.py` con Streamlit + Plotly.
-5. Documenta conjuntos, filtros y totales en este README.
+5. Documenta conjuntos, filtros y totales en este README y conserva fuentes,
+   huellas y transformaciones en `config/artefactos.json` y `data/procedencia_*.json`.
 
 ## Para qué sirven aquí la ontología y el MCP
 
@@ -90,30 +92,54 @@ el mapa, el diccionario y el reglamento:
 - **Entender columnas:** `contenido-inspeccion.json` da hoja, columnas y
   método de encabezado por archivo, así se elige el filtro municipal
   (`Mun_Nombre`, `MUNICIPIORESIDENCIAD`, `des_munici`…) antes de abrir un Excel.
-- **Significados:** 230 pares variable→significado documentado salen del
-  `portal-completo.ttl` (la misma fuente que sirve el MCP) y alimentan la
-  pestaña Ontología. Solo se usan significados respaldados, no candidatos.
+- **Significados:** el extractor consulta los conjuntos seleccionados por sus
+  identificadores, pagina con orden determinista y conserva el conteo completo.
+  Salud y Educación publican los significados, sus IRI, diccionarios y estados
+  en `data/significados_*.csv` y `data/ontologia_*.json`. Las correspondencias
+  con columnas se conservan por separado; una candidata sigue siendo hipótesis.
 - **Límites:** sin cruces entre conjuntos sin validación y sin inferir
   cobertura; por eso cada serie se reporta por separado como total declarado.
 
-El **MCP `mex-ontologia`** (`opencode.json`, proceso local `serve` sobre el
-store portal con 322,495 triples) expone ese grafo en vivo con `onto_query`,
-`onto_stats`, `onto_status` y `onto_validate`: descubrir conjuntos y verificar
-significados sin copiar archivos. Requiere el repo `MEX-Ontologi` en la ruta
-de `cwd` y reiniciar la sesión tras cambiar la config.
+El **MCP `mex-ontologia`** (`opencode.json`) expone consultas de solo lectura
+con `onto_query`, `onto_stats`, `onto_status`, `onto_validate` y `onto_shacl`.
+El lanzador y la CLI de MEX-Ontologi comparten un backend persistente por almacén;
+cada cliente tiene su propia sesión. Las consultas libres requieren `LIMIT`
+entre 1 y 2000. No se leen archivos TTL ni se abre directamente el motor.
+
+### Procedencia de Salud y Educación
+
+`config/recursos.json` selecciona identificadores y nombres locales. Las URL y
+las IRI proceden de consultas guardadas en `data/ontologia_*.json`.
+`data/descargas_*.json` registra URL, fecha de descarga y SHA-256;
+`config/artefactos.json` documenta hojas, filtros y agregaciones, y
+`data/procedencia_*.json` vincula cada Parquet con sus fuentes y evidencia.
+Ambos dashboards muestran esta información en «Fuentes y metodología».
+
+La fecha de extracción, la fecha de generación y la fecha de carga son distintas.
+Si la carga no está acreditada, se conserva `null` y se muestra el hueco.
+El alcance de esta integración de procedencia es Salud y Educación; Seguridad
+conserva sus artefactos y requiere su propia ampliación de evidencia.
 
 ## Desarrollo local
 
 ```powershell
 uv sync
+uv run python scripts/configurar_mcp.py
+uv run python scripts/extraer_significados.py --tema todos
 uv run python scripts/descargar_salud.py
-uv run python scripts/extraer_significados.py
+uv run python scripts/descargar_edu.py
 uv run python scripts/preprocesar_hmo.py
+uv run python scripts/preprocesar_edu.py
+uv run python -m unittest discover -s tests -v
+uv run python scripts/verificar.py --base origin/main
 uv run streamlit run dashboards/hermosillo-salud/app.py
 ```
 
-Requiere Python 3.12 y `uv`. El MCP `mex-ontologia` se registra en
-`opencode.json` (apunta al repo `MEX-Ontologi`).
+Requiere Python 3.12 y `uv`. MEX-Ontologi se busca como carpeta hermana;
+para otra ubicación, define `MEX_ONTOLOGIA_DIR`. El configurador registra el MCP
+en `opencode.json`. El extractor usa MCP por defecto; `--transporte cli` selecciona
+explícitamente la CLI canónica. `--tema todos` exporta Salud y Educación.
+El runtime publicado utiliza los artefactos preparados, sin conexión al MCP.
 
 ## Publicar en Streamlit Community Cloud
 
