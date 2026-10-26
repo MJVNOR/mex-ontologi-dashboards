@@ -5,6 +5,7 @@ ingreso, reprobacion y aprovechamiento institucionales UTH (radicadas en
 Hermosillo); capacitacion SEC estatal. Totales declarados por la fuente.
 """
 
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -62,8 +63,8 @@ k2.metric("Matrícula UTH HMO 2022-2", f"{len(mat):,}")
 k3.metric("Titulados UTH 22-25", f"{int(tit['n'].sum()):,}")
 k4.metric("Egresados UTH 22-25", f"{int(egr['n'].sum()):,}")
 
-t1, t2, t3, t4, t5, t6 = st.tabs(
-    ["Becas", "Trayectoria UTH", "Reprobación", "Matrícula",
+t1, t2, t3, t4, t5, t6, t7 = st.tabs(
+    ["Becas", "Trayectoria UTH", "Reprobación", "Matrícula", "Modelos",
      "Aprovech. y Capacitación", "Ontología"])
 
 with t1:
@@ -337,6 +338,73 @@ with t4:
                f"{int((mat[indg].astype(str).str.upper() == 'SI').sum())} estudiantes.")
 
 with t5:
+    import plotly.graph_objects as go
+    que("Materias con mayor probabilidad de riesgo (índice sem.16 ≥ 30%) según "
+        "RandomForest entrenado con semanas 4/8/12: alerta temprana para intervenir "
+        "antes del cierre del semestre.")
+    me = json.loads((DATA / "modelos" / "metricas_edu.json").read_text(encoding="utf-8"))
+    riesgo = pd.read_parquet(DATA / "modelos" / "inferencias" / "riesgo_materias.parquet")
+    mcol = next(c for c in riesgo.columns if "PROGRAMA" in str(c).upper())
+    top = riesgo.groupby(mcol)["p_riesgo"].max().sort_values(ascending=False).head(12)
+    top = top.reset_index().rename(columns={"p_riesgo": "p"})
+    st.plotly_chart(px.bar(top, x="p", y=mcol, orientation="h",
+                           title="Riesgo de reprobación: top 12 materias (p)"),
+                    use_container_width=True)
+    st.caption(f"Modelo: balanced accuracy {me['riesgo_reprobacion']['balanced_accuracy']} "
+               f"en prueba (n={me['riesgo_reprobacion']['n']}, prevalencia de riesgo "
+               f"{me['riesgo_reprobacion']['prevalencia_riesgo']}). Probabilidad, no destino.")
+    que("Segmentos de estudiantes (KMeans k=4 sobre semestre, promedios, créditos y "
+        "sexo, ciclo 2021-2022) proyectados en 2D: cada punto es un estudiante. "
+        "Describe perfiles (p. ej. avanzados vs. iniciales), no etiquetas oficiales.")
+    seg = pd.read_parquet(DATA / "modelos" / "inferencias" / "segmentos_uth.parquet")
+    st.plotly_chart(px.scatter(seg, x="pca1", y="pca2", color=seg.segmento.astype(str),
+                               title="Segmentos de estudiantes UTH (PCA 2D)",
+                               labels={"color": "Segmento"},
+                               hover_data=["programa", "semestre"]),
+                    use_container_width=True)
+    st.caption(f"Tamaños: {me['segmentos']['tamano']}. El segmento 2 (2 registros con "
+               "promedios en escala 0-100 en vez de 0-10) es probable error de captura.")
+    que("Tendencia de becas HMO con estimación 2026 (regresión lineal, n=5): el punto "
+        "naranja es ESTIMACIÓN frágil, no compromiso; úsese solo como referencia.")
+    tb = pd.read_parquet(DATA / "modelos" / "inferencias" / "tendencia_becas.parquet")
+    fig = go.Figure()
+    h = tb[tb.tipo == "observado"]
+    e = tb[tb.tipo == "estimacion"]
+    fig.add_trace(go.Scatter(x=h.anio, y=h.n, mode="lines+markers", name="Observado"))
+    fig.add_trace(go.Scatter(x=e.anio, y=e.n, mode="markers",
+                             marker=dict(color="orange", size=12), name="Estimación 2026"))
+    fig.update_layout(title="Becas HMO: observado + estimación 2026",
+                      xaxis_title="Año", yaxis_title="Becas")
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption(f"R² {me['tendencia_becas']['r2']}, MAE {me['tendencia_becas']['mae']}. "
+               f"{me['tendencia_becas']['advertencia']}.")
+    que("Riesgo de irregularidad por alumno (RandomForest con datos de entrada: "
+        "edad, promedio de bachillerato, programa, modalidad, sexo y semestres; "
+        "sin promedios generales ni créditos para no filtrar el resultado).")
+    mi = me["irregularidad"]
+    imp = pd.Series(mi["importancias"]).sort_values(ascending=False).reset_index()
+    imp.columns = ["variable", "importancia"]
+    st.plotly_chart(px.bar(imp, x="importancia", y="variable", orientation="h",
+                           title="Irregularidad: qué pesa más"),
+                    use_container_width=True)
+    irr = pd.read_parquet(DATA / "modelos" / "inferencias"
+                          / "irregularidad_matricula.parquet")
+    pcol = "p_irregular"
+    prog_irr = [c for c in irr.columns if c != pcol][0]
+    st.plotly_chart(px.histogram(irr, x=pcol, nbins=40,
+                                 title="Irregularidad: distribución de P(irregular)"),
+                    use_container_width=True)
+    top_irr = irr.groupby(prog_irr)[pcol].mean().sort_values(
+        ascending=False).head(15).reset_index()
+    st.plotly_chart(px.bar(top_irr, x=pcol, y=prog_irr, orientation="h",
+                           title="P(irregular) promedio: top 15 programas"),
+                    use_container_width=True)
+    st.caption(f"Modelo: balanced accuracy {mi['balanced_accuracy']} en prueba "
+               f"(n={mi['n']}, prevalencia irregular {mi['prevalencia_irregular']}). "
+               "El promedio de bachillerato y los semestres cursados pesan más; "
+               "sexo y modalidad casi nada. Probabilidad, no destino.")
+
+with t6:
     que("Aprovechamiento 2021-2 por programa (80 filas): promedio global y % con "
         "menos de 7. Ordenado por promedio; el n pequeño miente si no se muestra.")
     pg = col(apr, "promedio global")
@@ -375,7 +443,7 @@ with t5:
                            title="Participantes por modalidad"),
                     use_container_width=True)
 
-with t6:
+with t7:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
              "qué significa cada columna de los conjuntos de educación según la fuente.")
     sig = significados()
