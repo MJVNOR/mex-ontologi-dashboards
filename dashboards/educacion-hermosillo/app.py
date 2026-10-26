@@ -71,11 +71,50 @@ k2.metric("Matrícula UTH HMO 2022-2", f"{len(mat):,}", border=True)
 k3.metric("Titulados UTH 22-25", f"{int(tit['n'].sum()):,}", border=True)
 k4.metric("Egresados UTH 22-25", f"{int(egr['n'].sum()):,}", border=True)
 
-t1, t2, t3, t4, t5, t6, t7 = st.tabs(
-    ["Becas :material/savings:", "Trayectoria UTH :material/timeline:",
-     "Reprobación :material/trending_down:", "Matrícula :material/groups:",
-     "Modelos :material/psychology:", "Aprovech. y Capacitación :material/rubric:",
-     "Ontología :material/hub:"])
+th, t1, t2, t3, t4, t5, t6, t7 = st.tabs(
+    ["Hallazgos :material/auto_stories:", "Becas :material/savings:",
+     "Trayectoria UTH :material/timeline:", "Reprobación :material/trending_down:",
+     "Matrícula :material/groups:", "Modelos :material/psychology:",
+     "Aprovech. y Capacitación :material/rubric:", "Ontología :material/hub:"])
+
+with th:
+    que("Lo que los datos alcanzan a decir — y lo que no. Cada hallazgo trae su "
+        "gráfica, su evidencia y sus límites. Fuente: portal datos.sonora.gob.mx, "
+        "significados vía ontología mex-ontologi; sin cruces entre conjuntos ni "
+        "lecturas de cohorte donde hay cortes.")
+    st.subheader("El ticket cae mientras las becas crecen")
+    st.markdown("**Más becas, menos beca**: el programa pasó de 14,829 becas en 2021 a "
+                "49,637 en 2024 (41,280 en 2025), pero el ticket medio cayó de $10,210 a "
+                "$6,173 con la mediana fija en $5,000. Ver *Becas → Ticket por año* y "
+                "*distribución del importe* (p99 $42,500, max $500,000).")
+    st.caption("Límites: cuenta registros publicados, no acredita cobertura; cifras fijas al "
+               "periodo completo. El año entra lineal en log: es aproximación, no tarifa oficial.")
+    st.subheader("La UTH en un retrato con bordes rotos")
+    st.markdown("**Remota reprueba el doble, con n chica**: media 34.2 en semana 16 frente a "
+                "~17.3 presencial (Mann-Whitney p<0.001; medianas 37 vs 11.9). Ver *Reprobación → "
+                "media por corte*. **La edad no pesa controlando**: el Logit le da p=0.38 aunque el "
+                "bosque la marcaba importante (ver *Modelos → odds ratios*). **11 inscritos con 122 "
+                "años** son probable error de captura: se muestran, no se corrigen sin evidencia.")
+    st.caption("Límites: remota n=64 (rango, no punto); 2022-1/remota fuera del modelo por falta de "
+               "semanas tempranas; CV agrupada por materia 0.73 ± 0.07 con n=140.")
+    st.subheader("Trayectoria sin seguimiento")
+    st.markdown("**No hay tasas de transición**: titulados, egresados y nuevo ingreso son cortes "
+                "transversales 2022-2025, no la misma generación (por eso hay tasas >1). El corte "
+                "2022-1 trae un solo programa (n=10) y no es comparable. Ver *Trayectoria UTH*.")
+    st.caption("Límites: el dato para cohortes reales (mismo estudiante en el tiempo) no existe en "
+               "la fuente.")
+    st.subheader("Salud y seguridad: el tamaño engaña")
+    st.markdown("**El mejor pronóstico pierde contra el promedio** (salud, R² negativo: ver tableros "
+                "de Salud, *perfil estacional*). **La brecha de consulta es real y tiene edad** "
+                "(χ² p≈0, V=0.30; 72-78% mujeres entre 15 y 49). **Delitos: el R² 0.94 es del tamaño "
+                "entre municipios**; en Hermosillo el modelo apenas supera al naive (MAE 221 vs 252). "
+                "**Nacer**: la mediana del peso sube +3.1 g por año de madre (p=0.004); en q10 no hay "
+                "efecto.")
+    st.caption("Límites: series parciales 2021-2022; la mejor variante salud se eligió ganando en el "
+               "propio test (optimista); sin paridad ni atención prenatal no hay causalidad en peso.")
+    st.subheader("Qué faltaría para decir más")
+    st.markdown("Identificadores longitudinales (cohortes reales), 2-3 años más de series, y "
+                "diccionarios de códigos (periodos de ingreso, sufijos D). Sin eso, este es el techo.")
 
 with t1:
     fuentes("edu", 'edu_hmo/becas_hmo.parquet')
