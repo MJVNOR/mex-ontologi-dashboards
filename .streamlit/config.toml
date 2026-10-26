@@ -4,4 +4,7 @@ primaryColor = "#0b5fa5"
 backgroundColor = "#ffffff"
 secondaryBackgroundColor = "#eef3f8"
 textColor = "#1a1a1a"
-font = "sans serif"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+baseRadius = "0.5rem"
+showWidgetBorder = true
+chartCategoricalColors = ["#0b5fa5", "#1a7f37", "#bf3989", "#8250df", "#cf222e", "#bf8700", "#57606a"]

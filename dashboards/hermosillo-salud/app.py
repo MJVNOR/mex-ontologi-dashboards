@@ -66,12 +66,21 @@ else:
 
 fuentes("salud", "hmo_urgencias.parquet", "hmo_egresos.parquet", "hmo_consulta.parquet", "hmo_nacimientos.parquet", "hmo_defunciones.parquet")
 
+def fmt(n):
+    n = int(n)
+    if n >= 1_000_000:
+        return f"{n / 1_000_000:.2f} M"
+    if n >= 10_000:
+        return f"{n / 1_000:.1f} mil"
+    return f"{n:,}"
+
+
 k1, k2, k3, k4, k5 = st.columns(5)
-k1.metric("Urgencias", f"{int(urg_f['Total_Urgencias'].sum()):,}")
-k2.metric("Egresos hosp.", f"{int(egr_f['Total_Egresos'].sum()):,}")
-k3.metric("Consulta externa", f"{int(con_f['Total'].sum()):,}")
-k4.metric("Nacimientos 2022 (residencia HMO)", f"{len(nac):,}")
-k5.metric("Defunciones 2022 (residencia HMO)", f"{len(defu):,}")
+k1.metric("Urgencias", fmt(urg_f["Total_Urgencias"].sum()))
+k2.metric("Egresos hosp.", fmt(egr_f["Total_Egresos"].sum()))
+k3.metric("Consulta externa", fmt(con_f["Total"].sum()))
+k4.metric("Nacimientos 2022 (residencia HMO)", fmt(len(nac)))
+k5.metric("Defunciones 2022 (residencia HMO)", fmt(len(defu)))
 
 t1, t2, t3, t4, t5, t6, t7 = st.tabs(
     ["Series anuales", "Urgencias / Egresos", "Consulta externa",
@@ -89,7 +98,7 @@ with t1:
     s = s.rename(columns={"index": "año"})
     st.plotly_chart(px.bar(s, x="año", y="total", color="serie", barmode="group",
                            title="Consulta externa domina; 2020 se desploma y 2022 viene parcial"),
-                    use_container_width=True)
+                    width="stretch", alt="Barras anuales por servicio de salud")
     st.caption("Egresos incluye pocos registros 2015-2017 tal como los declara la fuente; "
                "el grueso es 2018-2022.")
 
@@ -101,18 +110,18 @@ with t2:
         "padecimientos presionan cada servicio.")
     top_u = urg_f.groupby("CIE10_Descrip")["Total_Urgencias"].sum().nlargest(10).reset_index()
     c1.plotly_chart(px.bar(top_u, x="Total_Urgencias", y="CIE10_Descrip", orientation="h",
-                           title="Urgencias: top 10 diagnósticos"), use_container_width=True)
+                           title="Urgencias: top 10 diagnósticos"), width="stretch", alt="Grafica: Urgencias: top 10 diagnósticos")
     top_e = egr_f.groupby("CIE10_Descrip")["Total_Egresos"].sum().nlargest(10).reset_index()
     c2.plotly_chart(px.bar(top_e, x="Total_Egresos", y="CIE10_Descrip", orientation="h",
-                           title="Egresos: top 10 diagnósticos"), use_container_width=True)
+                           title="Egresos: top 10 diagnósticos"), width="stretch", alt="Grafica: Egresos: top 10 diagnósticos")
     que("Pasteles: reparto por sexo de cada servicio. Las etiquetas son las que declara "
         "la fuente (en egresos conviven 'Hombre/Masculino' y 'Mujer/Femenino').")
     c1.plotly_chart(px.pie(urg_f.groupby("Sexo")["Total_Urgencias"].sum().reset_index(),
                            names="Sexo", values="Total_Urgencias",
-                           title="Urgencias por sexo"), use_container_width=True)
+                           title="Urgencias por sexo"), width="stretch", alt="Grafica: Urgencias por sexo")
     c2.plotly_chart(px.pie(egr_f.groupby("Sexo")["Total_Egresos"].sum().reset_index(),
                            names="Sexo", values="Total_Egresos",
-                           title="Egresos por sexo (etiquetas de la fuente)"), use_container_width=True)
+                           title="Egresos por sexo (etiquetas de la fuente)"), width="stretch", alt="Grafica: Egresos por sexo (etiquetas de la fuente)")
 
 with t3:
     fuentes("salud", 'hmo_consulta.parquet')
@@ -123,7 +132,7 @@ with t3:
     c1, c2 = st.columns(2)
     ce_edad = con_f.groupby("Grupo_Edad")["Total"].sum().reset_index().sort_values("Total")
     c1.plotly_chart(px.bar(ce_edad, x="Total", y="Grupo_Edad", orientation="h",
-                           title="Consulta externa por grupo de edad"), use_container_width=True)
+                           title="Consulta externa por grupo de edad"), width="stretch", alt="Grafica: Consulta externa por grupo de edad")
     sx = con_f.groupby(["Grupo_Edad", "Sexo"])["Total"].sum().reset_index()
     sx = sx[sx.Sexo.isin(["HOMBRE", "MUJER"])]
     sx["pct"] = sx["Total"] / sx.groupby("Grupo_Edad")["Total"].transform("sum") * 100
@@ -136,12 +145,12 @@ with t3:
                            title="Consulta externa: sexo por grupo de edad (%)",
                            category_orders={"Grupo_Edad": orden_edad},
                            labels={"pct": "% del grupo"}),
-                    use_container_width=True)
+                    width="stretch", alt="Barras apiladas de sexo por grupo de edad")
     que("Los 10 establecimientos con más consultas en Hermosillo: dónde se concentra "
         "la atención ambulatoria.")
     top_est = con_f.groupby("Nombre_Establecimiento")["Total"].sum().nlargest(10).reset_index()
     st.plotly_chart(px.bar(top_est, x="Total", y="Nombre_Establecimiento", orientation="h",
-                           title="Consulta externa: top 10 establecimientos"), use_container_width=True)
+                           title="Consulta externa: top 10 establecimientos"), width="stretch", alt="Grafica: Consulta externa: top 10 establecimientos")
 
 with t4:
     fuentes("salud", 'hmo_nacimientos.parquet', 'hmo_defunciones.parquet')
@@ -152,22 +161,22 @@ with t4:
     f1 = px.histogram(nac, x="EDAD", nbins=30, title="Edad de la madre: media 27, grueso 20-35")
     f1.add_vline(x=float(nac["EDAD"].mean()), line_dash="dash", annotation_text="media")
     f1.add_vline(x=float(nac["EDAD"].median()), line_dash="dot", annotation_text="mediana")
-    c1.plotly_chart(f1, use_container_width=True)
+    c1.plotly_chart(f1, width="stretch", alt="Histograma de edad de la madre con media y mediana")
     f2 = px.histogram(nac, x="PESO", nbins=40, title="Peso del RN: simétrico alrededor de 3.3 kg")
     f2.add_vline(x=float(nac["PESO"].mean()), line_dash="dash", annotation_text="media")
     f2.add_vline(x=float(nac["PESO"].median()), line_dash="dot", annotation_text="mediana")
-    c1.plotly_chart(f2, use_container_width=True)
+    c1.plotly_chart(f2, width="stretch", alt="Histograma de peso del recién nacido con media y mediana")
     sxn = nac["SEXOD"].value_counts().reset_index()
     sxn.columns = ["sexo", "n"]
     c1.plotly_chart(px.bar(sxn, x="sexo", y="n", title="RN por sexo: 50.7% hombres (esperado ~51%)"),
-                    use_container_width=True)
+                    width="stretch", alt="Barras de recién nacidos por sexo")
     f3 = px.histogram(defu, x="EDAD", nbins=40, title="Edad al fallecer: mediana 68, cola joven a la izquierda")
     f3.add_vline(x=float(defu["EDAD"].mean()), line_dash="dash", annotation_text="media")
     f3.add_vline(x=float(defu["EDAD"].median()), line_dash="dot", annotation_text="mediana")
-    c2.plotly_chart(f3, use_container_width=True)
+    c2.plotly_chart(f3, width="stretch", alt="Histograma de edad al fallecer con media y mediana")
     top_causa = defu.groupby("CIECAUSABASICAD").size().nlargest(10).reset_index(name="n")
     c2.plotly_chart(px.bar(top_causa, x="n", y="CIECAUSABASICAD", orientation="h",
-                           title="Defunciones: top 10 causas básicas"), use_container_width=True)
+                           title="Defunciones: top 10 causas básicas"), width="stretch", alt="Grafica: Defunciones: top 10 causas básicas")
 
 with t5:
     fuentes("salud", 'hmo_vigilancia.parquet', 'hmo_inspecciones.parquet')
@@ -177,16 +186,16 @@ with t5:
     top_v = vig.groupby("des_diagno")["acumulado"].sum().nlargest(12).reset_index()
     st.plotly_chart(px.bar(top_v, x="acumulado", y="des_diagno", orientation="h",
                            title="Vigilancia HMO: suma de valores de acumulado por diagnóstico"),
-                    use_container_width=True)
+                    width="stretch")
     sem = vig.groupby("no_semana")["acumulado"].sum().reset_index()
     st.plotly_chart(px.line(sem, x="no_semana", y="acumulado",
                             title="Vigilancia HMO: suma de acumulado por semana declarada"),
-                    use_container_width=True)
+                    width="stretch")
     if len(ins):
         que("Tabla de las 30 inspecciones sanitarias de PROAES realizadas en Hermosillo "
             "(3er trimestre 2021): fecha, actividad del lugar y motivo.")
         st.write("Inspecciones PROAES en Hermosillo (3er trim. 2021):", len(ins))
-        st.dataframe(ins[["FECHA", "ACTIVIDAD", "MOTIVO", "MUNICIPIO"]], use_container_width=True)
+        st.dataframe(ins[["FECHA", "ACTIVIDAD", "MOTIVO", "MUNICIPIO"]], width="stretch")
 
 with t6:
     que("Pronóstico mensual 2023 por servicio (mejor variante por servicio "
@@ -211,7 +220,7 @@ with t6:
                                  else "rgba(255,0,0,0.1)", hoverinfo="skip"))
     fig.update_layout(title="Perfil estacional mensual 2023 (referencia, no pronóstico)",
                       xaxis_title="Mes", yaxis_title="Atenciones estimadas")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch", alt="Pronóstico mensual 2023 con banda de incertidumbre")
     st.caption(f"Error medido en 2021: urgencias MAE {met['urgencias']['mae']} "
                f"(MAPE {met['urgencias']['mape_pct']}%, R² {met['urgencias']['r2']}, "
                f"variante {met['urgencias']['modelo']}), "
@@ -233,13 +242,13 @@ with t6:
                               marker=dict(color="red", size=10), name="Atípica"))
     fig2.update_layout(title="Vigilancia HMO: semanas atípicas detectadas",
                        xaxis_title="Semana epidemiológica", yaxis_title="Suma de acumulado")
-    st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, width="stretch", alt="Serie semanal de vigilancia con semanas atípicas marcadas")
 
 with t7:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
              "significados documentales; las correspondencias con columnas se muestran por separado y requieren revisar su estado.")
     sig = significados()
-    st.dataframe(sig, use_container_width=True)
+    st.dataframe(sig, width="stretch")
     st.download_button("Descargar significados (CSV)",
                        sig.to_csv(index=False).encode("utf-8"),
                        "significados_salud_hermosillo.csv", "text/csv")
