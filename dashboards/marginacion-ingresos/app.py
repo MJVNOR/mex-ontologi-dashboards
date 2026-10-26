@@ -202,6 +202,17 @@ with t0:
                          labels={"r2": "R²", "modelo": ""})
             _f7.add_vline(x=1.0, line_dash="dot", annotation_text="acuerdo perfecto")
             st.plotly_chart(_f7, width="stretch")
+    st.subheader("Conclusiones (solo lo respaldado)")
+    with st.container(border=True):
+        st.markdown("**Firmes (certeza alta):** no hay medición de empleo en la ontología "
+                    "(89 conjuntos); Sonora PO2SM 63.2%, lugar 22/32; la mediana municipal "
+                    "(70.5%) no contradice al estatal (ponderado 63.8); el IM corre invertido; "
+                    "el rango va 43.0–93.4 y el grado no es el ingreso.")
+        st.markdown("**Con cautela (certeza moderada a baja):** lo rural no es lo peor "
+                    "(69.5 vs 75.7, sin ajuste); dos perfiles de carencias (k=2, un corte); "
+                    "las carencias explican poco del ingreso (R² 0.15).")
+        st.markdown("**No respaldado:** causas, pronósticos, nada posterior a 2020, "
+                    "inferencias a personas desde municipios, ni empleo medido.")
     st.subheader("Cierre sin conclusión forzada")
     with st.container(border=True):
         st.subheader("Procedencia y preguntas abiertas")
