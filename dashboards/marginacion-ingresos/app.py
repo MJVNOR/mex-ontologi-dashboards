@@ -1,9 +1,9 @@
 """Dashboard Contexto laboral proxy: ingresos por marginación 2020.
 
 PO2SM (% con ingresos < 2 salarios mínimos) como proxy de ingresos a nivel
-municipal (72 municipios de Sonora) y entidad (Sonora vs. nacional).
-Corte único 2020, valores declarados por la fuente. No mide empleo,
-vacantes, colocaciones ni desempleo.
+municipal (72 municipios de Sonora) y entidad (Sonora en el contexto de las
+32 entidades). Corte único 2020, valores declarados por la fuente. No mide
+empleo, vacantes, colocaciones ni desempleo.
 """
 
 from pathlib import Path
@@ -51,6 +51,8 @@ k1.metric("PO2SM Sonora", f"{son['PO2SM']:.1f}%", border=True)
 k2.metric("Grado Sonora", str(son["GM_2020"]), border=True)
 k3.metric("Mediana municipal PO2SM", f"{mun['PO2SM'].median():.1f}%", border=True)
 k4.metric("Municipios", f"{len(mun):,}", border=True)
+st.caption("La mediana municipal no pondera por población y los municipios grandes "
+           "tienen PO2SM menor; por eso difiere del 63.2% estatal.")
 
 t1, t2, t3 = st.tabs(["Municipios :material/location_city:",
                      "Entidades :material/public:",

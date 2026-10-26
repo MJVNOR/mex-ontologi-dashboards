@@ -101,6 +101,18 @@ with t1:
                     width="stretch", alt="Barras anuales por servicio de salud")
     st.caption("Egresos incluye pocos registros 2015-2017 tal como los declara la fuente; "
                "el grueso es 2018-2022.")
+    que("Misma serie en tasa por 100 mil habitantes (proyecciones de población, "
+        "tema poblacion): corrige el efecto del crecimiento demográfico; 2022 sigue "
+        "parcial en la fuente.")
+    pob = pd.read_parquet(DATA / "tidy" / "pob_hermosillo_anual.parquet")
+    pob = pob.rename(columns={"anio": "año"})
+    t100 = s.merge(pob, on="año", how="left")
+    t100["tasa"] = (t100["total"] / t100["n"] * 100_000).round(1)
+    st.plotly_chart(px.line(t100, x="año", y="tasa", color="serie", markers=True,
+                            title="Atenciones por 100 mil habitantes (proyección)",
+                            labels={"tasa": "por 100 mil hab."}),
+                    width="stretch",
+                    alt="Líneas de tasa por 100 mil habitantes por servicio")
 
 with t2:
     fuentes("salud", 'hmo_urgencias.parquet', 'hmo_egresos.parquet')

@@ -22,12 +22,9 @@ from sklearn.preprocessing import OneHotEncoder
 
 ROOT = Path(__file__).resolve().parents[1]
 SEG = ROOT / "data" / "seg"
+TIDY = ROOT / "data" / "tidy"
 INF = SEG / "inferencias"
 MOD = SEG / "modelos"
-
-ORDEN = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-         "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
-         "Diciembre"]
 
 
 def main():
@@ -40,19 +37,20 @@ def main():
         .reset_index()
     m = m.sort_values(["municipio", "anio", "mes_num"]).reset_index(drop=True)
     g = m.groupby("municipio")["n"]
+    m = m.rename(columns={"mes_num": "nm"})
     m["lag1"] = g.shift(1)
     m["lag12"] = g.shift(12)
     m["roll3"] = g.shift(1).rolling(3).mean().reset_index(level=0, drop=True)
     m["roll12"] = g.shift(1).rolling(12).mean().reset_index(level=0, drop=True)
     m["target"] = g.shift(-1)
     m["target_anio"] = m["anio"].where(m["nm"] < 12, m["anio"] + 1)
-    feats = ["Municipio", "nm", "anio", "lag1", "lag12", "roll3", "roll12"]
+    feats = ["municipio", "nm", "anio", "lag1", "lag12", "roll3", "roll12"]
     d = m.dropna(subset=feats + ["target"]).reset_index(drop=True)
     tr, te = d[d.target_anio <= 2022], d[d.target_anio >= 2023]
 
     pre = ColumnTransformer(
         [("cat", OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-          ["Municipio", "nm"])], remainder="passthrough")
+          ["municipio", "nm"])], remainder="passthrough")
     Xtr, Xte = pre.fit_transform(tr[feats]), pre.transform(te[feats])
     ytr, yte = tr["target"].values, te["target"].values
     rf = RandomForestRegressor(n_estimators=300, min_samples_leaf=5,
@@ -91,7 +89,7 @@ def main():
                                   random_state=7), columns=names)
     Xm_all = pd.DataFrame(Xte[:200], columns=names)
     # Waterfall: Hermosillo reciente debe estar entre las filas explicadas
-    herm = te[te.Municipio == "Hermosillo"].index
+    herm = te[te.municipio == "Hermosillo"].index
     if herm.max() >= 200:
         extra = pd.DataFrame(pre.transform(te.loc[herm[-5:], feats]),
                              columns=names, index=herm[-5:])
@@ -120,7 +118,7 @@ def main():
     impa.to_parquet(INF / "shap_importancia.parquet", index=False)
     # Waterfall: Hermosillo, ultimo mes de test explicado
     if wf_label is None:
-        cand = te2[(te2.Municipio == "Hermosillo")].iloc[-1]
+        cand = te2[(te2.municipio == "Hermosillo")].iloc[-1]
         i = int(te2.index.get_loc(cand.name)) \
             if cand.name in te2.index[:len(Xm)] else 0
         wf_label = [int(cand.anio), int(cand.nm)]

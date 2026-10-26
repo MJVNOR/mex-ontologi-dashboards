@@ -164,5 +164,179 @@
       "recurso_id": "07e84aa9-65aa-4dc4-ad71-74f6f494474c",
       "archivo": "marg/indice-de-marginacion-estados-2020.xlsx"
     }
+  ],
+  "poblacion": [
+    {
+      "dataset_id": "0b5f5e16-2de3-4be1-811f-4b0976ed82d3",
+      "recurso_id": "81513319-6073-4239-84ab-4cfcc660819a",
+      "archivo": "pob/grupos_quinquenales_son.xlsx"
+    },
+    {
+      "dataset_id": "960ef0a9-73ed-4191-ae0b-b868d7e48292",
+      "recurso_id": "7e590f35-f293-40e3-b3e1-4002f8c3fbfe",
+      "archivo": "pob/indicadores_demograficos_son.xlsx"
+    }
+  ],
+  "seg": [
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "2513ec12-4b23-4700-8eeb-9cfb634d5553",
+      "archivo": "seg_raw/2015.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "147ead58-f894-4b0d-9881-ab06368e4cc9",
+      "archivo": "seg_raw/2016.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "4e13a33e-4738-41ac-a0a4-3ac0afab9091",
+      "archivo": "seg_raw/2017.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "d18cac7c-60dd-45ce-8cba-d90dc9fb5a18",
+      "archivo": "seg_raw/2018.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "0794d04e-7779-4fb6-b2ad-94a927e49a64",
+      "archivo": "seg_raw/2019.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "70c0bfb7-5378-42db-a20c-95da9ce1a4e4",
+      "archivo": "seg_raw/2020.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "22d74901-c3ab-4d80-9f4f-b9e7da051ba8",
+      "archivo": "seg_raw/2021.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "fc4a46ba-5318-4cc9-aadc-aa578300af15",
+      "archivo": "seg_raw/2022.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "18b58aaf-e382-478e-86d9-8f50a7b08e12",
+      "archivo": "seg_raw/2023.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "fb66e0fa-21e5-4c11-9d9d-7b4f701ee044",
+      "archivo": "seg_raw/2024.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "befd1c5e-1222-4795-a866-d46cf602637b",
+      "archivo": "seg_raw/2025.csv"
+    },
+    {
+      "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",
+      "recurso_id": "36d3ac85-4327-41f5-9259-538a7723a0ae",
+      "archivo": "seg_raw/catalogo.xlsx"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "4c1f984e-a6be-412b-b274-5af2d4ff55b1",
+      "archivo": "seg_raw/vict_2015.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "15650860-3a0b-461f-becb-658422e3a597",
+      "archivo": "seg_raw/vict_2016.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "c7ab7527-c2f5-44f2-a33e-6a368574f992",
+      "archivo": "seg_raw/vict_2017.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "1d7c90a8-d10b-4dbc-a16d-61e57164d80a",
+      "archivo": "seg_raw/vict_2018.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "e26eafbe-5d74-4882-af64-89e5bddbb46e",
+      "archivo": "seg_raw/vict_2019.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "652ca41a-5c9e-4d00-aa9a-f4d006b613fe",
+      "archivo": "seg_raw/vict_2020.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "1ec37796-0ad6-44b9-ba36-30bd4ae3d526",
+      "archivo": "seg_raw/vict_2021.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "8c2618f2-b317-41b0-b0d3-8020e735ffd7",
+      "archivo": "seg_raw/vict_2022.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "10d7cb8c-4058-4b9c-85f5-c25819d0f66b",
+      "archivo": "seg_raw/vict_2023.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "8f959438-7c12-419a-be1b-e0e4a52b0a26",
+      "archivo": "seg_raw/vict_2024.csv"
+    },
+    {
+      "dataset_id": "caf587a5-23ac-496b-85d4-6ceb1d615d78",
+      "recurso_id": "39ff0330-1959-4b92-914e-a48c691aff01",
+      "archivo": "seg_raw/vict_2025.csv"
+    },
+    {
+      "dataset_id": "923b485b-515e-4fb9-a4ac-cccbeb88cc92",
+      "recurso_id": "6ce17dd1-5716-44e9-bc5f-603c0925afe6",
+      "archivo": "seg_raw/llamadas-procedentes-911-primer-trimestre-2026.xlsx"
+    },
+    {
+      "dataset_id": "923b485b-515e-4fb9-a4ac-cccbeb88cc92",
+      "recurso_id": "943e2919-6a8b-4776-ac4f-c3d6b02bb94e",
+      "archivo": "seg_raw/llamadas-procedentes-911-segundo-trimestre-2026.xlsx"
+    },
+    {
+      "dataset_id": "19e5036d-dbe3-4e1d-b021-df5d47b6fb1f",
+      "recurso_id": "54285a13-3a2a-4e47-b0af-e855861f5347",
+      "archivo": "seg_raw/llamadas-improcedentes-911-primer-trimestre-2026.xlsx"
+    },
+    {
+      "dataset_id": "19e5036d-dbe3-4e1d-b021-df5d47b6fb1f",
+      "recurso_id": "0df8592f-bb3d-466c-aec3-6cbc91253be0",
+      "archivo": "seg_raw/llamadas-improcedentes-911-segundo-trimestre-2026.xlsx"
+    },
+    {
+      "dataset_id": "36c2016f-dd3d-4ac5-a746-cec4945f3cf0",
+      "recurso_id": "e6e387f4-5e0b-41ac-8420-bea70a30d804",
+      "archivo": "seg_raw/personas-detenidas-primer-trimestre-2026.xlsx"
+    },
+    {
+      "dataset_id": "36c2016f-dd3d-4ac5-a746-cec4945f3cf0",
+      "recurso_id": "cc87ef60-6e55-4899-87ee-ee720b476faa",
+      "archivo": "seg_raw/personas-detenidas-segundo-trimestre-2026.xlsx"
+    },
+    {
+      "dataset_id": "36c2016f-dd3d-4ac5-a746-cec4945f3cf0",
+      "recurso_id": "14b97369-ebd8-43fb-b88f-dc451d0ee76c",
+      "archivo": "seg_raw/personas-detenidas-tercer-trimestre-2026.xlsx"
+    },
+    {
+      "dataset_id": "4c1084b7-b038-4084-83b2-5fe042b09ffb",
+      "recurso_id": "d71a0111-d548-4c05-841f-4f789c4bed76",
+      "archivo": "seg_raw/cbp-desapariciones-sonora.xlsx"
+    },
+    {
+      "dataset_id": "f58a3196-6874-4163-8161-730e5bffb244",
+      "recurso_id": "d20d36c4-6406-4054-845c-43308b380b95",
+      "archivo": "seg_raw/map.json"
+    }
   ]
 }

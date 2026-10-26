@@ -1,6 +1,6 @@
 {
   "tema": "marginacion",
-  "generado_en_utc": "2026-10-26T10:58:06.486624+00:00",
+  "generado_en_utc": "2026-10-26T11:01:26.189113+00:00",
   "ontologia": {
     "extraido_en_utc": "2026-10-26T10:57:00.108533+00:00",
     "fecha_carga_ontologia": null,
@@ -47,7 +47,7 @@
         "IM_2020"
       ],
       "agregacion": "Sin agregar: una fila por municipio; valores declarados por la fuente.",
-      "alcance": "Corte 2020. PO2SM es proxy de ingresos (<2 salarios mínimos), no mide empleo, vacantes ni desempleo.",
+      "alcance": "Corte 2020. PO2SM es proxy de ingresos (<2 salarios mínimos), no mide empleo, vacantes ni desempleo. Serie municipal y serie estatal provienen de hojas distintas y no reconcilian al decimal (PO2SM ponderado municipal 63.8 vs 63.2 declarado en entidades); se reportan por separado.",
       "sha256": "e67377de87be8298bb6684d83188f053981cea63616d1254c353b5b6df0b8c0c",
       "filas": 72,
       "columnas_salida": [
@@ -555,7 +555,7 @@
         "IM_2020"
       ],
       "agregacion": "Sin agregar: una fila por entidad; valores declarados por la fuente.",
-      "alcance": "Corte 2020. PO2SM es proxy de ingresos (<2 salarios mínimos), no mide empleo, vacantes ni desempleo.",
+      "alcance": "Corte 2020. PO2SM es proxy de ingresos (<2 salarios mínimos), no mide empleo, vacantes ni desempleo. Serie municipal y serie estatal provienen de hojas distintas y no reconcilian al decimal (PO2SM ponderado municipal 63.8 vs 63.2 declarado en entidades); se reportan por separado.",
       "sha256": "94de4dff9f9d7dca43ba1d519b19ed6691d2ce278413429e2047a8f8edf7b433",
       "filas": 33,
       "columnas_salida": [

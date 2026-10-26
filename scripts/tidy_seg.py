@@ -226,9 +226,12 @@ def main():
     (DATA / "procedencia_seg.json").write_text(
         json.dumps(proc, ensure_ascii=False, indent=2), encoding="utf-8")
 
-    # 10. Artefactos (formato ligero existente; sin inventar IRIs)
-    art = json.loads((ROOT / "config/artefactos.json").read_text(encoding="utf-8"))
-    art["tidy/dim_municipios.parquet"] = {
+    # 10. Artefactos (formato ligero existente; sin inventar IRIs).
+    # Solo agrega claves nuevas: no reformatea lo de otras sesiones.
+    art_path = ROOT / "config/artefactos.json"
+    art = json.loads(art_path.read_text(encoding="utf-8"))
+    nuevo = dict(art)
+    nuevo["tidy/dim_municipios.parquet"] = {
         "tema": "seguridad",
         "fuentes": [{"archivo": "seg_raw/catalogo.xlsx", "hoja": 0}],
         "filtro": "ninguno (catalogo completo 74 filas)",
@@ -261,12 +264,14 @@ def main():
                   "vigilancia 2022 semanal (acumulado + instituciones)"),
                  ("tidy/hecho_vigilancia_edad.parquet",
                   "vigilancia 2022 derretida a semana x edad x sexo")]:
-        art[t] = {"tema": "seguridad", "fuentes": [{"archivo": f}],
-                  "filtro": "ninguno", "transformacion": f,
-                  "medidas": ["n"], "agregacion": "Suma de n.",
-                  "alcance": "Totales declarados por la fuente."}
-    (ROOT / "config/artefactos.json").write_text(
-        json.dumps(art, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        nuevo[t] = {"tema": "seguridad", "fuentes": [{"archivo": f}],
+                      "filtro": "ninguno", "transformacion": f,
+                      "medidas": ["n"], "agregacion": "Suma de n.",
+                      "alcance": "Totales declarados por la fuente."}
+    if nuevo != art:
+        art_path.write_text(
+            json.dumps(nuevo, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8")
 
     print(json.dumps({k: v.get("filas") for k, v in out.items()},
                      ensure_ascii=False, indent=2))

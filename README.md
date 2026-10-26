@@ -26,7 +26,7 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 | Seguridad en Sonora | `dashboards/seguridad-sonora/app.py` — [ver en vivo](https://mex-ontologi-dashboards-plduatjh2dn6pwcct3cwku.streamlit.app/) | Incidencia municipal 2015-25 + víctimas + 911 T1-T2 2026 + detenidas + desaparecidas + mapa 72 municipios, 107 significados |
 | Contexto laboral proxy (ingresos) | `dashboards/marginacion-ingresos/app.py` | Marginación 2020: PO2SM municipal (72 municipios) + entidades, 34 significados documentados. Proxy de ingresos, no mide empleo |
 
-Capa tidy de consumo: `data/tidy/` (9 tablas snake_case + `diccionario_datos.csv`, script `scripts/tidy_seg.py`, procedencia en `data/procedencia_seg.json`, registro en `config/artefactos.json`). El dashboard de seguridad lee de `data/tidy/`; `data/seg/` queda como staging.
+Capa tidy de consumo: `data/tidy/` (15 tablas snake_case + `diccionario_datos.csv`; scripts `tidy_seg.py`, `preprocesar_poblacion.py`, `materializar_catalogo.py`; procedencia en `data/procedencia_*.json`, registro en `config/artefactos.json`). Población (grupos quinquenales 1990-2040 + indicadores) aporta denominadores para tasas por 100 mil; catálogo (89 conjuntos, 486 recursos) documenta cobertura. El dashboard de seguridad lee de `data/tidy/`; `data/seg/` queda como staging.
 
 ## Skills para análisis y dashboards
 

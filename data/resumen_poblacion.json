@@ -1,0 +1,20 @@
+{
+  "grupos": {
+    "filas": 139536,
+    "municipios": 72,
+    "anios": [
+      1990,
+      2040
+    ]
+  },
+  "municipio_anio": {
+    "filas": 7344
+  },
+  "grandes_grupos": {
+    "filas": 33048,
+    "nota": "60_mas se solapa con 15_64 en la fuente"
+  },
+  "hermosillo_anual": {
+    "filas": 51
+  }
+}

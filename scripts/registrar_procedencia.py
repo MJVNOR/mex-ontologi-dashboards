@@ -12,7 +12,9 @@ def registrar(tema):
     downloads = {r['archivo']: r for r in json.loads((DATA / f'descargas_{tema}.json').read_text(encoding='utf-8'))}
     specs = json.loads((ROOT / 'config/artefactos.json').read_text(encoding='utf-8'))
     script = ROOT / 'scripts' / {'salud': 'preprocesar_hmo.py', 'edu': 'preprocesar_edu.py',
-              'marginacion': 'preprocesar_marginacion.py'}[tema]
+              'marginacion': 'preprocesar_marginacion.py',
+              'poblacion': 'preprocesar_poblacion.py',
+              'seg': 'tidy_seg.py'}[tema]
     result = {'tema': tema, 'generado_en_utc': ahora(), 'ontologia': {
         k: snapshot.get(k) for k in ('extraido_en_utc','fecha_carga_ontologia', 'ontologia_generada_en_utc', 'ontologia_manifest_sha256','transporte','parcial','conteos_completos','huecos')},
         'snapshot_sha256': huella(snapshot_path), 'preprocesador': script.name,
@@ -27,7 +29,7 @@ def registrar(tema):
                 raise RuntimeError('Fuente modificada sin registrar: ' + source['archivo'])
             if record['ontologia_snapshot_sha256'] != result['snapshot_sha256']:
                 raise RuntimeError('Descargas y ontología pertenecen a exportaciones distintas; reejecutar descarga')
-            source_rows.append({**record, 'hoja_utilizada': source['hoja']})
+            source_rows.append({**record, 'hoja_utilizada': source.get('hoja')})
             resource_iris.add(record['recurso'])
         frame = pd.read_parquet(DATA / name)
         columns = [c for c in snapshot['columnas'] if c['recurso'] in resource_iris]
@@ -47,5 +49,5 @@ def registrar(tema):
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--tema', choices=['salud', 'edu', 'marginacion'], required=True)
+    p.add_argument('--tema', choices=['salud', 'edu', 'marginacion', 'poblacion', 'seg'], required=True)
     registrar(p.parse_args().tema)

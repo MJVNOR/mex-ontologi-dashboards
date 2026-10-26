@@ -353,7 +353,7 @@ with t6:
     que("Predictor del mes siguiente por municipio (RandomForest, split "
         "temporal ≤2022 → ≥2023): R² 0.936, MAE 9.6, supera al naive "
         "estacional (R² 0.912, MAE 11.9). Ejemplo Hermosillo: real vs pronóstico.")
-    hmo = pr[pr.Municipio == "Hermosillo"].sort_values("fecha_t")
+    hmo = pr[pr.municipio == "Hermosillo"].sort_values("fecha_t")
     figp = px.line(hmo, x="fecha_t", y=["target", "pred"],
                    title="Hermosillo: real vs pronóstico (test ≥2023)",
                    labels={"value": "delitos", "variable": "serie"})
@@ -366,7 +366,7 @@ with t6:
         "poco. Describe al modelo, no es causalidad.")
     si = load("inferencias/shap_importancia.parquet")
     si["nombre"] = si["feature"].str.replace("remainder__", "") \
-        .str.replace("cat__Municipio_", "Mpio: ").str.replace("cat__nm_", "mes=")
+        .str.replace("cat__municipio_", "Mpio: ").str.replace("cat__nm_", "mes=")
     st.plotly_chart(hbar(si.nlargest(15, "mean_abs_shap"),
                            "mean_abs_shap", "nombre",
                            "SHAP: roll3 y lag1 mandan"),
@@ -380,7 +380,7 @@ with t6:
     figw = go.Figure(go.Waterfall(
         x=["base"] + top["feature"].str.replace(
             "remainder__", "").str.replace(
-            "cat__Municipio_", "Mpio: ").str.replace(
+            "cat__municipio_", "Mpio: ").str.replace(
             "cat__nm_", "mes=").tolist() + ["resto", "pronóstico"],
         y=[base] + top["shap_value"].tolist() + [resto,
                                                  float(wf["prediccion"].iloc[0])],

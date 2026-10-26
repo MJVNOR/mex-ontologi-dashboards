@@ -1,0 +1,30 @@
+[
+  {
+    "dataset_id": "0b5f5e16-2de3-4be1-811f-4b0976ed82d3",
+    "recurso_id": "81513319-6073-4239-84ab-4cfcc660819a",
+    "archivo": "pob/grupos_quinquenales_son.xlsx",
+    "conjunto": "Proyecciones de población - Grupos quinquenales de edad",
+    "dataset": "https://example.org/mex-ontologi/dataset/0b5f5e16-2de3-4be1-811f-4b0976ed82d3",
+    "recurso": "https://example.org/mex-ontologi/resource/81513319-6073-4239-84ab-4cfcc660819a",
+    "url": "https://datos.sonora.gob.mx/dataset/0b5f5e16-2de3-4be1-811f-4b0976ed82d3/resource/81513319-6073-4239-84ab-4cfcc660819a/download/grupos_quinquenales_son.xlsx",
+    "url_final": "https://datos.sonora.gob.mx/dataset/0b5f5e16-2de3-4be1-811f-4b0976ed82d3/resource/81513319-6073-4239-84ab-4cfcc660819a/download/grupos_quinquenales_son.xlsx",
+    "bytes": 916574,
+    "descargado_en_utc": "2026-10-26T11:01:15.398542+00:00",
+    "sha256": "09eb9e0c49151c868db729bf78ea895a5f9a78e802221b1f687b9bb135bce51d",
+    "ontologia_snapshot_sha256": "085b48604402abdfabb6ac4cb484b085faadb62921e9a6567da73c2c8435474a"
+  },
+  {
+    "dataset_id": "960ef0a9-73ed-4191-ae0b-b868d7e48292",
+    "recurso_id": "7e590f35-f293-40e3-b3e1-4002f8c3fbfe",
+    "archivo": "pob/indicadores_demograficos_son.xlsx",
+    "conjunto": "Proyecciones de población - Indicadores demográficos",
+    "dataset": "https://example.org/mex-ontologi/dataset/960ef0a9-73ed-4191-ae0b-b868d7e48292",
+    "recurso": "https://example.org/mex-ontologi/resource/7e590f35-f293-40e3-b3e1-4002f8c3fbfe",
+    "url": "https://datos.sonora.gob.mx/dataset/960ef0a9-73ed-4191-ae0b-b868d7e48292/resource/7e590f35-f293-40e3-b3e1-4002f8c3fbfe/download/indicadores_demograficos_son.xlsx",
+    "url_final": "https://datos.sonora.gob.mx/dataset/960ef0a9-73ed-4191-ae0b-b868d7e48292/resource/7e590f35-f293-40e3-b3e1-4002f8c3fbfe/download/indicadores_demograficos_son.xlsx",
+    "bytes": 661849,
+    "descargado_en_utc": "2026-10-26T11:01:16.122816+00:00",
+    "sha256": "e0e21aad3a84b4059efaf7525233ac05b08ced300f0f851fbadaab94057c027a",
+    "ontologia_snapshot_sha256": "085b48604402abdfabb6ac4cb484b085faadb62921e9a6567da73c2c8435474a"
+  }
+]
