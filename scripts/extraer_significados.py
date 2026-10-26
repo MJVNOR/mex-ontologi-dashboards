@@ -5,6 +5,7 @@ sirve el MCP mex-ontologia) con rdflib y guarda data/significados_salud.csv.
 Solo lectura; no escribe en la ontologia.
 """
 
+import argparse
 import os
 from pathlib import Path
 
@@ -20,6 +21,11 @@ SALUD = ["inspeccion", "urgencia", "egreso", "nacimient", "defunci",
 
 
 def main():
+    p = argparse.ArgumentParser()
+    p.add_argument("--salida", default="significados_salud.csv")
+    p.add_argument("--claves", default=",".join(SALUD))
+    args = p.parse_args()
+    claves = [k for k in args.claves.split(",") if k]
     g = rdflib.Graph()
     g.parse(TTL, format="turtle")
     q = """
@@ -31,10 +37,10 @@ def main():
          <http://purl.org/dc/terms/description> ?definicion .
     }"""
     filas = [(str(c), str(v), str(s), str(d)) for c, v, s, d in g.query(q)
-             if any(k in str(c).lower() for k in SALUD)]
+             if any(k in str(c).lower() for k in claves)]
     df = pd.DataFrame(filas, columns=["conjunto", "variable", "significado", "definicion"])
     df = df.sort_values(["conjunto", "variable"]).drop_duplicates()
-    dest = Path(__file__).resolve().parents[1] / "data" / "significados_salud.csv"
+    dest = Path(__file__).resolve().parents[1] / "data" / args.salida
     df.to_csv(dest, index=False, encoding="utf-8")
     print(len(df), "significados ->", dest)
 

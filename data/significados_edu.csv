@@ -1,0 +1,125 @@
+conjunto,variable,significado,definicion
+Aprovechamiento Académico,Evaluados,Alumnos evaluados del programa,Cantidad de alumnos evaluados
+Aprovechamiento Académico,Menos de 7,Alumnos con calificación menor a 7,Cantidad de alumnos que pertenecen al rango de calificaciones
+Aprovechamiento Académico,Programa Educativo,Programa educativo,Programa de estudios
+Aprovechamiento Académico,Promedio Global,Promedio global del programa,Promedio general del programa educativo
+Aprovechamiento Académico,Unidad Académica,Unidad académica sede,Unidad donde se imparte el programa
+Aprovechamiento Académico,de 7 hasta 7.9,Alumnos con calificación de 7 a 7.9,Cantidad de alumnos que pertenecen al rango de calificaciones
+Aprovechamiento Académico,de 8 hasta 8.9,Alumnos con calificación de 8 a 8.9,Cantidad de alumnos que pertenecen al rango de calificaciones
+Aprovechamiento Académico,de 9 hasta 10,Alumnos con calificación de 9 a 10,Cantidad de alumnos que pertenecen al rango de calificaciones
+Beneficiarios de becas o estímulos educativos,CicloEscolar,Ciclo escolar de la convocatoria,Ciclo escolar al que pertenece la convocatoria.
+Beneficiarios de becas o estímulos educativos,Clave,Clave del centro educativo,Clave oficial que identifica a los centros educativos que distingue a la escuela
+Beneficiarios de becas o estímulos educativos,Convocatoria,Numero de convocatoria,Número de convocatoria
+Beneficiarios de becas o estímulos educativos,Escuela,Escuela de inscripción,Nombre oficial de la escuela en la que está inscrito el estudiante beneficiario de beca o estímulo educativo
+Beneficiarios de becas o estímulos educativos,Genero,Género del estudiante becado,Género del estudiante con el apoyo de beca o estímulo educativo
+Beneficiarios de becas o estímulos educativos,Importe,Importe de la beca,"Importe, corresponde al importe del pago total de la beca o estímulo"
+Beneficiarios de becas o estímulos educativos,Municipio,Municipio de la escuela,Municipio del domicilio de la escuela
+Beneficiarios de becas o estímulos educativos,Nivel,Nivel escolar del becario,Nivel escolar del estudiante con el apoyo de beca o estímulo educativo
+Beneficiarios de becas o estímulos educativos,Programa,Programa de la convocatoria,Programa o tipo de beca al que pertenece la convocatoria. También puede ser un estímulo educativo.
+Capacitación a Docentes de Educación Básica,Duración (Días-Horas),Duración del evento,Duración del evento
+Capacitación a Docentes de Educación Básica,Fechas (Día-Periodo),Periodo del evento,Periodo en el que se imparte
+Capacitación a Docentes de Educación Básica,Modalidad (Línea o presencial),Modalidad del evento,Modalidad en que se impartira el evento
+Capacitación a Docentes de Educación Básica,Nivel educativo,Nivel educativo del evento,Nivel educativo destino del evento
+Capacitación a Docentes de Educación Básica,No.,Identificador del evento,Identificador del evento
+Capacitación a Docentes de Educación Básica,Nombre de quienes Impartieron el Curso,Encargados del evento,Encargados de empartir del evento
+Capacitación a Docentes de Educación Básica,Nombre del evento o actividad,Nombre del evento,Nombre del evento
+Capacitación a Docentes de Educación Básica,Número de participantes,Capacidad del evento,Cantidad (capacidad) del evento
+Capacitación a Docentes de Educación Básica,Sede,Sede del evento,Sede del evento
+Capacitación a Docentes de Educación Básica,Tipo de financiamiento,Financiamiento del evento,Financiamiento del Evento
+Capacitación a Docentes de Educación Básica,Tipo de oferta,Tipo del evento,Tipo del evento
+Discapacidad y grupo étnico,Nivel,Nivel de estudios del matriculado,Nivel de Estudios en el que el estudiante se encuentra matrículado
+Discapacidad y grupo étnico,Población escolar Hablantes de alguna Lengua Indígena - Hombres,Hombres estudiantes hablantes,Número de estudiantes (hombres) que reportan hablar algún dialécto indígena
+Discapacidad y grupo étnico,Población escolar Hablantes de alguna Lengua Indígena - Mujeres,Mujeres estudiantes hablantes,Número de estudiantes (mujeres) que reportan hablar algún dialécto indígena
+Discapacidad y grupo étnico,Población escolar con algun tipo de discapacidad -Hombres,Hombres estudiantes con discapacidad,Número de estudiantes (hombres) que reportan contar con algun tipo de discapacidad
+Discapacidad y grupo étnico,Población escolar con algun tipo de discapacidad -Mujeres,Mujeres estudiantes con discapacidad,Número de estudiantes (mujeres) que reportan contar con algun tipo de discapacidad
+Discapacidad y grupo étnico,Población escolar de origen Étnico -  Mujeres,Mujeres estudiantes de grupo étnico,Número de estudiantes (mujeres) que reportan pertenecer a algún grupo étnico.
+Discapacidad y grupo étnico,Población escolar de origen Étnico - Hombres,Hombres estudiantes de grupo étnico,Número de estudiantes (hombres) que reportan pertenecer a algún grupo étnico.
+Discapacidad y grupo étnico,Programa educativo,Programa educativo,Nombre del Programa Educativo en el que el estudiante se encuentra matriculado
+Egresados,Benito Juárez,Estudiantes egresados por sede,Número de estudiantes egresados en Benito Juárez
+Egresados,Hermosillo,Estudiantes egresados por sede,Número de estudiantes egresados en Hermosillo
+Egresados,Magdalena,Estudiantes egresados por sede,Número de estudiantes egresados en Magdalena
+Egresados,Navojoa,Estudiantes egresados por sede,Número de estudiantes egresados en Navojoa
+Egresados,Programa Educativo,Programa educativo,Nombre del programa educativo
+Egresados,San Luis R.C.,Estudiantes egresados por sede,Número de estudiantes egresados en San Luis R.C.
+Estudiantes Titulados,Campo de Formación Académica,Campo de formación académica,Clasificación mexicana de planes de estudio por campos de formaciónacadémica 2016 Educación superior y media superior
+Estudiantes Titulados,Hombres Titulados,Hombres titulados por programa y año,Total de hombres titulados durante el año  a reportar por programa educativo
+Estudiantes Titulados,Mujeres Tituladas,Mujeres tituladas por programa y año,Total de mujeres tituladas durante el año  a reportar por programa educativo
+Estudiantes Titulados,Nivel,Nivel de estudios matriculado,Nivel de Estudios en el que el estudiante se encuentra matrículado
+Estudiantes Titulados,Programa educativo,Programa educativo,Nombre del Programa Educativo en el que el estudiante se encuentra matriculado
+Estudiantes de nuevo ingreso,Hombres Nuevo Ingreso,Hombres de nuevo ingreso a TSU,Total de hombres matrículados de Nuevo Ingreso  al primer cuatrimestre de nivel Técnico Superior Universitario.
+Estudiantes de nuevo ingreso,Mujeres Nuevo Ingreso,Mujeres de nuevo ingreso a TSU,Total de mujeres matrículadas de Nuevo Ingreso  al primer cuatrimestre de nivel Técnico Superior Universitario.
+Estudiantes de nuevo ingreso,Nivel,Nivel de estudios matriculado,Nivel de Estudios en el que el estudiante se encuentra matrículado
+Estudiantes de nuevo ingreso,Programa educativo,Programa educativo,Nombre del Programa Educativo en el que el estudiante se encuentra matriculado
+Estudiantes egresados,Campo de Formación Académica,Campo de formación académica,Clasificación mexicana de planes de estudio por campos de formación académica 2016 Educación superior y media superior
+Estudiantes egresados,Hombres Egresados,Hombres egresados por programa y año,Total de hombres egresados durante el año  a reportar por programa educativo
+Estudiantes egresados,Mujeres Egresadas,Mujeres egresadas por programa y año,Total de mujeres egresadas durante el año  a reportar por programa educativo
+Estudiantes egresados,Nivel,Nivel de estudios matriculado,Nivel de Estudios en el que el estudiante se encuentra matrículado
+Estudiantes egresados,Programa educativo,Programa educativo,Nombre del Programa Educativo en el que el estudiante se encuentra matriculado
+Matriculas,Campo de Formación Académica,Campo de formación académica,Clasificación mexicana de planes de estudio por campos de formaciónacadémica 2016 Educación superior y media superior
+Matriculas,Edad,Edad del alumno,Edad del estudiante
+Matriculas,Estado civil,Estado civil del alumno,Estado civil
+Matriculas,Estado de Nacimiento,Entidad de nacimiento del estudiante,Estado de Nacimiento del estudiante
+Matriculas,Estudiante,Numero de estudiante matriculado,"Número consecutivo, que significa estudiante matriculado"
+Matriculas,Grado (Cuatrimestre),Grado o cuatrimestre cursado,Grado / Cuatrimestre cursado
+Matriculas,Modalidad,Modalidad cursada,"Modalidad cursada:  Escolarizada, No escolarizada o Mixta."
+Matriculas,Nivel,Nivel de estudios matriculado,Nivel de Estudios en el que el estudiante se encuentra matrículado
+Matriculas,Programa educativo,Programa educativo,Nombre del Programa Educativo en el que el estudiante se encuentra matriculado
+Matriculas,Sede,Municipio sede de matrícula,"Municipio Sede, donde el estudiante se encuentra matrículado"
+Matriculas,Sexo,Sexo del alumno,Sexo del alumno y/o alumna
+Población - Nuevo ingreso,Benito Juárez,Estudiantes de nuevo ingreso por sede,Número de estudiantes de nuevo ingreso en Benito Juárez
+Población - Nuevo ingreso,Hermosillo,Estudiantes de nuevo ingreso por sede,Número de estudiantes de nuevo ingreso en Hermosillo
+Población - Nuevo ingreso,Magdalena,Estudiantes de nuevo ingreso por sede,Número de estudiantes de nuevo ingreso en Magdalena
+Población - Nuevo ingreso,Navojoa,Estudiantes de nuevo ingreso por sede,Número de estudiantes de nuevo ingreso en Navojoa
+Población - Nuevo ingreso,Programa Educativo,Programa educativo,Nombre del programa educativo
+Población - Nuevo ingreso,San Luis R.C.,Estudiantes de nuevo ingreso por sede,Número de estudiantes de nuevo ingreso en San Luis R.C.
+Promedio Académico,AÑO,Año del que se informa,Año del que  se reporta la información
+Promedio Académico,CAMPO DE FORMACIÓN ACADÉMICA,Campo de formación académica,Clasificación mexicana de planes de estudio por campos de formaciónacadémica 2016 Educación superior y media superior
+Promedio Académico,CUATRIMESTRE,Cuatrimestre del reporte,"Cuatrimestre del que se reporta la información ( Enero - Abril, Mayo - Agosto y Septiembre - Diciembre)"
+Promedio Académico,NIVEL,Nivel de estudios matriculado,Nivel de Estudios en el que el estudiante se encuentra matrículado
+Promedio Académico,PROGRAMA EDUCATIVO,Programa educativo,Nombre del Programa Educativo en el que el estudiante se encuentra matriculado
+Promedio Académico,PROMEDIO DE APROVECHAMIENTO HOMBRE,Promedio de aprovechamiento de hombres,Promedio academico (hombres) durante el año a reportar por programa educativo
+Promedio Académico,PROMEDIO DE APROVECHAMIENTO MUJER,Promedio de aprovechamiento de mujeres,Promedio academico (mujeres) durante el año a reportar por programa educativo
+Relación de Titulados - Licenciatura,Fecha de Titulación,Fecha de titulación del titulado,Fecha en la que el titulado se tituló
+Relación de Titulados - Licenciatura,Fecha de egreso,Fecha de egreso del titulado,Fecha en la que el titulado egreso de la institucion
+Relación de Titulados - Licenciatura,Fecha de ingreso,Fecha de ingreso del titulado,Fecha en la que el titulado ingreso a la institucion
+Relación de Titulados - Licenciatura,Fecha de nacimiento,Fecha de nacimiento del titulado,Fecha de nacimiento del titulado
+Relación de Titulados - Licenciatura,No.,Numero de la entrada de titulados,Numero de la entrada
+Relación de Titulados - Licenciatura,Programa Educativo,Programa educativo,Clave del programa Educativo
+Relación de Titulados - Licenciatura,Sexo,Sexo del titulado,Sexo del titulado
+Relación de Titulados - Posgrado,Fecha de Titulación,Fecha de titulación del titulado,Fecha en la que el titulado se tituló
+Relación de Titulados - Posgrado,Fecha de egreso,Fecha de egreso del titulado,Fecha en la que el titulado egreso de la institucion
+Relación de Titulados - Posgrado,Fecha de ingreso,Fecha de ingreso del titulado,Fecha en la que el titulado ingreso a la institucion
+Relación de Titulados - Posgrado,Fecha de nacimiento,Fecha de nacimiento del titulado,Fecha de nacimiento del titulado
+Relación de Titulados - Posgrado,No.,Numero consecutivo del registro,Numero de la entrada
+Relación de Titulados - Posgrado,Programa Educativo,Programa educativo,Clave del programa Educativo
+Relación de Titulados - Posgrado,Sexo,Sexo del titulado,Sexo del titulado
+Titulados,Benito Juárez,Estudiantes titulados por sede,Número de estudiantes titulados en Benito Juárez
+Titulados,Hermosillo,Estudiantes titulados por sede,Número de estudiantes titulados en Hermosillo
+Titulados,Magdalena,Estudiantes titulados por sede,Número de estudiantes titulados en Magdalena
+Titulados,Navojoa,Estudiantes titulados por sede,Número de estudiantes titulados en Navojoa
+Titulados,Programa Educativo,Programa educativo,Nombre del programa educativo
+Titulados,San Luis R.C.,Estudiantes titulados por sede,Número de estudiantes titulados en San Luis R.C.
+Índices de Reprobación,12VA SEMANA INDICE DE REPROBACION,Índice de reprobación semana 12VA,Resultado de la evaluación en el periodo
+Índices de Reprobación,12VA SEMANA PROMEDIO DE MATERIA,Promedio de materia semana 12VA,Resultado de la evaluación en el periodo
+Índices de Reprobación,16VA SEMANA INDICE DE REPROBACION,Índice de reprobación semana 16VA,Resultado de la evaluación en el periodo
+Índices de Reprobación,16VA SEMANA PROMEDIO DE MATERIA,Promedio de materia semana 16VA,Resultado de la evaluación en el periodo
+Índices de Reprobación,4TA SEMANA INDICE DE REPROBACION,Índice de reprobación semana 4TA,Resultado de la evaluación en el periodo
+Índices de Reprobación,4TA SEMANA PROMEDIO DE MATERIA,Promedio de materia semana 4TA,Resultado de la evaluación en el periodo
+Índices de Reprobación,8VA SEMANA INDICE DE REPROBACION,Índice de reprobación semana 8VA,Resultado de la evaluación en el periodo
+Índices de Reprobación,8VA SEMANA PROMEDIO DE MATERIA,Promedio de materia semana 8VA,Resultado de la evaluación en el periodo
+Índices de Reprobación,GRUPO,Grupo evaluado,Grupo evaluado
+Índices de Reprobación,MATERIA,Materia evaluada,Materia evaluada
+Índices de Reprobación,PROGRAMA EDUCATIVO,Programa educativo,Programa educativo evaluado
+Índices de Reprobación,TOTAL DE ALUMNOS,Total de alumnos evaluado,Total de alumnos evaluado
+Índices de Reprobación Modalidad Remota,GRUPO,Clave del grupo (remota),Clave del grupo
+Índices de Reprobación Modalidad Remota,INDICE DE REPROBACION 12VA,Índice de reprobación remota 12VA,Indice de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,INDICE DE REPROBACION 16VA,Índice de reprobación remota 16VA,Indice de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,INDICE DE REPROBACION 4TA,Índice de reprobación remota 4TA,Indice de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,INDICE DE REPROBACION 8VA,Índice de reprobación remota 8VA,Indice de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,MATERIA,Materia (remota),Nombre de la materia
+Índices de Reprobación Modalidad Remota,PLAN EDUCATIVO,Plan educativo,Nombre del plan educativo
+Índices de Reprobación Modalidad Remota,PROMEDIO DE ASIGNATURA 12VA,Promedio de asignatura remota 12VA,Promedio de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,PROMEDIO DE ASIGNATURA 16VA,Promedio de asignatura remota 16VA,Promedio de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,PROMEDIO DE ASIGNATURA 4TA,Promedio de asignatura remota 4TA,Promedio de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,PROMEDIO DE ASIGNATURA 8VA,Promedio de asignatura remota 8VA,Promedio de reprobacion en el periodo
+Índices de Reprobación Modalidad Remota,TOTAL ALUMNOS,Total de alumnos del grupo (remota),Total de alumnos en el grupo

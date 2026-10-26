@@ -1,0 +1,63 @@
+{
+  "becas_hmo": {
+    "filas": 164839,
+    "importe": 1268285852,
+    "por_anio": {
+      "2021": 14829,
+      "2022": 24967,
+      "2023": 34126,
+      "2024": 49637,
+      "2025": 41280
+    },
+    "por_nivel": {
+      "NIVEL BÁSICO": 58726,
+      "NIVEL MEDIO SUPERIOR Y SUPERIOR": 106113
+    }
+  },
+  "matriculas_hmo": {
+    "filas": 8227,
+    "por_sexo": {
+      "Femenino": 4481,
+      "Masculino": 3746
+    }
+  },
+  "titulados": {
+    "filas": 268,
+    "total": 4820,
+    "por_anio": {
+      "2022": 1446,
+      "2023": 1111,
+      "2024": 1571,
+      "2025": 692
+    }
+  },
+  "egresados": {
+    "filas": 218,
+    "total": 4455,
+    "por_anio": {
+      "2022": 904,
+      "2023": 1170,
+      "2024": 1102,
+      "2025": 1279
+    }
+  },
+  "nuevo_ingreso": {
+    "filas": 56,
+    "total": 3080,
+    "por_corte": {
+      "2022-1": 10,
+      "2022-2": 1623,
+      "2023-2": 1447
+    }
+  },
+  "reprobacion": {
+    "filas": 510,
+    "col_indice": "16VA SEMANA INDICE DE REPROBACION"
+  },
+  "aprovechamiento": {
+    "filas": 80
+  },
+  "capacitacion": {
+    "filas": 22
+  }
+}
