@@ -46,6 +46,8 @@ El recorrido distingue los periodos y alcances de las fuentes. Los conteos munic
 ### Vistas del dashboard de seguridad
 
 ![Vista general](reports/capturas-seguridad/01-vista-general.png)
+![Historia: narrativa con evidencia y límites](reports/capturas-seguridad/02-historia.png)
+![Mapa municipal de incidencia](reports/capturas-seguridad/03-mapa.png)
 
 ### Ingresos y marginación: un contexto, no una medición de empleo
 
