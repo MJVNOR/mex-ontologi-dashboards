@@ -23,8 +23,8 @@
         "hoja": 0
       }
     ],
-    "filtro": "upper(str(Mun_Nombre)) == HERMOSILLO",
-    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "filtro": "upper(str(Mun_Nombre)) == HERMOSILLO + drop_duplicates (9,355 filas identicas retiradas; fuente con renglones duplicados)",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja; retira duplicados exactos.",
     "medidas": [
       "Total_Egresos"
     ],
@@ -90,6 +90,22 @@
     ],
     "agregacion": "Suma de acumulado por dimensiones del gráfico.",
     "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "vigilancia_long.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "vigilancia_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(des_munici)) == HERMOSILLO",
+    "transformacion": "Funde columnas de desglose en filas (dimension, categoria, sexo, casos): grupo_edad x {total, mujeres, hombres_derivado=total-mujeres}, institucion y mes x total.",
+    "medidas": [
+      "casos"
+    ],
+    "agregacion": "Sin agregar: una fila por diagnostico-semana-dimension-categoria-sexo.",
+    "alcance": "Mismo alcance que hmo_vigilancia.parquet; hombres_derivado es resta aritmetica marcada con derivado=true."
   },
   "hmo_inspecciones.parquet": {
     "tema": "salud",
@@ -263,6 +279,53 @@
     "filtro": "Sin filtro municipal; no atribuir alcance municipal",
     "transformacion": "Conserva primera hoja.",
     "agregacion": "Conserva primera hoja.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/reprobacion_long.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/indices_de_reprobacion_indices-enero-junio-2022.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/indices_de_reprobacion_indices-agosto-diciembre-2022.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/reprobacion_remota_indices-agosto-diciembre-2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Funde semanas 4/8/12/16 en filas (semana, indice, promedio); homologa columnas de remota; total_alumnos y plan por fila.",
+    "agregacion": "Sin agregar: una fila por materia-grupo-semana.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/aprovechamiento_long.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/aprovechamiento_aprovechamiento-academico-2021-2.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Funde bandas de calificacion en filas (rango, n); NaN=0 verificado contra Evaluados.",
+    "agregacion": "Sin agregar: una fila por programa-rango.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/matriculas_ciclo2122.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/matriculas_matriculas-ciclo-2021-2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Renombra columnas por posicion; conserva primera hoja.",
+    "agregacion": "Sin agregar: una fila por estudiante.",
     "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
   }
 }

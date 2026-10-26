@@ -21,6 +21,9 @@
       "Masculino": 3746
     }
   },
+  "matriculas_ciclo2122": {
+    "filas": 2410
+  },
   "titulados": {
     "filas": 268,
     "total": 4820,
@@ -54,8 +57,14 @@
     "filas": 510,
     "col_indice": "16VA SEMANA INDICE DE REPROBACION"
   },
+  "reprobacion_long": {
+    "filas": 2040
+  },
   "aprovechamiento": {
     "filas": 80
+  },
+  "aprovechamiento_long": {
+    "filas": 320
   },
   "capacitacion": {
     "filas": 22

@@ -76,10 +76,8 @@ def main():
     rep_out.loc[r.index, "p_riesgo"] = clf.predict_proba(r[feats])[:, 1].round(3)
     rep_out.to_parquet(OUT / "inferencias" / "riesgo_materias.parquet", index=False)
 
-    # 2. Segmentos estudiantes (ciclo 2021-2022)
-    c = pd.read_excel(ROOT / "data/edu/matriculas_matriculas-ciclo-2021-2022.xlsx", sheet_name=0)
-    c.columns = ["programa", "semestre", "sexo", "prom_act", "prom_gral",
-                 "creditos", "residencias", "seguro", "discapacidad"]
+    # 2. Segmentos estudiantes (ciclo 2021-2022, tabla tidy)
+    c = pd.read_parquet(EDU / "matriculas_ciclo2122.parquet")
     num = ["semestre", "prom_act", "prom_gral", "creditos"]
     pre = ColumnTransformer([("num", StandardScaler(), num),
                              ("sex", OneHotEncoder(handle_unknown="ignore"), ["sexo"])])

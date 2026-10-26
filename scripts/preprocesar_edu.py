@@ -54,6 +54,13 @@ def main():
     out["matriculas_hmo"] = {"filas": len(mh),
                              "por_sexo": mh[sexo].value_counts().astype(int).to_dict()}
 
+    # Matriculas ciclo 2021-2022 tidy (la usaba el modelo leyendo el xlsx crudo)
+    c21 = pd.read_excel(EDU / "matriculas_matriculas-ciclo-2021-2022.xlsx", sheet_name=0)
+    c21.columns = ["programa", "semestre", "sexo", "prom_act", "prom_gral",
+                   "creditos", "residencias", "seguro", "discapacidad"]
+    c21.to_parquet(OUT / "matriculas_ciclo2122.parquet", index=False)
+    out["matriculas_ciclo2122"] = {"filas": len(c21)}
+
     # Titulados / egresados 2022-2025 por programa y sexo
     for nombre, patron, h, m_ in [
             ("titulados", "titulados-{}.xlsx", 3, 4),
@@ -92,10 +99,57 @@ def main():
     rep.to_parquet(OUT / "reprobacion_uth.parquet", index=False)
     out["reprobacion"] = {"filas": len(rep), "col_indice": idx}
 
+    # Reprobacion tidy long (semanas como filas; remota homologada)
+    def melt_rep(df, corte):
+        def find(*keys):
+            hits = [c for c in df.columns
+                    if all(k in c.upper() for k in keys)]
+            return hits[0] if hits else None
+        prog, plan, tot = find("PROGRAMA"), find("PLAN"), find("TOTAL", "ALUMN")
+        out = []
+        for tag, sem in (("4TA", 4), ("8VA", 8), ("12VA", 12), ("16VA", 16)):
+            idx_w, prm_w = find(tag, "REPROB"), find(tag, "PROM")
+            if idx_w is None and prm_w is None:
+                continue
+            d = pd.DataFrame({
+                "programa": df[prog] if prog else None,
+                "materia": df["MATERIA"] if "MATERIA" in df.columns else None,
+                "grupo": df["GRUPO"] if "GRUPO" in df.columns else None,
+                "corte": corte, "semana": sem,
+                "indice": (pd.to_numeric(df[idx_w], errors="coerce")
+                           if idx_w else None),
+                "promedio": (pd.to_numeric(df[prm_w], errors="coerce")
+                             if prm_w else None),
+                "total_alumnos": (pd.to_numeric(df[tot], errors="coerce")
+                                  if tot else None),
+                "plan": df[plan] if plan else None,
+            })
+            out.append(d)
+        return pd.concat(out, ignore_index=True) if out else pd.DataFrame()
+    repl = pd.concat([melt_rep(r1, "2022-1"), melt_rep(r2, "2022-2"),
+                      melt_rep(rr, "2022-2-remota")], ignore_index=True)
+    repl.to_parquet(OUT / "reprobacion_long.parquet", index=False)
+    out["reprobacion_long"] = {"filas": len(repl)}
+
     # Aprovechamiento + capacitacion directos
     ap = pd.read_excel(EDU / "aprovechamiento_aprovechamiento-academico-2021-2.xlsx", sheet_name=0)
     ap.to_parquet(OUT / "aprovechamiento_uth.parquet", index=False)
     out["aprovechamiento"] = {"filas": len(ap)}
+    # Aprovechamiento tidy long (rangos de calificacion como filas; NaN = 0 verificado)
+    bandas = {"Menos de 7": "<7", "de 7 hasta 7.9": "7-7.9",
+              "de 8 hasta 8.9": "8-8.9", "de 9 hasta 10": "9-10"}
+    ua = [c for c in ap.columns if "dad" in c.lower()][0]
+    pe = [c for c in ap.columns if "programa" in c.lower()][0]
+    ev = [c for c in ap.columns if "evaluados" in c.lower()][0]
+    pg = [c for c in ap.columns if "promedio" in c.lower() and "global" in c.lower()][0]
+    apl = ap.melt(id_vars=[ua, pe, ev, pg], value_vars=list(bandas),
+                  var_name="rango", value_name="n")
+    apl["rango"] = apl["rango"].map(bandas)
+    apl["n"] = apl["n"].fillna(0)
+    apl = apl.rename(columns={ua: "unidad", pe: "programa", ev: "evaluados",
+                              pg: "promedio_global"})
+    apl.to_parquet(OUT / "aprovechamiento_long.parquet", index=False)
+    out["aprovechamiento_long"] = {"filas": len(apl)}
     cap = pd.read_excel(EDU / "capacitacion_segundo-trimestre-2022-vii.17-icd-sec.xlsx", sheet_name=0)
     cap.to_parquet(OUT / "capacitacion_sec.parquet", index=False)
     out["capacitacion"] = {"filas": len(cap)}
