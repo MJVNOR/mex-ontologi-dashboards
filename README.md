@@ -14,7 +14,7 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 | Dashboard | App | Fuente |
 |---|---|---|
 | Salud en Hermosillo | `dashboards/hermosillo-salud/app.py` — [ver en vivo](https://mjvnor-mex-ontologi-dashbo-dashboardshermosillo-saludapp-le2l94.streamlit.app/) | 7 conjuntos grupo Salud, 230 significados |
-| Educación en Hermosillo | `dashboards/educacion-hermosillo/app.py` | Becas 2021-25 (filtro HMO) + UTH institucional, 124 significados |
+| Educación en Hermosillo | `dashboards/educacion-hermosillo/app.py` — [ver en vivo](https://mex-ontologi-dashboards-zqt8qvqfwwbacguuimtvwz.streamlit.app/) | Becas 2021-25 (filtro HMO) + UTH institucional, 124 significados |
 
 ## Crear un dashboard nuevo
 
