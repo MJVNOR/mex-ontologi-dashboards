@@ -23,17 +23,29 @@ Este repositorio reúne dashboards de Salud, Educación, Seguridad y contexto de
 
 La pestaña **Historia** organiza los hallazgos y sus límites; **Ontología** permite consultar significados y evidencia. Los servicios, registros de residencia y registros de atención requieren interpretaciones distintas. Las estimaciones de modelos se presentan con sus métricas y advertencias.
 
+### Vistas del dashboard de salud
+
+![Vista general](reports/capturas-salud/01-vista-general.png)
+
 ### Educación: becas y cortes institucionales
 
 [App](dashboards/educacion-hermosillo/app.py). Reúne becas con filtro de Hermosillo, información institucional de la Universidad Tecnológica de Hermosillo y capacitación de la SEC. Permite explorar importes, matrícula, reprobación, aprovechamiento y series de ingreso, egreso y titulación.
 
 **Hallazgos** ofrece el recorrido narrativo. **Modelos** reúne predicción de riesgo e irregularidad, segmentación, modelos estadísticos y explicaciones SHAP. Las series de trayectoria son cortes; no acreditan el seguimiento de las mismas personas ni tasas de transición de cohortes.
 
+### Vistas del dashboard de educación
+
+![Vista general](reports/capturas-educacion/01-vista-general.png)
+
 ### Seguridad: varias fuentes, varias unidades de conteo
 
 [App](dashboards/seguridad-sonora/app.py). Incluye **Historia**, mapa municipal, comparación de delitos, víctimas, llamadas al 911, personas detenidas y desaparecidas, modelos y ontología.
 
 El recorrido distingue los periodos y alcances de las fuentes. Los conteos municipales, las víctimas y las llamadas se leen como series diferentes. Los modelos incluyen agrupaciones por perfil de volumen, detección de observaciones atípicas y predicción con métricas de evaluación y explicaciones SHAP.
+
+### Vistas del dashboard de seguridad
+
+![Vista general](reports/capturas-seguridad/01-vista-general.png)
 
 ### Ingresos y marginación: un contexto, no una medición de empleo
 
@@ -43,6 +55,7 @@ El recorrido distingue los periodos y alcances de las fuentes. Los conteos munic
 
 ### Vistas del dashboard de contexto laboral proxy
 
+![Vista general](reports/capturas-marginacion/00-vista-general.png)
 ![Hallazgos](reports/capturas-marginacion/01-hallazgos.png)
 ![Municipios](reports/capturas-marginacion/02-municipios.png)
 ![Entidades](reports/capturas-marginacion/03-entidades.png)
