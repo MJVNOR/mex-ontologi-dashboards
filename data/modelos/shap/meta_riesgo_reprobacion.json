@@ -1,0 +1,12 @@
+{
+  "modelo": "riesgo_reprobacion",
+  "output": "P(clase=1)",
+  "n_explicadas": 140,
+  "n_background": 100,
+  "explainer": "permutation",
+  "max_evals": 13,
+  "seed": 42,
+  "additivity_max_err": 1.9984014443252818e-15,
+  "shap_version": "0.54.1",
+  "nota": "describe el modelo, no causalidad"
+}

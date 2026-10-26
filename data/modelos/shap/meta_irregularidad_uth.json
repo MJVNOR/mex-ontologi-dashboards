@@ -1,0 +1,12 @@
+{
+  "modelo": "irregularidad_uth",
+  "output": "P(clase=1)",
+  "n_explicadas": 200,
+  "n_background": 100,
+  "explainer": "permutation",
+  "max_evals": 81,
+  "seed": 42,
+  "additivity_max_err": 2.220446049250313e-15,
+  "shap_version": "0.54.1",
+  "nota": "describe el modelo, no causalidad"
+}

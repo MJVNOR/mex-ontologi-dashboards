@@ -9,6 +9,7 @@ import json
 from pathlib import Path
 
 import pandas as pd
+import numpy as np
 import plotly.express as px
 import streamlit as st
 
@@ -411,6 +412,62 @@ with t5:
                f"(n={mi['n']}, prevalencia irregular {mi['prevalencia_irregular']}). "
                "El promedio de bachillerato y los semestres cursados pesan más; "
                "sexo y modalidad casi nada. Probabilidad, no destino.")
+    que("Por qué marca riesgo cada modelo (SHAP, PermutationExplainer sobre "
+        "P(clase=1), aditividad verificada con error 0.0): cada punto es una fila, "
+        "el color es el valor estandarizado del feature. Describe al modelo, "
+        "no causalidad.")
+    import plotly.graph_objects as go
+
+    def _beeswarm(parquet, titulo, nota):
+        vv = pd.read_parquet(DATA / "modelos" / "shap" / parquet)
+        feats = [c for c in vv.columns if not c.startswith(("base", "p_modelo", "valor_"))]
+        vals = vv[feats].values
+        raw = vv[[f"valor_{j}" for j in range(len(feats))]].values
+        base = {}
+        for j, c in enumerate(feats):
+            b = c.split("_")[0] if ("_" in c and not c.startswith(("Edad", "Promedio", "Semestres"))) else c
+            base.setdefault(b, []).append(j)
+        agg = {b: vals[:, js].sum(axis=1) for b, js in base.items()}
+        order = pd.DataFrame(agg).abs().mean().sort_values(ascending=False).head(8).index.tolist()
+        fig = go.Figure()
+        rng = np.random.RandomState(0)
+        for k, f_ in enumerate(reversed(order)):
+            js = base[f_]
+            x = vals[:, js].sum(axis=1)
+            cols = raw[:, js].mean(axis=1)
+            n = len(x)
+            fig.add_trace(go.Scatter(x=x, y=np.full(n, k) + rng.uniform(-0.25, 0.25, n),
+                                     mode="markers", name=f_,
+                                     marker=dict(size=4, color=cols, colorscale="RdBu",
+                                                 showscale=False, reversescale=True),
+                                     showlegend=False))
+        fig.update_layout(title=titulo, xaxis_title="SHAP (cambio en P)",
+                          yaxis=dict(tickvals=list(range(len(order))),
+                                     ticktext=list(reversed(order))))
+        st.plotly_chart(fig, use_container_width=True)
+        st.caption(nota)
+
+    _beeswarm("valores_riesgo_reprobacion.parquet", "SHAP: riesgo de reprobación",
+              "La semana 8 (promedio e índice) es lo que más mueve la predicción, "
+              "seguida de la 12; la 4 pesa menos. Punto a la derecha = empuja a riesgo.")
+    _beeswarm("valores_irregularidad_uth.parquet", "SHAP: irregularidad (agrupado)",
+              "Semestres cursados, promedio de bachillerato y edad dominan; "
+              "programa, sexo y modalidad son marginales.")
+    que("Ejemplo local: la fila con mayor P de cada modelo y qué la empujó. "
+        "La barra base es el promedio del background; cada tramo suma/resta "
+        "hasta la predicción final.")
+    for pq, titulo in (("valores_riesgo_reprobacion.parquet", "Waterfall: mayor riesgo"),
+                       ("valores_irregularidad_uth.parquet", "Waterfall: mayor irregularidad")):
+        vv = pd.read_parquet(DATA / "modelos" / "shap" / pq)
+        feats = [c for c in vv.columns if not c.startswith(("base", "p_modelo", "valor_"))]
+        i = int(vv["p_modelo"].idxmax())
+        contrib = vv.loc[i, feats].sort_values()
+        fig = go.Figure(go.Waterfall(x=contrib.index.tolist() + ["predicción"],
+                                     y=contrib.values.tolist() + [0],
+                                     base=float(vv.loc[i, "base_value"]),
+                                     measure=["relative"] * len(contrib) + ["total"]))
+        fig.update_layout(title=titulo)
+        st.plotly_chart(fig, use_container_width=True)
 
 with t6:
     que("Aprovechamiento 2021-2 por programa (80 filas): promedio global y % con "
