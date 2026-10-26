@@ -35,6 +35,48 @@ Codex y OpenCode pueden realizar esta preparación: ambos deben respetar AGENTS.
 `opencode.json` registra el MCP local; el configurador adapta su ruta a la máquina.
 En OpenCode se mantiene Muse 1.3 (`opencode-go/muse-spark-1.3-contributor`).
 
+## Skills para análisis y dashboards
+
+Codex y OpenCode cuentan con estas skills instaladas a nivel de usuario para
+preparar y revisar los análisis de los dashboards:
+
+| Skill | Uso | Fuente |
+|---|---|---|
+| `exploratory-data-analysis` | Explorar datos, faltantes y distribuciones antes del análisis. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/exploratory-data-analysis) |
+| `validate-data` | Revisar cálculos, agregaciones, sesgos y respaldo de las conclusiones. | [Anthropic](https://github.com/anthropics/knowledge-work-plugins/tree/main/data/skills/validate-data) |
+| `statistical-analysis` | Seleccionar métodos estadísticos e interpretar tendencias, correlaciones e incertidumbre. | [Anthropic](https://github.com/anthropics/knowledge-work-plugins/tree/main/data/skills/statistical-analysis) |
+| `polars` | Preparar tablas y ejecutar filtros, transformaciones y agregaciones eficientes. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/polars) |
+
+### Modelos predictivos y machine learning
+
+También están disponibles las siguientes skills para incorporar modelos cuando
+el análisis y la evidencia lo permitan:
+
+| Skill | Uso | Fuente |
+|---|---|---|
+| `scikit-learn` | Entrenar y evaluar regresión, clasificación y agrupamiento mediante pipelines y validación cruzada. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/scikit-learn) |
+| `statsmodels` | Ajustar modelos estadísticos y pronósticos temporales con diagnóstico e incertidumbre. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/statsmodels) |
+| `shap` | Explicar y auditar la contribución de las variables a las predicciones, sin atribuir causalidad. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/shap) |
+
+### Instalación para ambos agentes
+
+```powershell
+npx --yes skills add K-Dense-AI/scientific-agent-skills --skill exploratory-data-analysis polars --agent codex opencode --global --yes
+npx --yes skills add anthropics/knowledge-work-plugins --skill validate-data statistical-analysis --agent codex opencode --global --yes
+npx --yes skills add K-Dense-AI/scientific-agent-skills --skill scikit-learn statsmodels shap --agent codex opencode --global --yes
+```
+
+Las skills aportan instrucciones y recursos para los agentes; las dependencias
+de Python se instalan por separado y los modelos se entrenan o cargan según el
+caso. No son requisitos del runtime publicado. Los modelos se evalúan con datos
+reservados y los pronósticos respetan el orden temporal para evitar filtración
+de información futura.
+
+Su uso mantiene el contrato de [AGENTS.md](AGENTS.md): consultas por MCP o la
+CLI canónica, evidencia trazable y evaluación de cruces mediante
+`MEX-Ontologi/scripts/consultar_cruces.py`. Al cambiar indicadores, se actualizan
+`config/artefactos.json` y los archivos `data/procedencia_*.json` correspondientes.
+
 ## Consultas simultáneas
 
 El lanzador de MEX-Ontologi mantiene un único backend persistente, accesible por
