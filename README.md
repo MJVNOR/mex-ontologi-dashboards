@@ -13,7 +13,7 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 
 | Dashboard | App | Fuente |
 |---|---|---|
-| Salud en Hermosillo | `dashboards/hermosillo-salud/app.py` | 7 conjuntos grupo Salud, 230 significados |
+| Salud en Hermosillo | `dashboards/hermosillo-salud/app.py` — [ver en vivo](https://mjvnor-mex-ontologi-dashbo-dashboardshermosillo-saludapp-le2l94.streamlit.app/) | 7 conjuntos grupo Salud, 230 significados |
 
 ## Crear un dashboard nuevo
 
