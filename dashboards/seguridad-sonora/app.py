@@ -97,9 +97,9 @@ k5.metric("Desaparecidas (histórico)", f"{len(des):,}",
           .groupby("anio_hecho").size().sort_index().tolist(),
           chart_type="bar")
 
-t1, t2, t3, t4, t5, t6, t7 = st.tabs(
+t1, t2, t3, t4, t5, t6, t7, t8 = st.tabs(
     ["Mapa municipal", "Delitos y comparador", "Víctimas",
-     "911", "Detenidas / Desaparecidas", "Modelos", "Ontología"])
+     "911", "Detenidas / Desaparecidas", "Modelos", "Historia", "Ontología"])
 
 with t1:
     que("Mapa: delitos registrados por municipio en los años elegidos "
@@ -412,6 +412,76 @@ with t6:
                title="Modelo descartado")
 
 with t7:
+    st.header("Historia: lo que el portal cuenta (y lo que no)",
+              icon=":material/auto_stories:")
+    st.markdown("En 11 años, Sonora registró **343,128 delitos** — pero el 40% "
+                "ocurrió en un solo municipio, diciembre cae todos los años "
+                "sin excepción, y las llamadas de broma al 911 superan a todas "
+                "las detenciones. Esto es lo que los datos sostienen, con sus "
+                "límites a la vista.")
+    st.subheader("1. El mapa es Hermosillo (y luego el resto)",
+                 icon=":material/map:")
+    st.badge("Verificado", icon=":material/check:", color="green")
+    st.markdown("- **Evidencia**: Hermosillo 134,438 delitos; Cajeme 64,176; "
+                "SLRC 21,317; Nogales 20,966. KMeans k=4 separa por volumen, "
+                "no por perfil (ver pestaña Modelos).")
+    st.caption("Límite: conteos sin denominador poblacional; 26998/26999 no "
+               "son municipios y se excluyen del mapa.")
+    st.subheader("2. Robo y violencia familiar mandan",
+                 icon=":material/bar_chart:")
+    st.badge("Verificado", icon=":material/check:", color="green")
+    st.markdown("- **Evidencia**: robo 97,044; violencia familiar 54,971 "
+                "(modalidad #1); feminicidio 340 casos con pico de 42 en 2021; "
+                "homicidio con arma de fuego 7,300 ≈ 2× accidentes de tránsito.")
+    st.caption("Límite: registros administrativos, no prevalencia real; "
+               "subregistro desconocido.")
+    st.subheader("3. El año tiene forma",
+                 icon=":material/calendar_month:")
+    st.badge("Verificado", icon=":material/check:", color="green")
+    st.markdown("- **Evidencia**: junio 31.5k y octubre 31.3k arriba, diciembre "
+                "24.1k abajo —mínimo los 11 años (Wilcoxon pareado dic<nov, "
+                "p<0.001). IsolationForest marca abr-jul 2016 y dic-2017.")
+    st.caption("Límite: patrón descriptivo; puede ser efecto de reporte de "
+               "cierre de año. No se afirma causa.")
+    st.subheader("4. Víctimas: otra unidad, otra historia",
+                 icon=":material/group:")
+    st.badge("Verificado", icon=":material/check:", color="green")
+    st.markdown("- **Evidencia**: 57,983 víctimas 2016-2025, serie comparable.")
+    st.caption("Límite: 2015 se excluye (traía esquema municipal sin sexo/edad). "
+               "Incidencia y víctimas no se suman: distinta unidad de conteo.")
+    st.subheader("5. El 911 recibe 1.1M de llamadas y la mitad es ruido",
+                 icon=":material/call:")
+    st.badge("Verificado", icon=":material/check:", color="green")
+    st.markdown("- **Evidencia**: 212,902 cuelgues, 40,143 bromas; pico 18-21h; "
+                "37.2% sin sexo registrado. Las improcedentes vienen en dos "
+                "capturas excluyentes: con municipio y sin motivo, o viceversa.")
+    st.caption("Límite: llamadas ≠ incidentes; 327k sin municipio no se mapean.")
+    st.subheader("6. Detenidas y desaparecidas",
+                 icon=":material/person_search:")
+    st.badge("Verificado", icon=":material/check:", color="green")
+    st.markdown("- **Evidencia**: 4,169 detenciones, mediana de edad 34 (errores "
+                "de captura sin imputar); 11,810 desaparecidas, 6,432 siguen sin "
+                "aparecer, 36.7% localizadas con vida; tasa 2024-25 = 3.0× la "
+                "de 2015-23 (IC95 2.9-3.1).")
+    st.badge("Pregunta abierta", icon=":material/help:", color="orange")
+    st.caption("Límite: sin municipio en fuente (sin mapa). El ×3.0 es razón de "
+               "tasas: ¿mejor registro o más casos? El dato no lo dice.")
+    st.subheader("7. Los modelos que sí pasan (y los que no)",
+                 icon=":material/query_stats:")
+    st.badge("Verificado", icon=":material/check:", color="green")
+    st.markdown("- **Evidencia**: RandomForest mensual por municipio R² 0.936 "
+                "(supera al naive 0.912); SHAP: manda el promedio de 3 meses. "
+                "Ridge estacional y SARIMAX descartados con métrica (R²<0).")
+    st.caption("Límite: describe al modelo, no causalidad; predecir ≠ dotar recursos.")
+    st.subheader("Procedencia y reglas del juego",
+                 icon=":material/database:")
+    st.markdown("Portal datos.sonora.gob.mx, descubierto y documentado vía la "
+                "ontología mex-ontologi (MCP): cada cifra es un total declarado, "
+                "cada serie se reporta por separado — sin cruces sin validación, "
+                "sin inferir cobertura. Capas: crudos → `data/seg/` → tidy "
+                "`data/tidy/` con diccionario y procedencia firmada.")
+
+with t8:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
              "qué significa cada columna de los conjuntos de seguridad según la fuente.")
     sig = significados()
