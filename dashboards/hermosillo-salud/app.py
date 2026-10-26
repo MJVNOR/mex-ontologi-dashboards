@@ -116,14 +116,20 @@ with t2:
 with t3:
     fuentes("salud", 'hmo_consulta.parquet')
     que("Izquierda: consultas por grupo de edad (de menor a mayor volumen). Derecha: "
-        "reparto por sexo. Muestran qué población usa más la consulta externa.")
+        "reparto por sexo dentro de cada grupo (barras al 100%). La brecha hacia "
+        "mujeres se concentra entre 15 y 49 años e incluso se invierte en infancia; "
+        "descriptivo, sin atribuir causa.")
     c1, c2 = st.columns(2)
     ce_edad = con_f.groupby("Grupo_Edad")["Total"].sum().reset_index().sort_values("Total")
     c1.plotly_chart(px.bar(ce_edad, x="Total", y="Grupo_Edad", orientation="h",
                            title="Consulta externa por grupo de edad"), use_container_width=True)
-    c2.plotly_chart(px.pie(con_f.groupby("Sexo")["Total"].sum().reset_index(),
-                           names="Sexo", values="Total",
-                           title="Consulta externa por sexo"), use_container_width=True)
+    sx = con_f.groupby(["Grupo_Edad", "Sexo"])["Total"].sum().reset_index()
+    sx = sx[sx.Sexo.isin(["HOMBRE", "MUJER"])]
+    sx["pct"] = sx["Total"] / sx.groupby("Grupo_Edad")["Total"].transform("sum") * 100
+    c2.plotly_chart(px.bar(sx, x="Grupo_Edad", y="pct", color="Sexo", barmode="stack",
+                           title="Consulta externa: sexo por grupo de edad (%)",
+                           labels={"pct": "% del grupo"}),
+                    use_container_width=True)
     que("Los 10 establecimientos con más consultas en Hermosillo: dónde se concentra "
         "la atención ambulatoria.")
     top_est = con_f.groupby("Nombre_Establecimiento")["Total"].sum().nlargest(10).reset_index()
@@ -166,8 +172,10 @@ with t5:
         st.dataframe(ins[["FECHA", "ACTIVIDAD", "MOTIVO", "MUNICIPIO"]], use_container_width=True)
 
 with t6:
-    que("Pronóstico mensual 2023 por servicio (perfil estacional Ridge entrenado en "
-        "2018-2020): la línea es la estimación y la banda ±1 desviación entre años. "
+    que("Pronóstico mensual 2023 por servicio (mejor variante por servicio "
+        "entrenada en 2018-2020: urgencias = tendencia+estacionalidad, consulta = "
+        "Ridge mensual; variante elegida por ganar en 2021, así que su error es "
+        "optimista): la línea es la estimación y la banda ±1 desviación entre años. "
         "Son ESTIMACIONES, no datos oficiales; 2021-2022 vienen parciales en la fuente.")
     import plotly.graph_objects as go
     fc = pd.read_parquet(DATA / "modelos" / "inferencias" / "pronostico_mensual.parquet")
@@ -197,7 +205,8 @@ with t6:
                "perfil estacional de referencia, no como pronóstico operativo.")
     que("Semanas epidemiológicas atípicas (IsolationForest sobre la suma de la columna "
         "acumulado por semana): los puntos rojos son semanas cuyo valor se aparta del patrón "
-        "habitual y ameritan revisión.")
+        "habitual y ameritan revisión. Nota de método: IQR univariado solo marca 3 y 4; "
+        "la 15 la detecta el bosque por alejarse del patrón conjunto, no por extremo simple.")
     ano = pd.read_parquet(DATA / "modelos" / "inferencias" / "anomalias_vigilancia.parquet")
     fig2 = go.Figure()
     fig2.add_trace(go.Scatter(x=ano.no_semana, y=ano.acumulado, mode="lines",

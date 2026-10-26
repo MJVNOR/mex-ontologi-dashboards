@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 import streamlit as st
 
 DATA = Path(__file__).resolve().parents[2] / "data"
@@ -26,6 +27,12 @@ st.caption("Fuente: portal datos.sonora.gob.mx (SESNSP, CBP, SS). "
 
 def que(mensaje):
     st.caption("📊 " + mensaje)
+
+
+def hbar(df, x, y, title):
+    # ponytail: ascendente para que la barra mayor quede arriba
+    return px.bar(df.sort_values(x, ascending=True), x=x, y=y,
+                  orientation="h", title=title)
 
 
 @st.cache_data
@@ -77,16 +84,17 @@ with t1:
     que("Mapa: delitos registrados por municipio en los años elegidos "
         "(rojo = más delitos). Abajo, el ranking de los 15 municipios con "
         "más registros. Hermosillo, Cajeme, SLRC y Nogales concentran el grueso.")
+    mun_map = mun_tot[~mun_tot["cve"].isin(["26998", "26999"])]
     fig = px.choropleth(
-        mun_tot, geojson=geo(), locations="cve",
+        mun_map, geojson=geo(), locations="cve",
         featureidkey="properties.CVEGEO", color="n",
         hover_name="Municipio", color_continuous_scale="Reds",
         title="Incidencia delictiva por municipio")
     fig.update_geos(fitbounds="locations", visible=False)
     st.plotly_chart(fig, use_container_width=True)
     top_m = mun_tot.nlargest(15, "n")
-    st.plotly_chart(px.bar(top_m, x="n", y="Municipio", orientation="h",
-                           title="Top 15 municipios por delitos"),
+    st.plotly_chart(hbar(top_m, "n", "Municipio",
+                         "Top 15 municipios por delitos"),
                     use_container_width=True)
 
 with t2:
@@ -99,8 +107,13 @@ with t2:
     que("Los 12 tipos de delito con más registros en el periodo: robo "
         "domina, seguido de homicidio y lesiones.")
     top_t = inc_f.groupby(tipo_d)["n"].sum().nlargest(12).reset_index()
-    st.plotly_chart(px.bar(top_t, x="n", y=tipo_d, orientation="h",
-                           title="Top 12 tipos de delito"),
+    st.plotly_chart(hbar(top_t, "n", tipo_d, "Top 12 tipos de delito"),
+                    use_container_width=True)
+    bien = [c for c in inc.columns if "Bien" in str(c)][0]
+    que("Bien jurídico afectado: el patrimonio concentra casi la mitad; "
+        "la familia es el segundo (violencia familiar).")
+    top_b = inc_f.groupby(bien)["n"].sum().nlargest(8).reset_index()
+    st.plotly_chart(hbar(top_b, "n", bien, "Delitos por bien jurídico"),
                     use_container_width=True)
     que("Mapa de calor mes × año: junio y octubre concentran el pico y "
         "diciembre cae. Cada celda es el total de delitos de ese mes.")
@@ -127,12 +140,12 @@ with t2:
     c1, c2 = st.columns(2)
     rb = inc_f[inc_f[tipo_d] == "Robo"].groupby("Subtipo de delito")["n"] \
         .sum().nlargest(8).reset_index()
-    c1.plotly_chart(px.bar(rb, x="n", y="Subtipo de delito", orientation="h",
-                           title="Robo: subtipos"), use_container_width=True)
+    c1.plotly_chart(hbar(rb, "n", "Subtipo de delito", "Robo: subtipos"),
+                    use_container_width=True)
     ho = inc_f[inc_f[tipo_d] == "Homicidio"].groupby("Modalidad")["n"] \
         .sum().nlargest(6).reset_index()
-    c2.plotly_chart(px.bar(ho, x="n", y="Modalidad", orientation="h",
-                           title="Homicidio: modalidad"), use_container_width=True)
+    c2.plotly_chart(hbar(ho, "n", "Modalidad", "Homicidio: modalidad"),
+                    use_container_width=True)
     que("Comparador: elige municipios y ve su serie anual lado a lado.")
     opc = sorted(mun_tot["Municipio"].dropna().unique())
     comp = st.multiselect("Municipios a comparar",
@@ -158,13 +171,11 @@ with t3:
     c1.plotly_chart(px.pie(vic_f.groupby(sexo_v)["n"].sum().reset_index(),
                            names=sexo_v, values="n",
                            title="Víctimas por sexo"), use_container_width=True)
-    c2.plotly_chart(px.bar(vic_f.groupby(edad_v)["n"].sum().reset_index(),
-                           x="n", y=edad_v, orientation="h",
-                           title="Víctimas por grupo de edad"),
+    c2.plotly_chart(hbar(vic_f.groupby(edad_v)["n"].sum().reset_index(),
+                           "n", edad_v, "Víctimas por grupo de edad"),
                     use_container_width=True)
     top_vt = vic_f.groupby(vtipo)["n"].sum().nlargest(12).reset_index()
-    st.plotly_chart(px.bar(top_vt, x="n", y=vtipo, orientation="h",
-                           title="Víctimas: top 12 tipos de delito"),
+    st.plotly_chart(hbar(top_vt, "n", vtipo, "Víctimas: top 12 tipos"),
                     use_container_width=True)
 
 with t4:
@@ -182,16 +193,23 @@ with t4:
                     use_container_width=True)
     top_tm = tel["municipio"].value_counts().nlargest(12).reset_index()
     top_tm.columns = ["municipio", "n"]
-    c2.plotly_chart(px.bar(top_tm, x="n", y="municipio", orientation="h",
-                           title="Top 12 municipios que más llaman"),
+    c2.plotly_chart(hbar(top_tm, "n", "municipio",
+                         "Top 12 municipios que más llaman"),
+                    use_container_width=True)
+    que("Llamadas por hora del día: el pico es 18-21h, la madrugada el "
+        "mínimo. Ritmo diario de la demanda al 911.")
+    hr = tel.groupby("hora").size().reset_index(name="n").sort_values("hora")
+    st.plotly_chart(px.bar(hr, x="hora", y="n",
+                           title="911 por hora: pico 18-21h",
+                           labels={"hora": "hora del día", "n": "llamadas"}),
                     use_container_width=True)
     que("Las 12 clasificaciones más reportadas en llamadas procedentes "
         "(seguridad, médicas, servicios) y los motivos de improcedencia.")
     top_cl = tel[tel["tipo"] == "procedente"]["clasificacion"].value_counts(
         ).nlargest(12).reset_index()
     top_cl.columns = ["clasificacion", "n"]
-    st.plotly_chart(px.bar(top_cl, x="n", y="clasificacion", orientation="h",
-                           title="Procedentes: top clasificaciones"),
+    st.plotly_chart(hbar(top_cl, "n", "clasificacion",
+                         "Procedentes: top clasificaciones"),
                     use_container_width=True)
     if "motivo no procedente" in tel.columns:
         colg = int((tel["motivo no procedente"]
@@ -205,8 +223,7 @@ with t4:
         top_mo = tel[tel["tipo"] == "improcedente"]["motivo no procedente"] \
             .value_counts().nlargest(10).reset_index()
         top_mo.columns = ["motivo", "n"]
-        st.plotly_chart(px.bar(top_mo, x="n", y="motivo", orientation="h",
-                               title="Improcedentes: top motivos"),
+        st.plotly_chart(hbar(top_mo, "n", "motivo", "Improcedentes: top motivos"),
                         use_container_width=True)
         st.caption("⚠️ Calidad: 37% de las llamadas trae sexo del reportante "
                    "'no registrado'; se reporta tal cual, sin imputar.")
@@ -217,16 +234,18 @@ with t5:
     c1, c2 = st.columns(2)
     top_dl = det["delito"].value_counts().nlargest(12).reset_index()
     top_dl.columns = ["delito", "n"]
-    c1.plotly_chart(px.bar(top_dl, x="n", y="delito", orientation="h",
-                           title="Detenciones: top delitos"),
+    c1.plotly_chart(hbar(top_dl, "n", "delito", "Detenciones: top delitos"),
                     use_container_width=True)
     c2.plotly_chart(px.pie(det.groupby("sexo").size().reset_index(name="n"),
                            names="sexo", values="n",
                            title="Detenidas por sexo"), use_container_width=True)
     det["edad"] = pd.to_numeric(det["edad"], errors="coerce")
-    st.plotly_chart(px.histogram(det.dropna(subset=["edad"]), x="edad",
-                                 nbins=30, title="Detenidas: edad"),
-                    use_container_width=True)
+    med = float(det["edad"].median())
+    figh = px.histogram(det.dropna(subset=["edad"]), x="edad",
+                        nbins=30, title=f"Detenidas: edad (mediana {med:.0f})")
+    figh.add_vline(x=med, line_dash="dash",
+                   annotation_text=f"mediana {med:.0f}")
+    st.plotly_chart(figh, use_container_width=True)
     st.caption("⚠️ Calidad: la mediana de edad es 34, pero hay registros con "
                "valores imposibles (errores de captura); se reportan tal "
                "cual, sin imputar.")
@@ -296,7 +315,6 @@ with t6:
                      y=a9[a9.anomalia == -1]["n"], mode="markers",
                      marker={"size": 10}, name="anomalía")
     st.plotly_chart(fig9, use_container_width=True)
-    import plotly.graph_objects as go
 
     pr = load("inferencias/pred_municipio.parquet")
     pr["nm_t"] = pr["nm"] % 12 + 1
@@ -304,21 +322,23 @@ with t6:
                      pr["nm_t"].map(lambda m: f"{m:02d}"))
     que("Predictor del mes siguiente por municipio (RandomForest, split "
         "temporal ≤2022 → ≥2023): R² 0.936, MAE 9.6, supera al naive "
-        "estacional (0.912). Ejemplo Hermosillo: real vs pronóstico.")
+        "estacional (R² 0.912, MAE 11.9). Ejemplo Hermosillo: real vs pronóstico.")
     hmo = pr[pr.Municipio == "Hermosillo"].sort_values("fecha_t")
     figp = px.line(hmo, x="fecha_t", y=["target", "pred"],
                    title="Hermosillo: real vs pronóstico (test ≥2023)",
                    labels={"value": "delitos", "variable": "serie"})
     st.plotly_chart(figp, use_container_width=True)
+    st.caption("Caveat: el R² pooled lo explica sobre todo el tamaño entre municipios; "
+               "en Hermosillo el MAE es 221 vs 252 del naive: mejora modesta, no seguimiento fino.")
     que("SHAP (Permutation, background=train): el promedio móvil de 3 meses "
         "y el mes anterior explican el pronóstico; municipio y mes pesan "
         "poco. Describe al modelo, no es causalidad.")
     si = load("inferencias/shap_importancia.parquet")
     si["nombre"] = si["feature"].str.replace("remainder__", "") \
         .str.replace("cat__Municipio_", "Mpio: ").str.replace("cat__nm_", "mes=")
-    st.plotly_chart(px.bar(si.nlargest(15, "mean_abs_shap"),
-                           x="mean_abs_shap", y="nombre", orientation="h",
-                           title="SHAP: |atribución| media (top 15)"),
+    st.plotly_chart(hbar(si.nlargest(15, "mean_abs_shap"),
+                           "mean_abs_shap", "nombre",
+                           "SHAP: roll3 y lag1 mandan"),
                     use_container_width=True)
     wf = load("inferencias/shap_waterfall_hmo.parquet")
     wf = wf.sort_values("shap_value", ascending=False)
