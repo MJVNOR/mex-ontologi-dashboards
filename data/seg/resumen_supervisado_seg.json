@@ -1,0 +1,23 @@
+{
+  "predictor": {
+    "filas_train": 5976,
+    "filas_test": 2592,
+    "r2": 0.936,
+    "mae": 9.6,
+    "baseline_naive_r2": 0.912,
+    "train": "target<=2022",
+    "test": "target>=2023",
+    "nota": "features solo pasado; split por anio-target",
+    "valida": true
+  },
+  "shap_version": "0.54.1",
+  "shap": {
+    "output": "delitos mes siguiente (conteo, regresion)",
+    "background": "100 filas train",
+    "filas_explicadas": 200,
+    "additivity_ok": true,
+    "nota": "describe al modelo, no causalidad",
+    "waterfall_fila": "Hermosillo 2025-11 (mes de features; target = mes siguiente)",
+    "filas_explicadas_nota": "195 primeras de test + 5 Hermosillo recientes"
+  }
+}

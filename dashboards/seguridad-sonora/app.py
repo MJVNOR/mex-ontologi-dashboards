@@ -296,6 +296,46 @@ with t6:
                      y=a9[a9.anomalia == -1]["n"], mode="markers",
                      marker={"size": 10}, name="anomalía")
     st.plotly_chart(fig9, use_container_width=True)
+    import plotly.graph_objects as go
+
+    pr = load("inferencias/pred_municipio.parquet")
+    pr["nm_t"] = pr["nm"] % 12 + 1
+    pr["fecha_t"] = (pr["target_anio"].astype(int).astype(str) + "-" +
+                     pr["nm_t"].map(lambda m: f"{m:02d}"))
+    que("Predictor del mes siguiente por municipio (RandomForest, split "
+        "temporal ≤2022 → ≥2023): R² 0.936, MAE 9.6, supera al naive "
+        "estacional (0.912). Ejemplo Hermosillo: real vs pronóstico.")
+    hmo = pr[pr.Municipio == "Hermosillo"].sort_values("fecha_t")
+    figp = px.line(hmo, x="fecha_t", y=["target", "pred"],
+                   title="Hermosillo: real vs pronóstico (test ≥2023)",
+                   labels={"value": "delitos", "variable": "serie"})
+    st.plotly_chart(figp, use_container_width=True)
+    que("SHAP (Permutation, background=train): el promedio móvil de 3 meses "
+        "y el mes anterior explican el pronóstico; municipio y mes pesan "
+        "poco. Describe al modelo, no es causalidad.")
+    si = load("inferencias/shap_importancia.parquet")
+    si["nombre"] = si["feature"].str.replace("remainder__", "") \
+        .str.replace("cat__Municipio_", "Mpio: ").str.replace("cat__nm_", "mes=")
+    st.plotly_chart(px.bar(si.nlargest(15, "mean_abs_shap"),
+                           x="mean_abs_shap", y="nombre", orientation="h",
+                           title="SHAP: |atribución| media (top 15)"),
+                    use_container_width=True)
+    wf = load("inferencias/shap_waterfall_hmo.parquet")
+    wf = wf.sort_values("shap_value", ascending=False)
+    top = wf.head(8)
+    resto = wf.iloc[8:]["shap_value"].sum()
+    base = float(wf["base_value"].iloc[0])
+    figw = go.Figure(go.Waterfall(
+        x=["base"] + top["feature"].str.replace(
+            "remainder__", "").str.replace(
+            "cat__Municipio_", "Mpio: ").str.replace(
+            "cat__nm_", "mes=").tolist() + ["resto", "pronóstico"],
+        y=[base] + top["shap_value"].tolist() + [resto,
+                                                 float(wf["prediccion"].iloc[0])],
+        measure=["absolute"] + ["relative"] * (len(top) + 1) + ["total"]))
+    figw.update_layout(title="Waterfall: Hermosillo nov-2025 → dic-2025 "
+                             f"(pronóstico {float(wf['prediccion'].iloc[0]):.0f})")
+    st.plotly_chart(figw, use_container_width=True)
     st.caption("⚠️ Se probó pronóstico estacional (Ridge, 2015-2023 → "
                "2024-2025): R² < 0, peor que predecir la media. No se "
                "publica pronóstico. Métricas en data/seg/resumen_modelos_seg.json.")
