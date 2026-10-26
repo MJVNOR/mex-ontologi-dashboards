@@ -89,7 +89,7 @@ with t0:
                                    color=["Sonora"] + ["Resto"] * 2,
                                    color_discrete_map={"Sonora": "#C44E52", "Resto": "#8A8A8A"},
                                    title="Sonora vs el país (PO2SM, 2020)",
-                                   labels={"po2sm": "% < 2 SM", "grupo": ""}),
+                                   labels={"po2sm": "% < 2 SM", "grupo": "", "color": ""}),
                             width="stretch")
     with st.container(border=True):
         _c1, _c2 = st.columns(2)
@@ -238,12 +238,16 @@ with t1:
         m = m.sort_values("PO2SM", ascending=True)
     else:
         m = m.sort_values("NOM_MUN")
-    st.plotly_chart(px.bar(m, x="PO2SM", y="NOM_MUN", color="GM_2020", orientation="h",
-                           height=950,
-                           title="PO2SM municipal va de 43% a 93% (Sonora, 2020)",
-                           labels={"NOM_MUN": "municipio", "PO2SM": "% < 2 SM",
-                                   "GM_2020": "grado"}),
-                    width="stretch")
+    _fmun = px.bar(m, x="PO2SM", y="NOM_MUN", color="GM_2020", orientation="h",
+                     height=950,
+                     title="PO2SM municipal va de 43% a 93% (Sonora, 2020)",
+                     labels={"NOM_MUN": "municipio", "PO2SM": "% < 2 SM",
+                             "GM_2020": "grado"})
+    # ponytail: con color por trazos, el orden lo impone categoryarray, no el sort
+    # (plotly dibuja la primera categoria abajo: se pasa la lista invertida)
+    _fmun.update_yaxes(categoryorder="array",
+                       categoryarray=m["NOM_MUN"].tolist()[::-1])
+    st.plotly_chart(_fmun, width="stretch")
     que("Relación entre marginación e ingresos: cada punto es un municipio; a mayor "
         "grado de marginación, mayor PO2SM. Relación descriptiva, "
         "no causalidad. Nota: en esta fuente el IM_2020 es menor donde la "
@@ -287,14 +291,16 @@ with t2:
     que("Sonora frente a las demás entidades en 2020: cada barra es una entidad. "
         "La fila Nacional no trae IM/GM declarados y se excluye del orden por índice.")
     e = ent[ent["NOM_ENT"].str.strip().str.upper() != "NACIONAL"].copy()
-    e["_es_son"] = e["NOM_ENT"].astype(str).str.strip().str.upper() == "SONORA"
+    e["_resalta"] = (e["NOM_ENT"].astype(str).str.strip().str.upper() == "SONORA").map(
+        {True: "Sonora", False: "Resto"})
     e = e.sort_values("PO2SM", ascending=True)
-    st.plotly_chart(px.bar(e, x="PO2SM", y="NOM_ENT",
-                           color="_es_son", orientation="h", height=800,
-                           color_discrete_map={True: "#C44E52", False: "#8A8A8A"},
-                           title="Sonora, lugar 22 de 32 en PO2SM (2020)",
-                           labels={"NOM_ENT": "entidad", "PO2SM": "% < 2 SM", "_es_son": "Sonora"}),
-                    width="stretch")
+    _fent = px.bar(e, x="PO2SM", y="NOM_ENT",
+                     color="_resalta", orientation="h", height=800,
+                     color_discrete_map={"Sonora": "#C44E52", "Resto": "#8A8A8A"},
+                     title="Sonora, lugar 22 de 32 en PO2SM (2020)",
+                     labels={"NOM_ENT": "entidad", "PO2SM": "% < 2 SM", "_resalta": ""})
+    _fent.update_yaxes(categoryorder="array", categoryarray=e["NOM_ENT"].tolist())
+    st.plotly_chart(_fent, width="stretch")
     st.caption(f"Sonora: PO2SM {son['PO2SM']:.1f}%, grado {son['GM_2020']}, "
                f"posición nacional {son['POSICION']:.0f}.")
     rank = int((e["PO2SM"] > float(son["PO2SM"])).sum()) + 1

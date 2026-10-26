@@ -41,6 +41,13 @@ El recorrido distingue los periodos y alcances de las fuentes. Los conteos munic
 
 **Este dashboard no mide empleo, vacantes, colocaciones ni desempleo.** PO2SM se utiliza como indicador de contexto de ingresos; las asociaciones territoriales y los grupos del modelo no establecen causas.
 
+### Vistas del dashboard de contexto laboral proxy
+
+![Hallazgos](reports/capturas-marginacion/01-hallazgos.png)
+![Municipios](reports/capturas-marginacion/02-municipios.png)
+![Entidades](reports/capturas-marginacion/03-entidades.png)
+![Modelos](reports/capturas-marginacion/04-modelos.png)
+
 ## Cómo leer los resultados
 
 1. **Empieza por Historia o Hallazgos.** Revisa la pregunta, el gráfico y el límite de cada interpretación; después explora las pestañas temáticas.
