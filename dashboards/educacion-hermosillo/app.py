@@ -87,6 +87,10 @@ with th:
                 "49,637 en 2024 (41,280 en 2025), pero el ticket medio cayó de $10,210 a "
                 "$6,173 con la mediana fija en $5,000. Ver *Becas → Ticket por año* y "
                 "*distribución del importe* (p99 $42,500, max $500,000).")
+    tk = bec_f.groupby("anio")["importe"].mean().reset_index()
+    st.plotly_chart(px.bar(tk, x="anio", y="importe", title="Ticket medio por año (pesos)",
+                           labels={"anio": "año", "importe": "pesos"}),
+                    width="stretch", alt="El ticket medio cae cada año")
     st.caption("Límites: cuenta registros publicados, no acredita cobertura; cifras fijas al "
                "periodo completo. El año entra lineal en log: es aproximación, no tarifa oficial.")
     st.subheader("La UTH en un retrato con bordes rotos")
@@ -95,6 +99,11 @@ with th:
                 "media por corte*. **La edad no pesa controlando**: el Logit le da p=0.38 aunque el "
                 "bosque la marcaba importante (ver *Modelos → odds ratios*). **11 inscritos con 122 "
                 "años** son probable error de captura: se muestran, no se corrigen sin evidencia.")
+    ct2 = repl[repl.semana == 16].groupby("corte")["indice"].mean().reset_index()
+    st.plotly_chart(px.bar(ct2, x="corte", y="indice",
+                           title="Reprobación sem 16: media por corte",
+                           labels={"indice": "índice medio"}),
+                    width="stretch", alt="La remota duplica a presencial en semana 16")
     st.caption("Límites: remota n=64 (rango, no punto); 2022-1/remota fuera del modelo por falta de "
                "semanas tempranas; CV agrupada por materia 0.73 ± 0.07 con n=140.")
     st.subheader("Trayectoria sin seguimiento")
