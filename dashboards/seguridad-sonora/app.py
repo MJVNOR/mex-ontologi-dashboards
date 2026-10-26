@@ -528,6 +528,22 @@ with th:
                     alt="Real vs pronóstico en Hermosillo, curvas casi idénticas")
     que("SHAP: manda el promedio de 3 meses. Ridge y SARIMAX descartados "
         "(R²<0). Describe al modelo, no causalidad.")
+    with st.container(border=True):
+        st.subheader("Conclusiones: lo afirmable y lo pendiente",
+                     icon=":material/fact_check:")
+        st.badge("Verificado", icon=":material/check:", color="green")
+        st.markdown("**Se puede afirmar**: hiperconcentración en Hermosillo "
+                    "(39%); violencia familiar como modalidad #1; calendario "
+                    "validado (dic<nov, p<0.001); 911 mitad ruido con dos "
+                    "capturas; tasa de desapariciones ×3.0 post-2024; "
+                    "pronóstico mensual con R² 0.94 que usa historia reciente.")
+        st.markdown("**No se puede afirmar**: causas de diciembre, del pico "
+                    "2016, del salto 2024-25 o de la concentración (sin diseño "
+                    "causal, sin denominadores, sin subregistro medido).")
+        st.badge("Pregunta abierta", icon=":material/help:", color="orange")
+        st.markdown("**Pendiente**: ¿reporte o delito en diciembre? ¿mejor "
+                    "registro o más desapariciones? ¿qué son las llamadas sin "
+                    "municipio? Tasas por 100k en seguridad.")
     st.subheader("Procedencia y reglas del juego", icon=":material/database:")
     st.markdown("Portal datos.sonora.gob.mx vía ontología mex-ontologi (MCP): "
                 "totales declarados, series sin cruzar, sin inferir cobertura. "
