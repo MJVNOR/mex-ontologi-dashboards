@@ -419,6 +419,13 @@ with t7:
                 "sin excepción, y las llamadas de broma al 911 superan a todas "
                 "las detenciones. Esto es lo que los datos sostienen, con sus "
                 "límites a la vista.")
+    h1, h2, h3, h4 = st.columns(4)
+    h1.metric("Delitos 2015-2025", "343,128", border=True,
+              chart_data=inc.groupby("anio")["n"].sum().tolist(),
+              chart_type="line")
+    h2.metric("Hermosillo concentra", "39%", border=True)
+    h3.metric("Tasa desapariciones 2024-25 vs 2015-23", "3.0×", border=True)
+    h4.metric("Pronóstico mensual validado", "R² 0.94", border=True)
     st.subheader("1. El mapa es Hermosillo (y luego el resto)",
                  icon=":material/map:")
     st.badge("Verificado", icon=":material/check:", color="green")
