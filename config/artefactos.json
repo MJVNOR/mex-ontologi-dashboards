@@ -715,5 +715,27 @@
   ],
   "agregacion": "Sin agregar.",
   "alcance": "Comparacion honesta: MAPE 60.5, peor que Ridge; no se publica como pronostico."
+ },
+ "seg/municipios.json": {
+  "tema": "seg",
+  "fuentes": [
+   {
+    "archivo": "seg_raw/map.json"
+   }
+  ],
+  "filtro": "ninguno (FeatureCollection completa, coordenadas a 3 decimales)",
+  "transformacion": "Conserva solo CVEGEO+NOMGEO por feature (preprocesar_seg.py §6).",
+  "medidas": [],
+  "agregacion": "Sin agregar.",
+  "alcance": "Geometrias tal cual las publica la fuente, simplificadas para el mapa."
+ },
+ "tidy/diccionario_datos.csv": {
+  "tema": "seg",
+  "fuentes": [],
+  "filtro": "ninguno (documento generado)",
+  "transformacion": "Definiciones escritas en tidy_seg.py §8 a partir de las fuentes de cada tabla.",
+  "medidas": [],
+  "agregacion": "Sin agregar.",
+  "alcance": "Documentacion, no datos."
  }
 }

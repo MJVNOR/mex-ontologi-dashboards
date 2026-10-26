@@ -225,24 +225,38 @@ def main():
     pd.DataFrame(dd, columns=["tabla", "columna", "tipo", "descripcion",
                               "origen", "nota"]).to_csv(
         TIDY / "diccionario_datos.csv", index=False, encoding="utf-8")
+    out["_diccionario_filas"] = len(dd)
 
     # 9. Procedencia (huellas reales; IRIs pendientes -> hueco declarado)
     proc = {"tema": "seguridad", "generado_en_utc": ahora,
             "preprocesador": "tidy_seg.py",
             "preprocesador_sha256": huella(ROOT / "scripts/tidy_seg.py"),
             "staging": {k: {"filas": v["filas"], "sha256": None}
-                        for k, v in out.items()},
+                        for k, v in out.items() if not k.startswith("_")},
             "artefactos": {}, "huecos": [
         "Sin snapshot ontologia_seg.json: columnas_ontologia e IRIs por columna pendientes (requiere exportar evidencia del MCP).",
         "Fecha de carga no documentada; generado_en_utc no acredita la carga.",
         "victimas 2015 excluida por cambio de esquema en fuente (ver nota).",
     ]}
     for name, spec in out.items():
+        if name.startswith("_"):
+            continue
         p = TIDY / name if (TIDY / name).exists() else None
         df = pd.read_parquet(TIDY / name)
         proc["artefactos"][name] = {
             **spec, "sha256": huella(TIDY / name),
             "columnas_salida": list(df.columns)}
+    # Documentos y artefactos consumidos que no son parquet tidy.
+    geo = json.loads((SEG / "municipios.json").read_text(encoding="utf-8"))
+    proc["artefactos"]["seg/municipios.json"] = {
+        "filas": len(geo["features"]), "sha256": huella(SEG / "municipios.json"),
+        "origen": "seg_raw/map.json (FeatureCollection simplificada a 3 decimales, solo CVEGEO+NOMGEO)",
+        "columnas_salida": ["CVEGEO", "NOMGEO"]}
+    proc["documentos"] = {
+        "tidy/diccionario_datos.csv": {
+            "filas": out.pop("_diccionario_filas"),
+            "sha256": huella(TIDY / "diccionario_datos.csv"),
+            "origen": "generado por tidy_seg.py (§8, definiciones del codigo)"}}
     (DATA / "procedencia_seg.json").write_text(
         json.dumps(proc, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -251,6 +265,22 @@ def main():
     art_path = ROOT / "config/artefactos.json"
     art = json.loads(art_path.read_text(encoding="utf-8"))
     nuevo = dict(art)
+    nuevo["seg/municipios.json"] = {
+        "tema": "seg",
+        "fuentes": [{"archivo": "seg_raw/map.json"}],
+        "filtro": "ninguno (FeatureCollection completa, coordenadas a 3 decimales)",
+        "transformacion": "Conserva solo CVEGEO+NOMGEO por feature (preprocesar_seg.py §6).",
+        "medidas": [],
+        "agregacion": "Sin agregar.",
+        "alcance": "Geometrias tal cual las publica la fuente, simplificadas para el mapa."}
+    nuevo["tidy/diccionario_datos.csv"] = {
+        "tema": "seg",
+        "fuentes": [],
+        "filtro": "ninguno (documento generado)",
+        "transformacion": "Definiciones escritas en tidy_seg.py §8 a partir de las fuentes de cada tabla.",
+        "medidas": [],
+        "agregacion": "Sin agregar.",
+        "alcance": "Documentacion, no datos."}
     nuevo["tidy/dim_municipios.parquet"] = {
         "tema": "seguridad",
         "fuentes": [{"archivo": "seg_raw/catalogo.xlsx", "hoja": 0}],
@@ -303,10 +333,18 @@ def main():
     for k, v in list(nuevo.items()):
         if k.startswith("tidy/") and v.get("tema") == "seguridad":
             v["tema"] = "seg"
-    if nuevo != art:
-        art_path.write_text(
-            json.dumps(nuevo, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8")
+    faltantes = {k: v for k, v in nuevo.items() if k not in art}
+    if faltantes:
+        # Insercion aditiva con el indentado de 1 espacio del archivo:
+        # nunca se reformatea lo existente.
+        texto = art_path.read_text(encoding="utf-8").rstrip()
+        assert texto.endswith("}")
+        bloque = "".join(
+            ",\n " + json.dumps(k, ensure_ascii=False) + ": " +
+            json.dumps(v, ensure_ascii=False, indent=1).replace("\n", "\n ")
+            for k, v in faltantes.items())
+        art_path.write_text(texto[:-1].rstrip() + bloque + "\n}\n",
+                            encoding="utf-8")
 
     print(json.dumps({k: v.get("filas") for k, v in out.items()},
                      ensure_ascii=False, indent=2))

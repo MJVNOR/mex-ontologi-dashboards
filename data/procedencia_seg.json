@@ -1,8 +1,8 @@
 {
   "tema": "seguridad",
-  "generado_en_utc": "2026-10-26T11:11:19.166628+00:00",
+  "generado_en_utc": "2026-10-26T11:24:18.817080+00:00",
   "preprocesador": "tidy_seg.py",
-  "preprocesador_sha256": "d0a253d3b97b34ae864839646fc706c2f377086b0af6314ab3f6b259b8a21c4e",
+  "preprocesador_sha256": "a12aa91cbc5f8c00d91e36f30d0509fee26e7629b85929ce3238bdd25ea82436",
   "staging": {
     "dim_municipios.parquet": {
       "filas": 74,
@@ -195,11 +195,27 @@
         "mes_num",
         "n"
       ]
+    },
+    "seg/municipios.json": {
+      "filas": 72,
+      "sha256": "f738eb1de691ee902ad00426938c9e68cbad9f23fa9d863e7ee932c0411189a1",
+      "origen": "seg_raw/map.json (FeatureCollection simplificada a 3 decimales, solo CVEGEO+NOMGEO)",
+      "columnas_salida": [
+        "CVEGEO",
+        "NOMGEO"
+      ]
     }
   },
   "huecos": [
     "Sin snapshot ontologia_seg.json: columnas_ontologia e IRIs por columna pendientes (requiere exportar evidencia del MCP).",
     "Fecha de carga no documentada; generado_en_utc no acredita la carga.",
     "victimas 2015 excluida por cambio de esquema en fuente (ver nota)."
-  ]
+  ],
+  "documentos": {
+    "tidy/diccionario_datos.csv": {
+      "filas": 22,
+      "sha256": "659b5d4bfa1fd05c7a463bf044ea9e2f67cfcbe3729389d525ea3278f41291f9",
+      "origen": "generado por tidy_seg.py (§8, definiciones del codigo)"
+    }
+  }
 }
