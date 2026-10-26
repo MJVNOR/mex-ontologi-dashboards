@@ -254,7 +254,9 @@ with t4:
         st.plotly_chart(hbar(top_mo, "n", "motivo", "Improcedentes: top motivos"),
                         width="stretch")
         st.warning("37% de las llamadas trae sexo del reportante "
-                     "'no registrado'; se reporta tal cual, sin imputar.",
+                     "'no registrado'; se reporta tal cual, sin imputar. Las "
+                     "improcedentes vienen en dos capturas: con municipio y sin "
+                     "motivo, o con motivo y sin municipio.",
                      title="Calidad de la fuente")
 
 with t5:
@@ -361,6 +363,20 @@ with t6:
                     alt="Líneas real vs pronóstico mensual en Hermosillo, siguen la misma curva")
     st.caption("Caveat: el R² pooled lo explica sobre todo el tamaño entre municipios; "
                "en Hermosillo el MAE es 221 vs 252 del naive: mejora modesta, no seguimiento fino.")
+    que("Inferencia clásica del conteo (Binomial-negativa, ref=Hermosillo, controlando "
+        "mes y año): municipios con tasa distinta. Poisson inválido (varianza/media≈557). "
+        "Describe al modelo, no causalidad.")
+    nbr = pd.read_parquet(DATA / "modelos" / "inferencias" / "nb_delitos_rr.parquet")
+    vol = pr.groupby("municipio")["target"].mean().nlargest(12).index
+    topn = nbr[nbr.term.str.startswith("Mpio: ")].copy()
+    topn["mun"] = topn.term.str.replace("Mpio: ", "", regex=False)
+    topn = topn[topn.mun.isin(set(vol))].copy()
+    topn["menos"], topn["mas"] = topn.rr - topn.lo, topn.hi - topn.rr
+    st.plotly_chart(px.bar(topn.sort_values("rr"), x="rr", y="mun", orientation="h",
+                           error_x="mas", error_x_minus="menos",
+                           title="Tasa de delitos vs Hermosillo (NB, IC95)",
+                           labels={"rr": "razón de tasas", "mun": "municipio"}),
+                    width="stretch", alt="Tasas de delitos por municipio contra Hermosillo con intervalos")
     que("SHAP (Permutation, background=train): el promedio móvil de 3 meses "
         "y el mes anterior explican el pronóstico; municipio y mes pesan "
         "poco. Describe al modelo, no es causalidad.")

@@ -337,6 +337,11 @@
       "dataset_id": "f58a3196-6874-4163-8161-730e5bffb244",
       "recurso_id": "d20d36c4-6406-4054-845c-43308b380b95",
       "archivo": "seg_raw/map.json"
+    },
+    {
+      "dataset_id": "dca16d84-dbf0-4501-b702-dc6372a480ea",
+      "recurso_id": "1689b19c-b0dc-4e39-bf07-e3a2e684ef1a",
+      "archivo": "vigilancia_2022.xlsx"
     }
   ]
 }

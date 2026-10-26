@@ -238,7 +238,7 @@ def main():
         "transformacion": "Renombre a cve_municipio/municipio.",
         "medidas": [], "agregacion": "Sin agregar.",
         "alcance": "Catalogo tal cual lo publica la fuente."}
-    art["tidy/hecho_incidencia.parquet"] = {
+    nuevo["tidy/hecho_incidencia.parquet"] = {
         "tema": "seguridad",
         "fuentes": [{"archivo": f"seg_raw/{a}.csv"} for a in range(2015, 2026)],
         "filtro": "ninguno (estatal completo)",
@@ -246,7 +246,7 @@ def main():
         "medidas": ["n"],
         "agregacion": "Suma de n por dimensiones del grafico.",
         "alcance": "Totales declarados; ceros incluidos de la matriz SESNSP."}
-    art["tidy/hecho_victimas.parquet"] = {
+    nuevo["tidy/hecho_victimas.parquet"] = {
         "tema": "seguridad",
         "fuentes": [{"archivo": f"seg_raw/vict_{a}.csv"} for a in range(2015, 2026)],
         "filtro": "anio != 2015 (esquema municipal sin sexo/edad)",
@@ -254,20 +254,33 @@ def main():
         "medidas": ["n"],
         "agregacion": "Suma de n; no sumar con incidencia.",
         "alcance": "Serie comparable 2016-2025; unidad victima, no delito."}
-    for t, f in [("tidy/hecho_llamadas911.parquet",
-                  "llamadas 911 T1-T2 2026, snake_case"),
-                 ("tidy/hecho_detenidas.parquet",
-                  "detenidas T1-T3 2026, edad_raw + edad_num"),
-                 ("tidy/hecho_desaparecidas.parquet",
-                  "desaparecidas historico, sin cambios de columnas"),
-                 ("tidy/hecho_vigilancia_semanal.parquet",
-                  "vigilancia 2022 semanal (acumulado + instituciones)"),
-                 ("tidy/hecho_vigilancia_edad.parquet",
-                  "vigilancia 2022 derretida a semana x edad x sexo")]:
-        nuevo[t] = {"tema": "seguridad", "fuentes": [{"archivo": f}],
-                      "filtro": "ninguno", "transformacion": f,
-                      "medidas": ["n"], "agregacion": "Suma de n.",
-                      "alcance": "Totales declarados por la fuente."}
+    vig_src = [{"archivo": "vigilancia_2022.xlsx", "hoja": 0}]
+    for t, f, srcs in [
+            ("tidy/hecho_llamadas911.parquet",
+             "llamadas 911 T1-T2 2026, snake_case",
+             [{"archivo": "seg_raw/llamadas-procedentes-911-primer-trimestre-2026.xlsx"},
+              {"archivo": "seg_raw/llamadas-procedentes-911-segundo-trimestre-2026.xlsx"},
+              {"archivo": "seg_raw/llamadas-improcedentes-911-primer-trimestre-2026.xlsx"},
+              {"archivo": "seg_raw/llamadas-improcedentes-911-segundo-trimestre-2026.xlsx"}]),
+            ("tidy/hecho_detenidas.parquet",
+             "detenidas T1-T3 2026, edad_raw + edad_num",
+             [{"archivo": "seg_raw/personas-detenidas-primer-trimestre-2026.xlsx"},
+              {"archivo": "seg_raw/personas-detenidas-segundo-trimestre-2026.xlsx"},
+              {"archivo": "seg_raw/personas-detenidas-tercer-trimestre-2026.xlsx"}]),
+            ("tidy/hecho_desaparecidas.parquet",
+             "desaparecidas historico, sin cambios de columnas",
+             [{"archivo": "seg_raw/cbp-desapariciones-sonora.xlsx"}]),
+            ("tidy/hecho_vigilancia_semanal.parquet",
+             "vigilancia 2022 semanal (acumulado + instituciones)", vig_src),
+            ("tidy/hecho_vigilancia_edad.parquet",
+             "vigilancia 2022 derretida a semana x edad x sexo", vig_src)]:
+        nuevo[t] = {"tema": "seg", "fuentes": srcs,
+                    "filtro": "ninguno", "transformacion": f,
+                    "medidas": ["n"], "agregacion": "Suma de n.",
+                    "alcance": "Totales declarados por la fuente."}
+    for k, v in list(nuevo.items()):
+        if k.startswith("tidy/") and v.get("tema") == "seguridad":
+            v["tema"] = "seg"
     if nuevo != art:
         art_path.write_text(
             json.dumps(nuevo, ensure_ascii=False, indent=2) + "\n",
