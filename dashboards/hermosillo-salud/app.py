@@ -202,6 +202,23 @@ with t4:
     top_causa = defu.groupby("CIECAUSABASICAD").size().nlargest(10).reset_index(name="n")
     c2.plotly_chart(px.bar(top_causa, x="n", y="CIECAUSABASICAD", orientation="h",
                            title="Defunciones: top 10 causas básicas"), width="stretch", alt="Grafica: Defunciones: top 10 causas básicas")
+    que("Tasas con denominador de proyecciones (Hermosillo 2022, IC95% Poisson): "
+        "la mortalidad dibuja la J clásica y la fecundidad pica a los 20-29. "
+        "Tasas observadas, no proyecciones.")
+    tm = pd.read_parquet(DATA / "tidy" / "tasas_mortalidad_hmo2022.parquet")
+    tf = pd.read_parquet(DATA / "tidy" / "tasas_fecundidad_hmo2022.parquet")
+    c1.plotly_chart(px.bar(tm, x="grupo_edad", y="tasa_100k",
+                           error_y=(tm["ic_hi"] - tm["tasa_100k"]),
+                           error_y_minus=(tm["tasa_100k"] - tm["ic_lo"]),
+                           title="Mortalidad por edad, HMO 2022 (por 100 mil + IC95%)",
+                           labels={"grupo_edad": "edad", "tasa_100k": "por 100 mil"}),
+                    width="stretch", alt="Mortalidad por edad con intervalos")
+    c2.plotly_chart(px.bar(tf, x="grupo_edad", y="tasa_1k",
+                           error_y=(tf["ic_hi"] - tf["tasa_1k"]),
+                           error_y_minus=(tf["tasa_1k"] - tf["ic_lo"]),
+                           title="Fecundidad por edad de la madre, HMO 2022 (por 1,000 + IC95%)",
+                           labels={"grupo_edad": "edad madre", "tasa_1k": "por 1,000"}),
+                    width="stretch", alt="Fecundidad por edad con intervalos")
 
 with t5:
     fuentes("salud", 'hmo_vigilancia.parquet', 'hmo_inspecciones.parquet')
@@ -253,7 +270,7 @@ with t6:
                f"(MAPE {met['consulta']['mape_pct']}%, R² {met['consulta']['r2']}, "
                f"variante {met['consulta']['modelo']}). "
                "R² negativo = peor que predecir el promedio mensual: úsese como "
-               "perfil estacional de referencia, no como pronóstico operativo.")
+               "perfil estacional de referencia, no como pronóstico operativo. SARIMAX probado aparte (ADF p>0.5, residuos autocorrelacionados): MAPE 28.4/60.5, no supera al perfil; ver metricas_sarimax.json.")
     que("Semanas epidemiológicas atípicas (IsolationForest sobre la suma de la columna "
         "acumulado por semana): los puntos rojos son semanas cuyo valor se aparta del patrón "
         "habitual y ameritan revisión. Nota de método: IQR univariado solo marca 3 y 4; "

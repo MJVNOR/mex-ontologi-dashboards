@@ -1,0 +1,17 @@
+{
+  "denominadores": {
+    "sexo_vals": [
+      "HOMBRES",
+      "MUJERES"
+    ],
+    "hmo_2022_total": 982742
+  },
+  "mortalidad": {
+    "filas": 14,
+    "nota": "grupos 00-04...65_mas; denominador proyeccion CONAPO"
+  },
+  "fecundidad": {
+    "filas": 9,
+    "nota": "tasa por 1,000 mujeres del grupo"
+  }
+}
