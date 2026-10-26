@@ -82,15 +82,15 @@ with th:
         "gráfica, su evidencia y sus límites. Fuente: portal datos.sonora.gob.mx, "
         "significados vía ontología mex-ontologi; sin cruces entre conjuntos ni "
         "lecturas de cohorte donde hay cortes.")
-    st.subheader("El ticket cae mientras las becas crecen")
+    st.subheader("El monto por beca cae mientras las becas crecen")
     st.markdown("**Más becas, menos beca**: el programa pasó de 14,829 becas en 2021 a "
-                "49,637 en 2024 (41,280 en 2025), pero el ticket medio cayó de $10,210 a "
-                "$6,173 con la mediana fija en $5,000. Ver *Becas → Ticket por año* y "
+                "49,637 en 2024 (41,280 en 2025), pero el monto promedio por beca cayó de $10,210 a "
+                "$6,173 con la mediana fija en $5,000. Ver *Becas → Monto por año* y "
                 "*distribución del importe* (p99 $42,500, max $500,000).")
     tk = bec_f.groupby("anio")["importe"].mean().reset_index()
-    st.plotly_chart(px.bar(tk, x="anio", y="importe", title="Ticket medio por año (pesos)",
+    st.plotly_chart(px.bar(tk, x="anio", y="importe", title="Monto promedio por beca y año (pesos)",
                            labels={"anio": "año", "importe": "pesos"}),
-                    width="stretch", alt="El ticket medio cae cada año")
+                    width="stretch", alt="El monto promedio por beca cae cada año")
     st.caption("Límites: cuenta registros publicados, no acredita cobertura; cifras fijas al "
                "periodo completo. El año entra lineal en log: es aproximación, no tarifa oficial.")
     st.subheader("La UTH en un retrato con bordes rotos")
@@ -166,8 +166,8 @@ with t1:
     st.caption("p25=$2,200 · p50=$5,000 · p75=$10,000 · p99=$42,500 · max=$500,000 "
                "(periodo completo; el filtro de años solo afecta las gráficas). "
                "El histograma recorta en $50k (≈99% de los casos).")
-    # --- Ticket por año ---
-    que("Ticket promedio vs mediano por año: el programa da más becas pero de menor "
+    # --- Monto promedio por beca y año ---
+    que("Monto promedio vs mediano por beca y año: el programa da más becas pero de menor "
         "monto (2021 mean $10,210 → 2024 mean $6,173, mediana fija en $5,000; "
         "periodo completo).")
     ticket = bec_f.groupby("anio")["importe"].agg(
@@ -175,8 +175,8 @@ with t1:
     ticket_m = ticket.melt(id_vars="anio", value_vars=["media", "mediana"],
                            var_name="medida", value_name="pesos")
     st.plotly_chart(px.bar(ticket_m, x="anio", y="pesos", color="medida",
-                           barmode="group", title="Ticket por año: media vs mediana"),
-                    alt="Ticket por año: media vs mediana",
+                           barmode="group", title="Monto por beca y año: media vs mediana"),
+                    alt="Monto por beca y año: media vs mediana",
                     width="stretch")
     # --- Programa, ciclo, convocatoria ---
     que("De qué programa viene cada beca, de qué ciclo escolar y qué convocatoria "
