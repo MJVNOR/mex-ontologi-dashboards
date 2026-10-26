@@ -1,0 +1,35 @@
+{
+  "urgencias": {
+    "mae": 1430.7,
+    "mape_pct": 49.5,
+    "r2": -1.515,
+    "train_anios": [
+      2018,
+      2019,
+      2020
+    ],
+    "test_anio": 2021,
+    "nota": "2021-2022 parciales en la fuente"
+  },
+  "consulta": {
+    "mae": 6539.8,
+    "mape_pct": 34.9,
+    "r2": -2.285,
+    "train_anios": [
+      2018,
+      2019,
+      2020
+    ],
+    "test_anio": 2021,
+    "nota": "2021-2022 parciales en la fuente"
+  },
+  "vigilancia": {
+    "semanas_anomalas": 3,
+    "semanas": 36,
+    "semanas_flag": [
+      3,
+      4,
+      15
+    ]
+  }
+}

@@ -6,6 +6,7 @@ en data/significados_salud.csv). Descarga: scripts/descargar_salud.py.
 Filtro Hermosillo: scripts/preprocesar_hmo.py -> data/hmo_*.parquet.
 """
 
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -67,9 +68,9 @@ k3.metric("Consulta externa", f"{int(con_f['Total'].sum()):,}")
 k4.metric("Nacimientos 2022 (residencia HMO)", f"{len(nac):,}")
 k5.metric("Defunciones 2022 (residencia HMO)", f"{len(defu):,}")
 
-t1, t2, t3, t4, t5, t6 = st.tabs(
+t1, t2, t3, t4, t5, t6, t7 = st.tabs(
     ["Series anuales", "Urgencias / Egresos", "Consulta externa",
-     "Nacimientos / Defunciones", "Vigilancia", "Ontología"])
+     "Nacimientos / Defunciones", "Vigilancia", "Pronóstico", "Ontología"])
 
 with t1:
     que("Barras agrupadas por año: compara el volumen anual de urgencias, egresos "
@@ -156,6 +157,46 @@ with t5:
         st.dataframe(ins[["FECHA", "ACTIVIDAD", "MOTIVO", "MUNICIPIO"]], use_container_width=True)
 
 with t6:
+    que("Pronóstico mensual 2023 por servicio (perfil estacional Ridge entrenado en "
+        "2018-2020): la línea es la estimación y la banda ±1 desviación entre años. "
+        "Son ESTIMACIONES, no datos oficiales; 2021-2022 vienen parciales en la fuente.")
+    import plotly.graph_objects as go
+    fc = pd.read_parquet(DATA / "modelos" / "inferencias" / "pronostico_mensual.parquet")
+    met = json.loads((DATA / "modelos" / "metricas_salud.json").read_text(encoding="utf-8"))
+    fig = go.Figure()
+    for serv, color in (("urgencias", "blue"), ("consulta", "red")):
+        d = fc[fc.servicio == serv].sort_values("mes")
+        fig.add_trace(go.Scatter(x=d.mes, y=d.pronostico, mode="lines+markers",
+                                 name=f"{serv} (est.)", line=dict(color=color)))
+        fig.add_trace(go.Scatter(x=d.mes, y=d.pronostico + d.banda, mode="lines",
+                                 line=dict(width=0), showlegend=False,
+                                 hoverinfo="skip"))
+        fig.add_trace(go.Scatter(x=d.mes, y=(d.pronostico - d.banda).clip(lower=0),
+                                 mode="lines", line=dict(width=0), showlegend=False,
+                                 fill="tonexty", fillcolor=f"rgba(0,0,255,0.1)" if serv == "urgencias"
+                                 else "rgba(255,0,0,0.1)", hoverinfo="skip"))
+    fig.update_layout(title="Pronóstico mensual 2023 (estimación con banda ±1 DE)",
+                      xaxis_title="Mes", yaxis_title="Atenciones estimadas")
+    st.plotly_chart(fig, use_container_width=True)
+    st.caption(f"Error medido en 2021: urgencias MAE {met['urgencias']['mae']} "
+               f"(MAPE {met['urgencias']['mape_pct']}%), consulta MAE {met['consulta']['mae']} "
+               f"(MAPE {met['consulta']['mape_pct']}%). El cambio de nivel post-2020 limita "
+               f"la precisión: úsese como referencia, no como compromiso.")
+    que("Semanas epidemiológicas atípicas (IsolationForest sobre casos semanales "
+        "totales): los puntos rojos son semanas cuyo volumen se aparta del patrón "
+        "habitual y ameritan revisión.")
+    ano = pd.read_parquet(DATA / "modelos" / "inferencias" / "anomalias_vigilancia.parquet")
+    fig2 = go.Figure()
+    fig2.add_trace(go.Scatter(x=ano.no_semana, y=ano.acumulado, mode="lines",
+                              name="Casos semanales"))
+    flag = ano[ano.anomalia == -1]
+    fig2.add_trace(go.Scatter(x=flag.no_semana, y=flag.acumulado, mode="markers",
+                              marker=dict(color="red", size=10), name="Atípica"))
+    fig2.update_layout(title="Vigilancia HMO: semanas atípicas detectadas",
+                       xaxis_title="Semana epidemiológica", yaxis_title="Casos acumulados")
+    st.plotly_chart(fig2, use_container_width=True)
+
+with t7:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
              "qué significa cada columna de los 7 conjuntos de salud según la fuente.")
     sig = significados()
