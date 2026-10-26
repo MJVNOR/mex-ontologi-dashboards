@@ -88,7 +88,8 @@ with t1:
     }).reset_index().melt(id_vars="index", var_name="serie", value_name="total")
     s = s.rename(columns={"index": "año"})
     st.plotly_chart(px.bar(s, x="año", y="total", color="serie", barmode="group",
-                           title="Atenciones en Hermosillo por año"), use_container_width=True)
+                           title="Consulta externa domina; 2020 se desploma y 2022 viene parcial"),
+                    use_container_width=True)
     st.caption("Egresos incluye pocos registros 2015-2017 tal como los declara la fuente; "
                "el grueso es 2018-2022.")
 
@@ -126,8 +127,14 @@ with t3:
     sx = con_f.groupby(["Grupo_Edad", "Sexo"])["Total"].sum().reset_index()
     sx = sx[sx.Sexo.isin(["HOMBRE", "MUJER"])]
     sx["pct"] = sx["Total"] / sx.groupby("Grupo_Edad")["Total"].transform("sum") * 100
+    orden_edad = ["< 1", "1", "2-4", "5-9", "10-14", "15-19", "20-29",
+                  "30-49", "50-59", "60 y más"]
+    sx["Grupo_Edad"] = pd.Categorical(sx["Grupo_Edad"], categories=orden_edad,
+                                       ordered=True)
+    sx = sx.sort_values("Grupo_Edad")
     c2.plotly_chart(px.bar(sx, x="Grupo_Edad", y="pct", color="Sexo", barmode="stack",
                            title="Consulta externa: sexo por grupo de edad (%)",
+                           category_orders={"Grupo_Edad": orden_edad},
                            labels={"pct": "% del grupo"}),
                     use_container_width=True)
     que("Los 10 establecimientos con más consultas en Hermosillo: dónde se concentra "
@@ -142,12 +149,22 @@ with t4:
         "recién nacido en gramos. Defunciones 2022 (residentes): edad al fallecer y "
         "top 10 causas básicas (CIE). Son registros individuales, no agregados.")
     c1, c2 = st.columns(2)
-    c1.plotly_chart(px.histogram(nac, x="EDAD", nbins=30, title="Nacimientos: edad de la madre"),
+    f1 = px.histogram(nac, x="EDAD", nbins=30, title="Edad de la madre: media 27, grueso 20-35")
+    f1.add_vline(x=float(nac["EDAD"].mean()), line_dash="dash", annotation_text="media")
+    f1.add_vline(x=float(nac["EDAD"].median()), line_dash="dot", annotation_text="mediana")
+    c1.plotly_chart(f1, use_container_width=True)
+    f2 = px.histogram(nac, x="PESO", nbins=40, title="Peso del RN: simétrico alrededor de 3.3 kg")
+    f2.add_vline(x=float(nac["PESO"].mean()), line_dash="dash", annotation_text="media")
+    f2.add_vline(x=float(nac["PESO"].median()), line_dash="dot", annotation_text="mediana")
+    c1.plotly_chart(f2, use_container_width=True)
+    sxn = nac["SEXOD"].value_counts().reset_index()
+    sxn.columns = ["sexo", "n"]
+    c1.plotly_chart(px.bar(sxn, x="sexo", y="n", title="RN por sexo: 50.7% hombres (esperado ~51%)"),
                     use_container_width=True)
-    c1.plotly_chart(px.histogram(nac, x="PESO", nbins=40, title="Nacimientos: peso del RN (g)"),
-                    use_container_width=True)
-    c2.plotly_chart(px.histogram(defu, x="EDAD", nbins=40,
-                                 title="Defunciones: edad"), use_container_width=True)
+    f3 = px.histogram(defu, x="EDAD", nbins=40, title="Edad al fallecer: mediana 68, cola joven a la izquierda")
+    f3.add_vline(x=float(defu["EDAD"].mean()), line_dash="dash", annotation_text="media")
+    f3.add_vline(x=float(defu["EDAD"].median()), line_dash="dot", annotation_text="mediana")
+    c2.plotly_chart(f3, use_container_width=True)
     top_causa = defu.groupby("CIECAUSABASICAD").size().nlargest(10).reset_index(name="n")
     c2.plotly_chart(px.bar(top_causa, x="n", y="CIECAUSABASICAD", orientation="h",
                            title="Defunciones: top 10 causas básicas"), use_container_width=True)

@@ -118,7 +118,11 @@ with t2:
     que("Mapa de calor mes × año: junio y octubre concentran el pico y "
         "diciembre cae. Cada celda es el total de delitos de ese mes.")
     hm = inc_f.groupby(["anio", "mes"], observed=True)["n"].sum().reset_index()
-    hm = hm.pivot(index="mes", columns="anio", values="n")
+    orden_mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+                 "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
+                 "Diciembre"]
+    hm["mes"] = pd.Categorical(hm["mes"], categories=orden_mes, ordered=True)
+    hm = hm.pivot(index="mes", columns="anio", values="n").reindex(orden_mes)
     st.plotly_chart(px.imshow(hm, title="Delitos por mes y año",
                               labels={"x": "año", "y": "mes",
                                       "color": "delitos"}),
@@ -302,7 +306,7 @@ with t6:
                            ["Enero", "Febrero", "Marzo", "Abril", "Mayo",
                             "Junio", "Julio", "Agosto", "Septiembre",
                             "Octubre", "Noviembre", "Diciembre"])}))
-    figm = px.line(am, x="fecha", y="n", title="Incidencia mensual estatal")
+    figm = px.line(am, x="fecha", y="n", markers=True, title="Incidencia mensual estatal")
     figm.add_scatter(x=am[am.anomalia == -1]["fecha"],
                      y=am[am.anomalia == -1]["n"], mode="markers",
                      marker={"size": 10}, name="anomalía")
@@ -310,7 +314,7 @@ with t6:
     que("Anomalías en llamadas 911 por día (T1-T2 2026): 9 días fuera de lo "
         "común, arriba y abajo del flujo normal.")
     a9 = load("inferencias/anomalias_911.parquet")
-    fig9 = px.line(a9, x="dia", y="n", title="Llamadas 911 por día")
+    fig9 = px.line(a9, x="dia", y="n", markers=True, title="Llamadas 911 por día")
     fig9.add_scatter(x=a9[a9.anomalia == -1]["dia"],
                      y=a9[a9.anomalia == -1]["n"], mode="markers",
                      marker={"size": 10}, name="anomalía")
