@@ -1,0 +1,231 @@
+conjunto,variable,significado,definicion
+Atencion de Urgencias,Año,Referencia anual,Año
+Atencion de Urgencias,CIE10_Cve,Clave CIE declarada en salud,Clave CIE
+Atencion de Urgencias,CIE10_Descrip,Diagnóstico declarado en atención,Descripcion de diagnostico
+Atencion de Urgencias,CLUES,Unidad de salud,Clave de la Unidad
+Atencion de Urgencias,Edad,Grupo de edad declarado,Grupo de edad
+Atencion de Urgencias,JS_Cve,Jurisdicción sanitaria,Clave de Jurisdiccion
+Atencion de Urgencias,JS_Nombre,Jurisdicción sanitaria,Nombre de Jurisdiccion
+Atencion de Urgencias,Loc_Clave,"Localidad, función no especificada",Clave de la Localidad
+Atencion de Urgencias,Loc_Nombre,"Localidad, función no especificada",Nombre de la Localidad
+Atencion de Urgencias,Mes,"Mes, evento no especificado",Mes
+Atencion de Urgencias,Mun_Clave,Referencia municipal,Clave del Municipio
+Atencion de Urgencias,Mun_Nombre,Referencia municipal,Nombre del Municipio
+Atencion de Urgencias,Nombre_Establecimiento,Unidad de salud,Nombre del establecimiento
+Atencion de Urgencias,Sexo,Sexo declarado por la fuente,Sexo
+Atencion de Urgencias,Total_Urgencias,Total de urgencias atendidas,Total de urgencias atendidas
+Consulta Externa,CLUES,Unidad de salud,Clave de la Unidad
+Consulta Externa,Cve_JS,Jurisdicción sanitaria,Clave de Jurisdiccion
+Consulta Externa,Cve_Loc,"Localidad, función no especificada",Clave de la Localidad
+Consulta Externa,Cve_Mpo,Referencia municipal,Clave del Municipio
+Consulta Externa,Grupo_Edad,Grupo de edad declarado,Grupo de edad
+Consulta Externa,Mes,"Mes, evento no especificado",Mes
+Consulta Externa,Nomb_JS,Jurisdicción sanitaria,Nombre de Jurisdiccion
+Consulta Externa,Nomb_Loc,"Localidad, función no especificada",Nombre de la Localidad
+Consulta Externa,Nomb_Mpo,Referencia municipal,Nombre del Municipio
+Consulta Externa,Nombre_Establecimiento,Unidad de salud,Nombre del establecimiento
+Consulta Externa,Sexo,Sexo declarado por la fuente,Sexo
+Consulta Externa,Total,Total de consultas,Total de consultas
+Consulta Externa,Year,Referencia anual,Año
+Defunciones,año_defuncion,Año de fallecimiento,Año en el que fallecio
+Defunciones,dia_defuncion,Día del fallecimiento,Dia en el que fallecio
+Defunciones,edad,Edad al fallecer,Edad al fallecer
+Defunciones,fecha_registro,Fecha de registro,Fecha de registro de la defuncion
+Defunciones,hora_defuncion,Hora del fallecimiento,Hora de la defuncion
+Defunciones,mes_defuncion,Mes del fallecimiento,Mes en el que fallecio
+Defunciones,municipio,Municipio de registro,Municipio de registro
+Defunciones,sexo,Sexo del difunto,Sexo del difunto
+Egresos Hospitalarios,Año,Referencia anual,Año
+Egresos Hospitalarios,CIE10_Cve,Clave CIE declarada en salud,Clave CIE
+Egresos Hospitalarios,CIE10_Descrip,Diagnóstico declarado en atención,Descripcion de diagnostico
+Egresos Hospitalarios,CLUES,Unidad de salud,Clave de la Unidad
+Egresos Hospitalarios,Edad,Grupo de edad declarado,Grupo de edad
+Egresos Hospitalarios,JS_Cve,Jurisdicción sanitaria,Clave de Jurisdiccion
+Egresos Hospitalarios,JS_Nombre,Jurisdicción sanitaria,Nombre de Jurisdiccion
+Egresos Hospitalarios,Loc_Clave,"Localidad, función no especificada",Clave de la Localidad
+Egresos Hospitalarios,Loc_Nombre,"Localidad, función no especificada",Nombre de la Localidad
+Egresos Hospitalarios,Mes,"Mes, evento no especificado",Mes
+Egresos Hospitalarios,Mun_Clave,Referencia municipal,Clave del Municipio
+Egresos Hospitalarios,Mun_Nombre,Referencia municipal,Nombre del Municipio
+Egresos Hospitalarios,Nombre_Establecimiento,Unidad de salud,Nombre del establecimiento
+Egresos Hospitalarios,Sexo,Sexo declarado por la fuente,Sexo
+Información Sobre Nacimientos,AFILIACION,AFILIACION (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,APGAR,APGAR (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,ATENCIONPRENATAL,ATENCIONPRENATAL (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,CERTIFICADOPOR,CERTIFICADOPOR (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,CLAVEOCUPACIONHABITUAL,CLAVEOCUPACIONHABITUAL (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,CLUES,CLUES (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,CLUESCERTIFICA,CLUESCERTIFICA (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,CODIGOCIEANOMALIA1,CODIGOCIEANOMALIA1 (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,CODIGOCIEANOMALIA2,CODIGOCIEANOMALIA2 (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,CONDICIONHIJOANTERIOR,Condición del hijo anterior según definición,Indicador de la condicion del hijo anterior
+Información Sobre Nacimientos,CONDICIONHIJOANTERIORD,Condición del hijo anterior según definición,Indicador textual de la condicion del hijo anterior
+Información Sobre Nacimientos,EDAD,Edad de la madre,Edad de la madre
+Información Sobre Nacimientos,EDADGESTACIONAL,Edad gestacional del nacido,Edad gestacional del nacido
+Información Sobre Nacimientos,EDADPADRE,Edad del padre,Edad del padre
+Información Sobre Nacimientos,ENTIDADFEDERATIVACERTIFICA,ENTIDADFEDERATIVACERTIFICA (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,ENTIDADFEDERATIVAPARTO,Entidad del parto,Clave de la entidad federativa donde fue el parto
+Información Sobre Nacimientos,ENTIDADFEDERATIVAPARTOD,Entidad del parto,Nombre de la entidad federativa donde fue el parto
+Información Sobre Nacimientos,ENTIDADNACIMIENTO,Entidad de nacimiento de la madre,Clave de la entidad de nacimiento de la madre
+Información Sobre Nacimientos,ENTIDADNACIMIENTOD,Entidad de nacimiento de la madre,Nombre de la entidad de nacimiento de la madre
+Información Sobre Nacimientos,ENTIDADRESIDENCIA,Entidad de residencia de la madre,Clave de la entidad donde recide la madre
+Información Sobre Nacimientos,ENTIDADRESIDENCIAD,Entidad de residencia de la madre,Nombre de la entidad donde recide la madre
+Información Sobre Nacimientos,ESCOLARIDAD,Escolaridad de la madre,Indicador de escolaridad de la madre
+Información Sobre Nacimientos,ESCOLARIDADD,Escolaridad de la madre,Indicador textual de la escolaridad de la madre
+Información Sobre Nacimientos,ESTADOCONYUGAL,Estado conyugal de la madre,Indicador del estado conyugal de la madre
+Información Sobre Nacimientos,ESTADOCONYUGALD,Estado conyugal de la madre,Indicador textual del estado conyugal de la madre
+Información Sobre Nacimientos,FECHACERTIFICADO,FECHACERTIFICADO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,FECHANACIMIENTO,Fecha de nacimiento según definición,Fecha de nacimiento
+Información Sobre Nacimientos,FECHANACIMIENTOMADRE,Fecha de nacimiento de la madre,Fecha de nacimiento de la madre
+Información Sobre Nacimientos,HABLALENGUAINDIGENA,Habla de lengua indigena de la madre,Indicador de si la madre habla lengua indigena
+Información Sobre Nacimientos,HABLALENGUAINDIGENAD,Habla de lengua indigena de la madre,Indicador textual de si la madre habla lengua indigena
+Información Sobre Nacimientos,HIJOSNACIDOSMUERTOS,Hijos nacidos muertos según definición,Numero de hijos nacidos muertos
+Información Sobre Nacimientos,HIJOSNACIDOSVIVOS,Hijos nacidos vivos según definición,Numero de hijos nacidos vivos
+Información Sobre Nacimientos,HIJOSSOBREVIVIENTES,Hijos sobrevivientes según definición,Numero de hijos sobrevivientes
+Información Sobre Nacimientos,HORANACIMIENTO,Hora del nacimiento según definición,Hora de nacimiento
+Información Sobre Nacimientos,INTERRUMPIOESTUDIOS,INTERRUMPIOESTUDIOS (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,LOCALIDADCERTIFICA,LOCALIDADCERTIFICA (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,LOCALIDADPARTO,Localidad del parto,Clave de la localidad donde fue el parto
+Información Sobre Nacimientos,LOCALIDADPARTOD,Localidad del parto,Nombre de la localidad donde fue el parto
+Información Sobre Nacimientos,LOCALIDADRESIDENCIA,Localidad de residencia de la madre,Clave del localidad donde recide la madre
+Información Sobre Nacimientos,LOCALIDADRESIDENCIAD,Localidad de residencia de la madre,Nombre del localidad donde recide la madre
+Información Sobre Nacimientos,LUGARNACIMIENTO,Lugar del nacimiento,Lugar donde ocurrio el nacimiento indicador numerico
+Información Sobre Nacimientos,LUGARNACIMIENTOD,Lugar del nacimiento,Lugar donde ocurrio el nacimiento
+Información Sobre Nacimientos,MUNICIPIOCERTIFICA,MUNICIPIOCERTIFICA (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,MUNICIPIONACIMIENTO,Municipio de nacimiento de la madre,Clave del municipio donde nacio la madre
+Información Sobre Nacimientos,MUNICIPIONACIMIENTOD,Municipio de nacimiento de la madre,Nombre del municipio donde nacio la madre
+Información Sobre Nacimientos,MUNICIPIOPARTO,Municipio del parto,Clave del municipio donde fue el parto
+Información Sobre Nacimientos,MUNICIPIOPARTOD,Municipio del parto,Nombre del municipio donde fue el parto
+Información Sobre Nacimientos,MUNICIPIORESIDENCIA,Municipio de residencia,Clave del municipio donde recide la madre
+Información Sobre Nacimientos,MUNICIPIORESIDENCIAD,Municipio de residencia,Nombre del municipio donde recide la madre
+Información Sobre Nacimientos,NACIOEXTRANJERO,Extranjería según definición,Indicador de si es extrangera
+Información Sobre Nacimientos,NACIOEXTRANJEROD,Extranjería según definición,Indicador textual de si es extrangera
+Información Sobre Nacimientos,NUMEROEMBARAZOS,Numero de embarazos de la madre,Numero de embarazos totales que ha tenido la madre
+Información Sobre Nacimientos,ORDENNACIMIENTO,ORDENNACIMIENTO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,ORDENPRODUCTO,ORDENPRODUCTO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,PERSONALATENDIO,PERSONALATENDIO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,PESO,Peso del nacido,Peso del nacido
+Información Sobre Nacimientos,PRODUCTOEMBARAZO,PRODUCTOEMBARAZO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,RESIDEEXTRANJERO,Residencia en el extranjero de la madre,Indicador de si la madre es recidente en el extranjero
+Información Sobre Nacimientos,RESIDEEXTRANJEROD,Indicador textual de si la madre es residente extranjera,Indicador textual de si la madre es residente extranjera
+Información Sobre Nacimientos,RESOLUCIONEMBARAZO,RESOLUCIONEMBARAZO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,SECONSIDERAINDIGENA,Autoadscripcion indigena de la madre,Indicador de si la madre se considera indigena
+Información Sobre Nacimientos,SECONSIDERAINDIGENAD,Autoadscripcion indigena de la madre,Indicador textual de si la madre se considera indigena
+Información Sobre Nacimientos,SEXO,Sexo del nacido,Indicador del sexo del nacido
+Información Sobre Nacimientos,SEXOD,Sexo del nacido,Sexo del nacido
+Información Sobre Nacimientos,SILVERMAN,SILVERMAN (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,SOBREVIVIOPARTO,SOBREVIVIOPARTO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,TALLA,Talla del nacido,Talla del nacido
+Información Sobre Nacimientos,TAMIZAUDITIVO,TAMIZAUDITIVO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,TIEMPOTRASLADO,TIEMPOTRASLADO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,TIPOCESAREA,Cesarea del parto,Indicador de si fue por cesarea
+Información Sobre Nacimientos,TIPOCESAREAD,Cesarea del parto,Indicador textual de si fue cesarea
+Información Sobre Nacimientos,TIPOMEDICOATENDIO,TIPOMEDICOATENDIO (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,TOTALCONSULTAS,Total de consultas,Total de consultas
+Información Sobre Nacimientos,TOTALPRODUCTOS,TOTALPRODUCTOS (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,TRABAJAACTUALMENTE,Trabajo actual de la madre,Indicador sobre el trabajo actual de la madre
+Información Sobre Nacimientos,TRABAJAACTUALMENTED,Trabajo actual de la madre,Indicador textual sobre el trabajo actual de la madre
+Información Sobre Nacimientos,TRIMESTREPRIMERCONSULTA,TRIMESTREPRIMERCONSULTA (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,UTILIZOFORCEPS,UTILIZOFORCEPS (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,VACUNAHEPATITIS_B,VACUNAHEPATITIS_B (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,VACUNA_BCG,VACUNA_BCG (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,VITAMINA_A,VITAMINA_A (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,VITAMINA_K,VITAMINA_K (SINAC 2022),Pendiente de especificar
+Información Sobre Nacimientos,VIVEHIJOANTERIOR,Supervivencia del hijo anterior según definición,Indicador de si el hijo anterior todavia vive
+Información Sobre Nacimientos,VIVEHIJOANTERIORD,Supervivencia del hijo anterior según definición,Indicador textual de si el hijo anterior todavia vive
+Inspección y vigilancia,ACTIVIDAD,Actividad inspeccionada o vigilada,Actividad que ejecuta donde se inspecciona o se vigila
+Inspección y vigilancia,FECHA,Fecha de inspección,Fecha de la Inspeccion
+Inspección y vigilancia,MOTIVO,Motivo de inspeccion o vigilancia,Motivo de la inspeccion o vigilancia
+Inspección y vigilancia,MUNICIPIO,Municipio de registro,Municipio de registro
+Nacimientos,año,Año de registro,Año de registro
+Nacimientos,hombres,Nacimientos de sexo masculino,Nacimientos del sexo Masculino
+Nacimientos,mes,Mes de registro,Mes de registro
+Nacimientos,mujeres,Nacimientos de sexo femenino,Nacimientos del sexo Femenino
+Nacimientos,municipio,Municipio de registro,Municipio de registro
+Nacimientos,total,Total de nacimientos registrados,Total de nacimientos
+Sistema Epidemiológico y Estadístico de Defunciones,ATENCIONMEDICA,Atención médica según definición,Identificador de si recivio atencion medica
+Sistema Epidemiológico y Estadístico de Defunciones,ATENCIONMEDICAD,Atención médica según definición,Identificador textual de si recivió atencion medica
+Sistema Epidemiológico y Estadístico de Defunciones,CLAVEEDAD,Clave de edad del difunto,Clave de edad
+Sistema Epidemiológico y Estadístico de Defunciones,CLAVEEDADD,Unidad de edad del difunto,Unidad de edad
+Sistema Epidemiológico y Estadístico de Defunciones,EDAD,Edad del difunto (momento sin confirmar),Edad del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ENTIDADDEFUNCION,Entidad de la defuncion,Clave de Entidad donde ocurrio la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,ENTIDADDEFUNCIOND,Entidad de la defuncion,Nombre de la entidad donde ocurrio la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,ENTIDADNACIMIENTO,Entidad de nacimiento del difunto,Identificador de entidad de nacimiento del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ENTIDADNACIMIENTOD,Entidad de nacimiento del difunto,Entidad de nacimiento del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ENTIDADRESIDENCIA,Entidad de residencia del difunto,Clave de Entidad donde recidia el difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ENTIDADRESIDENCIAD,Entidad de residencia del difunto,Nombre de la entidad donde recidia el difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ESCOLARIDAD,Escolaridad del difunto,Identificador de nivel escolar del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ESCOLARIDADD,Escolaridad del difunto,Nivel escolar del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ESTADOCONYUGAL,Estado conyugal del difunto,Identificador de estado conyugal del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,ESTADOCONYUGALD,Estado conyugal del difunto,Identificador textual de estado conyugal del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,FECHADEFUNCION,Fecha de la defuncion,Fecha de la defuncion
+Sistema Epidemiológico y Estadístico de Defunciones,FECHANACIMIENTO,Fecha de nacimiento del difunto,Fecha de nacimiento del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,HABLALENGUAINDIGENA,Habla de lengua indigena del difunto,Identificador de si habla Indigena
+Sistema Epidemiológico y Estadístico de Defunciones,HABLALENGUAINDIGENAD,Habla de lengua indigena del difunto,Identificador textual de si habla Indigena
+Sistema Epidemiológico y Estadístico de Defunciones,HORADEFUNCION,Hora del fallecimiento,Hora de la defuncion
+Sistema Epidemiológico y Estadístico de Defunciones,JURISDICCIONDEFUNCION,Jurisdiccion de la defuncion,Clave de la Jurisdicción donde ocurrió la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,JURISDICCIONDEFUNCIOND,Jurisdiccion de la defuncion,Nombre de la Jurisdicción donde ocurrió la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,LOCALIDADDEFUNCION,Localidad del fallecimiento,Clave de la localidad donde ocurrio la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,LOCALIDADDEFUNCIOND,Localidad del fallecimiento,Nombre de la localidad donde ocurrio la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,LOCALIDADRESIDENCIA,Localidad de residencia del difunto,Clave de la localidad donde recidia el difunto
+Sistema Epidemiológico y Estadístico de Defunciones,LOCALIDADRESIDENCIAD,Localidad de residencia del difunto,Nombre de la localidad donde recidia el difunto
+Sistema Epidemiológico y Estadístico de Defunciones,MUNICIPIODEFUNCION,Municipio donde ocurrió la defunción,Clave del Municipio donde ocurrio la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,MUNICIPIODEFUNCIOND,Municipio donde ocurrió la defunción,Nombre del Municipio donde ocurrio la defunción
+Sistema Epidemiológico y Estadístico de Defunciones,MUNICIPIORESIDENCIA,Municipio de residencia,Clave del Municipio donde recidia el difunto
+Sistema Epidemiológico y Estadístico de Defunciones,MUNICIPIORESIDENCIAD,Municipio de residencia,Nombre del Municipio donde recidia el difunto
+Sistema Epidemiológico y Estadístico de Defunciones,NACIONALIDAD,Nacionalidad del difunto,Identificador de nacionalidad del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,NACIONALIDADD,Nacionalidad del difunto,Nombre de la nacionalidad del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,OCURRIODURANTEEMBARAZO,Defuncion durante el embarazo,Identificador de si la defuncion ocurrio durante el embarazo
+Sistema Epidemiológico y Estadístico de Defunciones,OCURRIODURANTEEMBARAZOD,Defuncion durante el embarazo,Identificador textual de si la defuncion ocurrio durante el embarazo
+Sistema Epidemiológico y Estadístico de Defunciones,OCURRIOENTRABAJO,Defuncion en el trabajo,Identificador de si la defuncion ocurrio en el trabajo
+Sistema Epidemiológico y Estadístico de Defunciones,OCURRIOENTRABAJOD,Defuncion en el trabajo,Identificador textual de si la defuncion ocurrio en el trabajo
+Sistema Epidemiológico y Estadístico de Defunciones,PESO,Peso del difunto,Peso del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,PRACTICONECROPSIA,Autopsia según definición,Identificador de si se practico autopsia
+Sistema Epidemiológico y Estadístico de Defunciones,PRACTICONECROPSIAD,Autopsia según definición,Identificador textual de si se practico autopsia
+Sistema Epidemiológico y Estadístico de Defunciones,REALIZO_CIRUGIA,Cirugía según definición,Identificador de si se le realizo cirugia
+Sistema Epidemiológico y Estadístico de Defunciones,REALIZO_CIRUGIAD,Cirugía según definición,Identificador textual de si se le realizo cirugia
+Sistema Epidemiológico y Estadístico de Defunciones,RESIDEEXTRANJERO,Extranjería según definición,Identificador de si es extrangero
+Sistema Epidemiológico y Estadístico de Defunciones,SEXO,Sexo del difunto,Identificador del sexo del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,SEXOD,Sexo del difunto,Sexo del difunto
+Sistema Epidemiológico y Estadístico de Defunciones,SE_CONSIDERA_INDIGENA,Condicion indigena del difunto,Identificador por si se considera Indigena
+Sistema Epidemiológico y Estadístico de Defunciones,SE_CONSIDERA_INDIGENAD,Condicion indigena del difunto,Identificador textual por si se identifica Indigena
+Sistema Epidemiológico y Estadístico de Defunciones,SE_RECONOCIA_AFROMEXICANO,Autorreconocimiento afromexicano del difunto,Identificador por si se reconoce como afroamericano
+Sistema Epidemiológico y Estadístico de Defunciones,SE_RECONOCIA_AFROMEXICANOD,Autorreconocimiento afromexicano del difunto,Identificador textual por si se reconoce como afroamericano
+Vigilancia Epidemiológica,abril,Vigilancias totales en abril,Vigilancias totales en abril
+Vigilancia Epidemiológica,agosto,Vigilancias totales en agosto,Vigilancias totales en agosto
+Vigilancia Epidemiológica,cve_diagno,Diagnóstico en vigilancia epidemiológica,Clave del diagnostico
+Vigilancia Epidemiológica,cve_estado,Entidad federativa,Clave del estado
+Vigilancia Epidemiológica,cve_jurisd,Jurisdicción sanitaria,Clave de la Jurisdiccion
+Vigilancia Epidemiológica,cve_munici,Referencia municipal,Clave del Municipio
+Vigilancia Epidemiológica,de05_a_09,Personas en vigilancia entre 5 y 9 años,Total de personas en vigilancia entre 5 y 9 años
+Vigilancia Epidemiológica,de10_a_14,Personas en vigilancia entre 10 y 14 años,Total de personas en vigilancia entre 10 y 14 años
+Vigilancia Epidemiológica,de15_a_19,Personas en vigilancia entre 15 y 19 años,Total de personas en vigilancia entre 15 y 19 años
+Vigilancia Epidemiológica,de20_a_24,Personas en vigilancia entre 20 y 24 años,Total de personas en vigilancia entre 20 y 24 años
+Vigilancia Epidemiológica,de25_a_44,Personas en vigilancia entre 25 y 44 años,Total de personas en vigilancia entre 25 y 44 años
+Vigilancia Epidemiológica,de45_a_49,Personas en vigilancia entre 45 y 49 años,Total de personas en vigilancia entre 45 y 49 años
+Vigilancia Epidemiológica,de50_a_59,Personas en vigilancia entre 50 y 59 años,Total de personas en vigilancia entre 50 y 59 años
+Vigilancia Epidemiológica,de60_a_64,Personas en vigilancia entre 60 y 64 años,Total de personas en vigilancia entre 60 y 64 años
+Vigilancia Epidemiológica,de65_y_mas,Personas en vigilancia de 65 años o más,Total de personas en vigilanciade 65 años o más
+Vigilancia Epidemiológica,des_diagno,Diagnóstico en vigilancia epidemiológica,Descripción del diagnostico
+Vigilancia Epidemiológica,des_estado,Entidad federativa,Nombre del Estado
+Vigilancia Epidemiológica,des_jurisd,Jurisdicción sanitaria,Nombre de la Jurisdiccion
+Vigilancia Epidemiológica,des_munici,Referencia municipal,Nombre del Municipio
+Vigilancia Epidemiológica,diciembre,Vigilancias totales en diciembre,Vigilancias totales en diciembre
+Vigilancia Epidemiológica,enero,Vigilancias totales en enero,Vigilancias totales en enero
+Vigilancia Epidemiológica,febrero,Vigilancias totales en febrero,Vigilancias totales en febrero
+Vigilancia Epidemiológica,julio,Vigilancias totales en julio,Vigilancias totales en julio
+Vigilancia Epidemiológica,junio,Vigilancias totales en junio,Vigilancias totales en junio
+Vigilancia Epidemiológica,marzo,Vigilancias totales en marzo,Vigilancias totales en marzo
+Vigilancia Epidemiológica,mayo,Vigilancias totales en mayo,Vigilancias totales en mayo
+Vigilancia Epidemiológica,menores_1,Personas en vigilancia menores de 1 año,Total de personas en vigilancia que son menores de 1 año
+Vigilancia Epidemiológica,no_semana,Semana de referencia de vigilancia,Numero de la semana
+Vigilancia Epidemiológica,noviembre,Vigilancias totales en noviembre,Vigilancias totales en noviembre
+Vigilancia Epidemiológica,octubre,Vigilancias totales en octubre,Vigilancias totales en octubre
+Vigilancia Epidemiológica,periodo,Referencia anual,Año que comprende el periodo
+Vigilancia Epidemiológica,septiembre,Vigilancias totales en septiembre,Vigilancias totales en septiembre
+Vigilancia Epidemiológica,totalf,Total acumulado de Mujeres,Total acumulado de Mujeres
+Vigilancia Epidemiológica,totalm,Total acumulado de Hombres,Total acumulado de Hombres
+Visitas de Inspeccion de la PROAES,ACTIVIDAD,Actividad del lugar inspeccionado,Actividad que se realiza en el lugar
+Visitas de Inspeccion de la PROAES,FECHA,Fecha de inspección,Fecha de la inspeccion
+Visitas de Inspeccion de la PROAES,MOTIVO,Motivo de la inspección,Motivo de la inspeccion
+Visitas de Inspeccion de la PROAES,MUNICIPIO,Referencia municipal,Nombre del municipio

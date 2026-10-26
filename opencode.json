@@ -1,0 +1,15 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "mex-ontologia": {
+        "type": "local",
+        "command": ["C:/Users/marti/.local/bin/uv.exe", "run", "python", "scripts/servir_ontologia_mcp.py"],
+        "cwd": "C:/Users/marti/Documents/MEX-Ontologi",
+        "environment": {
+          "OPEN_ONTOLOGIES_STORAGE_MODE": "persistent"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "urgencias_hmo": {
+    "filas": 157854,
+    "total": 240936,
+    "anio_col": "Año",
+    "por_anio": {
+      "2018": 73083,
+      "2019": 64663,
+      "2020": 51305,
+      "2021": 38758,
+      "2022": 13127
+    },
+    "por_sexo": {
+      "Hombre": 109223,
+      "Mujer": 131713
+    }
+  },
+  "egresos_hmo": {
+    "filas": 99391,
+    "total": 231153,
+    "por_anio": {
+      "2015": 2192,
+      "2016": 2528,
+      "2017": 3192,
+      "2018": 55238,
+      "2019": 58877,
+      "2020": 47571,
+      "2021": 47508,
+      "2022": 14047
+    },
+    "por_sexo": {
+      "Femenino": 1316,
+      "Hombre": 101139,
+      "Masculino": 3404,
+      "Mujer": 125293,
+      "No Especificado": 1
+    }
+  },
+  "consulta_hmo": {
+    "filas": 21509,
+    "total": 1333591,
+    "por_anio": {
+      "2018": 439111,
+      "2019": 423270,
+      "2020": 163651,
+      "2021": 268951,
+      "2022": 38608
+    },
+    "por_sexo": {
+      "HOMBRE": 500069,
+      "MUJER": 833521,
+      "NE": 1
+    }
+  },
+  "nacimientos_hmo_residencia": {
+    "filas": 7049
+  },
+  "defunciones_hmo_residencia": {
+    "filas": 3512
+  },
+  "vigilancia_hmo": {
+    "filas": 1752,
+    "casos": 201667
+  },
+  "inspecciones_hmo": {
+    "filas": 30
+  }
+}
