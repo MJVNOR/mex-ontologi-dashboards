@@ -65,6 +65,8 @@ with t1:
     que("PO2SM por municipio de Sonora en 2020: cada barra es un municipio y su "
         "altura el % con ingresos < 2 salarios mínimos. Valores declarados; no "
         "acreditan empleo ni cobertura de programa alguno.")
+    st.caption("72/72 municipios: censo completo del corte 2020, sin incertidumbre "
+               "muestral; la incertidumbre es de medición y constructo, no de muestreo.")
     orden = st.selectbox("Orden", ["PO2SM descendente", "PO2SM ascendente", "Alfabético"],
                          key="ord_mun")
     m = mun.copy()
@@ -97,6 +99,8 @@ with t1:
     grado = mun.groupby("GM_2020").agg(municipios=("PO2SM", "size"),
                                       po2sm_mediana=("PO2SM", "median")).reset_index()
     st.dataframe(grado, hide_index=True)
+    st.caption("El grado no es el ingreso: Sáric tiene el PO2SM máximo (93.4%) con "
+               "grado Bajo, y Nacozari el mínimo (43.0%) con grado Muy bajo.")
     que("Ruralidad e ingresos: 45 de los 72 municipios están totalmente en "
         "localidades de menos de 5 mil habitantes (PL.5000 = 100%). Cada caja "
         "resume la distribución de PO2SM del grupo. Descriptivo, sin causalidad.")
