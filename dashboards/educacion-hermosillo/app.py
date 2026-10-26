@@ -114,11 +114,13 @@ with t3:
 
 with t4:
     que("Matrícula UTH Hermosillo 2022-2 (8,227 estudiantes): reparto por unidad "
-        "académica y por sexo, más el histograma de edades. Describe quiénes estudian "
-        "en la universidad.")
+        "académica y por sexo, histograma de edades y periodo escolar de ingreso. "
+        "Describe quiénes estudian en la universidad.")
     uni = [c for c in mat.columns if "Unidad" in str(c)][0]
     sexo = [c for c in mat.columns if str(c).strip().lower() == "sexo"][0]
     edad = [c for c in mat.columns if str(c).strip().lower() == "edad"][0]
+    ping = [c for c in mat.columns
+            if "periodo" in str(c).lower() and "ingreso" in str(c).lower()][0]
     c1, c2 = st.columns(2)
     c1.plotly_chart(px.pie(mat.groupby(uni).size().reset_index(name="n"),
                            names=uni, values="n",
@@ -128,8 +130,37 @@ with t4:
                            names=sexo, values="n", title="Matrícula por sexo"),
                     use_container_width=True)
     st.plotly_chart(px.histogram(mat, x=edad, nbins=25,
-                                 title="Matrícula UTH HMO: edad"),
+                                 title="Matrícula UTH HMO: edad (años)",
+                                 labels={edad: "Edad (años)"}),
                     use_container_width=True)
+    st.caption("⚠️ Dato curioso: 11 registros aparecen con 122 años "
+               "(probable error de captura, no edad real).")
+    que("Periodo escolar de ingreso de la matrícula actual: de qué generación "
+        "viene cada inscrito (año-periodo).")
+    ing_c = mat.groupby(ping).size().reset_index(name="n").sort_values(ping)
+
+
+    def _per(p):  # ponytail: YY+periodo UTH (222->2022-2), siglo 19 si YY>=90
+        try:
+            p = int(p)
+            yy, t = divmod(p, 10)
+            return f"{19 if yy >= 90 else 20}{yy:02d}-{t}"
+        except (TypeError, ValueError):
+            return str(p)
+
+
+    ing_c["ingreso"] = ing_c[ping].map(_per)
+    ing_c["periodo"] = ing_c["ingreso"].str.slice(-1).map(
+        {"1": "1 · ene-abr", "2": "2 · sep-dic", "3": "3 · verano*"})
+    st.plotly_chart(px.bar(ing_c, x="ingreso", y="n", color="periodo",
+                           title="Matrícula por año de ingreso",
+                           labels={"ingreso": "Ingreso (año-periodo)",
+                                   "n": "Inscritos", "periodo": "Periodo"},
+                           category_orders={"ingreso": ing_c["ingreso"].tolist()}),
+                    use_container_width=True)
+    st.caption("* La fuente no define 1/2/3; se infiere de nuevo ingreso "
+               "(2022-1 = enero-abril, 2022-2 = septiembre-diciembre) y de que "
+               "el 3 va casi todo a cuatrimestrales.")
 
 with t5:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
