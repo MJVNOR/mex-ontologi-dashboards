@@ -43,7 +43,7 @@ def verificar(base):
             raw = raw.replace(b'\r\n', b'\n')
             current = current.replace(b'\r\n', b'\n')
         report['modelos_y_seguridad'][path] = hashlib.sha256(current).hexdigest() == hashlib.sha256(raw).hexdigest()
-    for tema in ('salud','edu'):
+    for tema in ('salud','edu','marginacion','poblacion'):
         snap = json.loads((DATA / f'ontologia_{tema}.json').read_text(encoding='utf-8'))
         report[tema] = {'conteos': snap['conteos_completos'], 'parcial': snap['parcial'], 'huecos': snap['huecos']}
         old_csv = subprocess.run(['git','show',base + f':data/significados_{tema}.csv'], cwd=ROOT, capture_output=True, check=True).stdout
@@ -62,16 +62,17 @@ def verificar(base):
             and provenance['preprocesador_sha256'] == huella(ROOT / 'scripts' / provenance['preprocesador'])
             and all(artifact['sha256'] == huella(DATA / name)
                     for name, artifact in provenance['artefactos'].items()))
-    for folder in ('hermosillo-salud','educacion-hermosillo','seguridad-sonora'):
+    for folder in ('hermosillo-salud','educacion-hermosillo','seguridad-sonora',
+                   'marginacion-ingresos'):
         app = AppTest.from_file(str(ROOT / 'dashboards' / folder / 'app.py')).run(timeout=90)
         errors = [str(e.value) for e in app.exception]
         report['apps'][folder] = {'errores': errors, 'metricas': [m.value for m in app.metric]}
-        if not errors:
+        if not errors and len(app.sidebar.multiselect) > 0:
             app.sidebar.multiselect[0].set_value([]).run(timeout=90)
             report['apps'][folder]['errores_sin_seleccion'] = [str(e.value) for e in app.exception]
     report['ok'] = (all(v['iguales'] for v in report['artefactos'].values())
         and all(report['modelos_y_seguridad'].values())
-        and all(report[tema]['procedencia_coherente'] for tema in ('salud', 'edu')) and all(
+        and all(report[tema]['procedencia_coherente'] for tema in ('salud', 'edu', 'marginacion', 'poblacion')) and all(
         not v['errores'] and not v.get('errores_sin_seleccion') for v in report['apps'].values()))
     guardar(ROOT / 'reports/verificacion.json', report)
     print(json.dumps(report, ensure_ascii=False, indent=2))

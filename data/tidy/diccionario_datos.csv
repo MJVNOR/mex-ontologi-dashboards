@@ -18,3 +18,6 @@ hecho_vigilancia_semanal,acumulado,entero,casos semana x diagnostico (NO es suma
 hecho_vigilancia_edad,grupo_edad,texto,"0,1-4,...,65+,ignorado",vigilancia 2022,
 hecho_vigilancia_edad,sexo,texto,total/femenina (masculino = total - femenina),vigilancia 2022,
 hecho_vigilancia_edad,n,entero,casos semana x diagnostico x edad x sexo,vigilancia 2022,
+hecho_vigilancia_mes,mes,texto,enero-diciembre,vigilancia 2022,
+hecho_vigilancia_mes,mes_num,entero 1-12,derivado de mes,tidy_seg.py,
+hecho_vigilancia_mes,n,entero,casos del mes por semana x diagnostico,vigilancia 2022,

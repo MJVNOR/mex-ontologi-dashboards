@@ -178,6 +178,23 @@ def main():
         "filas": len(tvig),
         "origen": "hmo_vigilancia.parquet (bandas x sexo; acumulado vive en tabla semanal)",
         **reg}
+    meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
+             "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
+    meses = [m for m in meses if m in vg.columns]
+    mpartes = []
+    for i, m in enumerate(meses, start=1):
+        b = vg[idv].copy()
+        b["mes"] = m
+        b["mes_num"] = i
+        b["n"] = pd.to_numeric(vg[m], errors="coerce").fillna(0).astype(int)
+        mpartes.append(b)
+    tmes = pd.concat(mpartes, ignore_index=True).rename(
+        columns={"des_munici": "municipio", "des_diagno": "diagnostico",
+                 "cve_diagno": "cve_diagnostico"})
+    tmes.to_parquet(TIDY / "hecho_vigilancia_mes.parquet", index=False)
+    out["hecho_vigilancia_mes.parquet"] = {
+        "filas": len(tmes),
+        "origen": "hmo_vigilancia.parquet (casos del mes por semana x diagnostico)"}
 
     # 8. Diccionario de datos
     dd = [
@@ -201,6 +218,9 @@ def main():
         ("hecho_vigilancia_edad", "grupo_edad", "texto", "0,1-4,...,65+,ignorado", "vigilancia 2022", None),
         ("hecho_vigilancia_edad", "sexo", "texto", "total/femenina (masculino = total - femenina)", "vigilancia 2022", None),
         ("hecho_vigilancia_edad", "n", "entero", "casos semana x diagnostico x edad x sexo", "vigilancia 2022", None),
+        ("hecho_vigilancia_mes", "mes", "texto", "enero-diciembre", "vigilancia 2022", None),
+        ("hecho_vigilancia_mes", "mes_num", "entero 1-12", "derivado de mes", "tidy_seg.py", None),
+        ("hecho_vigilancia_mes", "n", "entero", "casos del mes por semana x diagnostico", "vigilancia 2022", None),
     ]
     pd.DataFrame(dd, columns=["tabla", "columna", "tipo", "descripcion",
                               "origen", "nota"]).to_csv(
@@ -273,7 +293,9 @@ def main():
             ("tidy/hecho_vigilancia_semanal.parquet",
              "vigilancia 2022 semanal (acumulado + instituciones)", vig_src),
             ("tidy/hecho_vigilancia_edad.parquet",
-             "vigilancia 2022 derretida a semana x edad x sexo", vig_src)]:
+             "vigilancia 2022 derretida a semana x edad x sexo", vig_src),
+            ("tidy/hecho_vigilancia_mes.parquet",
+             "vigilancia 2022 derretida a semana x mes", vig_src)]:
         nuevo[t] = {"tema": "seg", "fuentes": srcs,
                     "filtro": "ninguno", "transformacion": f,
                     "medidas": ["n"], "agregacion": "Suma de n.",
