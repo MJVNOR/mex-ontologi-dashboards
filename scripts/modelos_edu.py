@@ -55,20 +55,25 @@ def main():
     feats = [idx(4), idx(8), idx(12), prom(4), prom(8), prom(12)]
     r = rep[feats + [idx(16)]].apply(pd.to_numeric, errors="coerce").dropna()
     X, y = r[feats], (r[idx(16)] >= 30).astype(int)
-    Xtr, Xte, ytr, yte = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
+    groups = rep.loc[r.index, "MATERIA"].astype(str).values
+    # ponytail: misma materia nunca en train y test (StratifiedGroupKFold, k=5)
+    from sklearn.model_selection import StratifiedGroupKFold, cross_val_score
     clf = Pipeline([("sc", StandardScaler()),
                     ("rf", RandomForestClassifier(n_estimators=200, random_state=42))])
-    clf.fit(Xtr, ytr)
-    yp = clf.predict(Xte)
+    cv = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)
+    cv_scores = cross_val_score(clf, X, y, groups=groups, cv=cv,
+                                scoring="balanced_accuracy")
+    clf.fit(X, y)
     met["riesgo_reprobacion"] = {
-        "balanced_accuracy": round(float(balanced_accuracy_score(yte, yp)), 3),
+        "balanced_accuracy_cv": round(float(cv_scores.mean()), 3),
+        "balanced_accuracy_cv_std": round(float(cv_scores.std()), 3),
         "prevalencia_riesgo": round(float(y.mean()), 3), "n": len(r),
-        "reporte": classification_report(yte, yp, output_dict=True, zero_division=0)}
+        "materias": int(len(set(groups))),
+        "nota": "2022-1/remota sin semanas tempranas fuera del modelo"}
     joblib.dump({"modelo": clf, "features": feats, "umbral": 30}, OUT / "riesgo_reprobacion.pkl")
     rep_out = rep.copy()
-    rep_out["p_riesgo"] = clf.predict_proba(
-        rep[feats].apply(pd.to_numeric, errors="coerce").fillna(rep[feats].median(numeric_only=True))
-    )[:, 1].round(3)
+    rep_out["p_riesgo"] = float("nan")
+    rep_out.loc[r.index, "p_riesgo"] = clf.predict_proba(r[feats])[:, 1].round(3)
     rep_out.to_parquet(OUT / "inferencias" / "riesgo_materias.parquet", index=False)
 
     # 2. Segmentos estudiantes (ciclo 2021-2022)

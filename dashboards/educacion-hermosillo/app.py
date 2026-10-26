@@ -97,11 +97,13 @@ with t1:
                                  nbins=60, title="Becas: distribución del importe "
                                  "(recorte en $50k para visualizar)"),
                     use_container_width=True)
-    st.caption("p25=$2,200 · p50=$5,000 · p75=$10,000 · p99=$42,500 · max=$500,000. "
+    st.caption("p25=$2,200 · p50=$5,000 · p75=$10,000 · p99=$42,500 · max=$500,000 "
+               "(periodo completo; el filtro de años solo afecta las gráficas). "
                "El histograma recorta en $50k (≈99% de los casos).")
     # --- Ticket por año ---
     que("Ticket promedio vs mediano por año: el programa da más becas pero de menor "
-        "monto (2021 mean $10,210 → 2024 mean $6,173, mediana fija en $5,000).")
+        "monto (2021 mean $10,210 → 2024 mean $6,173, mediana fija en $5,000; "
+        "periodo completo).")
     ticket = bec_f.groupby("anio")["importe"].agg(
         media="mean", mediana="median", becas="size").reset_index()
     ticket_m = ticket.melt(id_vars="anio", value_vars=["media", "mediana"],
@@ -129,7 +131,7 @@ with t1:
                     use_container_width=True)
     # --- Brecha de género en importe ---
     que("Brecha de género en el monto: los hombres promedian $8,106 y las mujeres "
-        "$7,391 con la misma mediana ($5,000).")
+        "$7,391 con la misma mediana ($5,000; periodo completo).")
     bg = bec_f.groupby("genero")["importe"].agg(
         media="mean", mediana="median", becas="size").reset_index()
     bg_m = bg.melt(id_vars="genero", value_vars=["media", "mediana"],
@@ -210,7 +212,7 @@ with t3:
     st.dataframe(corte, use_container_width=True)
     # --- Evolución 4ta→16va ---
     que("La reprobación sube a mitad del semestre y cae hacia la semana 16 "
-        "(medianas 14.5 → 21.4 → 21.4 → 11.9, presencial).")
+        "(medianas 14.6 → 21.4 → 21.4 → 11.9, presencial).")
     WEEKS = ("4TA", "8VA", "12VA", "16VA")
     sems = [c for c in rep.columns
             if "SEMANA" in c.upper() and "REPROB" in c.upper()]
@@ -353,9 +355,12 @@ with t5:
     st.plotly_chart(px.bar(top, x="p", y=mcol, orientation="h",
                            title="Riesgo de reprobación: top 12 materias (p)"),
                     use_container_width=True)
-    st.caption(f"Modelo: balanced accuracy {me['riesgo_reprobacion']['balanced_accuracy']} "
-               f"en prueba (n={me['riesgo_reprobacion']['n']}, prevalencia de riesgo "
-               f"{me['riesgo_reprobacion']['prevalencia_riesgo']}). Probabilidad, no destino.")
+    st.caption(f"Modelo: balanced accuracy {me['riesgo_reprobacion']['balanced_accuracy_cv']} "
+               f"(±{me['riesgo_reprobacion']['balanced_accuracy_cv_std']}, validación cruzada "
+               f"por materia: la misma materia nunca está en train y test; n="
+               f"{me['riesgo_reprobacion']['n']}, prevalencia de riesgo "
+               f"{me['riesgo_reprobacion']['prevalencia_riesgo']}). Materias sin semanas "
+               "tempranas (2022-1, remota) quedan fuera: sin p. Probabilidad, no destino.")
     que("Segmentos de estudiantes (KMeans k=4 sobre semestre, promedios, créditos y "
         "sexo, ciclo 2021-2022) proyectados en 2D: cada punto es un estudiante. "
         "Describe perfiles (p. ej. avanzados vs. iniciales), no etiquetas oficiales.")
@@ -415,7 +420,7 @@ with t6:
     pe = col(apr, "programa educativo")
     m7 = col(apr, "menos de 7")
     ap2 = apr.copy()
-    ap2["pct_menos7"] = ap2[m7] / ap2[ev] * 100
+    ap2["pct_menos7"] = ap2[m7].fillna(0) / ap2[ev] * 100  # NaN = 0 (bandas suman Evaluados)
     ap2 = ap2.sort_values(pg, ascending=False)
     st.plotly_chart(px.bar(ap2.head(10), x=pg, y=pe, orientation="h",
                            title="Top 10 promedio global",

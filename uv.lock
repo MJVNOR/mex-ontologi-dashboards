@@ -136,6 +136,7 @@ name = "hermosillo-salud-dashboard"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
+    { name = "joblib" },
     { name = "openpyxl" },
     { name = "pandas" },
     { name = "plotly" },
@@ -149,6 +150,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "joblib", specifier = ">=1.6" },
     { name = "openpyxl", specifier = ">=3.1.5" },
     { name = "pandas", specifier = ">=2.2" },
     { name = "plotly", specifier = ">=5.24" },

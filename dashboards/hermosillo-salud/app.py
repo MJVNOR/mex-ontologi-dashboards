@@ -175,13 +175,15 @@ with t6:
                                  mode="lines", line=dict(width=0), showlegend=False,
                                  fill="tonexty", fillcolor=f"rgba(0,0,255,0.1)" if serv == "urgencias"
                                  else "rgba(255,0,0,0.1)", hoverinfo="skip"))
-    fig.update_layout(title="Pronóstico mensual 2023 (estimación con banda ±1 DE)",
+    fig.update_layout(title="Perfil estacional mensual 2023 (referencia, no pronóstico)",
                       xaxis_title="Mes", yaxis_title="Atenciones estimadas")
     st.plotly_chart(fig, use_container_width=True)
     st.caption(f"Error medido en 2021: urgencias MAE {met['urgencias']['mae']} "
-               f"(MAPE {met['urgencias']['mape_pct']}%), consulta MAE {met['consulta']['mae']} "
-               f"(MAPE {met['consulta']['mape_pct']}%). El cambio de nivel post-2020 limita "
-               f"la precisión: úsese como referencia, no como compromiso.")
+               f"(MAPE {met['urgencias']['mape_pct']}%, R² {met['urgencias']['r2']}), "
+               f"consulta MAE {met['consulta']['mae']} "
+               f"(MAPE {met['consulta']['mape_pct']}%, R² {met['consulta']['r2']}). "
+               "R² negativo = peor que predecir el promedio mensual: úsese como "
+               "perfil estacional de referencia, no como pronóstico operativo.")
     que("Semanas epidemiológicas atípicas (IsolationForest sobre casos semanales "
         "totales): los puntos rojos son semanas cuyo volumen se aparta del patrón "
         "habitual y ameritan revisión.")
