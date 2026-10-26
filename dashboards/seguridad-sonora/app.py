@@ -69,9 +69,9 @@ k3.metric("Llamadas 911 (2026 T1-T2)", f"{len(tel):,}")
 k4.metric("Detenidas 2026 (T1-T3)", f"{len(det):,}")
 k5.metric("Desaparecidas (histórico)", f"{len(des):,}")
 
-t1, t2, t3, t4, t5, t6 = st.tabs(
+t1, t2, t3, t4, t5, t6, t7 = st.tabs(
     ["Mapa municipal", "Delitos y comparador", "Víctimas",
-     "911", "Detenidas / Desaparecidas", "Ontología"])
+     "911", "Detenidas / Desaparecidas", "Modelos", "Ontología"])
 
 with t1:
     que("Mapa: delitos registrados por municipio en los años elegidos "
@@ -252,6 +252,55 @@ with t5:
                     use_container_width=True)
 
 with t6:
+    que("KMeans (k=4) sobre el perfil delictivo de cada municipio "
+        "(2015-2025): Hermosillo y Cajeme forman su propio grupo; Caborca, "
+        "Guaymas, Navojoa, Nogales y SLRC el cinturón intermedio; el resto "
+        "comparte perfil bajo. PCA conserva el 92% de la varianza en 2D.")
+    cl = load("inferencias/clusters_municipio.parquet").merge(
+        mun_tot[["Municipio", "cve"]], on="Municipio", how="left")
+    nom = {0: "Resto (65)", 1: "Hermosillo", 2: "Cajeme",
+           3: "Cinturón (5)"}
+    cl["grupo"] = cl["cluster"].map(nom)
+    st.plotly_chart(px.choropleth(
+        cl, geojson=geo(), locations="cve",
+        featureidkey="properties.CVEGEO", color="grupo",
+        hover_name="Municipio", title="Clusters por perfil delictivo")
+        .update_geos(fitbounds="locations", visible=False),
+        use_container_width=True)
+    pc = load("inferencias/pca_municipios.parquet")
+    pc["grupo"] = pc["cluster"].map(nom)
+    st.plotly_chart(px.scatter(pc, x="x", y="y", color="grupo",
+                               hover_name="Municipio",
+                               title="PCA de perfiles municipales (2D)"),
+                    use_container_width=True)
+    que("Anomalías mensuales de incidencia (IsolationForest): el pico de "
+        "2016, el diciembre bajo de 2017 y marzo-2021. Son banderas para "
+        "revisar, no diagnósticos.")
+    am = load("inferencias/anomalias_incidencia.parquet")
+    am["fecha"] = (am["anio"].astype(int).astype(str) + "-" +
+                   am["mes"].astype(str).map(
+                       {v: f"{i + 1:02d}" for i, v in enumerate(
+                           ["Enero", "Febrero", "Marzo", "Abril", "Mayo",
+                            "Junio", "Julio", "Agosto", "Septiembre",
+                            "Octubre", "Noviembre", "Diciembre"])}))
+    figm = px.line(am, x="fecha", y="n", title="Incidencia mensual estatal")
+    figm.add_scatter(x=am[am.anomalia == -1]["fecha"],
+                     y=am[am.anomalia == -1]["n"], mode="markers",
+                     marker={"size": 10}, name="anomalía")
+    st.plotly_chart(figm, use_container_width=True)
+    que("Anomalías en llamadas 911 por día (T1-T2 2026): 9 días fuera de lo "
+        "común, arriba y abajo del flujo normal.")
+    a9 = load("inferencias/anomalias_911.parquet")
+    fig9 = px.line(a9, x="dia", y="n", title="Llamadas 911 por día")
+    fig9.add_scatter(x=a9[a9.anomalia == -1]["dia"],
+                     y=a9[a9.anomalia == -1]["n"], mode="markers",
+                     marker={"size": 10}, name="anomalía")
+    st.plotly_chart(fig9, use_container_width=True)
+    st.caption("⚠️ Se probó pronóstico estacional (Ridge, 2015-2023 → "
+               "2024-2025): R² < 0, peor que predecir la media. No se "
+               "publica pronóstico. Métricas en data/seg/resumen_modelos_seg.json.")
+
+with t7:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
              "qué significa cada columna de los conjuntos de seguridad según la fuente.")
     sig = significados()
