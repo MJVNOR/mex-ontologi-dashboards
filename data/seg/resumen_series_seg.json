@@ -1,0 +1,45 @@
+{
+  "wilcoxon_dic_nov": {
+    "pares": 11,
+    "mediana_dif_nov_dic": 403.0,
+    "w": 65.0,
+    "p": 0.0009765625,
+    "nota": "una prueba pre-especificada; sin correccion multiple"
+  },
+  "adf_train": {
+    "stat": -3.484,
+    "p": 0.008394613458025202,
+    "nota": "no rechazar no prueba raiz unitaria"
+  },
+  "sarimax": {
+    "orden": [
+      0,
+      1,
+      2
+    ],
+    "orden_estacional": [
+      0,
+      1,
+      1
+    ],
+    "aic": 1034.6,
+    "ljungbox_p_lag12": 0.564711099915524,
+    "mae": 300.9,
+    "r2": -0.047,
+    "baseline_naive_mae": 306.0,
+    "train": "<=2022",
+    "test": "2023-2025",
+    "nota": "intervalos del modelo en inferencias/sarimax_pronostico.parquet",
+    "decision": "no se publica: peor que la media"
+  },
+  "tasa_desaparecidas": {
+    "pre_2015_2023": 5606,
+    "post_2024_2025": 3712,
+    "rate_ratio": 2.98,
+    "ic95": [
+      2.86,
+      3.11
+    ],
+    "nota": "razon de tasas observadas; no explica causa"
+  }
+}

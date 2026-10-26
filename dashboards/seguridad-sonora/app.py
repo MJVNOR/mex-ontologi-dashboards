@@ -137,7 +137,8 @@ with t2:
     st.plotly_chart(hbar(top_b, "n", bien, "Delitos por bien jurídico"),
                     width="stretch")
     que("Mapa de calor mes × año: junio y octubre concentran el pico y "
-        "diciembre cae. Cada celda es el total de delitos de ese mes.")
+        "diciembre cae los 11 años (Wilcoxon pareado dic<nov, p<0.001). "
+        "Cada celda es el total de delitos de ese mes.")
     hm = inc_f.groupby(["anio", "mes"], observed=True)["n"].sum().reset_index()
     orden_mes = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                  "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
@@ -281,8 +282,8 @@ with t5:
                "sin imputar.", title="Calidad de la fuente")
     que("Desaparecidas (histórico CBP): estatus de localización, reparto por "
         "sexo y casos por año del hecho. 6,432 siguen desaparecidas y solo "
-        "36.7% aparecieron con vida (2015-2025); en 2024-25 los casos se "
-        "disparan a ~1.8k/año —¿mejor registro o más casos? La fuente no "
+        "36.7% aparecieron con vida (2015-2025); la tasa 2024-25 es 3.0× la "
+        "de 2015-23 (IC95 2.9-3.1) —¿mejor registro o más casos? La fuente no "
         "trae municipio, así que no se mapea.")
     c1, c2 = st.columns(2)
     c1.plotly_chart(px.pie(des.groupby("estatus_victima").size()
