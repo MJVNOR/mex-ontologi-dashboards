@@ -1,0 +1,34 @@
+{
+  "incidencia": {
+    "filas_largas": 957264,
+    "total": 343128,
+    "sin_municipio": 0
+  },
+  "victimas": {
+    "filas_largas": 114624,
+    "total": 86642
+  },
+  "llamadas911": {
+    "filas": 1119206,
+    "por_tipo": {
+      "improcedente": 587711,
+      "procedente": 531495
+    }
+  },
+  "detenidas": {
+    "filas": 4169
+  },
+  "desaparecidas": {
+    "filas": 11810,
+    "por_estatus": {
+      "DESAPARECIDA": 6432,
+      "LOCALIZADA CON VIDA": 4733,
+      "LOCALIZADA SIN VIDA": 608,
+      "NO LOCALIZADA": 37
+    }
+  },
+  "mapa": {
+    "municipios": 72,
+    "bytes": 1924636
+  }
+}

@@ -1,0 +1,108 @@
+conjunto,variable,significado,definicion
+Incidencia delictiva municipal,Abril,delitos registrados municipal de Abril (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Agosto,delitos registrados municipal de Agosto (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Año,Año de captura,Año de captura
+Incidencia delictiva municipal,Bien jurídico afectado,Bien juridico afectado por el delito,Campo en la que el delito se realizó
+Incidencia delictiva municipal,Cve. Municipio,Referencia municipal,Clave única de cada municipio en el estado
+Incidencia delictiva municipal,Diciembre,delitos registrados municipal de Diciembre (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Enero,delitos registrados municipal de Enero (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Febrero,delitos registrados municipal de Febrero (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Julio,delitos registrados municipal de Julio (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Junio,delitos registrados municipal de Junio (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Marzo,delitos registrados municipal de Marzo (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Mayo,delitos registrados municipal de Mayo (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Modalidad,Modalidad del delito registrado,Categoría en la que se puede clasificar el delito
+Incidencia delictiva municipal,Noviembre,delitos registrados municipal de Noviembre (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Octubre,delitos registrados municipal de Octubre (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Septiembre,delitos registrados municipal de Septiembre (actual),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal,Subtipo de delito,Subtipo de delito registrado,Detalle más específico sobre el tipo de delito que se realizó
+Incidencia delictiva municipal,Tipo de delito,Tipo de delito registrado,Descripción específica del tipo de delito que se realizó
+Incidencia delictiva municipal - metodología anterior,ABRIL,delitos registrados municipal de Abril (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,AGOSTO,delitos registrados municipal de Agosto (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,AÑO,Año de captura,Año de captura
+Incidencia delictiva municipal - metodología anterior,DICIEMBRE,delitos registrados municipal de Diciembre (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,ENERO,delitos registrados municipal de Enero (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,ENTIDAD,Entidad federativa de registro,Nombre del estado en el que se registraron los delitos
+Incidencia delictiva municipal - metodología anterior,FEBRERO,delitos registrados municipal de Febrero (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,INEGI,Referencia municipal,Clave única de cada municipio en el estado según INEGI
+Incidencia delictiva municipal - metodología anterior,JULIO,delitos registrados municipal de Julio (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,JUNIO,delitos registrados municipal de Junio (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,MARZO,delitos registrados municipal de Marzo (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,MAYO,delitos registrados municipal de Mayo (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,MODALIDAD,Modalidad del delito municipal (metodologia anterior),Categoría general en la que entra el delito cometido
+Incidencia delictiva municipal - metodología anterior,MUNICIPIO,Municipio de registro de delitos,Nombre del municipio en el que se registraron los delitos
+Incidencia delictiva municipal - metodología anterior,NOVIEMBRE,delitos registrados municipal de Noviembre (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,OCTUBRE,delitos registrados municipal de Octubre (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,SEPTIEMBRE,delitos registrados municipal de Septiembre (anterior),Mes en el que se realizaron los delitos
+Incidencia delictiva municipal - metodología anterior,SUBTIPO,Subtipo de delito municipal (metodologia anterior),Último nivel de detalle en la que se puede clasificar el delito
+Incidencia delictiva municipal - metodología anterior,TIPO,Tipo de delito municipal (metodologia anterior),Detalle más específico sobre el tipo de delito que se realizó
+Llamadas Improcedentes 911,clasificacion,Clasificacion de la llamada,clasificación de la llamada realizada
+Llamadas Improcedentes 911,colonia,Colonia de origen (improcedente),colonio donde se realizó la llamada
+Llamadas Improcedentes 911,fecha,Fecha de ingreso de la llamada,fecha de ingreso de la llamada
+Llamadas Improcedentes 911,hora,Hora de ingreso de la llamada (improcedente),"hora de ingreso de la llamada, dondela hora ""0"""" son las 12 am"
+Llamadas Improcedentes 911,localidad,Localidad de origen de la llamada,localidad de donde se realizó la llamada
+Llamadas Improcedentes 911,municipio,Municipio de origen de la llamada,municipio de donde se realizó la llamada
+Llamadas Improcedentes 911,sexo reportante,Sexo del reportante (improcedente),sexo de la persona que realizó la llamada
+Llamadas Procedentes 911,clasificacion,Clasificacion de la llamada 911,clasificación de la llamada realizada
+Llamadas Procedentes 911,colonia,Colonia de origen (procedente),colonio donde se realizó la llamada
+Llamadas Procedentes 911,fecha,Fecha de ingreso de la llamada,fecha de ingreso de la llamada
+Llamadas Procedentes 911,hora,Hora de ingreso de la llamada (procedente),"hora de ingreso de la llamada, dondela hora ""0"""" son las 12 am"
+Llamadas Procedentes 911,localidad,Localidad de origen de la llamada,localidad de donde se realizó la llamada
+Llamadas Procedentes 911,municipio,Municipio de origen de la llamada,municipio de donde se realizó la llamada
+Llamadas Procedentes 911,sexo reportante,Sexo del reportante (procedente),sexo de la persona que realizó la llamada
+Personas Detenidas,agencia,Agencia a la que se turnó el detenido,agencia a la que se turno el detenido
+Personas Detenidas,delito,Delito de la detención,delito por el cual detuvieron a la persona
+Personas Detenidas,edad,Edad del detenido,edad del detenido
+Personas Detenidas,fecha parte,Fecha del parte de detención,fecha del parte de la detencion
+Personas Detenidas,hora de la detencion,Hora de la detención,hora de la detención de la persona
+Personas Detenidas,motivo del origen,Motivo de origen de la detención,motivo del origen dela detencion de la persona
+Personas Detenidas,municipio,Municipio de la detención,municipio de la detencion
+Personas Detenidas,nivel fuerza,Nivel de fuerza de la detención,nivel de fuerza que se utilizo para la detencion
+Personas Detenidas,sexo,Sexo del detenido,sexo del detenido
+Personas desaparecidas en Sonora,estado_des,Estado de desaparición de la víctima,Estado de desaparición de la víctima
+Personas desaparecidas en Sonora,estado_nac_vic,Estado de nacimiento de la víctima,Estado de nacimiento de la víctima
+Personas desaparecidas en Sonora,estatus_victima,Estatus de la víctima,Estatus en que se encuentra la víctima
+Personas desaparecidas en Sonora,etnia,Etnia de la víctima,Etnia que pertenece la víctima
+Personas desaparecidas en Sonora,fecha_hechos,Fecha del reporte de la víctima,Fecha del reporte de la víctima
+Personas desaparecidas en Sonora,fecha_localizacion,Fecha de localización de la víctima,Fecha de localización de la víctima.
+Personas desaparecidas en Sonora,fecha_nac_vic,Fecha de nacimiento de la víctima,Fecha de nacimiento de la víctima
+Personas desaparecidas en Sonora,lengua,Lengua de la víctima,Lengua que pertenece la víctima
+Personas desaparecidas en Sonora,nacionalidad_vic,Nacionalidad de la víctima,Nacionalidad de la víctima
+Personas desaparecidas en Sonora,sexo_vic,Sexo de la víctima,Sexo de la víctima
+Víctimas del fuero común en el estado,Abril,victimas registradas de Abril (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Agosto,victimas registradas de Agosto (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Año,Año de registro,Año de registro de las víctimas
+Víctimas del fuero común en el estado,Bien jurídico afectado,Bien juridico afectado por el delito,Campo en la que el delito se realizó
+Víctimas del fuero común en el estado,Clave_Ent,Entidad federativa de registro,Identificador del estado de captura
+Víctimas del fuero común en el estado,Diciembre,victimas registradas de Diciembre (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Enero,victimas registradas de Enero (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Febrero,victimas registradas de Febrero (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Julio,victimas registradas de Julio (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Junio,victimas registradas de Junio (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Marzo,victimas registradas de Marzo (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Mayo,victimas registradas de Mayo (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Modalidad,Modalidad del delito del fuero comun,Categoría en la que se puede clasificar el delito
+Víctimas del fuero común en el estado,Noviembre,victimas registradas de Noviembre (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Octubre,victimas registradas de Octubre (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Rango de edad,Grupo de edad de la víctima,Grupo de edad en donde se encuentra la víctima
+Víctimas del fuero común en el estado,Septiembre,victimas registradas de Septiembre (actual),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado,Sexo,Sexo de la víctima,Sexo de la víctima
+Víctimas del fuero común en el estado,Subtipo de delito,Subtipo de delito del fuero comun,Detalle más específico sobre el tipo de delito que se realizó
+Víctimas del fuero común en el estado,Tipo de delito,Tipo de delito del fuero comun,Descripción específica del tipo de delito que se realizó
+Víctimas del fuero común en el estado - metodología anterior,ABRIL,victimas registradas de Abril (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,AGOSTO,victimas registradas de Agosto (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,AÑO,Año de registro,Año de registro de las víctimas
+Víctimas del fuero común en el estado - metodología anterior,DELITO,Tipo de delito (metodologia anterior),Descripción específica del tipo de delito que se realizó
+Víctimas del fuero común en el estado - metodología anterior,DICIEMBRE,victimas registradas de Diciembre (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,ENERO,victimas registradas de Enero (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,ENTIDAD,Entidad federativa de registro,Descripción del estado donde ocurrieron los registros de víctimas
+Víctimas del fuero común en el estado - metodología anterior,FEBRERO,victimas registradas de Febrero (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,INEGI,Entidad federativa,Identificador del estado de captura según INEGI
+Víctimas del fuero común en el estado - metodología anterior,JULIO,victimas registradas de Julio (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,JUNIO,victimas registradas de Junio (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,MARZO,victimas registradas de Marzo (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,MAYO,victimas registradas de Mayo (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,MODALIDAD,Modalidad del delito (metodologia anterior),Detalle más específico sobre la modalidad del delito realizado
+Víctimas del fuero común en el estado - metodología anterior,NOVIEMBRE,victimas registradas de Noviembre (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,OCTUBRE,victimas registradas de Octubre (anterior),Mes en el que se registraron las víctimas
+Víctimas del fuero común en el estado - metodología anterior,SEPTIEMBRE,victimas registradas de Septiembre (anterior),Mes en el que se registraron las víctimas
