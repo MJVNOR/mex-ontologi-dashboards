@@ -20,6 +20,10 @@ st.caption("Fuente: portal datos.sonora.gob.mx, grupo Educación (20 conjuntos).
            "UTH = Universidad Tecnológica de Hermosillo (datos institucionales).")
 
 
+def que(mensaje):
+    st.caption("📊 " + mensaje)
+
+
 @st.cache_data
 def load(name):
     return pd.read_parquet(EDU / name)
@@ -51,57 +55,86 @@ t1, t2, t3, t4, t5 = st.tabs(
     ["Becas", "Trayectoria UTH", "Reprobación", "Matrícula", "Ontología"])
 
 with t1:
+    que("Becas autorizadas a residentes de Hermosillo por año (2021-2025): cada barra "
+        "es un año y su altura el número de becas. Muestra el crecimiento del programa.")
     s = bec_f.groupby("anio").agg(becas=("importe", "size"),
                                    importe=("importe", "sum")).reset_index()
-    st.plotly_chart(px.bar(s, x="anio", y="becas", title="Becas HMO por año"), use_container_width=True)
+    st.plotly_chart(px.bar(s, x="anio", y="becas", title="Becas HMO por año"),
+                    use_container_width=True)
+    que("Reparto de las becas por nivel educativo (básico vs. medio superior y "
+        "superior) y por género declarado. Cada rebanada es la proporción del total.")
     c1, c2 = st.columns(2)
     c1.plotly_chart(px.pie(bec_f.groupby("nivel").size().reset_index(name="n"),
-                           names="nivel", values="n", title="Becas por nivel"), use_container_width=True)
+                           names="nivel", values="n", title="Becas por nivel"),
+                    use_container_width=True)
     c2.plotly_chart(px.pie(bec_f.groupby("genero").size().reset_index(name="n"),
-                           names="genero", values="n", title="Becas por género"), use_container_width=True)
+                           names="genero", values="n", title="Becas por género"),
+                    use_container_width=True)
+    que("Las 12 escuelas con mayor importe acumulado en becas: dónde se concentra "
+        "el recurso del programa en Hermosillo.")
     top_esc = bec_f.groupby("escuela")["importe"].sum().nlargest(12).reset_index()
     st.plotly_chart(px.bar(top_esc, x="importe", y="escuela", orientation="h",
-                           title="Top 12 escuelas por importe acumulado"), use_container_width=True)
+                           title="Top 12 escuelas por importe acumulado"),
+                    use_container_width=True)
 
 with t2:
+    que("Comparativa por corte de las tres etapas de la trayectoria UTH: nuevo ingreso, "
+        "egresados y titulados. Cada grupo de barras es un periodo; permite ver la "
+        "relación entre los que entran, los que egresan y los que se titulan.")
     tray = pd.concat([
         tit.assign(etapa="Titulados"), egr.assign(etapa="Egresados"),
         ing.assign(etapa="Nuevo ingreso")])
     st.plotly_chart(px.bar(tray.groupby(["anio", "etapa"])["n"].sum().reset_index(),
                            x="anio", y="n", color="etapa", barmode="group",
-                           title="Trayectoria UTH por corte"), use_container_width=True)
+                           title="Trayectoria UTH por corte"),
+                    use_container_width=True)
+    que("Los 10 programas educativos con más titulados y con más egresados "
+        "(2022-2025): qué carreras aportan más profesionistas en la UTH Hermosillo.")
     c1, c2 = st.columns(2)
     for df, nom, col in ((tit, "Titulados", c1), (egr, "Egresados", c2)):
         top = df.groupby("programa")["n"].sum().nlargest(10).reset_index()
         col.plotly_chart(px.bar(top, x="n", y="programa", orientation="h",
-                               title=f"{nom}: top 10 programas"), use_container_width=True)
+                               title=f"{nom}: top 10 programas"),
+                         use_container_width=True)
 
 with t3:
+    que("Materias con mayor índice promedio de reprobación en la semana 16 del semestre "
+        "(2022, presencial y remota): señala dónde se concentran los rezagos. El "
+        "histograma muestra cómo se distribuye ese índice entre todas las materias.")
     idx = [c for c in rep.columns if "16VA" in c.upper() and "REPROB" in c.upper()][0]
     mat_col = [c for c in rep.columns if "PROGRAMA" in c.upper()][0]
     top_r = rep.groupby(mat_col)[idx].mean().sort_values(ascending=False).head(15)
     top_r = top_r.reset_index().rename(columns={idx: "indice"})
     st.plotly_chart(px.bar(top_r, x="indice", y=mat_col, orientation="h",
-                           title="Reprobación: mayor índice promedio sem. 16"), use_container_width=True)
+                           title="Reprobación: mayor índice promedio sem. 16"),
+                    use_container_width=True)
     st.plotly_chart(px.histogram(rep, x=idx, nbins=30,
-                                 title="Distribución del índice de reprobación"), use_container_width=True)
+                                 title="Distribución del índice de reprobación"),
+                    use_container_width=True)
 
 with t4:
+    que("Matrícula UTH Hermosillo 2022-2 (8,227 estudiantes): reparto por unidad "
+        "académica y por sexo, más el histograma de edades. Describe quiénes estudian "
+        "en la universidad.")
     uni = [c for c in mat.columns if "Unidad" in str(c)][0]
     sexo = [c for c in mat.columns if str(c).strip().lower() == "sexo"][0]
     edad = [c for c in mat.columns if str(c).strip().lower() == "edad"][0]
     c1, c2 = st.columns(2)
     c1.plotly_chart(px.pie(mat.groupby(uni).size().reset_index(name="n"),
                            names=uni, values="n",
-                           title="Matrícula por unidad académica"), use_container_width=True)
+                           title="Matrícula por unidad académica"),
+                    use_container_width=True)
     c2.plotly_chart(px.pie(mat.groupby(sexo).size().reset_index(name="n"),
-                           names=sexo, values="n", title="Matrícula por sexo"), use_container_width=True)
+                           names=sexo, values="n", title="Matrícula por sexo"),
+                    use_container_width=True)
     st.plotly_chart(px.histogram(mat, x=edad, nbins=25,
-                                 title="Matrícula UTH HMO: edad"), use_container_width=True)
+                                 title="Matrícula UTH HMO: edad"),
+                    use_container_width=True)
 
 with t5:
+    st.write("Variables y significados documentados en la ontología (mex-ontologi): "
+             "qué significa cada columna de los conjuntos de educación según la fuente.")
     sig = significados()
-    st.write("Variables y significados documentados en la ontología (mex-ontologi).")
     st.dataframe(sig, use_container_width=True)
     st.download_button("Descargar significados (CSV)",
                        sig.to_csv(index=False).encode("utf-8"),

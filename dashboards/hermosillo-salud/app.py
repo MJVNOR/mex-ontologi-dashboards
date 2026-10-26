@@ -20,6 +20,10 @@ st.caption("Fuente: portal datos.sonora.gob.mx, grupo Salud (7 conjuntos). "
            "Los totales son los declarados por la fuente, sin inferir cobertura.")
 
 
+def que(mensaje):
+    st.caption("📊 " + mensaje)
+
+
 @st.cache_data
 def load(name):
     return pd.read_parquet(DATA / name)
@@ -68,6 +72,9 @@ t1, t2, t3, t4, t5, t6 = st.tabs(
      "Nacimientos / Defunciones", "Vigilancia", "Ontología"])
 
 with t1:
+    que("Barras agrupadas por año: compara el volumen anual de urgencias, egresos "
+        "hospitalarios y consulta externa en Hermosillo. Se aprecia el pico "
+        "2018-2019 y la caída de 2020 (pandemia) y 2022 (año parcial en la fuente).")
     s = pd.DataFrame({
         "Urgencias": urg_f.groupby(yu)["Total_Urgencias"].sum(),
         "Egresos": egr_f.groupby(ye)["Total_Egresos"].sum(),
@@ -81,12 +88,17 @@ with t1:
 
 with t2:
     c1, c2 = st.columns(2)
+    que("Izquierda: los 10 diagnósticos (CIE-10) con más atenciones de urgencias en "
+        "Hermosillo. Derecha: lo mismo para egresos hospitalarios. Permite ver qué "
+        "padecimientos presionan cada servicio.")
     top_u = urg_f.groupby("CIE10_Descrip")["Total_Urgencias"].sum().nlargest(10).reset_index()
     c1.plotly_chart(px.bar(top_u, x="Total_Urgencias", y="CIE10_Descrip", orientation="h",
                            title="Urgencias: top 10 diagnósticos"), use_container_width=True)
     top_e = egr_f.groupby("CIE10_Descrip")["Total_Egresos"].sum().nlargest(10).reset_index()
     c2.plotly_chart(px.bar(top_e, x="Total_Egresos", y="CIE10_Descrip", orientation="h",
                            title="Egresos: top 10 diagnósticos"), use_container_width=True)
+    que("Pasteles: reparto por sexo de cada servicio. Las etiquetas son las que declara "
+        "la fuente (en egresos conviven 'Hombre/Masculino' y 'Mujer/Femenino').")
     c1.plotly_chart(px.pie(urg_f.groupby("Sexo")["Total_Urgencias"].sum().reset_index(),
                            names="Sexo", values="Total_Urgencias",
                            title="Urgencias por sexo"), use_container_width=True)
@@ -95,6 +107,8 @@ with t2:
                            title="Egresos por sexo (etiquetas de la fuente)"), use_container_width=True)
 
 with t3:
+    que("Izquierda: consultas por grupo de edad (de menor a mayor volumen). Derecha: "
+        "reparto por sexo. Muestran qué población usa más la consulta externa.")
     c1, c2 = st.columns(2)
     ce_edad = con_f.groupby("Grupo_Edad")["Total"].sum().reset_index().sort_values("Total")
     c1.plotly_chart(px.bar(ce_edad, x="Total", y="Grupo_Edad", orientation="h",
@@ -102,23 +116,31 @@ with t3:
     c2.plotly_chart(px.pie(con_f.groupby("Sexo")["Total"].sum().reset_index(),
                            names="Sexo", values="Total",
                            title="Consulta externa por sexo"), use_container_width=True)
+    que("Los 10 establecimientos con más consultas en Hermosillo: dónde se concentra "
+        "la atención ambulatoria.")
     top_est = con_f.groupby("Nombre_Establecimiento")["Total"].sum().nlargest(10).reset_index()
     st.plotly_chart(px.bar(top_est, x="Total", y="Nombre_Establecimiento", orientation="h",
                            title="Consulta externa: top 10 establecimientos"), use_container_width=True)
 
 with t4:
+    que("Nacimientos 2022 (madres residentes en HMO): edad de la madre y peso del "
+        "recién nacido en gramos. Defunciones 2022 (residentes): edad al fallecer y "
+        "top 10 causas básicas (CIE). Son registros individuales, no agregados.")
     c1, c2 = st.columns(2)
     c1.plotly_chart(px.histogram(nac, x="EDAD", nbins=30, title="Nacimientos: edad de la madre"),
                     use_container_width=True)
     c1.plotly_chart(px.histogram(nac, x="PESO", nbins=40, title="Nacimientos: peso del RN (g)"),
                     use_container_width=True)
-    c2.plotly_chart(px.histogram(defun := defu, x="EDAD", nbins=40,
+    c2.plotly_chart(px.histogram(defu, x="EDAD", nbins=40,
                                  title="Defunciones: edad"), use_container_width=True)
     top_causa = defu.groupby("CIECAUSABASICAD").size().nlargest(10).reset_index(name="n")
     c2.plotly_chart(px.bar(top_causa, x="n", y="CIECAUSABASICAD", orientation="h",
                            title="Defunciones: top 10 causas básicas"), use_container_width=True)
 
 with t5:
+    que("Vigilancia epidemiológica 2022 en HMO: casos acumulados por diagnóstico "
+        "(lideran infecciones respiratorias agudas y COVID-19) y curva de casos por "
+        "semana epidemiológica, que muestra los picos de contagio del año.")
     top_v = vig.groupby("des_diagno")["acumulado"].sum().nlargest(12).reset_index()
     st.plotly_chart(px.bar(top_v, x="acumulado", y="des_diagno", orientation="h",
                            title="Vigilancia 2022 HMO: casos acumulados por diagnóstico"),
@@ -128,11 +150,14 @@ with t5:
                             title="Vigilancia HMO: casos por semana epidemiológica"),
                     use_container_width=True)
     if len(ins):
+        que("Tabla de las 30 inspecciones sanitarias de PROAES realizadas en Hermosillo "
+            "(3er trimestre 2021): fecha, actividad del lugar y motivo.")
         st.write("Inspecciones PROAES en Hermosillo (3er trim. 2021):", len(ins))
         st.dataframe(ins[["FECHA", "ACTIVIDAD", "MOTIVO", "MUNICIPIO"]], use_container_width=True)
 
 with t6:
-    st.write("Variables y significados documentados en la ontología (mex-ontologi).")
+    st.write("Variables y significados documentados en la ontología (mex-ontologi): "
+             "qué significa cada columna de los 7 conjuntos de salud según la fuente.")
     sig = significados()
     st.dataframe(sig, use_container_width=True)
     st.download_button("Descargar significados (CSV)",
