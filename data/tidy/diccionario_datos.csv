@@ -1,0 +1,20 @@
+tabla,columna,tipo,descripcion,origen,nota
+dim_municipios,cve_municipio,entero,clave INEGI 26001-26072 (+26998/26999),catalogo.xlsx,
+dim_municipios,municipio,texto,nombre en catalogo (mayusculas/minusculas de fuente),catalogo.xlsx,
+hecho_incidencia,anio,entero,2015-2025,SESNSP via portal,
+hecho_incidencia,mes_num,entero 1-12,derivado de mes,tidy_seg.py,
+hecho_incidencia,cve_municipio,entero,join con dim_municipios,catalogo.xlsx,
+hecho_incidencia,n,entero,delitos registrados; incluye ceros de la matriz SESNSP,CSV anuales,
+hecho_victimas,anio,entero,2016-2025 (2015 excluido: otro esquema),SESNSP via portal,serie comparable desde 2016
+hecho_victimas,sexo,texto,Mujer/Hombre/...,vict_2016+,
+hecho_victimas,rango_edad,texto,grupos de la fuente,vict_2016+,
+hecho_victimas,n,entero,victimas (no sumar con incidencia: distinta unidad),CSV anuales,
+hecho_llamadas911,fecha/hora,fecha/hora,T1-T2 2026; hora 0-23,911 SS,327k sin municipio/clasificacion en fuente
+hecho_llamadas911,motivo_no_procedente,texto,solo improcedentes; nulo en procedentes,911 SS,
+hecho_detenidas,edad_num,numerico,NaN = valor no numerico en fuente,parte policial,mediana 34; no imputar
+hecho_desaparecidas,estatus_victima,texto,DESAPARECIDA/LOCALIZADA CON VIDA/SIN VIDA/NO LOCALIZADA,CBP,sin municipio en fuente
+hecho_desaparecidas,anio_hecho,numerico,NaN = fecha_hechos invalida,CBP,
+hecho_vigilancia_semanal,acumulado,entero,casos semana x diagnostico (NO es suma de bandas),vigilancia 2022,mediana dif vs bandas: 8.5
+hecho_vigilancia_edad,grupo_edad,texto,"0,1-4,...,65+,ignorado",vigilancia 2022,
+hecho_vigilancia_edad,sexo,texto,total/femenina (masculino = total - femenina),vigilancia 2022,
+hecho_vigilancia_edad,n,entero,casos semana x diagnostico x edad x sexo,vigilancia 2022,

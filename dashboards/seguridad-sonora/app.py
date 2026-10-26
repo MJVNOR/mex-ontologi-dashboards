@@ -18,6 +18,7 @@ import streamlit as st
 
 DATA = Path(__file__).resolve().parents[2] / "data"
 SEG = DATA / "seg"
+TIDY = DATA / "tidy"
 st.set_page_config(page_title="Seguridad Sonora", layout="wide",
                    page_icon=":material/shield:")
 st.title("Seguridad en Sonora — datos abiertos")
@@ -42,6 +43,11 @@ def load(name):
 
 
 @st.cache_data
+def loadt(name):
+    return pd.read_parquet(TIDY / name)
+
+
+@st.cache_data
 def significados():
     return pd.read_csv(DATA / "significados_seg.csv")
 
@@ -51,14 +57,15 @@ def geo():
     return json.loads((SEG / "municipios.json").read_text(encoding="utf-8"))
 
 
-inc = load("incidencia.parquet")
-vic = load("victimas.parquet")
-tel = load("llamadas911.parquet")
-det = load("detenidas.parquet")
-des = load("desaparecidas.parquet")
+inc = loadt("hecho_incidencia.parquet")
+vic = loadt("hecho_victimas.parquet")
+tel = loadt("hecho_llamadas911.parquet")
+det = loadt("hecho_detenidas.parquet")
+des = loadt("hecho_desaparecidas.parquet")
 
-tipo_d = [c for c in inc.columns if str(c).strip() == "Tipo de delito"][0]
-vtipo = [c for c in vic.columns if str(c).strip() == "Tipo de delito"][0]
+tipo_d = "tipo_delito"
+vtipo = "tipo_delito"
+bien = "bien_juridico"
 
 anios = sorted(inc["anio"].dropna().unique().astype(int))
 sel = st.sidebar.multiselect("Años (incidencia / víctimas)", anios,
@@ -66,9 +73,9 @@ sel = st.sidebar.multiselect("Años (incidencia / víctimas)", anios,
 inc_f = inc[inc["anio"].isin(sel)] if sel else inc
 vic_f = vic[vic["anio"].isin(sel)] if sel else vic
 
-mun_tot = (inc_f.groupby(["Cve. Municipio", "Municipio"])["n"].sum()
+mun_tot = (inc_f.groupby(["cve_municipio", "municipio"])["n"].sum()
            .reset_index())
-mun_tot["cve"] = mun_tot["Cve. Municipio"].astype(int).map(lambda c: f"{c:05d}")
+mun_tot["cve"] = mun_tot["cve_municipio"].astype(int).map(lambda c: f"{c:05d}")
 
 k1, k2, k3, k4, k5 = st.columns(5)
 k1.metric("Delitos (incidencia)", f"{int(inc_f['n'].sum()):,}",
@@ -102,13 +109,13 @@ with t1:
     fig = px.choropleth(
         mun_map, geojson=geo(), locations="cve",
         featureidkey="properties.CVEGEO", color="n",
-        hover_name="Municipio", color_continuous_scale="Reds",
+        hover_name="municipio", color_continuous_scale="Reds",
         title="Incidencia delictiva por municipio")
     fig.update_geos(fitbounds="locations", visible=False)
     st.plotly_chart(fig, width="stretch",
                     alt="Mapa de Sonora: delitos por municipio, Hermosillo y Cajeme concentran el grueso")
     top_m = mun_tot.nlargest(15, "n")
-    st.plotly_chart(hbar(top_m, "n", "Municipio",
+    st.plotly_chart(hbar(top_m, "n", "municipio",
                          "Top 15 municipios por delitos"),
                     width="stretch")
 
@@ -124,7 +131,6 @@ with t2:
     top_t = inc_f.groupby(tipo_d)["n"].sum().nlargest(12).reset_index()
     st.plotly_chart(hbar(top_t, "n", tipo_d, "Top 12 tipos de delito"),
                     width="stretch")
-    bien = [c for c in inc.columns if "Bien" in str(c)][0]
     que("Bien jurídico afectado: el patrimonio concentra casi la mitad; "
         "la familia es el segundo (violencia familiar).")
     top_b = inc_f.groupby(bien)["n"].sum().nlargest(8).reset_index()
@@ -145,7 +151,7 @@ with t2:
                     alt="Mapa de calor: delitos por mes y año, picos en junio y octubre, diciembre bajo")
     que("Violencia familiar es la modalidad con más registros del periodo. "
         "Feminicidio aparte: 340 casos 2015-2025, con pico en 2021.")
-    vf = inc_f[inc_f["Modalidad"] == "Violencia familiar"] \
+    vf = inc_f[inc_f["modalidad"] == "Violencia familiar"] \
         .groupby("anio")["n"].sum().reset_index()
     st.plotly_chart(px.line(vf, x="anio", y="n", markers=True,
                             title="Violencia familiar por año"),
@@ -158,27 +164,28 @@ with t2:
     que("Robo: vehículo y casa habitación lideran después de 'otros robos'. "
         "Homicidio: arma de fuego duplica a accidente de tránsito.")
     c1, c2 = st.columns(2)
-    rb = inc_f[inc_f[tipo_d] == "Robo"].groupby("Subtipo de delito")["n"] \
+    rb = inc_f[inc_f[tipo_d] == "Robo"].groupby("subtipo_delito")["n"] \
         .sum().nlargest(8).reset_index()
-    c1.plotly_chart(hbar(rb, "n", "Subtipo de delito", "Robo: subtipos"),
+    c1.plotly_chart(hbar(rb, "n", "subtipo_delito", "Robo: subtipos"),
                     width="stretch")
-    ho = inc_f[inc_f[tipo_d] == "Homicidio"].groupby("Modalidad")["n"] \
+    ho = inc_f[inc_f[tipo_d] == "Homicidio"].groupby("modalidad")["n"] \
         .sum().nlargest(6).reset_index()
-    c2.plotly_chart(hbar(ho, "n", "Modalidad", "Homicidio: modalidad"),
+    c2.plotly_chart(hbar(ho, "n", "modalidad", "Homicidio: modalidad"),
                     width="stretch")
     que("Comparador: elige municipios y ve su serie anual lado a lado.")
-    opc = sorted(mun_tot["Municipio"].dropna().unique())
+    opc = sorted(mun_tot["municipio"].dropna().unique())
     comp = st.multiselect("Municipios a comparar",
                           opc, default=["Hermosillo", "Cajeme", "Nogales"])
     if comp:
-        c = inc_f[inc_f["Municipio"].isin(comp)].groupby(
-            ["Municipio", "anio"])["n"].sum().reset_index()
-        st.plotly_chart(px.line(c, x="anio", y="n", color="Municipio",
+        c = inc_f[inc_f["municipio"].isin(comp)].groupby(
+            ["municipio", "anio"])["n"].sum().reset_index()
+        st.plotly_chart(px.line(c, x="anio", y="n", color="municipio",
                                 markers=True, title="Comparador municipal"),
                         width="stretch")
 
 with t3:
-    que("Víctimas del fuero común (nivel estatal, SESNSP): serie anual y "
+    que("Víctimas del fuero común (nivel estatal, SESNSP, serie comparable "
+        "desde 2016 —2015 trae otro esquema y se excluye): serie anual y "
         "reparto por sexo y grupo de edad. Son registros de víctimas, no de "
         "delitos: no se suman con incidencia.")
     sv = vic_f.groupby("anio")["n"].sum().reset_index()
@@ -232,16 +239,16 @@ with t4:
     st.plotly_chart(hbar(top_cl, "n", "clasificacion",
                          "Procedentes: top clasificaciones"),
                     width="stretch")
-    if "motivo no procedente" in tel.columns:
-        colg = int((tel["motivo no procedente"]
+    if "motivo_no_procedente" in tel.columns:
+        colg = int((tel["motivo_no_procedente"]
                     == "NO CONTESTA O CUELGA LA LLAMADA").sum())
-        broma = int(tel["motivo no procedente"].str.contains(
+        broma = int(tel["motivo_no_procedente"].str.contains(
             "BROMA", na=False).sum())
         m1, m2, m3 = st.columns(3)
         m1.metric("Colgadas / no contesta", f"{colg:,}")
         m2.metric("Bromas (niños, adolescentes y adultos)", f"{broma:,}")
         m3.metric("Hora pico de llamadas", "18-21h")
-        top_mo = tel[tel["tipo"] == "improcedente"]["motivo no procedente"] \
+        top_mo = tel[tel["tipo"] == "improcedente"]["motivo_no_procedente"] \
             .value_counts().nlargest(10).reset_index()
         top_mo.columns = ["motivo", "n"]
         st.plotly_chart(hbar(top_mo, "n", "motivo", "Improcedentes: top motivos"),
@@ -261,9 +268,8 @@ with t5:
     c2.plotly_chart(px.pie(det.groupby("sexo").size().reset_index(name="n"),
                            names="sexo", values="n",
                            title="Detenidas por sexo"), width="stretch")
-    det["edad"] = pd.to_numeric(det["edad"], errors="coerce")
-    med = float(det["edad"].median())
-    figh = px.histogram(det.dropna(subset=["edad"]), x="edad",
+    med = float(det["edad_num"].median())
+    figh = px.histogram(det.dropna(subset=["edad_num"]), x="edad_num",
                         nbins=30, title=f"Detenidas: edad (mediana {med:.0f})")
     figh.add_vline(x=med, line_dash="dash",
                    annotation_text=f"mediana {med:.0f}")
@@ -297,15 +303,16 @@ with t6:
         "lideran robo y violencia familiar en proporciones parecidas; lo "
         "que cambia es cuánto registra cada municipio. Hermosillo y Cajeme "
         "van solos; 5 intermedios forman el cinturón; 65 comparten nivel bajo.")
-    cl = load("inferencias/clusters_municipio.parquet").merge(
-        mun_tot[["Municipio", "cve"]], on="Municipio", how="left")
+    cl = load("inferencias/clusters_municipio.parquet").rename(
+        columns={"Municipio": "municipio"}).merge(
+        mun_tot[["municipio", "cve"]], on="municipio", how="left")
     nom = {0: "Resto: 65 mpios (59k)", 1: "Hermosillo (134k)",
            2: "Cajeme (64k)", 3: "Cinturón: 5 mpios (85k)"}
     cl["grupo"] = cl["cluster"].map(nom)
     st.plotly_chart(px.choropleth(
         cl, geojson=geo(), locations="cve",
         featureidkey="properties.CVEGEO", color="grupo",
-        hover_name="Municipio", title="4 niveles por volumen de delitos")
+        hover_name="municipio", title="4 niveles por volumen de delitos")
         .update_geos(fitbounds="locations", visible=False),
         width="stretch",
         alt="Mapa por grupo de volumen: Hermosillo y Cajeme solos, cinturón de 5, resto con nivel bajo")
@@ -395,6 +402,12 @@ with t7:
     st.download_button("Descargar significados (CSV)",
                        sig.to_csv(index=False).encode("utf-8"),
                        "significados_seg_sonora.csv", "text/csv")
+    st.write("Capa tidy de consumo (`data/tidy/`, snake_case): 9 tablas con "
+             "diccionario de datos y procedencia en `data/procedencia_seg.json`.")
+    st.download_button(
+        "Descargar diccionario tidy (CSV)",
+        (TIDY / "diccionario_datos.csv").read_bytes(),
+        "diccionario_datos_seg.csv", "text/csv")
     st.json({"conjuntos_seguridad": 7, "significados": len(sig),
              "triples_store_portal": 322495,
              "nota": "Incidencia y víctimas no se suman entre sí (distinta "

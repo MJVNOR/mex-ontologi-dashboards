@@ -16,23 +16,23 @@
     }
   },
   "egresos_hmo": {
-    "filas": 99391,
-    "total": 231153,
+    "filas": 90036,
+    "total": 220954,
     "por_anio": {
       "2015": 2192,
       "2016": 2528,
       "2017": 3192,
-      "2018": 55238,
-      "2019": 58877,
-      "2020": 47571,
-      "2021": 47508,
+      "2018": 52293,
+      "2019": 55828,
+      "2020": 45352,
+      "2021": 45522,
       "2022": 14047
     },
     "por_sexo": {
       "Femenino": 1316,
-      "Hombre": 101139,
+      "Hombre": 95636,
       "Masculino": 3404,
-      "Mujer": 125293,
+      "Mujer": 120597,
       "No Especificado": 1
     }
   },
@@ -62,7 +62,15 @@
     "filas": 1752,
     "casos": 201667
   },
+  "vigilancia_long": {
+    "filas": 99864
+  },
   "inspecciones_hmo": {
     "filas": 30
+  },
+  "duplicados_exactos_retirados": {
+    "urgencias_hmo": 0,
+    "egresos_hmo": 9355,
+    "consulta_hmo": 0
   }
 }

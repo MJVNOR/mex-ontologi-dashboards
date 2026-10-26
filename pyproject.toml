@@ -16,6 +16,7 @@ dependencies = [
     "joblib>=1.6",
     "shap[plots]>=0.54.1",
     "matplotlib>=3.11.2",
+    "polars>=2.1.0",
 ]
 
 [tool.uv]

@@ -1,0 +1,194 @@
+{
+  "tema": "seguridad",
+  "generado_en_utc": "2026-10-26T10:51:51.459631+00:00",
+  "preprocesador": "tidy_seg.py",
+  "preprocesador_sha256": "508470784ace8f37ea083b3b1e54e2cb4674d2d52b964b6bcd620f7091c3b27d",
+  "staging": {
+    "dim_municipios.parquet": {
+      "filas": 74,
+      "archivo": "data/seg_raw/catalogo.xlsx",
+      "sha256": "84bb6fcda02f3de3b295189d59cf0dde201bc4e048888681b6cd8ea624bb0716"
+    },
+    "hecho_incidencia.parquet": {
+      "filas": 957264,
+      "archivo": "data/seg/incidencia.parquet",
+      "sha256": "cf97c4c9e16074c540894474c779de24f32b46a06817ca39a0693618c76dbcd0"
+    },
+    "hecho_victimas.parquet": {
+      "filas": 27600,
+      "archivo": "data/seg/victimas.parquet",
+      "sha256": "ae699267d5565685a96c9eb81b61d3fd92bd19416091aed02e4d3b664528e142"
+    },
+    "hecho_llamadas911.parquet": {
+      "filas": 1119206,
+      "archivo": "data/seg/llamadas911.parquet",
+      "sha256": "8c3d9b9ee73fdc92a9f94ea032cb1e8d2ab31480ca737effad4a099f99b32531"
+    },
+    "hecho_detenidas.parquet": {
+      "filas": 4169,
+      "archivo": "data/seg/detenidas.parquet",
+      "sha256": "47c2e1fe6616aed39d26dba776ab3e594d58d7f488741367956f766fb77c9b4f"
+    },
+    "hecho_desaparecidas.parquet": {
+      "filas": 11810,
+      "archivo": "data/seg/desaparecidas.parquet",
+      "sha256": "1d7434c7994effd06028631b49aa638f28178774d0935038f3ae31c68b9d1d62"
+    },
+    "hecho_vigilancia_semanal.parquet": {
+      "filas": 1752,
+      "archivo": "data/hmo_vigilancia.parquet",
+      "sha256": "02be3f6d451507fbb4685a458980639a33fa2ae91551924feb8c8d193094b2ab"
+    },
+    "hecho_vigilancia_edad.parquet": {
+      "filas": 38544,
+      "archivo": "data/hmo_vigilancia.parquet",
+      "sha256": "02be3f6d451507fbb4685a458980639a33fa2ae91551924feb8c8d193094b2ab"
+    }
+  },
+  "artefactos": {
+    "dim_municipios.parquet": {
+      "filas": 74,
+      "origen": "catalogo.xlsx (recurso del conjunto)",
+      "sha256": "22e686713a771fb0f2889db54dba4dc9b48951f872907fe04d06cb15553fd142",
+      "columnas_salida": [
+        "cve_municipio",
+        "municipio"
+      ]
+    },
+    "hecho_incidencia.parquet": {
+      "filas": 957264,
+      "total_n": 343128,
+      "origen": "incidencia.parquet (staging 2015-2025)",
+      "sha256": "c41b445286d6387666b7b60d1ab05d302a761d10b603bff9399bd4f9b504ac40",
+      "columnas_salida": [
+        "anio",
+        "mes_num",
+        "mes",
+        "cve_municipio",
+        "municipio",
+        "bien_juridico",
+        "tipo_delito",
+        "subtipo_delito",
+        "modalidad",
+        "n"
+      ]
+    },
+    "hecho_victimas.parquet": {
+      "filas": 27600,
+      "total_n": 57983,
+      "origen": "victimas.parquet (staging, excluye 2015)",
+      "excluidas_2015_otro_esquema": 87024,
+      "sha256": "40c47d39158ac6470d6d9c9cc9531df7734d248801c0c32d185495c4a87a5250",
+      "columnas_salida": [
+        "anio",
+        "mes_num",
+        "mes",
+        "sexo",
+        "rango_edad",
+        "bien_juridico",
+        "tipo_delito",
+        "subtipo_delito",
+        "modalidad",
+        "n"
+      ]
+    },
+    "hecho_llamadas911.parquet": {
+      "filas": 1119206,
+      "origen": "llamadas911.parquet (staging T1-T2 2026)",
+      "sha256": "87d1544a33de6147f51c581a3a3157823c44d67c5fa35de5c6b372f7f6dcfd35",
+      "columnas_salida": [
+        "fecha",
+        "hora",
+        "municipio",
+        "localidad",
+        "colonia",
+        "sexo_reportante",
+        "clasificacion",
+        "tipo",
+        "motivo_no_procedente"
+      ]
+    },
+    "hecho_detenidas.parquet": {
+      "filas": 4169,
+      "edad_no_numerica": 0,
+      "origen": "detenidas.parquet (staging T1-T3 2026)",
+      "sha256": "49c50ef58d12b9b792993ee8fdb6cc9d337d8d547cb5a90d0b663194341c7ef0",
+      "columnas_salida": [
+        "fecha_parte",
+        "municipio",
+        "sexo",
+        "agencia",
+        "delito",
+        "edad_raw",
+        "edad_num",
+        "nivel_fuerza",
+        "hora_detencion",
+        "motivo_origen"
+      ]
+    },
+    "hecho_desaparecidas.parquet": {
+      "filas": 11810,
+      "origen": "desaparecidas.parquet (staging)",
+      "sha256": "1d7434c7994effd06028631b49aa638f28178774d0935038f3ae31c68b9d1d62",
+      "columnas_salida": [
+        "sexo_vic",
+        "fecha_nac_vic",
+        "nacionalidad_vic",
+        "estado_nac_vic",
+        "fecha_hechos",
+        "estado_des",
+        "estatus_victima",
+        "fecha_localizacion",
+        "etnia",
+        "lengua",
+        "anio_hecho"
+      ]
+    },
+    "hecho_vigilancia_semanal.parquet": {
+      "filas": 1752,
+      "origen": "hmo_vigilancia.parquet (grano semana x diagnostico)",
+      "sha256": "5624f356d60716d98d37a6642e6644d2e955c37601b9336ebf7ee5099ccf1a74",
+      "columnas_salida": [
+        "no_semana",
+        "periodo",
+        "municipio",
+        "diagnostico",
+        "cve_diagnostico",
+        "acumulado",
+        "totalm",
+        "totalf",
+        "ssa",
+        "imss_ord",
+        "issste",
+        "otras",
+        "imss_sol",
+        "d_if",
+        "pemex",
+        "sedena",
+        "sedemar"
+      ]
+    },
+    "hecho_vigilancia_edad.parquet": {
+      "filas": 38544,
+      "origen": "hmo_vigilancia.parquet (bandas x sexo; acumulado vive en tabla semanal)",
+      "acumulado_vs_suma_bandas_max_dif": 3286.0,
+      "acumulado_vs_suma_bandas_mediana_dif": 8.5,
+      "sha256": "05fe9a93262657060b44aec743b996ad962d72a32700f5817c46c3c2223e6d5b",
+      "columnas_salida": [
+        "no_semana",
+        "periodo",
+        "municipio",
+        "diagnostico",
+        "cve_diagnostico",
+        "grupo_edad",
+        "sexo",
+        "n"
+      ]
+    }
+  },
+  "huecos": [
+    "Sin snapshot ontologia_seg.json: columnas_ontologia e IRIs por columna pendientes (requiere exportar evidencia del MCP).",
+    "Fecha de carga no documentada; generado_en_utc no acredita la carga.",
+    "victimas 2015 excluida por cambio de esquema en fuente (ver nota)."
+  ]
+}

@@ -107,7 +107,9 @@ with t2:
     c1, c2 = st.columns(2)
     que("Izquierda: los 10 diagnósticos (CIE-10) con más atenciones de urgencias en "
         "Hermosillo. Derecha: lo mismo para egresos hospitalarios. Permite ver qué "
-        "padecimientos presionan cada servicio.")
+        "padecimientos presionan cada servicio. Nota: la fuente trae 9,355 renglones "
+        "idénticos de egresos que se retiraron (ver procedencia); el total publicado "
+        "es sin duplicados.")
     top_u = urg_f.groupby("CIE10_Descrip")["Total_Urgencias"].sum().nlargest(10).reset_index()
     c1.plotly_chart(px.bar(top_u, x="Total_Urgencias", y="CIE10_Descrip", orientation="h",
                            title="Urgencias: top 10 diagnósticos"), width="stretch", alt="Grafica: Urgencias: top 10 diagnósticos")

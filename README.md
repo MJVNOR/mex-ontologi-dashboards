@@ -25,6 +25,8 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 | Educación en Hermosillo | `dashboards/educacion-hermosillo/app.py` — [ver en vivo](https://mex-ontologi-dashboards-zqt8qvqfwwbacguuimtvwz.streamlit.app/) | Becas 2021-25 (filtro HMO) + UTH institucional + capacitación SEC, 115 significados documentados |
 | Seguridad en Sonora | `dashboards/seguridad-sonora/app.py` — [ver en vivo](https://mex-ontologi-dashboards-plduatjh2dn6pwcct3cwku.streamlit.app/) | Incidencia municipal 2015-25 + víctimas + 911 T1-T2 2026 + detenidas + desaparecidas + mapa 72 municipios, 107 significados |
 
+Capa tidy de consumo: `data/tidy/` (9 tablas snake_case + `diccionario_datos.csv`, script `scripts/tidy_seg.py`, procedencia en `data/procedencia_seg.json`, registro en `config/artefactos.json`). El dashboard de seguridad lee de `data/tidy/`; `data/seg/` queda como staging.
+
 ## Skills para análisis y dashboards
 
 Codex y OpenCode cuentan con estas skills instaladas a nivel de usuario para

@@ -105,7 +105,7 @@
       "casos"
     ],
     "agregacion": "Sin agregar: una fila por diagnostico-semana-dimension-categoria-sexo.",
-    "alcance": "Mismo alcance que hmo_vigilancia.parquet; hombres_derivado es resta aritmetica marcada con derivado=true."
+    "alcance": "Mismo alcance que hmo_vigilancia.parquet; hombres_derivado es resta aritmetica marcada con derivado=true. El desglose de edad de la fuente es parcial (no suma al acumulado); totalm+totalf si cuadra siempre."
   },
   "hmo_inspecciones.parquet": {
     "tema": "salud",
@@ -327,5 +327,184 @@
     "transformacion": "Renombra columnas por posicion; conserva primera hoja.",
     "agregacion": "Sin agregar: una fila por estudiante.",
     "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "tidy/dim_municipios.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "seg_raw/catalogo.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "ninguno (catalogo completo 74 filas)",
+    "transformacion": "Renombre a cve_municipio/municipio.",
+    "medidas": [],
+    "agregacion": "Sin agregar.",
+    "alcance": "Catalogo tal cual lo publica la fuente."
+  },
+  "tidy/hecho_incidencia.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "seg_raw/2015.csv"
+      },
+      {
+        "archivo": "seg_raw/2016.csv"
+      },
+      {
+        "archivo": "seg_raw/2017.csv"
+      },
+      {
+        "archivo": "seg_raw/2018.csv"
+      },
+      {
+        "archivo": "seg_raw/2019.csv"
+      },
+      {
+        "archivo": "seg_raw/2020.csv"
+      },
+      {
+        "archivo": "seg_raw/2021.csv"
+      },
+      {
+        "archivo": "seg_raw/2022.csv"
+      },
+      {
+        "archivo": "seg_raw/2023.csv"
+      },
+      {
+        "archivo": "seg_raw/2024.csv"
+      },
+      {
+        "archivo": "seg_raw/2025.csv"
+      }
+    ],
+    "filtro": "ninguno (estatal completo)",
+    "transformacion": "Largo anio-mes; snake_case; mes_num; sin src_anio.",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n por dimensiones del grafico.",
+    "alcance": "Totales declarados; ceros incluidos de la matriz SESNSP."
+  },
+  "tidy/hecho_victimas.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "seg_raw/vict_2015.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2016.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2017.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2018.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2019.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2020.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2021.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2022.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2023.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2024.csv"
+      },
+      {
+        "archivo": "seg_raw/vict_2025.csv"
+      }
+    ],
+    "filtro": "anio != 2015 (esquema municipal sin sexo/edad)",
+    "transformacion": "Largo anio-mes; snake_case; mes_num.",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n; no sumar con incidencia.",
+    "alcance": "Serie comparable 2016-2025; unidad victima, no delito."
+  },
+  "tidy/hecho_llamadas911.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "llamadas 911 T1-T2 2026, snake_case"
+      }
+    ],
+    "filtro": "ninguno",
+    "transformacion": "llamadas 911 T1-T2 2026, snake_case",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n.",
+    "alcance": "Totales declarados por la fuente."
+  },
+  "tidy/hecho_detenidas.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "detenidas T1-T3 2026, edad_raw + edad_num"
+      }
+    ],
+    "filtro": "ninguno",
+    "transformacion": "detenidas T1-T3 2026, edad_raw + edad_num",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n.",
+    "alcance": "Totales declarados por la fuente."
+  },
+  "tidy/hecho_desaparecidas.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "desaparecidas historico, sin cambios de columnas"
+      }
+    ],
+    "filtro": "ninguno",
+    "transformacion": "desaparecidas historico, sin cambios de columnas",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n.",
+    "alcance": "Totales declarados por la fuente."
+  },
+  "tidy/hecho_vigilancia_semanal.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "vigilancia 2022 semanal (acumulado + instituciones)"
+      }
+    ],
+    "filtro": "ninguno",
+    "transformacion": "vigilancia 2022 semanal (acumulado + instituciones)",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n.",
+    "alcance": "Totales declarados por la fuente."
+  },
+  "tidy/hecho_vigilancia_edad.parquet": {
+    "tema": "seguridad",
+    "fuentes": [
+      {
+        "archivo": "vigilancia 2022 derretida a semana x edad x sexo"
+      }
+    ],
+    "filtro": "ninguno",
+    "transformacion": "vigilancia 2022 derretida a semana x edad x sexo",
+    "medidas": [
+      "n"
+    ],
+    "agregacion": "Suma de n.",
+    "alcance": "Totales declarados por la fuente."
   }
 }
