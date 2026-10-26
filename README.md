@@ -41,6 +41,7 @@ preparar y revisar los análisis de los dashboards:
 | `polars` | Preparar tablas y ejecutar filtros, transformaciones y agregaciones eficientes. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/polars) |
 | `data-visualization` | Elegir gráficos adecuados y mejorar escalas, etiquetas, colores y accesibilidad con Plotly, matplotlib y seaborn. | [Anthropic](https://github.com/anthropics/knowledge-work-plugins/tree/main/data/skills/data-visualization) |
 | `data-storytelling` | Construir una narrativa con pregunta central, contexto, hallazgos verificables y cierre; ordenar gráficos y explicar sus límites sin inventar causas. | [wshobson/agents](https://github.com/wshobson/agents/tree/main/plugins/business-analytics/skills/data-storytelling) |
+| `scientific-critical-thinking` | Interpretar resultados y evaluar la solidez de la evidencia, los sesgos y la incertidumbre; distinguir lo observado de las conclusiones y explicitar qué no se puede afirmar. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/scientific-critical-thinking) |
 
 ### Modelos predictivos y machine learning
 
@@ -56,7 +57,7 @@ el análisis y la evidencia lo permitan:
 ### Instalación para ambos agentes
 
 ```powershell
-npx --yes skills add K-Dense-AI/scientific-agent-skills --skill exploratory-data-analysis polars --agent codex opencode --global --yes
+npx --yes skills add K-Dense-AI/scientific-agent-skills --skill exploratory-data-analysis polars scientific-critical-thinking --agent codex opencode --global --yes
 npx --yes skills add anthropics/knowledge-work-plugins --skill validate-data statistical-analysis data-visualization --agent codex opencode --global --yes
 npx --yes skills add K-Dense-AI/scientific-agent-skills --skill scikit-learn statsmodels shap --agent codex opencode --global --yes
 npx --yes skills add wshobson/agents --skill data-storytelling --agent codex opencode --global --yes
