@@ -289,49 +289,72 @@ with t6:
 with t7:
     st.header("Historia: lo que el portal cuenta (y lo que no)",
               icon=":material/auto_stories:")
-    st.caption("5 hallazgos verificados. Abre cada uno para ver evidencia y límites.")
+    st.caption("5 hallazgos verificados, cada uno con su gráfica y su límite.")
     with st.container(border=True):
         st.subheader("1. La consulta externa es de mujeres jóvenes",
                      icon=":material/group:")
         st.badge("Verificado", icon=":material/check:", color="green")
-        with st.expander("Evidencia y límites"):
-            st.markdown("1,333,591 consultas; 62% mujeres, hasta 78% en 20-29; "
-                        "en infancia predomina Hombre. Asociación sexo×edad "
-                        "χ² p≈0, V de Cramér 0.30.")
-            st.caption("Límite: descriptivo por diseño, sin atribuir causa.")
+        c1, c2 = st.columns([1.2, 1])
+        pm = con_f[con_f["Sexo"].isin(["HOMBRE", "MUJER"])] \
+            .groupby(["Grupo_Edad", "Sexo"])["Total"].sum()
+        pm = (pm.xs("MUJER", level=1) / pm.groupby(level=0).sum() * 100).reset_index(name="pct")
+        c1.plotly_chart(px.bar(pm, x="Grupo_Edad", y="pct",
+                               title="% mujeres por grupo de edad"),
+                        width="stretch", alt="Mujeres por grupo de edad")
+        c2.markdown("1,333,591 consultas, **62% mujeres**, hasta **78% en 20-29**; "
+                    "en infancia predomina Hombre (5-9: 36%). Asociación sexo×edad "
+                    "χ² p≈0, V de Cramér 0.30.")
+        c2.caption("Límite: descriptivo por diseño, sin atribuir causa.")
     with st.container(border=True):
         st.subheader("2. 2020 se desploma y 2022 viene parcial",
                      icon=":material/trending_down:")
         st.badge("Verificado", icon=":material/check:", color="green")
-        with st.expander("Evidencia y límites"):
-            st.markdown("Consulta 163,651 en 2020 vs ~430 mil en 2018-2019; 2022 "
-                        "trae 3 meses. Egresos: 9,355 renglones idénticos "
-                        "retirados → total 220,954.")
-            st.caption("Límite: años incompletos declarados como tales.")
+        c1, c2 = st.columns([1.2, 1])
+        c1.plotly_chart(px.line(s, x="año", y="total", color="serie", markers=True,
+                               title="Atenciones anuales por servicio"),
+                        width="stretch", alt="Caída 2020 y 2022 parcial")
+        c2.markdown("Consulta **163,651 en 2020** vs ~430 mil en 2018-2019; 2022 trae "
+                    "3 meses. Egresos: **9,355 renglones idénticos** retirados → "
+                    "total publicado **220,954**.")
+        c2.caption("Límite: años incompletos declarados como tales.")
     with st.container(border=True):
         st.subheader("3. Hermosillo atiende de fuera",
                      icon=":material/local_hospital:")
         st.badge("Verificado", icon=":material/check:", color="green")
-        with st.expander("Evidencia y límites"):
-            st.markdown("7,893 partos ocurridos vs 7,049 madres residentes; "
-                        "4,098 defunciones ocurridas vs 3,512 residentes.")
-            st.caption("Límite: residencia ≠ ocurrencia.")
+        c1, c2 = st.columns([1.2, 1])
+        io = pd.DataFrame({"evento": ["Partos", "Defunciones"],
+                           "ocurridos": [7893, 4098], "residentes": [7049, 3512]})
+        c1.plotly_chart(px.bar(io.melt(id_vars="evento", var_name="tipo", value_name="n"),
+                                 x="evento", y="n", color="tipo", barmode="group",
+                                 title="Ocurridos vs residentes"),
+                        width="stretch", alt="Ocurridos contra residentes")
+        c2.markdown("**7,893 partos** ocurridos vs 7,049 madres residentes; **4,098** "
+                    "defunciones ocurridas vs 3,512 residentes: la ciudad concentra "
+                    "atención hospitalaria regional.")
+        c2.caption("Límite: residencia ≠ ocurrencia.")
     with st.container(border=True):
         st.subheader("4. IRA y COVID mandan la vigilancia",
                      icon=":material/coronavirus:")
         st.badge("Verificado", icon=":material/check:", color="green")
-        with st.expander("Evidencia y límites"):
-            st.markdown("63,700 IRA y 51,600 COVID en 2022 (36 semanas); semanas "
-                        "3, 4 y 15 atípicas; desglose de edad parcial.")
-            st.caption("Límite: 'acumulado' = casos nuevos semanales.")
+        c1, c2 = st.columns([1.2, 1])
+        c1.plotly_chart(px.line(sem, x="no_semana", y="acumulado", markers=True,
+                               title="Casos semanales 2022"),
+                        width="stretch", alt="Curva semanal con picos")
+        c2.markdown("**63,700 IRA y 51,600 COVID** en 2022 (36 semanas); semanas **3, 4 "
+                    "y 15 atípicas**. El desglose de edad de la fuente es parcial.")
+        c2.caption("Límite: 'acumulado' = casos nuevos semanales.")
     with st.container(border=True):
         st.subheader("5. Pronosticar aquí es perfilar, no predecir",
                      icon=":material/query_stats:")
         st.badge("Verificado", icon=":material/check:", color="green")
-        with st.expander("Evidencia y límites"):
-            st.markdown("Ridge MAPE 26/35%; SARIMAX (28/61) no lo supera. Tasas "
-                        "por 100 mil con IC95%.")
-            st.caption("Límite: cambio de nivel post-2020; denominador CONAPO.")
+        c1, c2 = st.columns([1.2, 1])
+        c1.plotly_chart(px.line(fc, x="mes", y="pronostico", color="servicio", markers=True,
+                               title="Perfil estacional 2023 (estimación)"),
+                        width="stretch", alt="Pronóstico mensual por servicio")
+        c2.markdown("Ridge **MAPE 26/35%**; SARIMAX (28/61, residuos autocorrelacionados) "
+                    "no lo supera. Tasas con IC95%: mortalidad en J, fecundidad pico "
+                    "20-29.")
+        c2.caption("Límite: cambio de nivel post-2020; denominador CONAPO.")
     st.caption("Portal datos.sonora.gob.mx vía ontología mex-ontologi: totales "
                "declarados, series por separado, sin cruces sin validación.")
 
