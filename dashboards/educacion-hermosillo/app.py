@@ -69,7 +69,8 @@ t1, t2, t3, t4, t5, t6, t7 = st.tabs(
 
 with t1:
     que("Becas autorizadas a residentes de Hermosillo por año (2021-2025): cada barra "
-        "es un año y su altura el número de becas. Muestra el crecimiento del programa.")
+        "es un año y su altura el número de becas. Crecimiento 2021-2024 con ligera "
+        "baja en 2025.")
     s = bec_f.groupby("anio").agg(becas=("importe", "size"),
                                    importe=("importe", "sum")).reset_index()
     st.plotly_chart(px.bar(s, x="anio", y="becas", title="Becas HMO por año"),
@@ -148,6 +149,8 @@ with t2:
                            x="anio", y="n", color="etapa", barmode="group",
                            title="Trayectoria UTH por corte"),
                     use_container_width=True)
+    st.caption("Ojo: el corte 2022-1 trae un solo programa reportado (n=10); no es "
+               "comparable con los demás cortes.")
     que("Los 10 programas educativos con más titulados y con más egresados "
         "(2022-2025): qué carreras aportan más profesionistas en la UTH Hermosillo.")
     c1, c2 = st.columns(2)

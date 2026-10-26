@@ -139,9 +139,9 @@ with t4:
                            title="Defunciones: top 10 causas básicas"), use_container_width=True)
 
 with t5:
-    que("Vigilancia epidemiológica 2022 en HMO: casos acumulados por diagnóstico "
-        "(lideran infecciones respiratorias agudas y COVID-19) y curva de casos por "
-        "semana epidemiológica, que muestra los picos de contagio del año.")
+    que("Vigilancia epidemiológica 2022 en HMO (36 semanas con reporte): casos acumulados "
+        "por diagnóstico (lideran infecciones respiratorias agudas y COVID-19) y curva "
+        "de casos por semana epidemiológica, que muestra los picos de contagio del año.")
     top_v = vig.groupby("des_diagno")["acumulado"].sum().nlargest(12).reset_index()
     st.plotly_chart(px.bar(top_v, x="acumulado", y="des_diagno", orientation="h",
                            title="Vigilancia 2022 HMO: casos acumulados por diagnóstico"),
