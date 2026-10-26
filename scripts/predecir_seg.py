@@ -32,15 +32,14 @@ ORDEN = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
 
 def main():
     met = {}
-    inc = pd.read_parquet(SEG / "incidencia.parquet",
-                          columns=["Cve. Municipio", "Municipio", "anio",
-                                   "mes", "n"])
-    inc = inc[~inc["Cve. Municipio"].isin([26998, 26999])]
-    m = inc.groupby(["Municipio", "anio", "mes"], observed=True)["n"].sum() \
+    inc = pd.read_parquet(TIDY / "hecho_incidencia.parquet",
+                          columns=["cve_municipio", "municipio", "anio",
+                                   "mes_num", "n"])
+    inc = inc[~inc["cve_municipio"].isin([26998, 26999])]
+    m = inc.groupby(["municipio", "anio", "mes_num"], observed=True)["n"].sum() \
         .reset_index()
-    m["nm"] = m["mes"].map({v: i + 1 for i, v in enumerate(ORDEN)})
-    m = m.sort_values(["Municipio", "anio", "nm"]).reset_index(drop=True)
-    g = m.groupby("Municipio")["n"]
+    m = m.sort_values(["municipio", "anio", "mes_num"]).reset_index(drop=True)
+    g = m.groupby("municipio")["n"]
     m["lag1"] = g.shift(1)
     m["lag12"] = g.shift(12)
     m["roll3"] = g.shift(1).rolling(3).mean().reset_index(level=0, drop=True)

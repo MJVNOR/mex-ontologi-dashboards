@@ -91,22 +91,6 @@
     "agregacion": "Suma de acumulado por dimensiones del gráfico.",
     "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
   },
-  "vigilancia_long.parquet": {
-    "tema": "salud",
-    "fuentes": [
-      {
-        "archivo": "vigilancia_2022.xlsx",
-        "hoja": 0
-      }
-    ],
-    "filtro": "upper(str(des_munici)) == HERMOSILLO",
-    "transformacion": "Funde columnas de desglose en filas (dimension, categoria, sexo, casos): grupo_edad x {total, mujeres, hombres_derivado=total-mujeres}, institucion y mes x total.",
-    "medidas": [
-      "casos"
-    ],
-    "agregacion": "Sin agregar: una fila por diagnostico-semana-dimension-categoria-sexo.",
-    "alcance": "Mismo alcance que hmo_vigilancia.parquet; hombres_derivado es resta aritmetica marcada con derivado=true. El desglose de edad de la fuente es parcial (no suma al acumulado); totalm+totalf si cuadra siempre."
-  },
   "hmo_inspecciones.parquet": {
     "tema": "salud",
     "fuentes": [
@@ -327,6 +311,40 @@
     "transformacion": "Renombra columnas por posicion; conserva primera hoja.",
     "agregacion": "Sin agregar: una fila por estudiante.",
     "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "marg_out/municipios.parquet": {
+    "tema": "marginacion",
+    "fuentes": [
+      {
+        "archivo": "marg/indice-de-marginacion-municipios-2020.xlsx",
+        "hoja": "IMM_2020"
+      }
+    ],
+    "filtro": "CVE_ENT == 26 (las 72 filas ya son Sonora; verificado por aserción)",
+    "transformacion": "Conserva columnas y filas de la hoja IMM_2020; añade marca es_sonora solo en entidades.",
+    "medidas": [
+      "PO2SM",
+      "IM_2020"
+    ],
+    "agregacion": "Sin agregar: una fila por municipio; valores declarados por la fuente.",
+    "alcance": "Corte 2020. PO2SM es proxy de ingresos (<2 salarios mínimos), no mide empleo, vacantes ni desempleo."
+  },
+  "marg_out/entidades.parquet": {
+    "tema": "marginacion",
+    "fuentes": [
+      {
+        "archivo": "marg/indice-de-marginacion-estados-2020.xlsx",
+        "hoja": "IME_2020"
+      }
+    ],
+    "filtro": "ninguno (33 filas: 32 entidades + nacional); marca es_sonora por NOM_ENT",
+    "transformacion": "Conserva columnas y filas de la hoja IME_2020; añade es_sonora.",
+    "medidas": [
+      "PO2SM",
+      "IM_2020"
+    ],
+    "agregacion": "Sin agregar: una fila por entidad; valores declarados por la fuente.",
+    "alcance": "Corte 2020. PO2SM es proxy de ingresos (<2 salarios mínimos), no mide empleo, vacantes ni desempleo."
   },
   "tidy/dim_municipios.parquet": {
     "tema": "seguridad",

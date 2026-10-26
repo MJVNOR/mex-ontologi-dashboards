@@ -72,10 +72,11 @@ def exportar(tema, transporte):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--tema', choices=['salud','edu','todos'], default='todos')
-    p.add_argument('--transporte', choices=['mcp','cli'], default='mcp')
+    p.add_argument('--tema', choices=['salud', 'edu', 'marginacion', 'todos'], default='todos')
+    p.add_argument('--transporte', choices=['mcp', 'cli'], default='mcp')
     a = p.parse_args()
-    for tema in (['salud','edu'] if a.tema == 'todos' else [a.tema]):
+    temas = ['salud', 'edu', 'marginacion'] if a.tema == 'todos' else [a.tema]
+    for tema in temas:
         exportar(tema, a.transporte)
 
 

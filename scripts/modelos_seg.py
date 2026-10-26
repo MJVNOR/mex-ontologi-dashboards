@@ -25,6 +25,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 ROOT = Path(__file__).resolve().parents[1]
 SEG = ROOT / "data" / "seg"
+TIDY = ROOT / "data" / "tidy"
 INF = SEG / "inferencias"
 INF.mkdir(exist_ok=True)
 MOD = SEG / "modelos"
@@ -33,11 +34,11 @@ MOD.mkdir(exist_ok=True)
 
 def main():
     met = {}
-    inc = pd.read_parquet(SEG / "incidencia.parquet")
+    inc = pd.read_parquet(TIDY / "hecho_incidencia.parquet")
 
     # 1-2. Matriz municipio x tipo de delito (reales, sin 26998/26999)
-    mat = (inc[~inc["Cve. Municipio"].isin([26998, 26999])]
-           .groupby(["Municipio", "Tipo de delito"])["n"].sum()
+    mat = (inc[~inc["cve_municipio"].isin([26998, 26999])]
+           .groupby(["municipio", "tipo_delito"])["n"].sum()
            .unstack(fill_value=0))
     Xs = StandardScaler().fit_transform(mat.values)
 
@@ -94,8 +95,8 @@ def main():
                             "dias_flag": int((d.anomalia == -1).sum())}
 
     # 3b. Anomalias incidencia mensual estatal
-    m = inc.groupby(["anio", "mes"], observed=True)["n"].sum() \
-        .reset_index().sort_values(["anio", "mes"]).reset_index(drop=True)
+    m = inc.groupby(["anio", "mes_num", "mes"], observed=True)["n"].sum() \
+        .reset_index().sort_values(["anio", "mes_num"]).reset_index(drop=True)
     iso2 = IsolationForest(contamination=0.05, random_state=42)
     m["anomalia"] = iso2.fit_predict(m[["n"]])
     joblib.dump(iso2, MOD / "anomalias_incidencia.pkl")
@@ -105,15 +106,11 @@ def main():
         "meses": len(m), "meses_flag": len(mal),
         "flags": mal.astype(str).to_dict("records")}
 
-    # 4. Pronostico estacional mensual (entrena <=2023, evalua 2024-2025)
-    orden = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-             "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre",
-             "Diciembre"]
     # 4. Pronostico: se probo Ridge estacional (dummies de mes, solo y con
     # tendencia) con split temporal 2015-2023 -> 2024-2025. R2 < 0 en ambos:
     # la serie tiene cambios de nivel que el perfil estacional no generaliza.
     # No se publica pronostico; se deja la metrica como constancia.
-    m["nm"] = m["mes"].map({v: i + 1 for i, v in enumerate(orden)})
+    m["nm"] = m["mes_num"]
     tr, te = m[m.anio <= 2023], m[m.anio >= 2024]
     pre = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
     Xtr, Xte = pre.fit_transform(tr[["nm"]]), pre.transform(te[["nm"]])

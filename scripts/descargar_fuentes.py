@@ -47,7 +47,7 @@ def descargar_tema(tema, actualizar=False):
 def main(tema=None):
     p = argparse.ArgumentParser(description=__doc__)
     if tema is None:
-        p.add_argument('--tema', choices=['salud', 'edu'], required=True)
+        p.add_argument('--tema', choices=['salud', 'edu', 'marginacion'], required=True)
     p.add_argument('--actualizar', action='store_true')
     args = p.parse_args()
     descargar_tema(tema or args.tema, args.actualizar)

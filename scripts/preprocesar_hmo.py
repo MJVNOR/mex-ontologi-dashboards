@@ -85,43 +85,6 @@ def main():
     vh.to_parquet(DATA / "hmo_vigilancia.parquet", index=False)
     out["vigilancia_hmo"] = {"filas": len(vh), "casos": int(vh["acumulado"].sum())}
 
-    # 3b. Vigilancia en formato largo (tidy): una fila por
-    # diagnostico x semana x dimension x categoria (x sexo donde aplica)
-    edad = ["menores_1", "de01_a_04", "de05_a_09", "de10_a_14", "de15_a_19",
-            "de20_a_24", "de25_a_44", "de45_a_49", "de50_a_59", "de60_a_64",
-            "de65_y_mas", "se_ignoran"]
-    edad_f = {"de65_y_mas": "de65_y_maf", "se_ignoran": "se_ignoraf"}
-    edad_f = {b: edad_f.get(b, b + "f") for b in edad}
-    inst = ["ssa", "imss_ord", "issste", "otras", "imss_sol", "d_if",
-            "pemex", "sedena", "sedemar"]
-    meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio",
-             "agosto", "septiembre", "octubre", "noviembre", "diciembre"]
-    base = ["des_diagno", "cve_diagno", "no_semana", "acumulado"]
-    filas = []
-    for _, r in vh.iterrows():
-        for g in edad:
-            filas.append((*[r[c] for c in base], "grupo_edad", g, "total", r[g], False))
-            filas.append((*[r[c] for c in base], "grupo_edad", g, "mujeres", r[edad_f[g]], False))
-            filas.append((*[r[c] for c in base], "grupo_edad", g, "hombres_derivado",
-                          r[g] - r[edad_f[g]], True))
-        for c in inst:
-            filas.append((*[r[c] for c in base], "institucion", c, "total", r[c], False))
-        for c in meses:
-            filas.append((*[r[c] for c in base], "mes", c, "total", r[c], False))
-    vl = pd.DataFrame(filas, columns=["diagnostico", "cve_diagno", "semana", "acumulado_ref",
-                                      "dimension", "categoria", "sexo", "casos", "derivado"])
-    vl.to_parquet(DATA / "vigilancia_long.parquet", index=False)
-    out["vigilancia_long"] = {"filas": len(vl)}
-    # verificacion: suma de grupos de edad == acumulado
-    chk = vl[(vl.dimension == "grupo_edad") & (vl.sexo == "total")]
-    dif = (chk.groupby(["diagnostico", "semana"])["casos"].sum().reset_index())
-    dif = dif.merge(vh[["des_diagno", "no_semana", "acumulado"]].rename(
-        columns={"des_diagno": "diagnostico", "no_semana": "semana"}),
-        on=["diagnostico", "semana"], how="left")
-    print("vigilancia: (diagnostico,semana) donde suma(edades) != acumulado:",
-          int((dif["casos"] != dif["acumulado"]).sum()), "de", len(dif),
-          "(desglose de edad parcial en la fuente; totalm+totalf siempre cuadra)")
-
     # 4. Inspecciones PROAES
     i = pd.read_excel(DATA / "inspecciones_2021_t3.xlsx", sheet_name=0)
     ih = i[i["MUNICIPIO"].astype(str).str.upper() == "HERMOSILLO"]

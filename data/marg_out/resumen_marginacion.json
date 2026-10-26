@@ -1,0 +1,14 @@
+{
+  "municipios": {
+    "filas": 72,
+    "po2sm_mediana": 70.4665583129601,
+    "po2sm_min": 43.0136494252874,
+    "po2sm_max": 93.4469200524246
+  },
+  "entidades": {
+    "filas": 33,
+    "sonora_po2sm": 63.2164131546799,
+    "sonora_grado": "Bajo",
+    "sonora_posicion": "25.0"
+  }
+}

@@ -1,0 +1,30 @@
+[
+  {
+    "dataset_id": "e262a488-69e5-4064-bd2b-191c5c8fc9f9",
+    "recurso_id": "046c2f52-72aa-4059-bf05-5ad52e191d1b",
+    "archivo": "marg/indice-de-marginacion-municipios-2020.xlsx",
+    "conjunto": "Índice de marginación por municipio",
+    "dataset": "https://example.org/mex-ontologi/dataset/e262a488-69e5-4064-bd2b-191c5c8fc9f9",
+    "recurso": "https://example.org/mex-ontologi/resource/046c2f52-72aa-4059-bf05-5ad52e191d1b",
+    "url": "https://datos.sonora.gob.mx/dataset/e262a488-69e5-4064-bd2b-191c5c8fc9f9/resource/046c2f52-72aa-4059-bf05-5ad52e191d1b/download/indice-de-marginacion-municipios-2020.xlsx",
+    "url_final": "https://datos.sonora.gob.mx/dataset/e262a488-69e5-4064-bd2b-191c5c8fc9f9/resource/046c2f52-72aa-4059-bf05-5ad52e191d1b/download/indice-de-marginacion-municipios-2020.xlsx",
+    "bytes": 24585,
+    "descargado_en_utc": "2026-10-26T10:57:11.511506+00:00",
+    "sha256": "906f56f983389504109925c4e132936be8ed5aee2efdd427383c0e7776c03fa9",
+    "ontologia_snapshot_sha256": "ecc5ad9ac0c469558d60207e0ab098dd98cc72f78c9d0ccb71c197aa896ed03c"
+  },
+  {
+    "dataset_id": "237cfa33-f6c1-42db-b6fb-388977e5d7fd",
+    "recurso_id": "07e84aa9-65aa-4dc4-ad71-74f6f494474c",
+    "archivo": "marg/indice-de-marginacion-estados-2020.xlsx",
+    "conjunto": "Índices de marginación por Entidad Federativa",
+    "dataset": "https://example.org/mex-ontologi/dataset/237cfa33-f6c1-42db-b6fb-388977e5d7fd",
+    "recurso": "https://example.org/mex-ontologi/resource/07e84aa9-65aa-4dc4-ad71-74f6f494474c",
+    "url": "https://datos.sonora.gob.mx/dataset/237cfa33-f6c1-42db-b6fb-388977e5d7fd/resource/07e84aa9-65aa-4dc4-ad71-74f6f494474c/download/indice-de-marginacion-estados-2020.xlsx",
+    "url_final": "https://datos.sonora.gob.mx/dataset/237cfa33-f6c1-42db-b6fb-388977e5d7fd/resource/07e84aa9-65aa-4dc4-ad71-74f6f494474c/download/indice-de-marginacion-estados-2020.xlsx",
+    "bytes": 23922,
+    "descargado_en_utc": "2026-10-26T10:57:12.057118+00:00",
+    "sha256": "0797ae65c88ecaa51fb0da1a0c05ba4cec895f7bbce5ea98f08c0d504889b5ba",
+    "ontologia_snapshot_sha256": "ecc5ad9ac0c469558d60207e0ab098dd98cc72f78c9d0ccb71c197aa896ed03c"
+  }
+]

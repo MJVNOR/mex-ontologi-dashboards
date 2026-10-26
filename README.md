@@ -24,6 +24,7 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 | Salud en Hermosillo | `dashboards/hermosillo-salud/app.py` — [ver en vivo](https://mjvnor-mex-ontologi-dashbo-dashboardshermosillo-saludapp-le2l94.streamlit.app/) | 7 conjuntos seleccionados, 212 significados documentados |
 | Educación en Hermosillo | `dashboards/educacion-hermosillo/app.py` — [ver en vivo](https://mex-ontologi-dashboards-zqt8qvqfwwbacguuimtvwz.streamlit.app/) | Becas 2021-25 (filtro HMO) + UTH institucional + capacitación SEC, 115 significados documentados |
 | Seguridad en Sonora | `dashboards/seguridad-sonora/app.py` — [ver en vivo](https://mex-ontologi-dashboards-plduatjh2dn6pwcct3cwku.streamlit.app/) | Incidencia municipal 2015-25 + víctimas + 911 T1-T2 2026 + detenidas + desaparecidas + mapa 72 municipios, 107 significados |
+| Contexto laboral proxy (ingresos) | `dashboards/marginacion-ingresos/app.py` | Marginación 2020: PO2SM municipal (72 municipios) + entidades, 34 significados documentados. Proxy de ingresos, no mide empleo |
 
 Capa tidy de consumo: `data/tidy/` (9 tablas snake_case + `diccionario_datos.csv`, script `scripts/tidy_seg.py`, procedencia en `data/procedencia_seg.json`, registro en `config/artefactos.json`). El dashboard de seguridad lee de `data/tidy/`; `data/seg/` queda como staging.
 
@@ -131,8 +132,10 @@ uv run python scripts/configurar_mcp.py
 uv run python scripts/extraer_significados.py --tema todos
 uv run python scripts/descargar_salud.py
 uv run python scripts/descargar_edu.py
+uv run python scripts/descargar_fuentes.py --tema marginacion
 uv run python scripts/preprocesar_hmo.py
 uv run python scripts/preprocesar_edu.py
+uv run python scripts/preprocesar_marginacion.py
 uv run python -m unittest discover -s tests -v
 uv run python scripts/verificar.py --base origin/main
 uv run streamlit run dashboards/hermosillo-salud/app.py
@@ -141,7 +144,7 @@ uv run streamlit run dashboards/hermosillo-salud/app.py
 Requiere Python 3.12 y `uv`. MEX-Ontologi se busca como carpeta hermana;
 para otra ubicación, define `MEX_ONTOLOGIA_DIR`. El configurador registra el MCP
 en `opencode.json`. El extractor usa MCP por defecto; `--transporte cli` selecciona
-explícitamente la CLI canónica. `--tema todos` exporta Salud y Educación.
+explícitamente la CLI canónica. `--tema todos` exporta Salud, Educación y Marginación.
 El runtime publicado utiliza los artefactos preparados, sin conexión al MCP.
 
 ## Publicar en Streamlit Community Cloud

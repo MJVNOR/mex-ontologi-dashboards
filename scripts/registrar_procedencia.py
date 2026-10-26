@@ -11,7 +11,8 @@ def registrar(tema):
     snapshot = json.loads(snapshot_path.read_text(encoding='utf-8'))
     downloads = {r['archivo']: r for r in json.loads((DATA / f'descargas_{tema}.json').read_text(encoding='utf-8'))}
     specs = json.loads((ROOT / 'config/artefactos.json').read_text(encoding='utf-8'))
-    script = ROOT / 'scripts' / ('preprocesar_hmo.py' if tema == 'salud' else 'preprocesar_edu.py')
+    script = ROOT / 'scripts' / {'salud': 'preprocesar_hmo.py', 'edu': 'preprocesar_edu.py',
+              'marginacion': 'preprocesar_marginacion.py'}[tema]
     result = {'tema': tema, 'generado_en_utc': ahora(), 'ontologia': {
         k: snapshot.get(k) for k in ('extraido_en_utc','fecha_carga_ontologia', 'ontologia_generada_en_utc', 'ontologia_manifest_sha256','transporte','parcial','conteos_completos','huecos')},
         'snapshot_sha256': huella(snapshot_path), 'preprocesador': script.name,
@@ -46,5 +47,5 @@ def registrar(tema):
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--tema', choices=['salud','edu'], required=True)
+    p.add_argument('--tema', choices=['salud', 'edu', 'marginacion'], required=True)
     registrar(p.parse_args().tema)

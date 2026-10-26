@@ -62,9 +62,6 @@
     "filas": 1752,
     "casos": 201667
   },
-  "vigilancia_long": {
-    "filas": 99864
-  },
   "inspecciones_hmo": {
     "filas": 30
   },
