@@ -44,6 +44,8 @@ def significados():
 mun = load("municipios.parquet")
 ent = load("entidades.parquet")
 son = ent[ent["es_sonora"]].iloc[0]
+import json as _json
+met = _json.loads((DATA / "modelos" / "metricas_marginacion.json").read_text(encoding="utf-8"))
 
 fuentes("marginacion", "marg_out/municipios.parquet", "marg_out/entidades.parquet")
 
@@ -55,10 +57,134 @@ k4.metric("Municipios", f"{len(mun):,}", border=True)
 st.caption("La mediana municipal no pondera por población y los municipios grandes "
            "tienen PO2SM menor; por eso difiere del 63.2% estatal.")
 
-t1, t2, t3, t4 = st.tabs(["Municipios :material/location_city:",
+t0, t1, t2, t3, t4 = st.tabs(["Hallazgos :material/auto_stories:",
+                     "Municipios :material/location_city:",
                      "Entidades :material/public:",
                      "Ontología :material/hub:",
                      "Modelos :material/psychology:"])
+
+with t0:
+    st.header("Lo que los ingresos dicen (y lo que no) del trabajo en Sonora")
+    que("Buscábamos medir el empleo. La ontología (89 conjuntos verificados) no "
+        "tiene ninguno de empleo: este dashboard mide su proxy más cercano, el % "
+        "con ingresos menores a 2 salarios mínimos (PO2SM, corte 2020). Todo lo que "
+        "sigue vive dentro de ese límite.")
+    with st.container(border=True):
+        st.subheader("Sonora está por debajo del promedio nacional, pero lejos del fondo")
+        st.markdown("**Evidencia:** PO2SM 63.2%, lugar 22 de 32 (1 = mayor valor), "
+                    "media de entidades 67.2%; grado Bajo, posición nacional 25 declarada. "
+                    "(Ver en: Entidades)")
+        _e32 = ent[ent["NOM_ENT"].astype(str).str.strip().str.upper() != "NACIONAL"]
+        _h1 = pd.DataFrame({"grupo": ["Sonora", "Media entidades", "Mediana entidades"],
+                            "po2sm": [float(son["PO2SM"]), float(_e32["PO2SM"].mean()),
+                                      float(_e32["PO2SM"].median())]})
+        st.plotly_chart(px.bar(_h1, x="po2sm", y="grupo", orientation="h", height=220,
+                               color=["Sonora"] + ["Resto"] * 2,
+                               color_discrete_map={"Sonora": "#C44E52", "Resto": "#8A8A8A"},
+                               title="Sonora vs el país (PO2SM, 2020)",
+                               labels={"po2sm": "% < 2 SM", "grupo": ""}),
+                        width="stretch")
+        st.caption("Límites: corte único 2020 con umbral de 2 SM de 2020; el lugar 22 es "
+                   "orden por PO2SM calculado aquí, distinto de la posición 25 declarada "
+                   "(orden por IM). No comparar con otros años.")
+    with st.container(border=True):
+        st.subheader("El estado no es sus municipios")
+        st.markdown("**Evidencia:** mediana municipal 70.5% vs 63.2% estatal; PO2SM "
+                    "ponderado por población 63.8 ≈ 63.2 declarado. (Ver en: Municipios)")
+        _pond = float((mun["PO2SM"] * mun["POB_TOT"]).sum() / mun["POB_TOT"].sum())
+        _h2 = pd.DataFrame({"medida": ["Mediana municipal", "Ponderado por población",
+                                       "Estatal declarado"],
+                            "po2sm": [float(mun["PO2SM"].median()), _pond,
+                                      float(son["PO2SM"])]})
+        st.plotly_chart(px.bar(_h2, x="po2sm", y="medida", orientation="h", height=220,
+                               title="Tres formas de resumir lo mismo (PO2SM, 2020)",
+                               labels={"po2sm": "% < 2 SM", "medida": ""}),
+                        width="stretch")
+        st.caption("Límites: la mediana no pondera; Hermosillo (936 mil hab., 47.2%) jala "
+                   "el promedio. Diferencia explicada, no contradicción.")
+    with st.container(border=True):
+        st.subheader("El rango es enorme y el grado no es el ingreso")
+        st.markdown("**Evidencia:** 43.0% (Nacozari, Muy bajo) a 93.4% (Sáric, Bajo); "
+                    "p5 53.8 · p95 87.3. (Ver en: Municipios)")
+        _h3 = px.strip(mun, x="PO2SM", height=200,
+                       title="Cada punto es un municipio (PO2SM, 2020)",
+                       labels={"PO2SM": "% < 2 SM"})
+        _dest = pd.concat([mun.loc[[mun["PO2SM"].idxmax(), mun["PO2SM"].idxmin()]],
+                           mun[mun["NOM_MUN"] == "Hermosillo"]])
+        for _, _r in _dest.iterrows():
+            _h3.add_annotation(x=float(_r["PO2SM"]), y=0, text=str(_r["NOM_MUN"]),
+                               showarrow=True, arrowhead=2)
+        st.plotly_chart(_h3, width="stretch")
+        st.caption("Límites: el grado combina 9 indicadores; leer PO2SM como "
+                   "\"marginación\" es un error que estos dos casos exhiben.")
+    with st.container(border=True):
+        st.subheader("Lo rural no es lo peor en este indicador")
+        st.markdown("**Evidencia:** mediana rural (PL.5000 = 100%, n=45) 69.5% vs "
+                    "no-rural (n=27) 75.7%. (Ver en: Municipios)")
+        _h4 = mun.assign(_rural=(mun["PL.5000"] == 100).map(
+            {True: "Totalmente rural", False: "Con loc. ≥5 mil"})).groupby("_rural")[
+            "PO2SM"].median().round(1).reset_index()
+        st.plotly_chart(px.bar(_h4, x="PO2SM", y="_rural", orientation="h", height=200,
+                               title="Mediana PO2SM por ruralidad (2020)",
+                               labels={"PO2SM": "% < 2 SM", "_rural": ""}),
+                        width="stretch")
+        st.caption("Límites: descriptivo del corte, sin explicación (minería, "
+                   "agricultura, migración — no lo sabemos y no lo afirmamos).")
+    with st.container(border=True):
+        st.subheader("El índice corre al revés de lo que sugiere su nombre")
+        st.markdown("**Evidencia:** menor IM_2020 = mayor marginación (Guerrero 10.99 "
+                    "Muy alto → CDMX 23.14 Muy bajo); correlación IM–PO2SM r = −0.52. "
+                    "(Ver en: Municipios)")
+        _h5 = mun.groupby("GM_2020")["PO2SM"].median().round(1).reset_index()
+        _orden_gm = ["Muy bajo", "Bajo", "Medio", "Alto"]
+        _h5["GM_2020"] = pd.Categorical(_h5["GM_2020"], _orden_gm, ordered=True)
+        st.plotly_chart(px.bar(_h5.sort_values("GM_2020"), x="PO2SM", y="GM_2020",
+                               orientation="h", height=220,
+                               title="Mediana PO2SM por grado (2020)",
+                               labels={"PO2SM": "% < 2 SM", "GM_2020": "grado"}),
+                        width="stretch")
+        st.caption("Límites: orientación documentada de la fuente, no interpretación; "
+                   "la correlación es descriptiva, no causalidad.")
+    with st.container(border=True):
+        st.subheader("Dos Sonoras por perfil de carencias")
+        st.markdown("**Evidencia:** KMeans k=2 por silueta (0.51): 65 municipios "
+                    "(mediana 69.3) vs 7 (mediana 83.9). (Ver en: Modelos)")
+        _s = met["segmentos"]
+        _h6 = pd.DataFrame({"segmento": [f"Mayoría (n={_s['tamano'].get('0', _s['tamano'].get(0))})",
+                                         f"Alta carencia (n={_s['tamano'].get('1', _s['tamano'].get(1))})"],
+                            "mediana": [float(_s["po2sm_mediana_por_segmento"].get("0",
+                                        _s["po2sm_mediana_por_segmento"].get(0))),
+                                        float(_s["po2sm_mediana_por_segmento"].get("1",
+                                        _s["po2sm_mediana_por_segmento"].get(1)))]})
+        st.plotly_chart(px.bar(_h6, x="mediana", y="segmento", orientation="h", height=200,
+                               color="segmento",
+                               color_discrete_map={"Mayoría (n=65)": "#8A8A8A",
+                                                   "Alta carencia (n=7)": "#C44E52"},
+                               title="Mediana PO2SM por segmento (2020)",
+                               labels={"mediana": "% < 2 SM", "segmento": ""}),
+                        width="stretch")
+        st.caption("Límites: agrupación descriptiva de un corte; no acredita causas "
+                   "ni pronostica.")
+    with st.container(border=True):
+        st.subheader("Las carencias explican poco del ingreso")
+        st.markdown("**Evidencia:** Ridge R² fuera de muestra 0.15, MAE 7.9; SHAP exacto "
+                    "(err 1e-14) describe al modelo, no al mundo. (Ver en: Modelos)")
+        _h7 = pd.DataFrame({"modelo": ["Ridge OOF"],
+                             "r2": [float(met["po2sm_ridge"]["r2_oof"])]})
+        _f7 = px.bar(_h7, x="r2", y="modelo", orientation="h", height=180, range_x=[0, 1],
+                     title=f"R² fuera de muestra: {float(met['po2sm_ridge']['r2_oof']):.2f} de 1.0",
+                     labels={"r2": "R²", "modelo": ""})
+        _f7.add_vline(x=1.0, line_dash="dot", annotation_text="acuerdo perfecto")
+        st.plotly_chart(_f7, width="stretch")
+        st.caption("Límites: n=72, asociación exploratoria; coeficientes con "
+                   "colinealidad no se leen como efectos.")
+    with st.container(border=True):
+        st.subheader("Procedencia y preguntas abiertas")
+        st.markdown("Portal datos.sonora.gob.mx vía ontología mex-ontologi: 2 conjuntos, "
+                    "6 recursos, 34 significados; valores declarados; fecha de carga no "
+                    "documentada; series municipal y estatal de hojas distintas.")
+        st.caption("Abierto: ¿qué significan los ceros exactos en carencias? ¿qué pasó "
+                   "después de 2020? ¿cuándo se da de alta un conjunto real de empleo?")
 
 with t1:
     fuentes("marginacion", "marg_out/municipios.parquet")
@@ -144,8 +270,6 @@ with t3:
     st.dataframe(significados(), hide_index=True)
 
 with t4:
-    import json as _json
-    met = _json.loads((DATA / "modelos" / "metricas_marginacion.json").read_text(encoding="utf-8"))
     seg = pd.read_parquet(DATA / "modelos" / "inferencias" / "segmentos_marg.parquet")
     que("Segmentos municipales por perfil de carencias (KMeans + PCA, descriptivo): "
         "cada punto es un municipio. No acredita causas ni pronostica nada.")
