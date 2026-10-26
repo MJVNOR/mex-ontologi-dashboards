@@ -355,6 +355,16 @@ with t7:
                     "no lo supera. Tasas con IC95%: mortalidad en J, fecundidad pico "
                     "20-29.")
         c2.caption("Límite: cambio de nivel post-2020; denominador CONAPO.")
+    st.subheader("Conclusiones: lo que sí, lo que no", icon=":material/fact_check:")
+    st.markdown("**Sí se sostiene**: Hermosillo concentra atención regional; la consulta "
+                "es mayoritariamente femenina joven; la serie tiene rupturas (2020, 2022 "
+                "parcial, duplicados retirados); no hay pronóstico operativo defendible; "
+                "el riesgo de reprobación se anticipa en semana 8; la vigilancia 2022 es parcial.")
+    st.markdown("**No se puede concluir**: causa de la brecha de sexo; becas 2026 como "
+                "compromiso; cobertura poblacional, cohortes ni cruces entre conjuntos.")
+    st.caption("Grados: descriptivos ALTA (conteos verificados), riesgo MODERADA (n=140, "
+               "sin cohorte externa). Supuestos siempre visibles: denominador CONAPO, "
+               "2021-2022 parciales, subregistro desconocido.")
     st.caption("Portal datos.sonora.gob.mx vía ontología mex-ontologi: totales "
                "declarados, series por separado, sin cruces sin validación.")
 
