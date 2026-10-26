@@ -289,55 +289,51 @@ with t6:
 with t7:
     st.header("Historia: lo que el portal cuenta (y lo que no)",
               icon=":material/auto_stories:")
-    st.markdown("Hermosillo concentra la salud del estado: aquí se atiende, aquí "
-                "nacen y aquí mueren en hospital personas que viven fuera. La "
-                "consulta externa la usan sobre todo mujeres jóvenes y 2020 se "
-                "desploma. Esto es lo que los datos sostienen, con sus límites "
-                "a la vista.")
-    st.subheader("1. La consulta externa es de mujeres jóvenes",
-                 icon=":material/group:")
-    st.badge("Verificado", icon=":material/check:", color="green")
-    st.markdown("- **Evidencia**: 1,333,591 consultas; 62% mujeres, hasta 78% en "
-                "20-29 y 74% en 15-19; en infancia predomina Hombre (5-9: 36% "
-                "mujeres). Asociación sexo×edad χ² p≈0, V de Cramér 0.30.")
-    st.caption("Límite: descriptivo por diseño; no se atribuye causa a la brecha.")
-    st.subheader("2. 2020 se desploma y 2022 viene parcial",
-                 icon=":material/trending_down:")
-    st.badge("Verificado", icon=":material/check:", color="green")
-    st.markdown("- **Evidencia**: consulta 163,651 en 2020 vs ~430 mil en "
-                "2018-2019; 2022 trae 3 meses. Egresos: 9,355 renglones "
-                "idénticos retirados → total publicado 220,954.")
-    st.caption("Límite: años incompletos declarados como tales; sin inferir cobertura.")
-    st.subheader("3. Hermosillo atiende de fuera",
-                 icon=":material/local_hospital:")
-    st.badge("Verificado", icon=":material/check:", color="green")
-    st.markdown("- **Evidencia**: 7,893 partos ocurridos vs 7,049 madres "
-                "residentes; 4,098 defunciones ocurridas vs 3,512 residentes.")
-    st.caption("Límite: residencia ≠ ocurrencia; concentra atención hospitalaria, "
-                "no necesariamente más nacimientos ni muertes.")
-    st.subheader("4. IRA y COVID mandan la vigilancia",
-                 icon=":material/coronavirus:")
-    st.badge("Verificado", icon=":material/check:", color="green")
-    st.markdown("- **Evidencia**: 63,700 IRA y 51,600 COVID en 2022 (36 semanas "
-                "con reporte); semanas 3, 4 y 15 atípicas. El desglose de edad "
-                "de la fuente es parcial (no suma al total).")
-    st.caption("Límite: 'acumulado' = casos nuevos semanales, no acumulado anual.")
-    st.subheader("5. Pronosticar aquí es perfilar, no predecir",
-                 icon=":material/query_stats:")
-    st.badge("Verificado", icon=":material/check:", color="green")
-    st.markdown("- **Evidencia**: perfil estacional Ridge MAPE 26/35%; SARIMAX "
-                "probado (MAPE 28/61, residuos autocorrelacionados) no lo supera. "
-                "Tasas por 100 mil con IC95%: mortalidad en J, fecundidad pico "
-                "20-29 (41.8-43.1‰).")
-    st.caption("Límite: el cambio de nivel post-2020 limita todo pronóstico; "
-                "las tasas usan proyección CONAPO como denominador, no conteo.")
-    st.subheader("Procedencia y reglas del juego",
-                 icon=":material/database:")
-    st.markdown("Portal datos.sonora.gob.mx, descubierto y documentado vía la "
-                "ontología mex-ontologi (MCP): cada cifra es un total declarado, "
-                "cada serie se reporta por separado — sin cruces sin validación, "
-                "sin inferir cobertura. Educación, seguridad y marginación viven "
-                "en sus propios dashboards del mismo repo.")
+    st.caption("5 hallazgos verificados. Abre cada uno para ver evidencia y límites.")
+    with st.container(border=True):
+        st.subheader("1. La consulta externa es de mujeres jóvenes",
+                     icon=":material/group:")
+        st.badge("Verificado", icon=":material/check:", color="green")
+        with st.expander("Evidencia y límites"):
+            st.markdown("1,333,591 consultas; 62% mujeres, hasta 78% en 20-29; "
+                        "en infancia predomina Hombre. Asociación sexo×edad "
+                        "χ² p≈0, V de Cramér 0.30.")
+            st.caption("Límite: descriptivo por diseño, sin atribuir causa.")
+    with st.container(border=True):
+        st.subheader("2. 2020 se desploma y 2022 viene parcial",
+                     icon=":material/trending_down:")
+        st.badge("Verificado", icon=":material/check:", color="green")
+        with st.expander("Evidencia y límites"):
+            st.markdown("Consulta 163,651 en 2020 vs ~430 mil en 2018-2019; 2022 "
+                        "trae 3 meses. Egresos: 9,355 renglones idénticos "
+                        "retirados → total 220,954.")
+            st.caption("Límite: años incompletos declarados como tales.")
+    with st.container(border=True):
+        st.subheader("3. Hermosillo atiende de fuera",
+                     icon=":material/local_hospital:")
+        st.badge("Verificado", icon=":material/check:", color="green")
+        with st.expander("Evidencia y límites"):
+            st.markdown("7,893 partos ocurridos vs 7,049 madres residentes; "
+                        "4,098 defunciones ocurridas vs 3,512 residentes.")
+            st.caption("Límite: residencia ≠ ocurrencia.")
+    with st.container(border=True):
+        st.subheader("4. IRA y COVID mandan la vigilancia",
+                     icon=":material/coronavirus:")
+        st.badge("Verificado", icon=":material/check:", color="green")
+        with st.expander("Evidencia y límites"):
+            st.markdown("63,700 IRA y 51,600 COVID en 2022 (36 semanas); semanas "
+                        "3, 4 y 15 atípicas; desglose de edad parcial.")
+            st.caption("Límite: 'acumulado' = casos nuevos semanales.")
+    with st.container(border=True):
+        st.subheader("5. Pronosticar aquí es perfilar, no predecir",
+                     icon=":material/query_stats:")
+        st.badge("Verificado", icon=":material/check:", color="green")
+        with st.expander("Evidencia y límites"):
+            st.markdown("Ridge MAPE 26/35%; SARIMAX (28/61) no lo supera. Tasas "
+                        "por 100 mil con IC95%.")
+            st.caption("Límite: cambio de nivel post-2020; denominador CONAPO.")
+    st.caption("Portal datos.sonora.gob.mx vía ontología mex-ontologi: totales "
+               "declarados, series por separado, sin cruces sin validación.")
 
 with t8:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
