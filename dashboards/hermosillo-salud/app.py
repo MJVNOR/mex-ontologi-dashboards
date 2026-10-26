@@ -305,8 +305,8 @@ with t7:
                  icon=":material/trending_down:")
     st.badge("Verificado", icon=":material/check:", color="green")
     st.markdown("- **Evidencia**: consulta 163,651 en 2020 vs ~430 mil en "
-                "2018-2019; 2022 trae 3 meses. Egresos: 230k filas idénticas "
-                "retiradas → total publicado 220,954.")
+                "2018-2019; 2022 trae 3 meses. Egresos: 9,355 renglones "
+                "idénticos retirados → total publicado 220,954.")
     st.caption("Límite: años incompletos declarados como tales; sin inferir cobertura.")
     st.subheader("3. Hermosillo atiende de fuera",
                  icon=":material/local_hospital:")
