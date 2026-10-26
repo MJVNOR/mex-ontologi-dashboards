@@ -271,27 +271,27 @@ with t5:
                     use_container_width=True)
 
 with t6:
-    que("KMeans (k=4) sobre el perfil delictivo de cada municipio "
-        "(2015-2025): Hermosillo y Cajeme forman su propio grupo; Caborca, "
-        "Guaymas, Navojoa, Nogales y SLRC el cinturón intermedio; el resto "
-        "comparte perfil bajo. PCA conserva el 92% de la varianza en 2D.")
+    que("Los 4 grupos salen por VOLUMEN, no por tipo de delito: en todos "
+        "lideran robo y violencia familiar en proporciones parecidas; lo "
+        "que cambia es cuánto registra cada municipio. Hermosillo y Cajeme "
+        "van solos; 5 intermedios forman el cinturón; 65 comparten nivel bajo.")
     cl = load("inferencias/clusters_municipio.parquet").merge(
         mun_tot[["Municipio", "cve"]], on="Municipio", how="left")
-    nom = {0: "Resto (65)", 1: "Hermosillo", 2: "Cajeme",
-           3: "Cinturón (5)"}
+    nom = {0: "Resto: 65 mpios (59k)", 1: "Hermosillo (134k)",
+           2: "Cajeme (64k)", 3: "Cinturón: 5 mpios (85k)"}
     cl["grupo"] = cl["cluster"].map(nom)
     st.plotly_chart(px.choropleth(
         cl, geojson=geo(), locations="cve",
         featureidkey="properties.CVEGEO", color="grupo",
-        hover_name="Municipio", title="Clusters por perfil delictivo")
+        hover_name="Municipio", title="4 niveles por volumen de delitos")
         .update_geos(fitbounds="locations", visible=False),
         use_container_width=True)
-    pc = load("inferencias/pca_municipios.parquet")
-    pc["grupo"] = pc["cluster"].map(nom)
-    st.plotly_chart(px.scatter(pc, x="x", y="y", color="grupo",
-                               hover_name="Municipio",
-                               title="PCA de perfiles municipales (2D)"),
-                    use_container_width=True)
+    perf = load("inferencias/perfil_clusters.parquet")
+    perf["grupo"] = perf["grupo"].map(
+        {0: "Resto (65)", 1: "Hermosillo", 2: "Cajeme", 3: "Cinturón (5)"})
+    st.dataframe(perf[["grupo", "delitos_total", "prom_por_municipio",
+                        "top1", "top2", "top3"]],
+                 use_container_width=True, hide_index=True)
     que("Anomalías mensuales de incidencia (IsolationForest): el pico de "
         "2016, el diciembre bajo de 2017 y marzo-2021. Son banderas para "
         "revisar, no diagnósticos.")

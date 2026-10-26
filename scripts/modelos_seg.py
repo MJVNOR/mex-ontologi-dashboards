@@ -53,6 +53,22 @@ def main():
     joblib.dump(km, MOD / "clusters_municipio.pkl")
     lab = pd.DataFrame({"Municipio": mat.index, "cluster": km.labels_})
     lab.to_parquet(INF / "clusters_municipio.parquet", index=False)
+    # Tabla legible: volumen + top-3 tipos por grupo
+    prof = mat.groupby(km.labels_).sum()
+    filas = []
+    for k in sorted(prof.index):
+        top3 = prof.loc[k].nlargest(3)
+        filas.append({
+            "grupo": k,
+            "municipios": int((km.labels_ == k).sum()),
+            "delitos_total": int(prof.loc[k].sum()),
+            "prom_por_municipio": int(prof.loc[k].sum() / (km.labels_ == k).sum()),
+            "top1": f"{top3.index[0]} ({int(top3.iloc[0]):,})",
+            "top2": f"{top3.index[1]} ({int(top3.iloc[1]):,})",
+            "top3": f"{top3.index[2]} ({int(top3.iloc[2]):,})",
+        })
+    pd.DataFrame(filas).to_parquet(INF / "perfil_clusters.parquet",
+                                    index=False)
     pca = PCA(n_components=2, random_state=42).fit(Xs)
     pts = pd.DataFrame(pca.transform(Xs), columns=["x", "y"])
     pts["Municipio"] = mat.index
