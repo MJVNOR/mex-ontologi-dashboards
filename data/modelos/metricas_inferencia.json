@@ -1,0 +1,50 @@
+{
+  "logit": {
+    "n": 7696,
+    "prev": 0.307,
+    "auc": 0.737,
+    "nota": "edad no significativa controlando (ver p)"
+  },
+  "gamma": {
+    "n": 164838,
+    "nota": "IC robustos HC0; año lineal en log"
+  },
+  "nb": {
+    "n": 9768,
+    "alpha": null,
+    "llf": -22949.6,
+    "nota": "NB por sobredispersion (var/media~557); ref=Hermosillo"
+  },
+  "quantile": {
+    "n": 7049,
+    "coefs": {
+      "q10": {
+        "coef_edad": -2.86,
+        "p": 0.23325481009409155
+      },
+      "q50": {
+        "coef_edad": 3.06,
+        "p": 0.004011292508954839
+      },
+      "q90": {
+        "coef_edad": 5.0,
+        "p": 0.0010472662165082283
+      }
+    },
+    "nota": "mediana + bandas q10-q90"
+  },
+  "chi2_sexo_edad": {
+    "chi2": 116910.4,
+    "p": 0.0,
+    "cramer_v": 0.296,
+    "n": 1333590
+  },
+  "mw_remota": {
+    "u": 4992.5,
+    "p": 1.7976091930291798e-07,
+    "med_pres": 11.9,
+    "n_pres": 267,
+    "med_remota": 36.99,
+    "n_remota": 64
+  }
+}

@@ -160,6 +160,7 @@ with t3:
                            category_orders={"Grupo_Edad": orden_edad},
                            labels={"pct": "% del grupo"}),
                     width="stretch", alt="Barras apiladas de sexo por grupo de edad")
+    st.caption("Asociación sexo×edad: χ² p≈0, V de Cramér 0.30 (moderada). La brecha no es azar.")
     que("Los 10 establecimientos con más consultas en Hermosillo: dónde se concentra "
         "la atención ambulatoria.")
     top_est = con_f.groupby("Nombre_Establecimiento")["Total"].sum().nlargest(10).reset_index()
@@ -184,6 +185,16 @@ with t4:
     sxn.columns = ["sexo", "n"]
     c1.plotly_chart(px.bar(sxn, x="sexo", y="n", title="RN por sexo: 50.7% hombres (esperado ~51%)"),
                     width="stretch", alt="Barras de recién nacidos por sexo")
+    que("Peso al nacer contra edad de la madre (regresión cuantílica, n=7,049): "
+        "la mediana sube +3.1 g por año de madre (p=0.004); en q10 no hay efecto "
+        "(p=0.23). Bandas q10-q90.")
+    qg = pd.read_parquet(DATA / "modelos" / "inferencias" / "quantile_peso_grid.parquet")
+    qg_m = qg.melt(id_vars="edad", value_vars=["q10", "q50", "q90"],
+                   var_name="cuantil", value_name="peso")
+    c1.plotly_chart(px.line(qg_m, x="edad", y="peso", color="cuantil",
+                            title="Peso del RN: cuantiles por edad de la madre",
+                            labels={"edad": "edad de la madre", "peso": "gramos"}),
+                    width="stretch", alt="La mediana del peso sube con la edad de la madre; q10 plano")
     f3 = px.histogram(defu, x="EDAD", nbins=40, title="Edad al fallecer: mediana 68, cola joven a la izquierda")
     f3.add_vline(x=float(defu["EDAD"].mean()), line_dash="dash", annotation_text="media")
     f3.add_vline(x=float(defu["EDAD"].median()), line_dash="dot", annotation_text="mediana")

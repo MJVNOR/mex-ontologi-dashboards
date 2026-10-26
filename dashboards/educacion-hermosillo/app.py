@@ -456,6 +456,41 @@ with t5:
                f"(n={mi['n']}, prevalencia irregular {mi['prevalencia_irregular']}). "
                "El promedio de bachillerato y los semestres cursados pesan más; "
                "sexo y modalidad casi nada. Probabilidad, no destino.")
+    que("Inferencia clásica del mismo riesgo: odds ratios del Logit con IC95. "
+        "La edad no es significativa controlando (p=0.38); el RF la marcaba "
+        "importante por correlación, no por efecto propio.")
+    mi2 = json.loads((DATA / "modelos" / "metricas_inferencia.json").read_text(encoding="utf-8"))
+    lors = pd.read_parquet(DATA / "modelos" / "inferencias" / "logit_irregularidad_or.parquet")
+    lors = lors[lors.term != "const"].copy()
+    lors["menos"], lors["mas"] = lors["or"] - lors["lo"], lors["hi"] - lors["or"]
+    st.plotly_chart(px.bar(lors, x="or", y="term", orientation="h",
+                           error_x="mas", error_x_minus="menos",
+                           title="Irregularidad: odds ratios (IC95)",
+                           labels={"or": "OR", "term": "variable"}),
+                    width="stretch", alt="Odds ratios: semestres y promedio pesan; edad no significativa")
+    cur = pd.read_parquet(DATA / "modelos" / "inferencias" / "logit_curva_prombach.parquet")
+    figL = go.Figure()
+    figL.add_trace(go.Scatter(x=cur.prom_bach, y=cur.p, mode="lines",
+                              name="P(irregular)"))
+    figL.add_trace(go.Scatter(x=cur.prom_bach, y=cur.hi, mode="lines",
+                              line=dict(width=0), showlegend=False, hoverinfo="skip"))
+    figL.add_trace(go.Scatter(x=cur.prom_bach, y=cur.lo, mode="lines",
+                              line=dict(width=0), showlegend=False,
+                              fill="tonexty", hoverinfo="skip"))
+    figL.update_layout(title="P(irregular) contra promedio de bachillerato (IC95)",
+                       xaxis_title="Promedio de bachillerato", yaxis_title="P")
+    st.plotly_chart(figL, width="stretch",
+                    alt="La probabilidad de irregularidad cae al subir el promedio de bachillerato")
+    que("Importe de beca: razones de tasas del Gamma-GLM con IC95 robustos. "
+        "Nivel medio-superior +12%, mujer −10%, cada año −9% (multiplicativo).")
+    grr = pd.read_parquet(DATA / "modelos" / "inferencias" / "gamma_becas_rr.parquet")
+    grr = grr[grr.term != "const"].copy()
+    grr["menos"], grr["mas"] = grr["rr"] - grr["lo"], grr["hi"] - grr["rr"]
+    st.plotly_chart(px.bar(grr, x="rr", y="term", orientation="h",
+                           error_x="mas", error_x_minus="menos",
+                           title="Importe de beca: razones de tasas (IC95)",
+                           labels={"rr": "razón de tasas", "term": "efecto"}),
+                    width="stretch", alt="Nivel sube el importe 12%; ser mujer lo baja 10%; cada año baja 9%")
     que("Por qué marca riesgo cada modelo (SHAP TreeExplainer exacto sobre "
         "P(clase=1), aditividad verificada err<1e-6; muestra held-out en "
         "irregularidad y train en riesgo n=140): cada punto es una fila. "
