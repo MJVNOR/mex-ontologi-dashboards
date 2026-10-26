@@ -1,0 +1,268 @@
+{
+  "hmo_urgencias.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "urgencias_2018_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(Mun_Nombre)) == HERMOSILLO",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "medidas": [
+      "Total_Urgencias"
+    ],
+    "agregacion": "Suma de Total_Urgencias por dimensiones del gráfico.",
+    "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "hmo_egresos.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "egresos_2018_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(Mun_Nombre)) == HERMOSILLO",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "medidas": [
+      "Total_Egresos"
+    ],
+    "agregacion": "Suma de Total_Egresos por dimensiones del gráfico.",
+    "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "hmo_consulta.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "consulta_externa_2018_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(Nomb_Mpo)) == HERMOSILLO",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "medidas": [
+      "Total"
+    ],
+    "agregacion": "Suma de Total por dimensiones del gráfico.",
+    "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "hmo_nacimientos.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "nacimientos_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(MUNICIPIORESIDENCIAD)) == HERMOSILLO",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "medidas": [],
+    "agregacion": "Conteo de filas; histogramas y categorías declaradas.",
+    "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "hmo_defunciones.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "defunciones_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(MUNICIPIORESIDENCIAD)) == HERMOSILLO",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "medidas": [],
+    "agregacion": "Conteo de filas; histogramas y categorías declaradas.",
+    "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "hmo_vigilancia.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "vigilancia_2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(des_munici)) == HERMOSILLO",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "medidas": [
+      "acumulado"
+    ],
+    "agregacion": "Suma de acumulado por dimensiones del gráfico.",
+    "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "hmo_inspecciones.parquet": {
+    "tema": "salud",
+    "fuentes": [
+      {
+        "archivo": "inspecciones_2021_t3.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "upper(str(MUNICIPIO)) == HERMOSILLO",
+    "transformacion": "Conserva las columnas y filas seleccionadas de la primera hoja.",
+    "medidas": [],
+    "agregacion": "Conteo de filas; histogramas y categorías declaradas.",
+    "alcance": "Filtro sobre la columna indicada; no acredita cobertura municipal completa."
+  },
+  "edu_hmo/becas_hmo.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/becas_becas-autorizadas-2021.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/becas_becas-autorizadas-2022.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/becas_becas-autorizadas-2023.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/becas_becas-autorizadas-2024.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/becas_becas-autorizadas-2025.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "strip(upper(municipio)) == HERMOSILLO",
+    "transformacion": "Concatena 2021-2025, renombra columnas, añade año desde el archivo; normaliza municipio y género; suma importe y cuenta filas.",
+    "agregacion": "Concatena 2021-2025, renombra columnas, añade año desde el archivo; normaliza municipio y género; suma importe y cuenta filas.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/matriculas_uth_hmo.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/matriculas_de_estudiantes_202209271427270-file.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "Unidad Académica == HERMOSILLO O Municipio empieza con HERMOSILLO, tras strip/upper",
+    "transformacion": "Conserva columnas; cuenta filas y agrupa por columnas declaradas.",
+    "agregacion": "Conserva columnas; cuenta filas y agrupa por columnas declaradas.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/titulados_uth.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/titulados_titulados-2022.xlsx",
+        "hoja": "2022"
+      },
+      {
+        "archivo": "edu/titulados_titulados-2023.xlsx",
+        "hoja": "2023"
+      },
+      {
+        "archivo": "edu/titulados_titulados-2024.xlsx",
+        "hoja": "2024"
+      },
+      {
+        "archivo": "edu/titulados_titulados-2025.xlsx",
+        "hoja": "2025"
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Hojas 2022-2025; selecciona nivel/programa y posiciones 3/4, transforma sexo a filas, añade año; suma n.",
+    "agregacion": "Hojas 2022-2025; selecciona nivel/programa y posiciones 3/4, transforma sexo a filas, añade año; suma n.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/egresados_uth.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/egresados_egresados-2022.xlsx",
+        "hoja": "2022"
+      },
+      {
+        "archivo": "edu/egresados_egresados-2023.xlsx",
+        "hoja": "2023"
+      },
+      {
+        "archivo": "edu/egresados_egresados-2024.xlsx",
+        "hoja": "2024"
+      },
+      {
+        "archivo": "edu/egresados_egresados-2025.xlsx",
+        "hoja": "2025"
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Hojas 2022-2025; selecciona nivel/programa y posiciones 3/4, transforma sexo a filas, añade año; suma n.",
+    "agregacion": "Hojas 2022-2025; selecciona nivel/programa y posiciones 3/4, transforma sexo a filas, añade año; suma n.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/nuevo_ingreso_uth.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/nuevo_ingreso_nuevo-ingreso-enero-abril-2022.xlsx",
+        "hoja": "Ene 22"
+      },
+      {
+        "archivo": "edu/nuevo_ingreso_nuevo-ingreso-septiembre-diciembre-2022.xlsx",
+        "hoja": "Sep 22"
+      },
+      {
+        "archivo": "edu/nuevo_ingreso_nuevo-ingreso-septiembre-diciembre-2023.xlsx",
+        "hoja": "Sep 23"
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Hojas Ene 22 / Sep 22 / Sep 23; transforma sexo a filas con posiciones documentadas en preprocesar_edu.py, añade corte; suma n.",
+    "agregacion": "Hojas Ene 22 / Sep 22 / Sep 23; transforma sexo a filas con posiciones documentadas en preprocesar_edu.py, añade corte; suma n.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/reprobacion_uth.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/indices_de_reprobacion_indices-enero-junio-2022.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/indices_de_reprobacion_indices-agosto-diciembre-2022.xlsx",
+        "hoja": 0
+      },
+      {
+        "archivo": "edu/reprobacion_remota_indices-agosto-diciembre-2022.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Concatena filas de tres cortes; añade corte y conserva etiquetas; promedio aritmético sin ponderación del índice declarado.",
+    "agregacion": "Concatena filas de tres cortes; añade corte y conserva etiquetas; promedio aritmético sin ponderación del índice declarado.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/aprovechamiento_uth.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/aprovechamiento_aprovechamiento-academico-2021-2.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "Sin filtro municipal; serie institucional",
+    "transformacion": "Conserva primera hoja.",
+    "agregacion": "Conserva primera hoja.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  },
+  "edu_hmo/capacitacion_sec.parquet": {
+    "tema": "edu",
+    "fuentes": [
+      {
+        "archivo": "edu/capacitacion_segundo-trimestre-2022-vii.17-icd-sec.xlsx",
+        "hoja": 0
+      }
+    ],
+    "filtro": "Sin filtro municipal; no atribuir alcance municipal",
+    "transformacion": "Conserva primera hoja.",
+    "agregacion": "Conserva primera hoja.",
+    "alcance": "Serie de registros publicados; no acredita población, cobertura ni seguimiento de cohortes."
+  }
+}

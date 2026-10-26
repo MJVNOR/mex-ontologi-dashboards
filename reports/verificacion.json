@@ -1,0 +1,889 @@
+{
+  "verificado_en_utc": "2026-10-26T09:29:31.140665+00:00",
+  "referencia_base": "origin/main",
+  "revision_base": "9f307c1d9893c578cea25e68dd5175787a089e09",
+  "artefactos": {
+    "hmo_urgencias.parquet": {
+      "filas_anteriores": 157854,
+      "filas_actuales": 157854,
+      "iguales": true
+    },
+    "hmo_egresos.parquet": {
+      "filas_anteriores": 99391,
+      "filas_actuales": 99391,
+      "iguales": true
+    },
+    "hmo_consulta.parquet": {
+      "filas_anteriores": 21509,
+      "filas_actuales": 21509,
+      "iguales": true
+    },
+    "hmo_nacimientos.parquet": {
+      "filas_anteriores": 7049,
+      "filas_actuales": 7049,
+      "iguales": true
+    },
+    "hmo_defunciones.parquet": {
+      "filas_anteriores": 3512,
+      "filas_actuales": 3512,
+      "iguales": true
+    },
+    "hmo_vigilancia.parquet": {
+      "filas_anteriores": 1752,
+      "filas_actuales": 1752,
+      "iguales": true
+    },
+    "hmo_inspecciones.parquet": {
+      "filas_anteriores": 30,
+      "filas_actuales": 30,
+      "iguales": true
+    },
+    "edu_hmo/becas_hmo.parquet": {
+      "filas_anteriores": 164839,
+      "filas_actuales": 164839,
+      "iguales": true
+    },
+    "edu_hmo/matriculas_uth_hmo.parquet": {
+      "filas_anteriores": 8227,
+      "filas_actuales": 8227,
+      "iguales": true
+    },
+    "edu_hmo/titulados_uth.parquet": {
+      "filas_anteriores": 268,
+      "filas_actuales": 268,
+      "iguales": true
+    },
+    "edu_hmo/egresados_uth.parquet": {
+      "filas_anteriores": 218,
+      "filas_actuales": 218,
+      "iguales": true
+    },
+    "edu_hmo/nuevo_ingreso_uth.parquet": {
+      "filas_anteriores": 56,
+      "filas_actuales": 56,
+      "iguales": true
+    },
+    "edu_hmo/reprobacion_uth.parquet": {
+      "filas_anteriores": 510,
+      "filas_actuales": 510,
+      "iguales": true
+    },
+    "edu_hmo/aprovechamiento_uth.parquet": {
+      "filas_anteriores": 80,
+      "filas_actuales": 80,
+      "iguales": true
+    },
+    "edu_hmo/capacitacion_sec.parquet": {
+      "filas_anteriores": 22,
+      "filas_actuales": 22,
+      "iguales": true
+    }
+  },
+  "apps": {
+    "hermosillo-salud": {
+      "errores": [],
+      "metricas": [
+        "240,936",
+        "231,153",
+        "1,333,591",
+        "7,049",
+        "3,512"
+      ],
+      "errores_sin_seleccion": []
+    },
+    "educacion-hermosillo": {
+      "errores": [],
+      "metricas": [
+        "164,839",
+        "8,227",
+        "4,820",
+        "4,455"
+      ],
+      "errores_sin_seleccion": []
+    }
+  },
+  "salud": {
+    "conteos": {
+      "recursos": 14,
+      "significados": 212,
+      "columnas": 362
+    },
+    "parcial": false,
+    "huecos": [
+      "Fecha de carga no documentada; generado_en_utc no acredita la carga."
+    ],
+    "significados_anteriores": 230,
+    "significados_actuales": 212,
+    "significados_retirados": [
+      [
+        "Defunciones",
+        "año_defuncion",
+        "Año de fallecimiento",
+        "Año en el que fallecio"
+      ],
+      [
+        "Defunciones",
+        "dia_defuncion",
+        "Día del fallecimiento",
+        "Dia en el que fallecio"
+      ],
+      [
+        "Defunciones",
+        "edad",
+        "Edad al fallecer",
+        "Edad al fallecer"
+      ],
+      [
+        "Defunciones",
+        "fecha_registro",
+        "Fecha de registro",
+        "Fecha de registro de la defuncion"
+      ],
+      [
+        "Defunciones",
+        "hora_defuncion",
+        "Hora del fallecimiento",
+        "Hora de la defuncion"
+      ],
+      [
+        "Defunciones",
+        "mes_defuncion",
+        "Mes del fallecimiento",
+        "Mes en el que fallecio"
+      ],
+      [
+        "Defunciones",
+        "municipio",
+        "Municipio de registro",
+        "Municipio de registro"
+      ],
+      [
+        "Defunciones",
+        "sexo",
+        "Sexo del difunto",
+        "Sexo del difunto"
+      ],
+      [
+        "Inspección y vigilancia",
+        "ACTIVIDAD",
+        "Actividad inspeccionada o vigilada",
+        "Actividad que ejecuta donde se inspecciona o se vigila"
+      ],
+      [
+        "Inspección y vigilancia",
+        "FECHA",
+        "Fecha de inspección",
+        "Fecha de la Inspeccion"
+      ],
+      [
+        "Inspección y vigilancia",
+        "MOTIVO",
+        "Motivo de inspeccion o vigilancia",
+        "Motivo de la inspeccion o vigilancia"
+      ],
+      [
+        "Inspección y vigilancia",
+        "MUNICIPIO",
+        "Municipio de registro",
+        "Municipio de registro"
+      ],
+      [
+        "Nacimientos",
+        "año",
+        "Año de registro",
+        "Año de registro"
+      ],
+      [
+        "Nacimientos",
+        "hombres",
+        "Nacimientos de sexo masculino",
+        "Nacimientos del sexo Masculino"
+      ],
+      [
+        "Nacimientos",
+        "mes",
+        "Mes de registro",
+        "Mes de registro"
+      ],
+      [
+        "Nacimientos",
+        "mujeres",
+        "Nacimientos de sexo femenino",
+        "Nacimientos del sexo Femenino"
+      ],
+      [
+        "Nacimientos",
+        "municipio",
+        "Municipio de registro",
+        "Municipio de registro"
+      ],
+      [
+        "Nacimientos",
+        "total",
+        "Total de nacimientos registrados",
+        "Total de nacimientos"
+      ]
+    ],
+    "significados_agregados": []
+  },
+  "edu": {
+    "conteos": {
+      "recursos": 39,
+      "significados": 115,
+      "columnas": 349
+    },
+    "parcial": false,
+    "huecos": [
+      "Fecha de carga no documentada; generado_en_utc no acredita la carga."
+    ],
+    "significados_anteriores": 124,
+    "significados_actuales": 115,
+    "significados_retirados": [
+      [
+        "Discapacidad y grupo étnico",
+        "Nivel",
+        "Nivel de estudios del matriculado",
+        "Nivel de Estudios en el que el estudiante se encuentra matrículado"
+      ],
+      [
+        "Discapacidad y grupo étnico",
+        "Población escolar Hablantes de alguna Lengua Indígena - Hombres",
+        "Hombres estudiantes hablantes",
+        "Número de estudiantes (hombres) que reportan hablar algún dialécto indígena"
+      ],
+      [
+        "Discapacidad y grupo étnico",
+        "Población escolar Hablantes de alguna Lengua Indígena - Mujeres",
+        "Mujeres estudiantes hablantes",
+        "Número de estudiantes (mujeres) que reportan hablar algún dialécto indígena"
+      ],
+      [
+        "Discapacidad y grupo étnico",
+        "Población escolar con algun tipo de discapacidad -Hombres",
+        "Hombres estudiantes con discapacidad",
+        "Número de estudiantes (hombres) que reportan contar con algun tipo de discapacidad"
+      ],
+      [
+        "Discapacidad y grupo étnico",
+        "Población escolar con algun tipo de discapacidad -Mujeres",
+        "Mujeres estudiantes con discapacidad",
+        "Número de estudiantes (mujeres) que reportan contar con algun tipo de discapacidad"
+      ],
+      [
+        "Discapacidad y grupo étnico",
+        "Población escolar de origen Étnico -  Mujeres",
+        "Mujeres estudiantes de grupo étnico",
+        "Número de estudiantes (mujeres) que reportan pertenecer a algún grupo étnico."
+      ],
+      [
+        "Discapacidad y grupo étnico",
+        "Población escolar de origen Étnico - Hombres",
+        "Hombres estudiantes de grupo étnico",
+        "Número de estudiantes (hombres) que reportan pertenecer a algún grupo étnico."
+      ],
+      [
+        "Discapacidad y grupo étnico",
+        "Programa educativo",
+        "Programa educativo",
+        "Nombre del Programa Educativo en el que el estudiante se encuentra matriculado"
+      ],
+      [
+        "Egresados",
+        "Benito Juárez",
+        "Estudiantes egresados por sede",
+        "Número de estudiantes egresados en Benito Juárez"
+      ],
+      [
+        "Egresados",
+        "Hermosillo",
+        "Estudiantes egresados por sede",
+        "Número de estudiantes egresados en Hermosillo"
+      ],
+      [
+        "Egresados",
+        "Magdalena",
+        "Estudiantes egresados por sede",
+        "Número de estudiantes egresados en Magdalena"
+      ],
+      [
+        "Egresados",
+        "Navojoa",
+        "Estudiantes egresados por sede",
+        "Número de estudiantes egresados en Navojoa"
+      ],
+      [
+        "Egresados",
+        "Programa Educativo",
+        "Programa educativo",
+        "Nombre del programa educativo"
+      ],
+      [
+        "Egresados",
+        "San Luis R.C.",
+        "Estudiantes egresados por sede",
+        "Número de estudiantes egresados en San Luis R.C."
+      ],
+      [
+        "Matriculas",
+        "Campo de Formación Académica",
+        "Campo de formación académica",
+        "Clasificación mexicana de planes de estudio por campos de formaciónacadémica 2016 Educación superior y media superior"
+      ],
+      [
+        "Matriculas",
+        "Edad",
+        "Edad del alumno",
+        "Edad del estudiante"
+      ],
+      [
+        "Matriculas",
+        "Estado civil",
+        "Estado civil del alumno",
+        "Estado civil"
+      ],
+      [
+        "Matriculas",
+        "Estado de Nacimiento",
+        "Entidad de nacimiento del estudiante",
+        "Estado de Nacimiento del estudiante"
+      ],
+      [
+        "Matriculas",
+        "Estudiante",
+        "Numero de estudiante matriculado",
+        "Número consecutivo, que significa estudiante matriculado"
+      ],
+      [
+        "Matriculas",
+        "Grado (Cuatrimestre)",
+        "Grado o cuatrimestre cursado",
+        "Grado / Cuatrimestre cursado"
+      ],
+      [
+        "Matriculas",
+        "Modalidad",
+        "Modalidad cursada",
+        "Modalidad cursada:  Escolarizada, No escolarizada o Mixta."
+      ],
+      [
+        "Matriculas",
+        "Nivel",
+        "Nivel de estudios matriculado",
+        "Nivel de Estudios en el que el estudiante se encuentra matrículado"
+      ],
+      [
+        "Matriculas",
+        "Programa educativo",
+        "Programa educativo",
+        "Nombre del Programa Educativo en el que el estudiante se encuentra matriculado"
+      ],
+      [
+        "Matriculas",
+        "Sede",
+        "Municipio sede de matrícula",
+        "Municipio Sede, donde el estudiante se encuentra matrículado"
+      ],
+      [
+        "Matriculas",
+        "Sexo",
+        "Sexo del alumno",
+        "Sexo del alumno y/o alumna"
+      ],
+      [
+        "Población - Nuevo ingreso",
+        "Benito Juárez",
+        "Estudiantes de nuevo ingreso por sede",
+        "Número de estudiantes de nuevo ingreso en Benito Juárez"
+      ],
+      [
+        "Población - Nuevo ingreso",
+        "Hermosillo",
+        "Estudiantes de nuevo ingreso por sede",
+        "Número de estudiantes de nuevo ingreso en Hermosillo"
+      ],
+      [
+        "Población - Nuevo ingreso",
+        "Magdalena",
+        "Estudiantes de nuevo ingreso por sede",
+        "Número de estudiantes de nuevo ingreso en Magdalena"
+      ],
+      [
+        "Población - Nuevo ingreso",
+        "Navojoa",
+        "Estudiantes de nuevo ingreso por sede",
+        "Número de estudiantes de nuevo ingreso en Navojoa"
+      ],
+      [
+        "Población - Nuevo ingreso",
+        "Programa Educativo",
+        "Programa educativo",
+        "Nombre del programa educativo"
+      ],
+      [
+        "Población - Nuevo ingreso",
+        "San Luis R.C.",
+        "Estudiantes de nuevo ingreso por sede",
+        "Número de estudiantes de nuevo ingreso en San Luis R.C."
+      ],
+      [
+        "Promedio Académico",
+        "AÑO",
+        "Año del que se informa",
+        "Año del que  se reporta la información"
+      ],
+      [
+        "Promedio Académico",
+        "CAMPO DE FORMACIÓN ACADÉMICA",
+        "Campo de formación académica",
+        "Clasificación mexicana de planes de estudio por campos de formaciónacadémica 2016 Educación superior y media superior"
+      ],
+      [
+        "Promedio Académico",
+        "CUATRIMESTRE",
+        "Cuatrimestre del reporte",
+        "Cuatrimestre del que se reporta la información ( Enero - Abril, Mayo - Agosto y Septiembre - Diciembre)"
+      ],
+      [
+        "Promedio Académico",
+        "NIVEL",
+        "Nivel de estudios matriculado",
+        "Nivel de Estudios en el que el estudiante se encuentra matrículado"
+      ],
+      [
+        "Promedio Académico",
+        "PROGRAMA EDUCATIVO",
+        "Programa educativo",
+        "Nombre del Programa Educativo en el que el estudiante se encuentra matriculado"
+      ],
+      [
+        "Promedio Académico",
+        "PROMEDIO DE APROVECHAMIENTO HOMBRE",
+        "Promedio de aprovechamiento de hombres",
+        "Promedio academico (hombres) durante el año a reportar por programa educativo"
+      ],
+      [
+        "Promedio Académico",
+        "PROMEDIO DE APROVECHAMIENTO MUJER",
+        "Promedio de aprovechamiento de mujeres",
+        "Promedio academico (mujeres) durante el año a reportar por programa educativo"
+      ],
+      [
+        "Relación de Titulados - Licenciatura",
+        "Fecha de Titulación",
+        "Fecha de titulación del titulado",
+        "Fecha en la que el titulado se tituló"
+      ],
+      [
+        "Relación de Titulados - Licenciatura",
+        "Fecha de egreso",
+        "Fecha de egreso del titulado",
+        "Fecha en la que el titulado egreso de la institucion"
+      ],
+      [
+        "Relación de Titulados - Licenciatura",
+        "Fecha de ingreso",
+        "Fecha de ingreso del titulado",
+        "Fecha en la que el titulado ingreso a la institucion"
+      ],
+      [
+        "Relación de Titulados - Licenciatura",
+        "Fecha de nacimiento",
+        "Fecha de nacimiento del titulado",
+        "Fecha de nacimiento del titulado"
+      ],
+      [
+        "Relación de Titulados - Licenciatura",
+        "No.",
+        "Numero de la entrada de titulados",
+        "Numero de la entrada"
+      ],
+      [
+        "Relación de Titulados - Licenciatura",
+        "Programa Educativo",
+        "Programa educativo",
+        "Clave del programa Educativo"
+      ],
+      [
+        "Relación de Titulados - Licenciatura",
+        "Sexo",
+        "Sexo del titulado",
+        "Sexo del titulado"
+      ],
+      [
+        "Relación de Titulados - Posgrado",
+        "Fecha de Titulación",
+        "Fecha de titulación del titulado",
+        "Fecha en la que el titulado se tituló"
+      ],
+      [
+        "Relación de Titulados - Posgrado",
+        "Fecha de egreso",
+        "Fecha de egreso del titulado",
+        "Fecha en la que el titulado egreso de la institucion"
+      ],
+      [
+        "Relación de Titulados - Posgrado",
+        "Fecha de ingreso",
+        "Fecha de ingreso del titulado",
+        "Fecha en la que el titulado ingreso a la institucion"
+      ],
+      [
+        "Relación de Titulados - Posgrado",
+        "Fecha de nacimiento",
+        "Fecha de nacimiento del titulado",
+        "Fecha de nacimiento del titulado"
+      ],
+      [
+        "Relación de Titulados - Posgrado",
+        "No.",
+        "Numero consecutivo del registro",
+        "Numero de la entrada"
+      ],
+      [
+        "Relación de Titulados - Posgrado",
+        "Programa Educativo",
+        "Programa educativo",
+        "Clave del programa Educativo"
+      ],
+      [
+        "Relación de Titulados - Posgrado",
+        "Sexo",
+        "Sexo del titulado",
+        "Sexo del titulado"
+      ],
+      [
+        "Titulados",
+        "Benito Juárez",
+        "Estudiantes titulados por sede",
+        "Número de estudiantes titulados en Benito Juárez"
+      ],
+      [
+        "Titulados",
+        "Hermosillo",
+        "Estudiantes titulados por sede",
+        "Número de estudiantes titulados en Hermosillo"
+      ],
+      [
+        "Titulados",
+        "Magdalena",
+        "Estudiantes titulados por sede",
+        "Número de estudiantes titulados en Magdalena"
+      ],
+      [
+        "Titulados",
+        "Navojoa",
+        "Estudiantes titulados por sede",
+        "Número de estudiantes titulados en Navojoa"
+      ],
+      [
+        "Titulados",
+        "Programa Educativo",
+        "Programa educativo",
+        "Nombre del programa educativo"
+      ],
+      [
+        "Titulados",
+        "San Luis R.C.",
+        "Estudiantes titulados por sede",
+        "Número de estudiantes titulados en San Luis R.C."
+      ]
+    ],
+    "significados_agregados": [
+      [
+        "Matrículas",
+        "Créditos Acumulados",
+        "Créditos acumulados del alumno",
+        "Creditos totales del alumno"
+      ],
+      [
+        "Matrículas",
+        "Discapacidad",
+        "Indicador de discapacidad del alumno",
+        "Indicador de discapacidad"
+      ],
+      [
+        "Matrículas",
+        "Inscrito en Residencias",
+        "Indicador de inscripción en residencias",
+        "Indicador sobre si el alumno esta inscrito en residencias"
+      ],
+      [
+        "Matrículas",
+        "Programa academico",
+        "Programa educativo",
+        "Nombre sobre el programa academico que cursa el alumno"
+      ],
+      [
+        "Matrículas",
+        "Promedio Actual",
+        "Promedio actual del alumno",
+        "Promedio actual del alumno"
+      ],
+      [
+        "Matrículas",
+        "Promedio General",
+        "Promedio general del alumno",
+        "Promedio general del alumno"
+      ],
+      [
+        "Matrículas",
+        "Seguro Escolar",
+        "Indicador de seguro escolar",
+        "Indicador sobre si el alumno cuenta con seguro escolar"
+      ],
+      [
+        "Matrículas",
+        "Semestre que cursa",
+        "Semestre en curso del alumno",
+        "Semestre en el hasta el cual persiven los datos del alumno"
+      ],
+      [
+        "Matrículas",
+        "Sexo",
+        "Sexo del alumno",
+        "Sexo registrado del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Alumno",
+        "Numero del alumno",
+        "Numero del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Alumno activo",
+        "Indicador de alumno activo",
+        "Indicador de si el alumno está activo o no"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Alumnos regulares e irregulares",
+        "Indicador de regularidad del alumno",
+        "Indicador de si es regular o irregular"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Bachillerato",
+        "Institución de bachillerato del alumno",
+        "Nombre de la institucion donde cursó el Bachillerato el alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Campo de Formación Académica",
+        "Campo de formación académica",
+        "Campo al cual pertenece la formacion academica"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Ciudad Bachillerato",
+        "Ciudad donde cursó el bachillerato",
+        "Ciudad en el cual cursó el bachillerato"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Clave de Formación Académica",
+        "Campo de formación académica",
+        "Clave de formacion academica"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Créditos cursados",
+        "Créditos cursados del alumno",
+        "Total de creditos cursoados del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Discapacidad_Tipo",
+        "Tipo de discapacidad del alumno",
+        "Tipo de discapacidad que posee el alumno de tenerla"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Edad",
+        "Edad del alumno",
+        "Edad del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Egreso Bachillerato",
+        "Año de egreso del bachillerato",
+        "Año en el cual egreso del bachillerato"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Estado",
+        "Entidad de residencia del alumno",
+        "Estado donde recide el alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Estado Bachillerato",
+        "Entidad donde cursó el bachillerato",
+        "Estado en el cual cursó el bachillerato"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Estado civil",
+        "Estado civil del alumno",
+        "Estado civil del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Fecha de baja",
+        "Fecha de baja del alumno",
+        "Fecha en la que el alumno se dio de baja"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Fecha inscripción ciclo escolar actual",
+        "Fecha de inscripción del alumno",
+        "Fecha en la que el alumno se inscribio al ciclo escolar actual"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Grupos asignaturas inscrito ciclo escolar actual",
+        "Grupos y asignaturas de inscripción",
+        "Conjunto de grupos a los cuales el alumno se inscribio"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Lugar de nacimiento",
+        "Lugar de nacimiento del alumno",
+        "Lugar de nacimiento del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Modalidad",
+        "Modalidad del programa educativo",
+        "Modalidad del programa educativo"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Nacionalidad",
+        "Nacionalidad del alumno",
+        "Nacionalidad del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Nuevo Ingreso/Reingreso",
+        "Indicador de nuevo ingreso o reingreso",
+        "Indicador si es nuevo ingreso o reingreso"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Num. asignaturas reprobadas en ultimo ciclo cursado",
+        "Asignaturas reprobadas del último ciclo",
+        "Numero de asignaturas que reprobo el ultimo ciclo que cursó el alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Periodo de la baja",
+        "Clave del periodo de baja del alumno",
+        "Clave del periodo en el cual el alumno se dio de baja"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Periodo escolar de ingreso",
+        "Clave del periodo de ingreso del alumno",
+        "Clave del periodo escolar cuando ingreso"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Plan de Estudio",
+        "Programa educativo",
+        "Clave del plan de estudio"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Programa educativo",
+        "Programa educativo",
+        "Nombre del programa educativo"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Promedio de bachillerato",
+        "Promedio de bachillerato del alumno",
+        "Promedio final al salir del bachillerato"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Promedio general (Solo asig. aprobadas)",
+        "Promedio general solo aprobadas",
+        "Promedio general de solo las asignaturas aprobadas"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Promedio general (Todas las asignaturas)",
+        "Promedio general de todas las asignaturas",
+        "Promedio general de todas las asignaturas"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Promedio ultimo ciclo cursado (Solo asig. aprobadas)",
+        "Promedio del último ciclo solo aprobadas",
+        "Promedio del ultimo ciclo que cursó el alumno solo en las asignaturas que aprobó el alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Promedio ultimo ciclo cursado(Todas las asignaturas)",
+        "Promedio del último ciclo todas las asignaturas",
+        "Promedio del ultimo ciclo que cursó el alumno en todas las asignaturas"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Semestres cursados incluye ciclo actual",
+        "Semestres cursados contando el ciclo actual",
+        "Numero de semestres cursados por el alumno contando el ciclo actual"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Semestres cursados sin ciclo actual",
+        "Semestres cursados sin el ciclo actual",
+        "Numero de semestres cursados por el alumno sin contar el ciclo actual"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Sexo",
+        "Sexo del alumno",
+        "Sexo del alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Tipo de periodo",
+        "Tipo de periodo del programa",
+        "Tipo de periodo del programa educativo"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Tipo de programa académico",
+        "Tipo de programa educativo",
+        "Tipo de programa educativo"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Total de créditos del plan de estudio",
+        "Total de créditos del plan del alumno",
+        "Total de creditos del plan de estudio que cursa el alumno"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Ultimo ciclo  escolar cursado",
+        "Clave del último ciclo cursado",
+        "Clave del ultimo ciclo escolar cursado"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "Unidad Académica",
+        "Municipio de la unidad académica",
+        "Nombre del Municipio donde se encuentra la Unidad Académica"
+      ],
+      [
+        "Matrículas de Estudiantes",
+        "fecha de reinscripción",
+        "Fecha de reinscripción del alumno",
+        "Fecha en la que se reinscribió el alumno"
+      ]
+    ]
+  },
+  "ok": true
+}
