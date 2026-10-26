@@ -27,6 +27,30 @@ contrato: descubre por ontología, descarga la fuente, filtra, publica.
 4. Crea `dashboards/<tema>/app.py` con Streamlit + Plotly.
 5. Documenta conjuntos, filtros y totales en este README.
 
+## Para qué sirven aquí la ontología y el MCP
+
+El grafo de **mex-ontologi** guarda metadatos, estructuras y significados —
+no las filas. Los números vienen de los archivos del portal; la ontología es
+el mapa, el diccionario y el reglamento:
+
+- **Descubrir:** de 89 conjuntos y 486 recursos, el grupo `Salud` (7 conjuntos)
+  dice exactamente qué descargar, con IDs de dataset, recurso y nombre real
+  de archivo.
+- **Entender columnas:** `contenido-inspeccion.json` da hoja, columnas y
+  método de encabezado por archivo, así se elige el filtro municipal
+  (`Mun_Nombre`, `MUNICIPIORESIDENCIAD`, `des_munici`…) antes de abrir un Excel.
+- **Significados:** 230 pares variable→significado documentado salen del
+  `portal-completo.ttl` (la misma fuente que sirve el MCP) y alimentan la
+  pestaña Ontología. Solo se usan significados respaldados, no candidatos.
+- **Límites:** sin cruces entre conjuntos sin validación y sin inferir
+  cobertura; por eso cada serie se reporta por separado como total declarado.
+
+El **MCP `mex-ontologia`** (`opencode.json`, proceso local `serve` sobre el
+store portal con 322,495 triples) expone ese grafo en vivo con `onto_query`,
+`onto_stats`, `onto_status` y `onto_validate`: descubrir conjuntos y verificar
+significados sin copiar archivos. Requiere el repo `MEX-Ontologi` en la ruta
+de `cwd` y reiniciar la sesión tras cambiar la config.
+
 ## Desarrollo local
 
 ```powershell
