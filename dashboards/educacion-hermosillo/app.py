@@ -124,6 +124,15 @@ with th:
     st.subheader("Qué faltaría para decir más")
     st.markdown("Identificadores longitudinales (cohortes reales), 2-3 años más de series, y "
                 "diccionarios de códigos (periodos de ingreso, sufijos D). Sin eso, este es el techo.")
+    st.subheader("Conclusiones: lo que sí se sostiene")
+    st.markdown("**Sostenido**: las becas crecieron y cada una vale menos (Gamma-GLM con IC); la remota "
+                "reprueba el doble (p<0.001); la brecha de consulta tiene edad (V=0.30); el peso al nacer "
+                "sube con la edad de la madre solo arriba de la mediana; los modelos predicen moderado y "
+                "se sabe dónde fallan (salud pierde contra el promedio).")
+    st.markdown("**No sostenido**: nada causal; no hay tasas de transición ni deserción (cortes, no "
+                "cohortes); no hay pronóstico operativo ni cobertura acreditada; la edad no pesa "
+                "controlando (p=0.38) aunque el bosque la marcaba importante.")
+    st.caption("Regla de lectura: conteos y diferencias grandes, sí; causas, tasas y pronósticos, no.")
 
 with t1:
     fuentes("edu", 'edu_hmo/becas_hmo.parquet')
