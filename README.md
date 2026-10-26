@@ -36,6 +36,7 @@ preparar y revisar los análisis de los dashboards:
 | `validate-data` | Revisar cálculos, agregaciones, sesgos y respaldo de las conclusiones. | [Anthropic](https://github.com/anthropics/knowledge-work-plugins/tree/main/data/skills/validate-data) |
 | `statistical-analysis` | Seleccionar métodos estadísticos e interpretar tendencias, correlaciones e incertidumbre. | [Anthropic](https://github.com/anthropics/knowledge-work-plugins/tree/main/data/skills/statistical-analysis) |
 | `polars` | Preparar tablas y ejecutar filtros, transformaciones y agregaciones eficientes. | [K-Dense](https://github.com/K-Dense-AI/scientific-agent-skills/tree/main/skills/polars) |
+| `data-visualization` | Elegir gráficos adecuados y mejorar escalas, etiquetas, colores y accesibilidad con Plotly, matplotlib y seaborn. | [Anthropic](https://github.com/anthropics/knowledge-work-plugins/tree/main/data/skills/data-visualization) |
 
 ### Modelos predictivos y machine learning
 
@@ -52,7 +53,7 @@ el análisis y la evidencia lo permitan:
 
 ```powershell
 npx --yes skills add K-Dense-AI/scientific-agent-skills --skill exploratory-data-analysis polars --agent codex opencode --global --yes
-npx --yes skills add anthropics/knowledge-work-plugins --skill validate-data statistical-analysis --agent codex opencode --global --yes
+npx --yes skills add anthropics/knowledge-work-plugins --skill validate-data statistical-analysis data-visualization --agent codex opencode --global --yes
 npx --yes skills add K-Dense-AI/scientific-agent-skills --skill scikit-learn statsmodels shap --agent codex opencode --global --yes
 ```
 
