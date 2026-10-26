@@ -76,8 +76,9 @@ with t1:
         m = m.sort_values("PO2SM", ascending=True)
     else:
         m = m.sort_values("NOM_MUN")
-    st.plotly_chart(px.bar(m, x="NOM_MUN", y="PO2SM", color="GM_2020",
-                           title="PO2SM por municipio (Sonora, 2020)",
+    st.plotly_chart(px.bar(m, x="PO2SM", y="NOM_MUN", color="GM_2020", orientation="h",
+                           height=950,
+                           title="PO2SM municipal va de 43% a 93% (Sonora, 2020)",
                            labels={"NOM_MUN": "municipio", "PO2SM": "% < 2 SM",
                                    "GM_2020": "grado"}),
                     width="stretch")
@@ -85,17 +86,23 @@ with t1:
         "grado de marginación, mayor PO2SM. Relación descriptiva, "
         "no causalidad. Nota: en esta fuente el IM_2020 es menor donde la "
         "marginación es mayor.")
+    _r = float(mun[["IM_2020", "PO2SM"]].corr().iloc[0, 1])
     st.plotly_chart(px.scatter(mun, x="IM_2020", y="PO2SM", color="GM_2020",
-                              hover_name="NOM_MUN",
-                              title="IM_2020 vs PO2SM por municipio",
+                              hover_name="NOM_MUN", trendline="ols",
+                              title=f"A mayor marginación, mayor PO2SM (r = {_r:.2f}, descriptivo)",
                               labels={"IM_2020": "IM_2020 (menor valor = mayor marginación)",
                                       "PO2SM": "% < 2 SM", "GM_2020": "grado"}),
                     width="stretch")
     que("Distribución municipal de PO2SM: dónde se concentra la mayoría de los "
         "municipios.")
-    st.plotly_chart(px.histogram(mun, x="PO2SM", nbins=20,
-                                title="Distribución de PO2SM municipal"),
-                    width="stretch")
+    _h = px.histogram(mun, x="PO2SM", nbins=20,
+                        title="La mitad de los municipios supera 70.5% de PO2SM",
+                        labels={"PO2SM": "% < 2 SM"})
+    _h.add_vline(x=float(mun["PO2SM"].median()), line_dash="dot",
+                 annotation_text=f"mediana {mun['PO2SM'].median():.1f}%")
+    _h.add_vline(x=float(mun["PO2SM"].mean()), line_dash="dash",
+                 annotation_text=f"media {mun['PO2SM'].mean():.1f}%")
+    st.plotly_chart(_h, width="stretch")
     grado = mun.groupby("GM_2020").agg(municipios=("PO2SM", "size"),
                                       po2sm_mediana=("PO2SM", "median")).reset_index()
     st.dataframe(grado, hide_index=True)
@@ -118,9 +125,13 @@ with t2:
     que("Sonora frente a las demás entidades en 2020: cada barra es una entidad. "
         "La fila Nacional no trae IM/GM declarados y se excluye del orden por índice.")
     e = ent[ent["NOM_ENT"].str.strip().str.upper() != "NACIONAL"].copy()
-    st.plotly_chart(px.bar(e.sort_values("PO2SM", ascending=False), x="NOM_ENT", y="PO2SM",
-                           title="PO2SM por entidad (2020)",
-                           labels={"NOM_ENT": "entidad", "PO2SM": "% < 2 SM"}),
+    e["_es_son"] = e["NOM_ENT"].astype(str).str.strip().str.upper() == "SONORA"
+    e = e.sort_values("PO2SM", ascending=True)
+    st.plotly_chart(px.bar(e, x="PO2SM", y="NOM_ENT",
+                           color="_es_son", orientation="h", height=800,
+                           color_discrete_map={True: "#C44E52", False: "#8A8A8A"},
+                           title="Sonora, lugar 22 de 32 en PO2SM (2020)",
+                           labels={"NOM_ENT": "entidad", "PO2SM": "% < 2 SM", "_es_son": "Sonora"}),
                     width="stretch")
     st.caption(f"Sonora: PO2SM {son['PO2SM']:.1f}%, grado {son['GM_2020']}, "
                f"posición nacional {son['POSICION']:.0f}.")
