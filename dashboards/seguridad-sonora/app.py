@@ -423,8 +423,14 @@ with t7:
     h1.metric("Delitos 2015-2025", "343,128", border=True,
               chart_data=inc.groupby("anio")["n"].sum().tolist(),
               chart_type="line")
-    h2.metric("Hermosillo concentra", "39%", border=True)
-    h3.metric("Tasa desapariciones 2024-25 vs 2015-23", "3.0×", border=True)
+    hmo_share = (inc[inc["municipio"] == "Hermosillo"].groupby("anio")["n"].sum()
+                 / inc.groupby("anio")["n"].sum())
+    h2.metric("Hermosillo concentra", "39%", border=True,
+              chart_data=hmo_share.round(3).tolist(), chart_type="line")
+    h3.metric("Tasa desapariciones 2024-25 vs 2015-23", "3.0×", border=True,
+              chart_data=des.dropna(subset=["anio_hecho"])
+              .groupby("anio_hecho").size().sort_index().tolist(),
+              chart_type="bar")
     h4.metric("Pronóstico mensual validado", "R² 0.94", border=True)
     st.subheader("1. El mapa es Hermosillo (y luego el resto)",
                  icon=":material/map:")
