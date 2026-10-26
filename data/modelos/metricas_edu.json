@@ -88,5 +88,21 @@
         "support": 1646.0
       }
     }
+  },
+  "shap": {
+    "version": "0.54.1",
+    "output": "P(clase=1), TreeExplainer sin fondo",
+    "masker": "tree_path_dependent (sigue la distribucion de los arboles)",
+    "nota": "Describe al modelo, no causalidad",
+    "irregularidad": {
+      "explicadas": 500,
+      "filas": "held-out test",
+      "aditividad_max_err": 5.3760329521423955e-11
+    },
+    "riesgo": {
+      "explicadas": 140,
+      "filas": "train (n=140, orientativo)",
+      "aditividad_max_err": 6.661338147750939e-16
+    }
   }
 }

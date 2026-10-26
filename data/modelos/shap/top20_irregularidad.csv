@@ -1,0 +1,21 @@
+Edad,Promedio de bachillerato,Semestres cursados incluye ciclo actual,Programa educativo,Modalidad,Sexo,p_irregular,top_drivers
+21.0,71.0,4,Lic. en Comercio Internacional,Escolarizado,Masculino,1.0,Semestres cursados incluye ciclo actual=+0.242; Promedio de bachillerato=+0.219; Edad=+0.063
+21.0,77.0,4,Ing. en Mecatrónica,Escolarizado,Masculino,0.99,Semestres cursados incluye ciclo actual=+0.214; Promedio de bachillerato=+0.178; Programa educativo_Ing. en Mecatrónica=+0.127
+22.0,71.0,7,Lic. en Entrenamiento Deportivo,Escolarizado,Masculino,0.98,Promedio de bachillerato=+0.228; Semestres cursados incluye ciclo actual=+0.147; Edad=+0.078
+24.0,70.94,11,Lic. en Administración de Empresas,Escolarizado,Masculino,0.97,Semestres cursados incluye ciclo actual=+0.181; Promedio de bachillerato=+0.171; Edad=+0.136
+23.0,71.0,9,Ing. en Mecatrónica,Escolarizado,Masculino,0.97,Promedio de bachillerato=+0.202; Semestres cursados incluye ciclo actual=+0.145; Programa educativo_Ing. en Mecatrónica=+0.099
+23.0,82.0,9,Ing. en Geociencias,Escolarizado,Masculino,0.95,Edad=+0.152; Semestres cursados incluye ciclo actual=+0.118; Programa educativo_Ing. en Geociencias=+0.082
+21.0,80.0,7,Lic. en Criminología,Escolarizado,Femenino,0.935,Promedio de bachillerato=+0.185; Semestres cursados incluye ciclo actual=+0.158; Edad=+0.094
+20.0,80.0,5,Lic. en Contaduría,Escolarizado,Masculino,0.923,Semestres cursados incluye ciclo actual=+0.169; Promedio de bachillerato=+0.127; Programa educativo_Lic. en Contaduría=+0.081
+26.0,70.0,13,Ing. en Horticultura,Escolarizado,Masculino,0.92,Promedio de bachillerato=+0.189; Semestres cursados incluye ciclo actual=+0.146; Edad=+0.111
+23.0,72.0,9,Ing. en Horticultura,Escolarizado,Masculino,0.92,Promedio de bachillerato=+0.212; Semestres cursados incluye ciclo actual=+0.175; Edad=+0.115
+23.0,70.0,7,Lic. en Administración de Empresas Turísticas,Escolarizado,Masculino,0.92,Promedio de bachillerato=+0.228; Semestres cursados incluye ciclo actual=+0.143; Edad=+0.104
+25.0,67.0,7,Ing. en Logística y Transporte,Escolarizado,Masculino,0.91,Promedio de bachillerato=+0.152; Semestres cursados incluye ciclo actual=+0.135; Edad=+0.127
+22.0,70.0,9,Ing. Industrial en Manufactura,Escolarizado,Femenino,0.9,Promedio de bachillerato=+0.188; Edad=+0.114; Semestres cursados incluye ciclo actual=+0.107
+23.0,0.0,6,Ing. en Software,Escolarizado,Masculino,0.9,Semestres cursados incluye ciclo actual=+0.195; Edad=+0.128; Promedio de bachillerato=+0.097
+20.0,69.0,3,Lic. en Enfermería,Escolarizado,Femenino,0.898,Promedio de bachillerato=+0.301; Semestres cursados incluye ciclo actual=+0.221; Edad=+0.070
+22.0,78.0,5,Ing. en Mecatrónica,Escolarizado,Masculino,0.89,Semestres cursados incluye ciclo actual=+0.149; Programa educativo_Ing. en Mecatrónica=+0.140; Edad=+0.100
+22.0,67.0,7,Lic. en Comercio Internacional,Escolarizado,Femenino,0.88,Promedio de bachillerato=+0.288; Semestres cursados incluye ciclo actual=+0.139; Edad=+0.054
+24.0,0.0,7,Lic. en Finanzas e Inversiones,Escolarizado,Masculino,0.88,Semestres cursados incluye ciclo actual=+0.141; Edad=+0.133; Promedio de bachillerato=+0.102
+20.0,75.0,5,Lic. en Administración de Empresas,Escolarizado,Masculino,0.875,Semestres cursados incluye ciclo actual=+0.171; Promedio de bachillerato=+0.137; Programa educativo_Lic. en Administración de Empresas=+0.077
+23.0,77.0,10,Lic. en Administración de Empresas,Escolarizado,Femenino,0.875,Semestres cursados incluye ciclo actual=+0.169; Edad=+0.145; Promedio de bachillerato=+0.084

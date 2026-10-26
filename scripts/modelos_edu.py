@@ -156,19 +156,14 @@ def main():
     mm_out.to_parquet(OUT / "inferencias" / "irregularidad_matricula.parquet",
                       index=False)
 
-    # 5. SHAP offline (artefactos PNG/CSV; el dashboard no importa shap)
-    import matplotlib
-    matplotlib.use("Agg")
-    import matplotlib.pyplot as plt
+    # 5. SHAP offline (TreeExplainer exacto; el dashboard grafica los parquets)
     import shap
-    SHAPD = OUT / "inferencias" / "shap"
-    SHAPD.mkdir(parents=True, exist_ok=True)
+    SHAPV = OUT / "shap"
+    SHAPV.mkdir(parents=True, exist_ok=True)
 
     def explain(rf, X_exp, names, tag, exp_rows):
         # ponytail: interventional+probability falla aditividad en este shap
-        # (err~0.06 verificado); la via tree_path_dependent reconstruye exacto (err=0.0)
-        d = SHAPD / tag
-        d.mkdir(parents=True, exist_ok=True)
+        # (err~0.06 verificado); la via tree_path_dependent reconstruye exacto (err~1e-11)
         ex = shap.TreeExplainer(rf)
         e = ex(pd.DataFrame(X_exp, columns=names))
         if e.values.ndim == 3:
@@ -176,14 +171,18 @@ def main():
         b = np.asarray(e.base_values)
         if b.ndim == 2:
             b = b[:, 1]
-        rec = b + np.asarray(e.values).sum(axis=1)
+        v = np.asarray(e.values)
+        rec = b + v.sum(axis=1)
         err = float(np.abs(rec - rf.predict_proba(X_exp)[:, 1]).max())
         assert err < 1e-6, f"SHAP no aditivo en {tag}: err={err}"
-        shap.plots.beeswarm(e, max_display=15, show=False)
-        plt.tight_layout(); plt.savefig(d / "beeswarm.png", dpi=90); plt.close()
-        shap.plots.bar(e, max_display=15, show=False)
-        plt.tight_layout(); plt.savefig(d / "bar.png", dpi=90); plt.close()
-        return e, err, d
+        vv = pd.DataFrame(v, columns=names)
+        vv["base_value"] = b
+        vv["p_modelo"] = rf.predict_proba(X_exp)[:, 1]
+        raw = np.asarray(e.data)
+        for j in range(len(names)):
+            vv[f"valor_{j}"] = raw[:, j]
+        vv.to_parquet(SHAPV / f"valores_{tag}.parquet", index=False)
+        return e, err
 
     import scipy.sparse as _sp
     dense = lambda a: a.toarray() if _sp.issparse(a) else np.asarray(a)
@@ -193,8 +192,8 @@ def main():
     rf_irr = rf4.named_steps["rf"]
     Xtr_t, Xte_t = dense(pre4.transform(Xtr4)), dense(pre4.transform(Xte4))
     NEXP = min(500, len(Xte_t))
-    e_irr, err_irr, d_irr = explain(rf_irr, Xte_t[:NEXP], feat_names,
-                                    "irregularidad", "held-out test")
+    e_irr, err_irr = explain(rf_irr, Xte_t[:NEXP], feat_names,
+                             "irregularidad_uth", "held-out test")
     p_irr = rf_irr.predict_proba(Xte_t[:NEXP])[:, 1]
     top_idx = np.argsort(-p_irr)[:20]
     t20 = Xte4.iloc[:NEXP].iloc[top_idx][num4 + cat4].copy()
@@ -203,18 +202,18 @@ def main():
         "; ".join(f"{feat_names[j]}={e_irr.values[i][j]:+.3f}"
                   for j in np.argsort(-np.abs(e_irr.values[i]))[:3])
         for i in top_idx]
-    t20.to_csv(d_irr / "top20.csv", index=False)
+    t20.to_csv(SHAPV / "top20_irregularidad.csv", index=False)
 
-    # 5b. Riesgo: n=140, fondo y filas de train (orientativo, se declara)
+    # 5b. Riesgo: n=140, filas de train (orientativo, se declara)
     pre_r = clf.named_steps["sc"]
     rf_r = clf.named_steps["rf"]
     Xr_t = dense(pre_r.transform(X))
-    e_rie, err_rie, d_rie = explain(rf_r, Xr_t, feats, "riesgo",
-                                    "train (n=140, orientativo)")
+    e_rie, err_rie = explain(rf_r, Xr_t, feats, "riesgo_reprobacion",
+                             "train (n=140, orientativo)")
     jf = int(np.abs(e_rie.values).mean(axis=0).argmax())
     pd.DataFrame({"feature": feats[jf], "valor": np.asarray(X)[:, jf],
                   "shap": e_rie.values[:, jf]}).to_csv(
-        d_rie / "dependence.csv", index=False)
+        SHAPV / "dependence_riesgo.csv", index=False)
 
     met["shap"] = {
         "version": shap.__version__, "output": "P(clase=1), TreeExplainer sin fondo",

@@ -404,10 +404,10 @@ with t5:
                f"(n={mi['n']}, prevalencia irregular {mi['prevalencia_irregular']}). "
                "El promedio de bachillerato y los semestres cursados pesan más; "
                "sexo y modalidad casi nada. Probabilidad, no destino.")
-    que("Por qué marca riesgo cada modelo (SHAP, PermutationExplainer sobre "
-        "P(clase=1), aditividad verificada con error 0.0): cada punto es una fila, "
-        "el color es el valor estandarizado del feature. Describe al modelo, "
-        "no causalidad.")
+    que("Por qué marca riesgo cada modelo (SHAP TreeExplainer exacto sobre "
+        "P(clase=1), aditividad verificada err<1e-6; muestra held-out en "
+        "irregularidad y train en riesgo n=140): cada punto es una fila. "
+        "Describe al modelo, no causalidad.")
     import plotly.graph_objects as go
 
     def _beeswarm(parquet, titulo, nota):
@@ -460,6 +460,10 @@ with t5:
                                      measure=["relative"] * len(contrib) + ["total"]))
         fig.update_layout(title=titulo)
         st.plotly_chart(fig, use_container_width=True)
+    que("Top 20 alumnos con mayor P(irregular) y sus 3 principales impulsores "
+        "SHAP (valor + cambio en P).")
+    st.dataframe(pd.read_csv(DATA / "modelos" / "shap" / "top20_irregularidad.csv"),
+                 use_container_width=True)
 
 with t6:
     que("Aprovechamiento 2021-2 por programa (80 filas): promedio global y % con "
