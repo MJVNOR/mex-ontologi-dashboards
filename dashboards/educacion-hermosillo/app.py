@@ -85,7 +85,7 @@ with t1:
                                    importe=("importe", "sum")).reset_index()
     st.plotly_chart(px.bar(s, x="anio", y="becas", title="Becas crecen 2021-2024 y bajan en 2025",
                            labels={"anio": "año", "becas": "becas"}),
-                    alt="Becas crecen 2021-2024 y bajan en 2025"
+                    alt="Becas crecen 2021-2024 y bajan en 2025",
                     width="stretch")
     que("Reparto de las becas por nivel educativo (básico vs. medio superior y "
         "superior) y por género declarado. Cada rebanada es la proporción del total.")
@@ -103,7 +103,7 @@ with t1:
     top_esc = bec_f.groupby("escuela")["importe"].sum().nlargest(12).reset_index()
     st.plotly_chart(px.bar(top_esc, x="importe", y="escuela", orientation="h",
                            title="Top 12 escuelas por importe acumulado"),
-                    alt="Top 12 escuelas por importe acumulado"
+                    alt="Top 12 escuelas por importe acumulado",
                     width="stretch")
     # --- Distribución del importe (media vs mediana) ---
     que("Cuánto recibe cada beca: la media ($7,694) supera a la mediana ($5,000) "
@@ -113,7 +113,8 @@ with t1:
                        "(recorte en $50k para visualizar)")
     fh3.add_vline(x=float(bec_f["importe"].median()), line_dash="dot",
                   annotation_text="mediana $5,000")
-    st.plotly_chart(fh3, width="stretch")
+    st.plotly_chart(fh3, width="stretch",
+                    alt="Distribución del importe con mediana en $5,000")
     st.caption("p25=$2,200 · p50=$5,000 · p75=$10,000 · p99=$42,500 · max=$500,000 "
                "(periodo completo; el filtro de años solo afecta las gráficas). "
                "El histograma recorta en $50k (≈99% de los casos).")
@@ -127,7 +128,7 @@ with t1:
                            var_name="medida", value_name="pesos")
     st.plotly_chart(px.bar(ticket_m, x="anio", y="pesos", color="medida",
                            barmode="group", title="Ticket por año: media vs mediana"),
-                    alt="Ticket por año: media vs mediana"
+                    alt="Ticket por año: media vs mediana",
                     width="stretch")
     # --- Programa, ciclo, convocatoria ---
     que("De qué programa viene cada beca, de qué ciclo escolar y qué convocatoria "
@@ -149,7 +150,7 @@ with t1:
                            x="convocatoria", y="n",
                            title="Top 12 convocatorias por becas",
                            labels={"convocatoria": "convocatoria", "n": "becas"}),
-                    alt="Top 12 convocatorias por becas"
+                    alt="Top 12 convocatorias por becas",
                     width="stretch")
     # --- Brecha de género en importe ---
     que("Brecha de género en el monto: los hombres promedian $8,106 y las mujeres "
@@ -160,7 +161,7 @@ with t1:
                    var_name="medida", value_name="pesos")
     st.plotly_chart(px.bar(bg_m, x="genero", y="pesos", color="medida",
                            barmode="group", title="Importe por género: media vs mediana"),
-                    alt="Importe por género: media vs mediana"
+                    alt="Importe por género: media vs mediana",
                     width="stretch")
     que("Distribución del importe por nivel: la caja muestra mediana y cuartiles, "
         "los puntos son becas atípicas. En ambos niveles la media queda por encima "
@@ -168,7 +169,7 @@ with t1:
     st.plotly_chart(px.box(bec_f[bec_f["importe"] <= 50000], x="nivel", y="importe",
                            title="Importe por nivel (recorte $50k)",
                            labels={"nivel": "nivel", "importe": "pesos"}),
-                    alt="Importe por nivel (recorte $50k)"
+                    alt="Importe por nivel (recorte $50k)",
                     width="stretch")
 
 with t2:
@@ -183,7 +184,7 @@ with t2:
                            x="anio", y="n", color="etapa", barmode="group",
                            title="Trayectoria UTH por corte",
                            labels={"anio": "corte", "n": "estudiantes"}),
-                    alt="Trayectoria UTH por corte"
+                    alt="Trayectoria UTH por corte",
                     width="stretch")
     st.caption("Ojo: el corte 2022-1 trae un solo programa reportado (n=10); no es "
                "comparable con los demás cortes.")
@@ -208,7 +209,7 @@ with t2:
     st.plotly_chart(px.bar(tasa, x="tasa", y="programa", orientation="h",
                            title="Tasa titulación (top 15 por titulados)",
                            labels={"tasa": "Titulados / Egresados"}),
-                    alt="Tasa titulación (top 15 por titulados)"
+                    alt="Tasa titulación (top 15 por titulados)",
                     width="stretch")
     st.caption("Tasa >1 es posible porque los cortes no siguen a la misma generación.")
     # --- Serie año x sexo ---
@@ -219,7 +220,7 @@ with t2:
                            facet_col="etapa",
                            title="Trayectoria por año y sexo",
                            labels={"anio": "corte", "n": "estudiantes"}),
-                    alt="Trayectoria por año y sexo"
+                    alt="Trayectoria por año y sexo",
                     width="stretch")
 
 with t3:
@@ -232,13 +233,14 @@ with t3:
     top_r = rep16.groupby("programa")["indice"].mean().nlargest(15).reset_index()
     st.plotly_chart(px.bar(top_r, x="indice", y="programa", orientation="h",
                            title="Reprobación: mayor índice promedio sem. 16"),
-                    alt="Reprobación: mayor índice promedio sem. 16"
+                    alt="Reprobación: mayor índice promedio sem. 16",
                     width="stretch")
     fh = px.histogram(rep16, x="indice", nbins=30,
                       title="Índice con sesgo a la derecha: media 17, mediana 12")
     fh.add_vline(x=float(rep16["indice"].mean()), line_dash="dash", annotation_text="media")
     fh.add_vline(x=float(rep16["indice"].median()), line_dash="dot", annotation_text="mediana")
-    st.plotly_chart(fh, width="stretch")
+    st.plotly_chart(fh, width="stretch",
+                    alt="Distribución del índice con media 17 y mediana 12")
     # --- Comparar cortes ---
     que("Presencial vs remota: la remota (n=64) trae media 34.2 en sem 16 frente a "
         "~17.3 presencial. Con n chica, leer como rango, no como punto.")
@@ -247,9 +249,10 @@ with t3:
     st.plotly_chart(px.bar(corte, x="corte", y="media",
                            title="Reprobación sem 16: media por corte",
                            labels={"media": "índice medio"}),
-                    alt="Reprobación sem 16: media por corte"
+                    alt="Reprobación sem 16: media por corte",
                     width="stretch")
-    st.dataframe(corte, width="stretch")
+    st.dataframe(corte, width="stretch",
+                 alt="Tabla de media y mediana del índice por corte")
     # --- Evolución 4ta→16va (presencial; la remota trae otra escala) ---
     que("La reprobación sube a mitad del semestre y cae hacia la semana 16 "
         "(medianas 14.6 → 21.4 → 21.4 → 11.9, presencial).")
@@ -257,7 +260,7 @@ with t3:
            .agg(mediana="median", media="mean", n="count").reset_index())
     st.plotly_chart(px.line(evo, x="semana", y=["media", "mediana"],
                             markers=True, title="Evolución del índice por semana"),
-                    alt="Evolución del índice por semana"
+                    alt="Evolución del índice por semana",
                     width="stretch")
 
 with t4:
@@ -282,7 +285,8 @@ with t4:
                        labels={edad: "Edad (años)", sexo: "Sexo"})
     fh2.add_vline(x=float(mat[edad].mean()), line_dash="dash", annotation_text="media")
     fh2.add_vline(x=float(mat[edad].median()), line_dash="dot", annotation_text="mediana")
-    st.plotly_chart(fh2, width="stretch")
+    st.plotly_chart(fh2, width="stretch",
+                    alt="Edad concentrada 18-25 en ambos sexos; 11 casos en 122")
     st.caption("Las edades se presentan tal como aparecen en la fuente; no se corrigen valores sin evidencia.")
     que("Periodo escolar de ingreso de la matrícula actual: de qué generación "
         "viene cada inscrito (año-periodo).")
@@ -293,7 +297,7 @@ with t4:
     st.plotly_chart(px.bar(ing_c, x="ingreso", y="n",
                            title="Matrícula por código de periodo de ingreso",
                            labels={"ingreso": "Código declarado", "n": "Registros"}),
-                    alt="Matrícula por código de periodo de ingreso"
+                    alt="Matrícula por código de periodo de ingreso",
                     width="stretch")
     st.caption("Se conservan los códigos originales: no se ha recuperado una definición documental que permita traducirlos a fechas.")
     # --- Programas, modalidad, regularidad ---
@@ -314,7 +318,7 @@ with t4:
                     width="stretch")
     st.plotly_chart(px.pie(mat.groupby(reg).size().reset_index(name="n"),
                            names=reg, values="n", title="Regulares vs irregulares"),
-                    alt="Regulares vs irregulares"
+                    alt="Regulares vs irregulares",
                     width="stretch")
     # --- Antecedente y avance ---
     que("Con qué promedio de bachillerato llegan (mediana ~80, 531 sin dato) y en "
@@ -385,7 +389,7 @@ with t5:
     st.plotly_chart(px.bar(top, x="p", y=mcol, orientation="h",
                            title="Riesgo de reprobación: top 12 materias (p)",
                            labels={"p": "P(riesgo)"}),
-                    alt="Riesgo de reprobación: top 12 materias (p)"
+                    alt="Riesgo de reprobación: top 12 materias (p)",
                     width="stretch")
     st.caption(f"Modelo: balanced accuracy {me['riesgo_reprobacion']['balanced_accuracy_cv']} "
                f"(±{me['riesgo_reprobacion']['balanced_accuracy_cv_std']}, validación cruzada "
@@ -401,7 +405,7 @@ with t5:
                                title="Segmentos de estudiantes UTH (PCA 2D)",
                                labels={"color": "Segmento"},
                                hover_data=["programa", "semestre"]),
-                    alt="Segmentos de estudiantes UTH (PCA 2D)"
+                    alt="Segmentos de estudiantes UTH (PCA 2D)",
                     width="stretch")
     st.caption(f"Tamaños: {me['segmentos']['tamano']}. El segmento 2 (2 registros con "
                "promedios en escala 0-100 en vez de 0-10) es probable error de captura.")
@@ -418,7 +422,8 @@ with t5:
                              name="Estimación 2026"))
     fig.update_layout(title="Becas HMO: observado + estimación 2026",
                       xaxis_title="Año", yaxis_title="Becas")
-    st.plotly_chart(fig, width="stretch")
+    st.plotly_chart(fig, width="stretch",
+                    alt="Becas observadas por año y estimación 2026")
     st.caption(f"R² {me['tendencia_becas']['r2']}, MAE {me['tendencia_becas']['mae']}. "
                f"{me['tendencia_becas']['advertencia']}.")
     que("Riesgo de irregularidad por alumno (RandomForest con datos de entrada: "
@@ -429,7 +434,7 @@ with t5:
     imp.columns = ["variable", "importancia"]
     st.plotly_chart(px.bar(imp, x="importancia", y="variable", orientation="h",
                            title="Irregularidad: qué pesa más"),
-                    alt="Irregularidad: qué pesa más"
+                    alt="Irregularidad: qué pesa más",
                     width="stretch")
     irr = pd.read_parquet(DATA / "modelos" / "inferencias"
                           / "irregularidad_matricula.parquet")
@@ -438,14 +443,14 @@ with t5:
     st.plotly_chart(px.histogram(irr, x=pcol, nbins=40,
                                  title="Irregularidad: distribución de P(irregular)",
                                  labels={"p_irregular": "P(irregular)"}),
-                    alt="Irregularidad: distribución de P(irregular)"
+                    alt="Irregularidad: distribución de P(irregular)",
                     width="stretch")
     top_irr = irr.groupby(prog_irr)[pcol].mean().sort_values(
         ascending=False).head(15).reset_index()
     st.plotly_chart(px.bar(top_irr, x=pcol, y=prog_irr, orientation="h",
                            title="P(irregular) promedio: top 15 programas",
                            labels={"p_irregular": "P(irregular) promedio"}),
-                    alt="P(irregular) promedio: top 15 programas"
+                    alt="P(irregular) promedio: top 15 programas",
                     width="stretch")
     st.caption(f"Modelo: balanced accuracy {mi['balanced_accuracy']} en prueba "
                f"(n={mi['n']}, prevalencia irregular {mi['prevalencia_irregular']}). "
@@ -483,7 +488,7 @@ with t5:
         fig.update_layout(title=titulo, xaxis_title="SHAP (cambio en P)",
                           yaxis=dict(tickvals=list(range(len(order))),
                                      ticktext=list(reversed(order))))
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, width="stretch", alt=titulo)
         st.caption(nota)
 
     _beeswarm("valores_riesgo_reprobacion.parquet", "SHAP: riesgo de reprobación",
@@ -499,7 +504,7 @@ with t5:
                                title=f"Dependencia SHAP: {dep['feature'].iloc[0]}",
                                labels={"valor": "Promedio semana 8",
                                        "shap": "SHAP (cambio en P)"}),
-                    alt=f"Dependencia SHAP: {dep['feature'].iloc[0]}"
+                    alt=f"Dependencia SHAP: {dep['feature'].iloc[0]}",
                     width="stretch")
     que("Ejemplo local: la fila con mayor P de cada modelo y qué la empujó. "
         "La barra base es el promedio del background; cada tramo suma/resta "
@@ -515,11 +520,12 @@ with t5:
                                      base=float(vv.loc[i, "base_value"]),
                                      measure=["relative"] * len(contrib) + ["total"]))
         fig.update_layout(title=titulo)
-        st.plotly_chart(fig, width="stretch")
+        st.plotly_chart(fig, width="stretch", alt=titulo)
     que("Top 20 alumnos con mayor P(irregular) y sus 3 principales impulsores "
         "SHAP (valor + cambio en P).")
     st.dataframe(pd.read_csv(DATA / "modelos" / "shap" / "top20_irregularidad.csv"),
-                 width="stretch")
+                 width="stretch",
+                 alt="Top 20 alumnos con mayor P de irregularidad y sus impulsores")
 
 with t6:
     que("Aprovechamiento 2021-2 por programa (80 filas): promedio global y % con "
@@ -534,18 +540,19 @@ with t6:
     st.plotly_chart(px.bar(ap2.head(10), x=pg, y=pe, orientation="h",
                            title="Top 10 promedio global",
                            labels={pg: "Promedio global", pe: "Programa"}),
-                    alt="Top 10 promedio global"
+                    alt="Top 10 promedio global",
                     width="stretch")
     st.plotly_chart(px.bar(ap2.tail(10).sort_values(pg), x=pg, y=pe,
                            orientation="h",
                            title="Bottom 10 promedio global",
                            labels={pg: "Promedio global", pe: "Programa"}),
-                    alt="Bottom 10 promedio global"
+                    alt="Bottom 10 promedio global",
                     width="stretch")
     st.dataframe(ap2[[pe, ev, pg, "pct_menos7"]]
                  .rename(columns={pe: "Programa", ev: "Evaluados",
                                   pg: "Promedio", "pct_menos7": "% <7"}),
-                 width="stretch")
+                 width="stretch",
+                 alt="Programas con promedio global y porcentaje menor a 7")
     st.caption("Ojo: Ing. en Tecnología de Alimentos promedia 6.0 con n=1; "
                "Ing. en Geociencias (Hermosillo) 7.81 con n=405 — ponderar por Evaluados.")
     que("Capacitación docente SEC (22 eventos, 2022): pocos datos, solo tabla y "
@@ -555,19 +562,21 @@ with t6:
     evn = col(cap, "evento")
     cap2 = cap.rename(columns={evn: "Evento", np_: "Participantes", mo: "Modalidad"})
     st.dataframe(cap2[["Evento", "Participantes", "Modalidad"]],
-                 width="stretch")
+                 width="stretch",
+                 alt="Eventos de capacitación con participantes y modalidad")
     st.plotly_chart(px.bar(cap2.groupby("Modalidad")["Participantes"].sum()
                            .reset_index(),
                            x="Modalidad", y="Participantes",
                            title="Participantes por modalidad"),
-                    alt="Participantes por modalidad"
+                    alt="Participantes por modalidad",
                     width="stretch")
 
 with t7:
     st.write("Variables y significados documentados en la ontología (mex-ontologi): "
              "significados documentales; las correspondencias con columnas se muestran por separado y requieren revisar su estado.")
     sig = significados()
-    st.dataframe(sig, width="stretch")
+    st.dataframe(sig, width="stretch",
+                 alt="Variables y significados de la ontología")
     st.download_button("Descargar significados (CSV)",
                        sig.to_csv(index=False).encode("utf-8"),
                        "significados_edu_hermosillo.csv", "text/csv")
