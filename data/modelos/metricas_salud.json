@@ -1,17 +1,25 @@
 {
   "urgencias": {
-    "mae": 1430.7,
-    "mape_pct": 49.5,
-    "r2": -1.515,
+    "modelo": "share_tendencia",
+    "mae": 991.2,
+    "mape_pct": 26.1,
+    "r2": -0.094,
     "train_anios": [
       2018,
       2019,
       2020
     ],
     "test_anio": 2021,
+    "variantes_mape": {
+      "ridge_mes": 49.5,
+      "share_tendencia": 26.1,
+      "share_ultimo": 33.0,
+      "share_media": 50.2
+    },
     "nota": "2021-2022 parciales en la fuente"
   },
   "consulta": {
+    "modelo": "ridge_mes",
     "mae": 6539.8,
     "mape_pct": 34.9,
     "r2": -2.285,
@@ -21,6 +29,12 @@
       2020
     ],
     "test_anio": 2021,
+    "variantes_mape": {
+      "ridge_mes": 34.9,
+      "share_tendencia": 73.7,
+      "share_ultimo": 40.3,
+      "share_media": 38.7
+    },
     "nota": "2021-2022 parciales en la fuente"
   },
   "vigilancia": {

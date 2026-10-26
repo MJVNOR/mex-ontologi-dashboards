@@ -179,9 +179,11 @@ with t6:
                       xaxis_title="Mes", yaxis_title="Atenciones estimadas")
     st.plotly_chart(fig, use_container_width=True)
     st.caption(f"Error medido en 2021: urgencias MAE {met['urgencias']['mae']} "
-               f"(MAPE {met['urgencias']['mape_pct']}%, R² {met['urgencias']['r2']}), "
+               f"(MAPE {met['urgencias']['mape_pct']}%, R² {met['urgencias']['r2']}, "
+               f"variante {met['urgencias']['modelo']}), "
                f"consulta MAE {met['consulta']['mae']} "
-               f"(MAPE {met['consulta']['mape_pct']}%, R² {met['consulta']['r2']}). "
+               f"(MAPE {met['consulta']['mape_pct']}%, R² {met['consulta']['r2']}, "
+               f"variante {met['consulta']['modelo']}). "
                "R² negativo = peor que predecir el promedio mensual: úsese como "
                "perfil estacional de referencia, no como pronóstico operativo.")
     que("Semanas epidemiológicas atípicas (IsolationForest sobre casos semanales "
