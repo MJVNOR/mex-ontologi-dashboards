@@ -76,7 +76,7 @@ t1, t2, t3, t4, t5, t6, t7 = st.tabs(
 with t1:
     que("Mapa: delitos registrados por municipio en los años elegidos "
         "(rojo = más delitos). Abajo, el ranking de los 15 municipios con "
-        "más registros. Hermosillo, Cajeme y Nogales concentran el grueso.")
+        "más registros. Hermosillo, Cajeme, SLRC y Nogales concentran el grueso.")
     fig = px.choropleth(
         mun_tot, geojson=geo(), locations="cve",
         featureidkey="properties.CVEGEO", color="n",
