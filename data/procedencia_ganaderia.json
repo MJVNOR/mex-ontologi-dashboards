@@ -1,0 +1,988 @@
+{
+  "tema": "ganaderia",
+  "generado_en_utc": "2026-10-27T01:19:20.610229+00:00",
+  "preprocesador": "preprocesar_ganaderia.py",
+  "preprocesador_sha256": "d6fb7c8228c1929a07d1730191c45d77958f16820f9a5505ec6c43516654dc4e",
+  "ontologia": {
+    "conteos_completos": {
+      "correspondencias_distintas": 45,
+      "correspondencias_totales": 407
+    },
+    "estado_mcp": {
+      "status": "ok",
+      "triples_loaded": 322495
+    },
+    "fecha_carga_ontologia": null,
+    "huecos": [
+      "Fecha de carga no documentada (portal-carga.json sin cargado_en_utc); generado_en_utc no acredita la carga."
+    ],
+    "ontologia_generada_en_utc": "2026-10-25T02:38:49.067509+00:00",
+    "parcial": false,
+    "transporte": "mcp"
+  },
+  "snapshot_sha256": "2304f20fc209d8cfb019498d80d937e7114abc3a54ace03b0fe890b7c66c2da0",
+  "artefactos": {
+    "gan/produccion.parquet": {
+      "tema": "ganaderia",
+      "fuentes": [
+        {
+          "archivo": "gan_raw/ganaderia_2006.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/eec8f940-e1bf-45c0-923f-f852670d4784",
+          "recurso_id": "eec8f940-e1bf-45c0-923f-f852670d4784",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/eec8f940-e1bf-45c0-923f-f852670d4784/download/ganaderia_2006.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "342f40ef988de8536542df19da5e55d287e45c08ce93e4a1e345c8d3dfc5b94a",
+          "descargado_en_utc": "2026-10-27T01:19:20.558638+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2007.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/3c21fc24-a33f-41a6-addc-43854587be9c",
+          "recurso_id": "3c21fc24-a33f-41a6-addc-43854587be9c",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/3c21fc24-a33f-41a6-addc-43854587be9c/download/ganaderia_2007.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "8bab34d989ecb670c1a3ee7e9f9779f4764776cb36194be510f3715198e5722b",
+          "descargado_en_utc": "2026-10-27T01:19:20.558638+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2008.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/6100b8c5-817b-409d-8ec3-139da67ce8ef",
+          "recurso_id": "6100b8c5-817b-409d-8ec3-139da67ce8ef",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/6100b8c5-817b-409d-8ec3-139da67ce8ef/download/ganaderia_2008.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "4235873ce9edbe638ebfb5d2e8817c99ac5c577017075eeb9cc06363cb689732",
+          "descargado_en_utc": "2026-10-27T01:19:20.560178+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2009.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/d3661707-beb1-4ea5-8bd5-c22ce50fed44",
+          "recurso_id": "d3661707-beb1-4ea5-8bd5-c22ce50fed44",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/d3661707-beb1-4ea5-8bd5-c22ce50fed44/download/ganaderia_2009.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "5344457023632a4617fcb9347d76ff7ea0e49c0b29cceee6718656e462f8d7cf",
+          "descargado_en_utc": "2026-10-27T01:19:20.560178+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2010.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/30c6e78f-b6d9-4842-9cb6-5d3d207958d1",
+          "recurso_id": "30c6e78f-b6d9-4842-9cb6-5d3d207958d1",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/30c6e78f-b6d9-4842-9cb6-5d3d207958d1/download/ganaderia_2010.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "21be9da90d0199bb564a556efd4b061053014ee79febb4363ca947f5e255ef0c",
+          "descargado_en_utc": "2026-10-27T01:19:20.561260+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2011.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/8bdc561b-ad88-4860-ae88-c0cc44206995",
+          "recurso_id": "8bdc561b-ad88-4860-ae88-c0cc44206995",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/8bdc561b-ad88-4860-ae88-c0cc44206995/download/ganaderia_2011.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "411b77ff2cea6fbb137469a9fa082ccecf99df0babb3406e5521209b0aab4c47",
+          "descargado_en_utc": "2026-10-27T01:19:20.561260+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2012.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/b69e3632-2484-4aa3-a344-b6c1b6a93923",
+          "recurso_id": "b69e3632-2484-4aa3-a344-b6c1b6a93923",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/b69e3632-2484-4aa3-a344-b6c1b6a93923/download/ganaderia_2012.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "ef7103a06a9b0a4cec4c78603b7a7e61046659509cc505220856b9bd1419133e",
+          "descargado_en_utc": "2026-10-27T01:19:20.562266+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2014.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/c7055978-7577-4b1a-af1a-7e9f124ceb35",
+          "recurso_id": "c7055978-7577-4b1a-af1a-7e9f124ceb35",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/c7055978-7577-4b1a-af1a-7e9f124ceb35/download/ganaderia_2014.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "0faee765c43b0b2958baab312ccc2a106ce26ec987f2665e9cf0bef732b232bd",
+          "descargado_en_utc": "2026-10-27T01:19:20.562266+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2015.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/b79aaf86-ed01-4e89-9fd9-e8f071a3bed4",
+          "recurso_id": "b79aaf86-ed01-4e89-9fd9-e8f071a3bed4",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/b79aaf86-ed01-4e89-9fd9-e8f071a3bed4/download/ganaderia_2015.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "e05f6c59edee401c9ebc11ea0bf35c2e191579b923b09012244dce12c437a750",
+          "descargado_en_utc": "2026-10-27T01:19:20.562266+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2016.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/e4024afc-3ee8-4f84-900c-098b184e64ca",
+          "recurso_id": "e4024afc-3ee8-4f84-900c-098b184e64ca",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/e4024afc-3ee8-4f84-900c-098b184e64ca/download/ganaderia_2016.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "9b579e35221bce083bb87572401f44474ec9079f567bf96f9ca9f2dbdb0f1ed6",
+          "descargado_en_utc": "2026-10-27T01:19:20.563265+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2017.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/0662440f-224a-4d53-8dad-746441053e03",
+          "recurso_id": "0662440f-224a-4d53-8dad-746441053e03",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/0662440f-224a-4d53-8dad-746441053e03/download/ganaderia_2017.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "2e32d7f6aa480b9934bdf85d8746fa936c8d4eb0d7e17ef50f84efbc2c320dac",
+          "descargado_en_utc": "2026-10-27T01:19:20.563265+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2018.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/360b50f3-e1c7-43d5-a5e6-5f765c46ec5a",
+          "recurso_id": "360b50f3-e1c7-43d5-a5e6-5f765c46ec5a",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/360b50f3-e1c7-43d5-a5e6-5f765c46ec5a/download/ganaderia_2018.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "843f99b9c0f889870c525caf8259260453a71d9c1a60a3d8e68876e07c83718e",
+          "descargado_en_utc": "2026-10-27T01:19:20.564268+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2020.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/2ee4b63f-e1ec-45c9-9e07-2505db5d56a0",
+          "recurso_id": "2ee4b63f-e1ec-45c9-9e07-2505db5d56a0",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/2ee4b63f-e1ec-45c9-9e07-2505db5d56a0/download/ganaderia_2020.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "2a8cd2d81a95625467b2204a18db8db3d58820891dd4bf0d2ec97cf717167768",
+          "descargado_en_utc": "2026-10-27T01:19:20.564268+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2021.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/5042b5e0-7c56-453b-8535-1fc479b4f867",
+          "recurso_id": "5042b5e0-7c56-453b-8535-1fc479b4f867",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/5042b5e0-7c56-453b-8535-1fc479b4f867/download/ganaderia_2021.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "2421be96acc6e9bf102f43bbedaae027d7bc3ac96bc3a0fec8d02b66815e3f11",
+          "descargado_en_utc": "2026-10-27T01:19:20.564268+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2022.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/148571ca-009e-4cc2-84ee-b38484ca8fc7",
+          "recurso_id": "148571ca-009e-4cc2-84ee-b38484ca8fc7",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/148571ca-009e-4cc2-84ee-b38484ca8fc7/download/ganaderia_2022.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "72184b906ff42b4cf86f86dfecc5db73efb60a94f169d6a266086ffac3c06eca",
+          "descargado_en_utc": "2026-10-27T01:19:20.565265+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2023.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/eeff82bb-bc52-4baf-88ee-1f87bbcc697b",
+          "recurso_id": "eeff82bb-bc52-4baf-88ee-1f87bbcc697b",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/eeff82bb-bc52-4baf-88ee-1f87bbcc697b/download/ganaderia_2023.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "5b8bafc05cbd6f3bfbcad170790b5d3849f1a7737e7755e55f4e00986d45ea32",
+          "descargado_en_utc": "2026-10-27T01:19:20.565265+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        },
+        {
+          "archivo": "gan_raw/ganaderia_2024.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/1b0a300d-38f6-4d83-bb94-87e4d461b96b",
+          "recurso_id": "1b0a300d-38f6-4d83-bb94-87e4d461b96b",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/1b0a300d-38f6-4d83-bb94-87e4d461b96b/download/ganaderia_2024.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "a22118f378ec30cba25c68d5a45de40993ac2ca5b2482035a99c5609823efd48",
+          "descargado_en_utc": "2026-10-27T01:19:20.566264+00:00",
+          "huecos": "2013 sin URL en el portal (HTTP 500); 2019 duplicado del 2020 en la fuente (mismo sha256) y se usa una sola vez."
+        }
+      ],
+      "archivos_crudo": [
+        "ganaderia_2006",
+        "ganaderia_2007",
+        "ganaderia_2008",
+        "ganaderia_2009",
+        "ganaderia_2010",
+        "ganaderia_2011",
+        "ganaderia_2012",
+        "ganaderia_2014",
+        "ganaderia_2015",
+        "ganaderia_2016",
+        "ganaderia_2017",
+        "ganaderia_2018",
+        "ganaderia_2020",
+        "ganaderia_2021",
+        "ganaderia_2022",
+        "ganaderia_2023",
+        "ganaderia_2024"
+      ],
+      "filtro": "ninguno (estatal completo; 2013 ausente en el portal y 2019 duplicado del 2020 en la fuente)",
+      "transformacion": "Concatena 17 cortes anuales; renombra a snake_case; recorta espacios finales de la fuente en texto (strip); conserva grano municipio-mes-especie-producto.",
+      "medidas": [
+        "vol",
+        "val_miles_mxn"
+      ],
+      "agregacion": "Suma de vol y val_miles_mxn solo dentro de la misma UMED; no se suman toneladas con miles de litros.",
+      "alcance": "Totales declarados; 2013 sin datos, 2019 reutiliza el archivo 2020 de la fuente. Sin cobertura ni cohortes.",
+      "huecos_extra": [
+        "VOLTON mezcla TONELADAS y MILES DE LITROS segun UMED: agregados totales solo por UMED."
+      ],
+      "sha256": "541c70e21626412da4fed3f3b99bd0c8f3dd16136ce99342c194afdd820366c0",
+      "filas": 5153,
+      "columnas_salida": [
+        "anio",
+        "cierre_avance",
+        "cddr",
+        "nddr",
+        "cmun",
+        "nmun",
+        "cvemes",
+        "nmes",
+        "cvespe",
+        "especie",
+        "produc",
+        "umed",
+        "vol",
+        "val_miles_mxn"
+      ],
+      "columnas_ontologia": [],
+      "significados_documentados": [
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "ANO",
+          "significado": "Año de registro de la producción pecuaria.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "CDDR",
+          "significado": "Clave numérica del Distrito de Desarrollo Rural (DDR) donde se registra.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "CIERYAVAN",
+          "significado": "Indica si el registro pecuario se trata de un dato de cierre o de avance de producción del año AAAA.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "CMUN",
+          "significado": "Clave numérica del municipio donde se registra la producción.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "CVEMES",
+          "significado": "Clave numérica del mes en que se registra la producción pecuaria.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "CVESPE",
+          "significado": "Clave numérica de la especie producida.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "ESPECIE",
+          "significado": "Nombre de la especie producida.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "NDDR",
+          "significado": "Descripción del Distrito de Desarrollo Rural (DDR) en que se registra.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "NMES",
+          "significado": "Nombre del mes en que se registra la producción.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "NMUN",
+          "significado": "Nombre del municipio en que se registra la producción.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "PRODUC",
+          "significado": "Tipo de producto.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "UMED",
+          "significado": "Unidades de medida de la producción.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "VOLTON",
+          "significado": "Volumen total producido.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "VALPROD",
+          "significado": "Valor total producido.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "cvespe",
+          "significado": "Clave numérica de la especie producida.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Ganadería Sonora",
+          "variable": "produc",
+          "significado": "Tipo de producto.",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        }
+      ],
+      "huecos": [
+        "Fecha de carga no documentada (portal-carga.json sin cargado_en_utc); generado_en_utc no acredita la carga.",
+        "Ganadería Sonora y Censo Ganadero sin enlaces mex:recurso en el grafo (alcance por etiquetas de correspondencia; pendiente alinear modelado).",
+        "2013 sin URL en el portal (HTTP 500 al descargar); 2019 duplicado byte a byte del 2020 en la fuente.",
+        "VOLTON mezcla TONELADAS y MILES DE LITROS segun UMED: agregados totales solo por UMED.",
+        "Columnas por recurso no exportadas a procedencia (alcance por etiquetas de correspondencia)."
+      ],
+      "nota_correspondencias": "documental_revisada confirma la interpretación documental de la columna; no valida filas ni autoriza cruces."
+    },
+    "gan/censo.parquet": {
+      "tema": "ganaderia",
+      "fuentes": [
+        {
+          "archivo": "gan_raw/catalogo_ganaderia.xlsx",
+          "conjunto": "Ganadería Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+          "recurso": "https://example.org/mex-ontologi/resource/21d44f7d-7ccc-4958-8e66-de4e808ac5cf",
+          "recurso_id": "21d44f7d-7ccc-4958-8e66-de4e808ac5cf",
+          "url": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73/resource/21d44f7d-7ccc-4958-8e66-de4e808ac5cf/download/catalogo_ganaderia.xlsx",
+          "hoja_utilizada": "Municipios",
+          "sha256": "4912cae60016f782a57d0c0dbd3162173368e34e1a8d5cded8155eae594c63a0",
+          "descargado_en_utc": "2026-10-27T01:19:20.556243+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/censo_2022.xlsx",
+          "conjunto": "Censo Ganadero de Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "recurso": "https://example.org/mex-ontologi/resource/3ff505e2-bfce-463d-bfa8-6264c14f8c44",
+          "recurso_id": "3ff505e2-bfce-463d-bfa8-6264c14f8c44",
+          "url": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4/resource/3ff505e2-bfce-463d-bfa8-6264c14f8c44/download/censo_2022.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "8df3f3713a535dc0e91c29c8696f0a5a1395e875bd6b07192410788f143c2cb6",
+          "descargado_en_utc": "2026-10-27T01:19:20.556243+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/censo_2023.xlsx",
+          "conjunto": "Censo Ganadero de Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "recurso": "https://example.org/mex-ontologi/resource/3da02887-db6b-450b-9a47-705d016881d0",
+          "recurso_id": "3da02887-db6b-450b-9a47-705d016881d0",
+          "url": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4/resource/3da02887-db6b-450b-9a47-705d016881d0/download/censo_2023.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "9ed5cb401e249f878896b21f2581372a89e3915f0117730dd68bffa5f6e7fb02",
+          "descargado_en_utc": "2026-10-27T01:19:20.557275+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/censo_2024.xlsx",
+          "conjunto": "Censo Ganadero de Sonora",
+          "dataset": "https://example.org/mex-ontologi/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "recurso": "https://example.org/mex-ontologi/resource/170e3f6d-6315-47f3-9987-3a72facdb3a7",
+          "recurso_id": "170e3f6d-6315-47f3-9987-3a72facdb3a7",
+          "url": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4/resource/170e3f6d-6315-47f3-9987-3a72facdb3a7/download/censo_2024.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "5d987f95fbf4e91710db00e6ba699acf5acede0d9f2607348001fd8f695ef135",
+          "descargado_en_utc": "2026-10-27T01:19:20.557275+00:00",
+          "huecos": null
+        }
+      ],
+      "archivos_crudo": [
+        "censo_2022",
+        "censo_2023",
+        "censo_2024",
+        "catalogo_ganaderia"
+      ],
+      "filtro": "ninguno (72 municipios x 3 años)",
+      "transformacion": "Concatena 2022-2024; renombra a snake_case; une nombre de municipio desde el catalogo del conjunto.",
+      "medidas": [
+        "total_bovino",
+        "total_menor"
+      ],
+      "agregacion": "Suma de cabezas por dimensiones del grafico; no sumar con produccion ni subastas (distinta unidad y grano).",
+      "alcance": "Conteo censal declarado; 3 cortes transversales, sin seguimiento de cohortes.",
+      "sha256": "19c317265327101d3b92afb2bb5788637e87baccf979d5696506fd4bb4b5f106",
+      "filas": 216,
+      "columnas_salida": [
+        "ddr",
+        "region",
+        "cuenca",
+        "n_prod",
+        "vacas",
+        "toros",
+        "vaquillas",
+        "novillos",
+        "becerras",
+        "becerros",
+        "total_bovino",
+        "porcinos",
+        "equino",
+        "caprino",
+        "mular",
+        "asnal",
+        "ovinos",
+        "total_menor",
+        "anio",
+        "cmun",
+        "municipio"
+      ],
+      "columnas_ontologia": [],
+      "significados_documentados": [
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "ASNAL",
+          "significado": "Número de asnos registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "Año",
+          "significado": "Año de referencia del censo",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "BECERRAS",
+          "significado": "Número de becerras registradas",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "BECERROS",
+          "significado": "Número de becerros registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "CAPRINO",
+          "significado": "Número de caprinos registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "CUENCA",
+          "significado": "Cuenca hidrológica de referencia",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "DDR",
+          "significado": "Distrito de Desarrollo Rural al que pertenece el registro",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "EQUINO",
+          "significado": "Número de equinos registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "MULAR",
+          "significado": "Número de animales mulares registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "MUNI",
+          "significado": "Clave numérica del municipio",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "NOVILLOS",
+          "significado": "Número de novillos registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "OVINOS",
+          "significado": "Número de ovinos registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "PORCINOS",
+          "significado": "Número de porcinos registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "REGION",
+          "significado": "Región geográfica del estado",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "TOROS",
+          "significado": "Número de toros registrados",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "VACAS",
+          "significado": "Número de vacas registradas",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "VAQUILLAS",
+          "significado": "Número de vaquillas registradas",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Censo Ganadero de Sonora",
+          "variable": "region",
+          "significado": "Región geográfica del estado",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        }
+      ],
+      "huecos": [
+        "Fecha de carga no documentada (portal-carga.json sin cargado_en_utc); generado_en_utc no acredita la carga.",
+        "Ganadería Sonora y Censo Ganadero sin enlaces mex:recurso en el grafo (alcance por etiquetas de correspondencia; pendiente alinear modelado).",
+        "2013 sin URL en el portal (HTTP 500 al descargar); 2019 duplicado byte a byte del 2020 en la fuente.",
+        "Columnas por recurso no exportadas a procedencia (alcance por etiquetas de correspondencia)."
+      ],
+      "nota_correspondencias": "documental_revisada confirma la interpretación documental de la columna; no valida filas ni autoriza cruces."
+    },
+    "gan/subastas.parquet": {
+      "tema": "ganaderia",
+      "fuentes": [
+        {
+          "archivo": "gan_raw/subastas_2007_2017.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/ca08d529-adc7-4cbd-98de-746c877538ba",
+          "recurso_id": "ca08d529-adc7-4cbd-98de-746c877538ba",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/ca08d529-adc7-4cbd-98de-746c877538ba/download/subastas_2007_2017.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "7b0b165b4f3cb7ac3b645a9346daa623b7f5dafd50b71478ac842d7d8f0e5ea2",
+          "descargado_en_utc": "2026-10-27T01:19:20.567211+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2018.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/26340eec-b8e7-4a0c-a84d-b0b51ba0977f",
+          "recurso_id": "26340eec-b8e7-4a0c-a84d-b0b51ba0977f",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/26340eec-b8e7-4a0c-a84d-b0b51ba0977f/download/subastas_2018.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "c866686f76b9af9194cafcb7f579cc0cd48286dd2a708c55567a4bbca045e555",
+          "descargado_en_utc": "2026-10-27T01:19:20.567211+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2019.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/dc1cd0da-2a31-4d46-b0c3-b2955350ca65",
+          "recurso_id": "dc1cd0da-2a31-4d46-b0c3-b2955350ca65",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/dc1cd0da-2a31-4d46-b0c3-b2955350ca65/download/subastas_2019.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "9176773ca64ff4540f582330c7589e548276a2d24862b173307be015221d770d",
+          "descargado_en_utc": "2026-10-27T01:19:20.567211+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2020.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/71212f37-7504-4cf3-ac19-dbda4b1c9ef4",
+          "recurso_id": "71212f37-7504-4cf3-ac19-dbda4b1c9ef4",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/71212f37-7504-4cf3-ac19-dbda4b1c9ef4/download/subastas_2020.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "b2157a601fb96dc713abab7daa64ee313164b64c1fc337af56ea9ed7959362aa",
+          "descargado_en_utc": "2026-10-27T01:19:20.568422+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2021.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/22a8013c-9b59-4385-84df-617425822cea",
+          "recurso_id": "22a8013c-9b59-4385-84df-617425822cea",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/22a8013c-9b59-4385-84df-617425822cea/download/subastas_2021.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "f1eda36b27b999a8e8ce29201cf7098289b2615edfd3ff3aacb5baacb43f945f",
+          "descargado_en_utc": "2026-10-27T01:19:20.568422+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2022.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/5c37f4e0-c2ce-472f-b8ad-2705e2a04d6f",
+          "recurso_id": "5c37f4e0-c2ce-472f-b8ad-2705e2a04d6f",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/5c37f4e0-c2ce-472f-b8ad-2705e2a04d6f/download/subastas_2022.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "c30ec7ec36953d6e917705e0ad4af235efc28cfdd3a47cb954269e76084a91ba",
+          "descargado_en_utc": "2026-10-27T01:19:20.568422+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2023.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/018638b3-ca66-47c6-a72f-fc606e455133",
+          "recurso_id": "018638b3-ca66-47c6-a72f-fc606e455133",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/018638b3-ca66-47c6-a72f-fc606e455133/download/subastas_2023.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "21bcc6ea53971e115cb2d059636c56dbfd193c11b3edb8eba9183e751181b8b2",
+          "descargado_en_utc": "2026-10-27T01:19:20.569972+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2024.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/38b4d6ff-8292-4363-a631-fbea0b8ece9e",
+          "recurso_id": "38b4d6ff-8292-4363-a631-fbea0b8ece9e",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/38b4d6ff-8292-4363-a631-fbea0b8ece9e/download/subastas_2024.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "efcf8e20ecfb83ca5fcf99655d4d63a5bcc7a2c79f88ad4c6f3a69650ae0d585",
+          "descargado_en_utc": "2026-10-27T01:19:20.570510+00:00",
+          "huecos": null
+        },
+        {
+          "archivo": "gan_raw/subastas_2025.xlsx",
+          "conjunto": "Subastas Ganaderas",
+          "dataset": "https://example.org/mex-ontologi/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "recurso": "https://example.org/mex-ontologi/resource/67a24301-5657-473d-8a90-eb2f7c8bd27f",
+          "recurso_id": "67a24301-5657-473d-8a90-eb2f7c8bd27f",
+          "url": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e/resource/67a24301-5657-473d-8a90-eb2f7c8bd27f/download/subastas_2025.xlsx",
+          "hoja_utilizada": 0,
+          "sha256": "f1590f0bf9f8007061270ac0f81e163a699a54fdbaaef70e0cde65a4d195561f",
+          "descargado_en_utc": "2026-10-27T01:19:20.570510+00:00",
+          "huecos": null
+        }
+      ],
+      "archivos_crudo": [
+        "subastas_2007_2017",
+        "subastas_2018",
+        "subastas_2019",
+        "subastas_2020",
+        "subastas_2021",
+        "subastas_2022",
+        "subastas_2023",
+        "subastas_2024",
+        "subastas_2025"
+      ],
+      "filtro": "ninguno (lotes subastados 2007-2025; 12 municipios con subasta)",
+      "transformacion": "Concatena historico 2007-2017 + cortes 2018-2025; renombra a snake_case; precios en pesos/kg y peso en kg/cabeza.",
+      "medidas": [
+        "cant_cabezas",
+        "precio_prom"
+      ],
+      "agregacion": "Suma de cant_cabezas; precio promedio ponderado por cabezas (no promedio simple).",
+      "alcance": "Lotes subastados declarados; no acredita hato estatal ni precios fuera de subasta.",
+      "sha256": "16679b22f333df2ff791398478e89c416b70fcef75642d199fd9838c3e7c4bdb",
+      "filas": 21253,
+      "columnas_salida": [
+        "nsub",
+        "dia",
+        "cvem",
+        "anio",
+        "cvetg",
+        "tipo_ganado",
+        "cant_cabezas",
+        "precio_min",
+        "precio_max",
+        "precio_prom",
+        "peso_prom_kg"
+      ],
+      "columnas_ontologia": [],
+      "significados_documentados": [
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "ano",
+          "significado": "Año de realización de la subasta",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "cant",
+          "significado": "Número de cabezas subastadas en el lote",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "cvem",
+          "significado": "Clave del municipio donde se realizó la subasta",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "cvetg",
+          "significado": "Clave del tipo de ganado subastado",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "dia",
+          "significado": "Día del mes en que se realizó la subasta",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "nsub",
+          "significado": "Identificador numérico de la subasta",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "pesoprom",
+          "significado": "Peso promedio por cabeza del lote subastado",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "premax",
+          "significado": "Precio máximo registrado por kilogramo",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "premin",
+          "significado": "Precio mínimo registrado por kilogramo",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "preprom",
+          "significado": "Precio promedio registrado por kilogramo",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        },
+        {
+          "conjunto": "Subastas Ganaderas",
+          "variable": "tipogan",
+          "significado": "Descripción del tipo de ganado subastado",
+          "estado_correspondencia": "documental_revisada",
+          "dataset_iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+          "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+          "fecha_carga_ontologia": ""
+        }
+      ],
+      "huecos": [
+        "Fecha de carga no documentada (portal-carga.json sin cargado_en_utc); generado_en_utc no acredita la carga.",
+        "Ganadería Sonora y Censo Ganadero sin enlaces mex:recurso en el grafo (alcance por etiquetas de correspondencia; pendiente alinear modelado).",
+        "2013 sin URL en el portal (HTTP 500 al descargar); 2019 duplicado byte a byte del 2020 en la fuente.",
+        "Columnas por recurso no exportadas a procedencia (alcance por etiquetas de correspondencia)."
+      ],
+      "nota_correspondencias": "documental_revisada confirma la interpretación documental de la columna; no valida filas ni autoriza cruces."
+    }
+  }
+}

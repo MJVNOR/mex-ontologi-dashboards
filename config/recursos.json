@@ -177,6 +177,183 @@
       "archivo": "pob/indicadores_demograficos_son.xlsx"
     }
   ],
+  "ganaderia": [
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "53b157b9-ec39-4754-b6bf-457d370bc5c3",
+      "archivo": "gan_raw/diccionario_ganaderia.csv"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "21d44f7d-7ccc-4958-8e66-de4e808ac5cf",
+      "archivo": "gan_raw/catalogo_ganaderia.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "eec8f940-e1bf-45c0-923f-f852670d4784",
+      "archivo": "gan_raw/ganaderia_2006.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "3c21fc24-a33f-41a6-addc-43854587be9c",
+      "archivo": "gan_raw/ganaderia_2007.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "6100b8c5-817b-409d-8ec3-139da67ce8ef",
+      "archivo": "gan_raw/ganaderia_2008.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "d3661707-beb1-4ea5-8bd5-c22ce50fed44",
+      "archivo": "gan_raw/ganaderia_2009.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "30c6e78f-b6d9-4842-9cb6-5d3d207958d1",
+      "archivo": "gan_raw/ganaderia_2010.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "8bdc561b-ad88-4860-ae88-c0cc44206995",
+      "archivo": "gan_raw/ganaderia_2011.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "b69e3632-2484-4aa3-a344-b6c1b6a93923",
+      "archivo": "gan_raw/ganaderia_2012.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "c7055978-7577-4b1a-af1a-7e9f124ceb35",
+      "archivo": "gan_raw/ganaderia_2014.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "b79aaf86-ed01-4e89-9fd9-e8f071a3bed4",
+      "archivo": "gan_raw/ganaderia_2015.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "e4024afc-3ee8-4f84-900c-098b184e64ca",
+      "archivo": "gan_raw/ganaderia_2016.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "0662440f-224a-4d53-8dad-746441053e03",
+      "archivo": "gan_raw/ganaderia_2017.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "360b50f3-e1c7-43d5-a5e6-5f765c46ec5a",
+      "archivo": "gan_raw/ganaderia_2018.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "2ee4b63f-e1ec-45c9-9e07-2505db5d56a0",
+      "archivo": "gan_raw/ganaderia_2020.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "5042b5e0-7c56-453b-8535-1fc479b4f867",
+      "archivo": "gan_raw/ganaderia_2021.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "148571ca-009e-4cc2-84ee-b38484ca8fc7",
+      "archivo": "gan_raw/ganaderia_2022.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "eeff82bb-bc52-4baf-88ee-1f87bbcc697b",
+      "archivo": "gan_raw/ganaderia_2023.xlsx"
+    },
+    {
+      "dataset_id": "092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "recurso_id": "1b0a300d-38f6-4d83-bb94-87e4d461b96b",
+      "archivo": "gan_raw/ganaderia_2024.xlsx"
+    },
+    {
+      "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+      "recurso_id": "045da7ba-ee72-498a-9b7a-071176e2a4ea",
+      "archivo": "gan_raw/diccionario_censo.csv"
+    },
+    {
+      "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+      "recurso_id": "432af774-15d7-4218-9e5f-3c050871e4dd",
+      "archivo": "gan_raw/catalogo_censo.xlsx"
+    },
+    {
+      "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+      "recurso_id": "3ff505e2-bfce-463d-bfa8-6264c14f8c44",
+      "archivo": "gan_raw/censo_2022.xlsx"
+    },
+    {
+      "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+      "recurso_id": "3da02887-db6b-450b-9a47-705d016881d0",
+      "archivo": "gan_raw/censo_2023.xlsx"
+    },
+    {
+      "dataset_id": "5a511ff8-6a45-4589-8ef3-22000d5676f4",
+      "recurso_id": "170e3f6d-6315-47f3-9987-3a72facdb3a7",
+      "archivo": "gan_raw/censo_2024.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "a4eb0b8b-d6c6-44b8-b00a-f5f45c1875a5",
+      "archivo": "gan_raw/diccionario_subastas.csv"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "7af10971-2a92-4164-bfed-0f4378be0839",
+      "archivo": "gan_raw/catalogo_subastas.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "ca08d529-adc7-4cbd-98de-746c877538ba",
+      "archivo": "gan_raw/subastas_2007_2017.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "26340eec-b8e7-4a0c-a84d-b0b51ba0977f",
+      "archivo": "gan_raw/subastas_2018.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "dc1cd0da-2a31-4d46-b0c3-b2955350ca65",
+      "archivo": "gan_raw/subastas_2019.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "71212f37-7504-4cf3-ac19-dbda4b1c9ef4",
+      "archivo": "gan_raw/subastas_2020.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "22a8013c-9b59-4385-84df-617425822cea",
+      "archivo": "gan_raw/subastas_2021.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "5c37f4e0-c2ce-472f-b8ad-2705e2a04d6f",
+      "archivo": "gan_raw/subastas_2022.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "018638b3-ca66-47c6-a72f-fc606e455133",
+      "archivo": "gan_raw/subastas_2023.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "38b4d6ff-8292-4363-a631-fbea0b8ece9e",
+      "archivo": "gan_raw/subastas_2024.xlsx"
+    },
+    {
+      "dataset_id": "932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "recurso_id": "67a24301-5657-473d-8a90-eb2f7c8bd27f",
+      "archivo": "gan_raw/subastas_2025.xlsx"
+    }
+  ],
   "seg": [
     {
       "dataset_id": "93ca5e1c-702e-4e62-bc61-638907be184a",

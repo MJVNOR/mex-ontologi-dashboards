@@ -737,5 +737,203 @@
   "medidas": [],
   "agregacion": "Sin agregar.",
   "alcance": "Documentacion, no datos."
+ },
+ "gan/produccion.parquet": {
+  "tema": "ganaderia",
+  "fuentes": [
+   {
+    "archivo": "gan_raw/ganaderia_2006.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2007.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2008.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2009.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2010.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2011.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2012.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2014.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2015.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2016.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2017.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2018.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2020.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2021.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2022.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2023.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/ganaderia_2024.xlsx",
+    "hoja": 0
+   }
+  ],
+  "archivos_crudo": [
+   "ganaderia_2006",
+   "ganaderia_2007",
+   "ganaderia_2008",
+   "ganaderia_2009",
+   "ganaderia_2010",
+   "ganaderia_2011",
+   "ganaderia_2012",
+   "ganaderia_2014",
+   "ganaderia_2015",
+   "ganaderia_2016",
+   "ganaderia_2017",
+   "ganaderia_2018",
+   "ganaderia_2020",
+   "ganaderia_2021",
+   "ganaderia_2022",
+   "ganaderia_2023",
+   "ganaderia_2024"
+  ],
+  "filtro": "ninguno (estatal completo; 2013 ausente en el portal y 2019 duplicado del 2020 en la fuente)",
+  "transformacion": "Concatena 17 cortes anuales; renombra a snake_case; recorta espacios finales de la fuente en texto (strip); conserva grano municipio-mes-especie-producto.",
+  "medidas": [
+   "vol",
+   "val_miles_mxn"
+  ],
+  "agregacion": "Suma de vol y val_miles_mxn solo dentro de la misma UMED; no se suman toneladas con miles de litros.",
+  "alcance": "Totales declarados; 2013 sin datos, 2019 reutiliza el archivo 2020 de la fuente. Sin cobertura ni cohortes.",
+  "huecos_extra": [
+   "VOLTON mezcla TONELADAS y MILES DE LITROS segun UMED: agregados totales solo por UMED."
+  ]
+ },
+ "gan/censo.parquet": {
+  "tema": "ganaderia",
+  "fuentes": [
+   {
+    "archivo": "gan_raw/censo_2022.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/censo_2023.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/censo_2024.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/catalogo_ganaderia.xlsx",
+    "hoja": "Municipios"
+   }
+  ],
+  "archivos_crudo": [
+   "censo_2022",
+   "censo_2023",
+   "censo_2024",
+   "catalogo_ganaderia"
+  ],
+  "filtro": "ninguno (72 municipios x 3 años)",
+  "transformacion": "Concatena 2022-2024; renombra a snake_case; une nombre de municipio desde el catalogo del conjunto.",
+  "medidas": [
+   "total_bovino",
+   "total_menor"
+  ],
+  "agregacion": "Suma de cabezas por dimensiones del grafico; no sumar con produccion ni subastas (distinta unidad y grano).",
+  "alcance": "Conteo censal declarado; 3 cortes transversales, sin seguimiento de cohortes."
+ },
+ "gan/subastas.parquet": {
+  "tema": "ganaderia",
+  "fuentes": [
+   {
+    "archivo": "gan_raw/subastas_2007_2017.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2018.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2019.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2020.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2021.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2022.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2023.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2024.xlsx",
+    "hoja": 0
+   },
+   {
+    "archivo": "gan_raw/subastas_2025.xlsx",
+    "hoja": 0
+   }
+  ],
+  "archivos_crudo": [
+   "subastas_2007_2017",
+   "subastas_2018",
+   "subastas_2019",
+   "subastas_2020",
+   "subastas_2021",
+   "subastas_2022",
+   "subastas_2023",
+   "subastas_2024",
+   "subastas_2025"
+  ],
+  "filtro": "ninguno (lotes subastados 2007-2025; 12 municipios con subasta)",
+  "transformacion": "Concatena historico 2007-2017 + cortes 2018-2025; renombra a snake_case; precios en pesos/kg y peso en kg/cabeza.",
+  "medidas": [
+   "cant_cabezas",
+   "precio_prom"
+  ],
+  "agregacion": "Suma de cant_cabezas; precio promedio ponderado por cabezas (no promedio simple).",
+  "alcance": "Lotes subastados declarados; no acredita hato estatal ni precios fuera de subasta."
  }
 }

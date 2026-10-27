@@ -1,0 +1,65 @@
+{
+  "alcance": "3 conjuntos ganaderos (sin joins entre conjuntos)",
+  "artefactos_esperados": [
+    "gan/produccion.parquet",
+    "gan/censo.parquet",
+    "gan/subastas.parquet"
+  ],
+  "conteos_completos": {
+    "correspondencias_distintas": 45,
+    "correspondencias_totales": 407,
+    "por_conjunto": {
+      "Agricultura Sonora (no incluida)": 0,
+      "Censo Ganadero de Sonora": 53,
+      "Ganadería Sonora": 254,
+      "Subastas Ganaderas": 100
+    }
+  },
+  "consultas": [
+    "PREFIX mex: <https://example.org/mex-ontologi/vocab/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT ?dataset (COUNT(?c) AS ?revisadas) WHERE {\n  ?c a mex:CorrespondenciaSemantica ;\n     mex:estadoCorrespondencia \"documental_revisada\" ;\n     rdfs:label ?lab .\n  BIND(STRAFTER(STR(?lab), \"— \") AS ?dataset)\n} GROUP BY ?dataset ORDER BY DESC(?revisadas) LIMIT 100",
+    "PREFIX mex: <https://example.org/mex-ontologi/vocab/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT DISTINCT ?lab ?ev ?estado WHERE {\n  ?c a mex:CorrespondenciaSemantica ;\n     rdfs:label ?lab ;\n     mex:evidenciaTextual ?ev ;\n     mex:estadoCorrespondencia ?estado .\n  FILTER(CONTAINS(?lab, \"Ganadería Sonora\") || CONTAINS(?lab, \"Censo Ganadero\") || CONTAINS(?lab, \"Subastas Ganadera\"))\n} ORDER BY ?lab ?ev LIMIT 2000"
+  ],
+  "datasets": [
+    {
+      "iri": "https://datos.sonora.gob.mx/dataset/092f6ac2-2714-44b3-a18a-bdca7893bb73",
+      "revisadas": 254,
+      "titulo": "Ganadería Sonora"
+    },
+    {
+      "iri": "https://datos.sonora.gob.mx/dataset/5a511ff8-6a45-4589-8ef3-22000d5676f4",
+      "revisadas": 53,
+      "titulo": "Censo Ganadero de Sonora"
+    },
+    {
+      "iri": "https://datos.sonora.gob.mx/dataset/932de35b-e9d4-4acb-bd1e-d54c70f6f45e",
+      "revisadas": 100,
+      "titulo": "Subastas Ganaderas"
+    }
+  ],
+  "extraido_en_utc": "2026-10-27T00:00:00+00:00",
+  "huecos": [
+    "Fecha de carga no documentada (portal-carga.json sin cargado_en_utc); generado_en_utc no acredita la carga.",
+    "Ganadería Sonora y Censo Ganadero sin enlaces mex:recurso en el grafo (alcance por etiquetas de correspondencia; pendiente alinear modelado).",
+    "2013 sin URL en el portal (HTTP 500 al descargar); 2019 duplicado byte a byte del 2020 en la fuente."
+  ],
+  "ontologia": {
+    "conteos_completos": {
+      "correspondencias_distintas": 45,
+      "correspondencias_totales": 407
+    },
+    "estado_mcp": {
+      "status": "ok",
+      "triples_loaded": 322495
+    },
+    "fecha_carga_ontologia": null,
+    "huecos": [
+      "Fecha de carga no documentada (portal-carga.json sin cargado_en_utc); generado_en_utc no acredita la carga."
+    ],
+    "ontologia_generada_en_utc": "2026-10-25T02:38:49.067509+00:00",
+    "parcial": false,
+    "transporte": "mcp"
+  },
+  "parcial": false,
+  "tema": "ganaderia",
+  "transporte": "mcp"
+}
